@@ -6,6 +6,8 @@ let isGameOver = false;
 
 // this one should never change!
 const isWaterWet = true;
+
+
 Strings
 A string is a sequence of Unicode characters. Unlike variable naming, strings support all Unicode including emojis!
 
