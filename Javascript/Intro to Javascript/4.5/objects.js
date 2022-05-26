@@ -128,7 +128,6 @@ const movie = [ 'Titanic', 1997, 'PG-13', 659363944, 'James Cameron' ];
 //   yearReleased: 1995,
 //   isSuperFun: true
 // };
-
 // const name = language.name; // dot notation works
 // const hasObjects = language["hasObjects"]; // brackets work too!
 // const yearReleased = language.yearReleased;
