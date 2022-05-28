@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes about Forms</title>
+</head>
+<body>
+
+
+    <form>
+        <!--Normally we have <form action='/survey-submission' method = "post"-->>
+            <p>First Name:
+                <input name="first-name">
+            </p>
+
+            <p>Last Name:
+                <input type="text" name = "last-name">
+            </p>
+
+            <p>Password:
+                <input type="password" 
+                       name = "password" 
+                       minlength = 5 
+                       placeholder="Password" 
+                       required>
+            </p>
+
+              <input type="checkbox" name="extra-sprinkles">Add extra sprinkles? <br>
+             Enter your email: <input type="email" name="user-email">
+<br>
+             Type of bicycle: <br>
+  <input type="radio" name="bike-type" value="road"> Road <br>
+  <input type="radio" name="bike-type" value="mtn"> Mountain <br>
+  <input type="radio" name="bike-type" value="hybrid"> Hybrid <br>
+
+  <input type="submit" value="Submit">
+    </form>
+
+
+
+
+
+
+</body>
+</html>
