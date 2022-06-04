@@ -1,0 +1,55 @@
+/* body {
+  font-size: 10px;
+} */
+
+
+html {
+  font-size: 1vw;
+  height: 100%;
+  /* font-family: Lucida Console, monospace; */
+  /* font-family: Camphor,Open Sans,Segoe UI; */
+  font-family: IBM Plex Sans, sans-serif;
+
+}
+
+body {
+  /* background: linear-gradient(-45deg,  cyan, 10%, purple, 80%, cyan); */
+  background: linear-gradient(194deg, rgba(160,236,255,1) 0%, rgba(233,202,255,1) 56%, rgba(255,171,241,1) 100%);
+
+}
+
+h1 {
+  font-size: 6rem;
+  font-family: Nosifer, fantasy;
+  text-shadow: 1px 0px 20px black; 
+}
+
+h2 {
+  font-size: 3rem;
+  font-weight: 100;
+  /* text-decoration-line: underline;
+  text-decoration-color: red;
+  text-decoration-style: wavy; */
+  text-decoration: underline overline wavy pink;
+}
+
+section {
+  font-size: 0.8rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+h3 {
+  font-size: 4rem;
+  color: hsl(0,100%, 50%, 0.5);
+  text-transform: capitalize;
+  font-weight: 400;
+  text-shadow: 5px 5px hsl(180,100%, 50%, 0.5), 2px 2px hsl(60, 100%, 50%, 0.5)
+  /* text-shadow: 5px 5px 5px magenta; */
+}
+
+
+
+

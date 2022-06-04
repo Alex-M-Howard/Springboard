@@ -1,0 +1,107 @@
+Goals
+Explain what CSS is
+Write basic CSS rules
+Style some content (even if doesn’t look pretty)
+Getting started
+Our web pages don’t look all that great…
+If we want to change the appearance of our webpages, it’s time to learn CSS!
+If HTML is the structure of the page and content,
+
+CSS is the style of that content.
+
+HTML - the nouns CSS - the adjectives
+
+Introducing CSS!
+Cascading
+Style
+Sheets
+Let’s ignore the “cascading” part for now and just focus on “style sheets”
+What Can You Do With Css?
+fonts
+colors
+web / print / mobile layout
+animations
+so much more!
+Where do we write our CSS?
+Including CSS
+We can do this three ways!
+
+In our HTML using a <style> element
+External stylesheet using a <link> element
+(Inline) - DON’T DO THIS!
+We will be using an external stylesheet as it is far more common
+
+Linking to a stylesheet
+<link rel="stylesheet" href="homepage.css">
+Make sure to put this inside of the <head> element
+This assumes that we have a file in the same folder called homepage.css
+CSS Syntax
+What does it look like?
+Here is the idea:
+
+select-some-html {
+  property: value;
+}
+Here is an example:
+
+body {
+  background-color: purple;
+}
+Let’s examine that in detail
+body {
+  background-color: purple;
+}
+Selector - what we would like to style
+Declaration - Everything in the curly braces
+Property - left of the colon
+Value - right of the colon followed by a semicolon
+We tell css what we want to select, and how we want it to be styled
+
+Our first style
+Starting with the basics
+There are tons and tons of different properties in css, let’s start with a simple one - color
+
+To make all paragraphs purple:
+
+p {
+  color: purple;
+}
+Including multiple properties
+In CSS we place each property and value on one line, but we can include multiple rules in one declaration.
+
+p {
+  color: purple;
+  font-weight: bold;
+  font-size: 16px;
+}
+Color in CSS
+Lots of options!
+
+Named colors (red, green, blue, papayawhip)
+RGB - rgb(121, 12, 41)
+RBGA - rgba(121, 12, 41, .4)
+Hex - #00bfff
+HSL - hsl(195, 100%, 50%)
+Text Properties
+font-size - how big should the font be?
+font-family - what type of font?
+text-align - left? center?
+line-height - how much space between lines?
+font sizes
+So far we’ve seen values for colors, but how do we measure font-size?
+
+Many ways!
+
+px (pixels)
+% (percentages)
+And many more!
+Don’t panic!
+Don’t get overwhelmed by the hundreds of CSS properties
+You do not need to spend much of your time studying or memorizing the vast majority of them.
+Google or turn to MDN whenever you’re not sure how to accomplish something in CSS
+“add a border to the bottom of an element”
+Recap
+CSS is used to style HTML elements and layout web pages
+CSS syntax consists of selectors, declarations, properties and values
+CSS can also be used for animations, responsive design and much more!
+
