@@ -1,0 +1,49 @@
+Goals
+Explain what the Box Model is
+Compare and contrast border, margin, padding and outline
+Easily calculate true width and height with box-sizing
+Box Model
+_images/box-models.png
+Margin is outside of border (“space between”)
+Padding is inside of border (“space inside”)
+Direction Shorthands
+margin, padding, and border all support four different ways to set their value:
+
+one number for top, right, bottom, and left
+e.g. margin: 10px;
+two numbers, for top & bottom, right & left
+e.g. margin: 10px 20px;
+three numbers, for top, right & left, bottom
+e.g. margin: 10px 20px 30px;
+four numbers, for top, right, bottom, left
+e.g. margin: 10px 20px 30px 40px;
+Box Sizing
+div {
+  box-sizing: content-box;
+  width: 100px;
+  padding: 1em;
+  border: solid 5px black;
+}
+content-box is the default
+Content area is 100px
+Don’t know how wide element is
+ 
+div {
+  box-sizing: border-box;
+  width: 100px;
+  padding: 1em;
+  border: solid 5px black;
+}
+Element width is 100px
+Don’t know width of content area
+Often, easier to work with
+Outline
+Outlines are like borders …
+
+but are outside of borders
+but never take up space
+div:hover {
+  outline: solid 5px red;
+  outline-offset: 5px;
+}
+Often most used for hover effects, so things don’t “move”

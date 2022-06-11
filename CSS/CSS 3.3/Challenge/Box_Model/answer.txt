@@ -1,0 +1,35 @@
+What is the box model?
+- Model of website layout where every element is inside of a box with margin, padding, border, and content
+
+What is the difference between margin and padding?
+-Margin will set the total amount that surrounds an object before another object can be put next to it. If margin is at 100px, it
+isn't until we get to that 100pixels that we can drop another element next to it. Padding is the amount of room surrounding the content that separates 
+it from it's container. If inside a div, 50px will have 50px from the content of the div from the container box
+
+What is collapsing margin?
+Where margin will combine in siblings top and bottom. 3 divs in a row with a margin of 50px, the middle div will share the 50px with the top and
+bottom div instead of having 100px between the items
+
+What is the purpose of the box-sizing CSS property?
+box-sizing property allows us to control the element size easier, whereas content-box will show an 'infinite' width on the webpage as it is a 
+big block.
+
+What does the outline property do?
+Outline will create a border - used a lot on hover, that will not take up any space or displace any other elements. If you had a big
+enough outline, it could cover the entire webpage, whereas if you only used the border, it displaces other elements as it grows.
+
+How do you add a background image in CSS?
+background-image: url('URL goes here')
+
+Given a div with a width of 200px, margin of 20px and padding of 20px, what is the calculated width by the browser?
+The calculated width should be 200px for the 'content' and adds 20px to left AND right, which brings us to 240 and the distance between the content
+and the element container adds 20px left and right of padding which brings us to 280px total. Apparently margin doesn't factor into this
+and the answer stops at 240px. 
+
+Given a div with a height of 100px, border of 10px and padding of 20px, what is the calculated height by the browser?
+10px is factored into the total height, so 100 + 10 (top) + 10 (bottom)+ 20(top) + 20)bottom =  160px should be the answer. 
+
+
+What does margin:auto do?
+margin: auto is usually used to help center an element. It moves on the screen automatically as the browser resizes. Usually used with a 0 and auto
+which ensures that the top and bottom remain the same while left and route is automatically resized. 
