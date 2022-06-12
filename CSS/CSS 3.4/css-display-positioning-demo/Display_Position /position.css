@@ -1,0 +1,96 @@
+h1 {
+	background-color: lightgreen;
+	width: 25%;
+	position: absolute;
+	top: 100px;
+	left: 100px;
+}
+
+div {
+	width: 50%;
+	height: 500px;
+	border: 2px solid red;
+	margin: 0 auto;
+	position: relative;
+	top: 100px;
+}
+
+img {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+#deer {
+	left: 100px;
+	top: -100px;
+}
+
+p {
+	font-size: 2em;
+}
+
+nav {
+	background-color: olive;
+	color: white;
+	height: 80px;
+	position: fixed;
+	width: 100%;
+	left: 0;
+	top: 0;
+	z-index: 1;
+}
+
+nav a {
+	color: white;
+	font-size: 2em;
+}
+
+body {
+	background-color: lightpink;
+}
+
+/* section#essay {
+	width: 50%;
+	margin: 0 auto;
+}
+
+@media (max-width: 1000px) {
+	section#essay {
+		width: 80%;
+	}
+	body {
+		background-color: lightseagreen;
+	}
+	nav {
+		background-color: orangered;
+	}
+}
+
+@media (max-width: 600px) {
+	section#essay {
+		width: 90%;
+	}
+	body {
+		background-color: lightsalmon;
+	}
+	nav {
+		background-color: lightseagreen;
+	}
+} */
+
+section#essay {
+	width: 90%;
+	margin: 0 auto;
+}
+
+@media (min-width: 600px) {
+	section#essay {
+		width: 80%;
+	}
+}
+@media (min-width: 1000px) {
+	section#essay {
+		width: 50%;
+	}
+}

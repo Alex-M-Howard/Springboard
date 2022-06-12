@@ -1,0 +1,52 @@
+button {
+	width: 100px;
+	color: white;
+	background-color: rgb(50, 147, 244);
+	padding: 10px 20px;
+	border-radius: 10px;
+	border-color: white;
+	display: block;
+	margin: 10px auto;
+}
+
+button:hover {
+	background-color: rgb(4, 95, 214);
+}
+
+#cat-info img {
+	width: 600px;
+}
+
+#cat-info {
+	border-radius: 10px;
+	width: 600px;
+	background-color: rgba(210, 206, 206, 0.973);
+	font-weight: 300;
+}
+
+p {
+	padding: 0px 10px;
+	padding-bottom: 10px;
+}
+
+h1 {
+	padding: 0px 10px;
+	font-size: 1.5rem;
+}
+
+div {
+	position: relative;
+	margin: 0 auto;
+}
+
+iframe {
+	display: flex;
+}
+
+#gifs {
+	display: flex;
+}
+
+.gif {
+	margin: 0 auto;
+}

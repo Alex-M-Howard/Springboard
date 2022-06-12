@@ -1,0 +1,32 @@
+h1 {
+	font-size: 2em;
+	color: cyan;
+	transition: font-size 1s, color 3s;
+}
+
+h1:hover {
+	color: magenta;
+	font-size: 4em;
+}
+
+button:hover {
+	transform: translateX(800px);
+	transition: transform 2s ease-out 500ms;
+}
+
+a {
+	display: inline-block;
+	font-size: 1.5em;
+	text-decoration: none;
+	padding: 1em;
+	border: 3px solid rebeccapurple;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	color: rebeccapurple;
+	transition: color 0.3s ease-in, background-color 0.3s ease-in;
+}
+
+a:hover {
+	color: white;
+	background-color: rebeccapurple;
+}
