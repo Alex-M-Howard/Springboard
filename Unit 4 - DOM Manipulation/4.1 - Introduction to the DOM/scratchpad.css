@@ -1,0 +1,13 @@
+h1 {
+    display: flex;
+    width: 200px;
+	background-color: cornflowerblue;
+	margin: 0 auto;
+}
+
+h2 {
+    width: 225px;
+    display: flex;
+    margin: 0 auto;
+    background-color: aquamarine;
+}
