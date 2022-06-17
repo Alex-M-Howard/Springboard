@@ -20,8 +20,28 @@ Now that you have a functioning todo app, save your todos in localStorage! Make 
 document.addEventListener('DOMContentLoaded', function () {
 
 //Add code here
+    const button = document.querySelector('button');
+
+    button.addEventListener('click', function (event) {
+        event.preventDefault()
+        const input = document.querySelector('input');
+
+        if (input.value) {
+            console.log(input.value)
+            
+            const ul = document.querySelector("ul");
+            const newLi = document.createElement("li");            
+            newLi.innerText = input.value;
+            newLi.classList.add("todo")
 
 
+            
+            ul.append(newLi);
+            input.value = ''
+        }
+
+
+    })
 
 
 
