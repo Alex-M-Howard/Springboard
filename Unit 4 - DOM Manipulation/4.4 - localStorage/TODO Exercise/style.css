@@ -11,11 +11,19 @@ h1 {
     color: rgba(0, 0, 255, .5);
     font-size: 3rem;
     margin: 0px;
-}
+} 
 
 .todo {
     font-family: 'Kanit', sans-serif;
     font-size: 1.75rem;
     text-shadow: 1.5px 1px 0px rgba(0,0,0,0.15);
     color: rgba(0,0,255,.5);
+}
+form {
+    margin: 25px;
+}
+
+div {
+    display: flex;
+    align-items: center;
 }

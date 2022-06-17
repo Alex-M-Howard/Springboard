@@ -15,4 +15,4 @@ setInterval(function () {
     for (let letter of letters) {
         letter.style.color = randomRGB();
     }
-}, 1500)
+}, 1000)
