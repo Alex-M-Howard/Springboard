@@ -4,8 +4,7 @@
 	height: 200px;
 	margin: 10px 10px;
 	display: inline-block;
-	transition: background-color 2000ms;
-	transition: transform 2000ms;
+
 }
 
 body {
