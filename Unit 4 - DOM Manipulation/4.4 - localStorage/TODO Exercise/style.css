@@ -1,25 +1,35 @@
 body {
-    background-color: rgba(178, 239, 155,1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
+	background-color: rgba(178, 239, 155, 1);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
 h1 {
-    font-family: 'Kanit', sans-serif;
-    color: rgba(0, 0, 255, .5);
-    font-size: 3rem;
-    margin: 0px;
-} 
+	font-family: 'Kanit', sans-serif;
+	color: rgba(0, 0, 255, .5);
+	font-size: 3rem;
+	margin: 0px;
+}
 
 .todo {
-    font-family: 'Kanit', sans-serif;
-    font-size: 1.75rem;
-    text-shadow: 1.5px 1px 0px rgba(0,0,0,0.15);
-    color: rgba(0,0,255,.5);
+	font-family: 'Kanit', sans-serif;
+	font-size: 1.75rem;
+	text-shadow: 1.5px 1px 0px rgba(0, 0, 0, 0.15);
+	color: rgba(0, 0, 255, .5);
 }
 form {
-    margin: 25px;
+	margin: 25px;
+}
+
+.remove {
+	margin: 10px;
+}
+
+.done {
+    color: grey;
+	text-decoration: line-through;
+	text-decoration-thickness: 3px;
+    text-decoration-color: black;
 }
