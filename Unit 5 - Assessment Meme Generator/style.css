@@ -1,0 +1,60 @@
+html {
+    border: 0px;
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Nunito', sans-serif;
+}
+
+body {
+    margin: 0px;
+    
+}
+
+#div-input {
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: hsl(198,85%, 85%);
+    width: 100vw;
+    padding-bottom: 2vh;
+}
+
+ 
+label {
+    display: inline-block;
+    width: 100px;
+    margin: 5px;
+    text-align: left;
+}
+
+input {
+    width: 80vw;
+}
+form{
+    border: none;
+    width: 95vw;
+    margin: 0px auto;
+} 
+
+#generated-memes {
+    background-color: rgb(255, 255, 255);
+}
+
+#create-meme {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.25rem;
+    position: relative;
+    width: 75px;
+    margin: 15px 43vw;
+    background-color: hsl(37, 99%, 70%);
+    border-radius: 5px;
+    border-width: 0px;
+    box-shadow: 2px 3px 3px 0px black;
+}
+
+#create-meme:hover {
+    background-color: hsl(37,100%,85%);
+    box-shadow: 1px 3px 3px 0px black;
+}
