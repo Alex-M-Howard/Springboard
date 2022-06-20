@@ -1276,6 +1276,26 @@ open
 
 open . will open current folder. Open .. will open previous directory
 
+mv -> move files and folders
+we can also use mv to rename something
+you can rename and move at same time:
+touch rename_me.html
+mv rename_me.html ../index.html
+
+cp -> copy a file or folder
+cp PATH_TO_ORIGINAL_FILE PATH_TO_COPIED_FILE
+
+to copy a directory
+cp -r
+
+control(win) + a -> moves cursor to beginning of line
+control(win) + e -> moves cursor to end of line
+
+control(win) + w -> deletes word to where your cursor is
+control(win) + u -> deletes entire line up to cursor
+
+option(win) + left -> jumps between words to the left
+option(win) + right -> jumps between words to the right
 
 
 

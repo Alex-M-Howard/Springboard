@@ -1,0 +1,27 @@
+1. Man command shows the manual where you can see what individual commands do. You can scroll using a mouse-wheel or pressing enter. Press 'Q' to exit the screen
+
+2. The l flag on 'ls' will list files in the long format in a directory. The a flag will list all files in a directory that begin with a '.'
+
+3. Jumping between words in the terminal - option + left or option + right
+
+4. Getting to the end of a line in terminal is control + e
+
+5. Moving cursor to the beginning of terminal line uses control + a
+
+6. You can delete a word by using control + w which deletes the word up to the cursor.
+
+7. A shell is a program ran inside the terminal. The terminal is where you can navigate, copy, create, delete files on your computer. 
+
+8. An absolute path shows a full directory back to an origin or root directory.
+/Users/Alex/Desktop
+
+9. A relative path is a path that is relative to the current location
+If I'm already in /Users/Alex, I can just type in cd Desktop
+
+10. A flag is a modifier that will alter commands in the CLI. 
+	-a for ls will show hidden files
+	-rf for rm will delete a directory even if it isn't empty
+	-r for cp will copy an entire directory and its contents
+
+11. The rm -r flag attempts to remove file hierarchy rooted in each file argument. Recursive.
+The rm -f flag attempts to remove the files without prompting for confirmation regardless of permissions.
