@@ -1496,9 +1496,20 @@ Delete our branch called feature => git branch -d feature
 Now if you take a look at git log --oneline --decorate you’ll see that the commit history on feature has ben merged into main!
 
 
+git branch "nameOfBranch" -No quotes -> creates new branch
+git checkout "nameOfBranch" -> changes to another branch
 
+to create branch in one line -> git checkout -b "nameOfBranch"
 
+delete a branch after code has been merged, or decide you don't want to merge
+git branch -d "nameOfBranch"
 
+merging branches. 
+git merge "nameOfBranch" -> wherever you run it from, it iwll merge to that branch!
+
+merge conflicts
+fast forward merge will put all changes chronologically into new branch
+recursive merge has different times on each branch. Two developers working on same file for example.
 
 
 */
