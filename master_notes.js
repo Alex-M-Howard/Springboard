@@ -1604,6 +1604,13 @@ Now when you type in git push, you will be prompted to enter your username and p
 
 It would be nice if we could establish some trust between our computer and GitHub so that when we run git push or git pull, GitHub does not need to authenticate us. To do that we are going to create an SSH key.
 
+
+
+Git pull - bring updated code from repo
+
+
+
+
 Practice
 Generate some code files on your machine and set up a local repository using git init .
 Create a remote repository on github to push your code to
