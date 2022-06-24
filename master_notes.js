@@ -1634,5 +1634,104 @@ The remote github repo just provides a interface for people to share code
 
 
 
+///////// JASMINE //////////
+Testing
+
+
+To include inside of your files:
+INCLUDE CSS FOR JASMINE:
+<link rel="stylesheet" href="https://unpkg.com/jasmine-core@4.1.0/lib/jasmine-core/jasmine.css" />
+
+INCLUDE JS for JASMINE:
+<script 
+  src="https://unpkg.com/jasmine-core@4.1.0/lib/jasmine-core/jasmine.js"></script>
+<script 
+  src="https://unpkg.com/jasmine-core@4.1.0/lib/jasmine-core/jasmine-html.js"></script>
+<script 
+  src="https://unpkg.com/jasmine-core@4.1.0/lib/jasmine-core/boot0.js"></script>
+<script 
+  src="https://unpkg.com/jasmine-core@4.1.0/lib/jasmine-core/boot1.js"></script>
+*include these at end of body before your code
+
+INCLUDE OUR JS and TEST FILE
+<script src="file.js"></script>
+<script src="file.test.js"></script>
+
+
+
+describe -> Group different its together
+it -> test spec
+
+describe('CalculateTaxes Tests', function (){
+  its here
+})
+
+
+it('should reject invalid incomes', function () {
+  expect(() => calculateTaxes('aksljdlkas')).toThrowError();
+  expect(() => calculateTaxes([])).toThrowError();
+})
+
+Matchers
+.toEqual(obj)
+Has the same value (eg, different lists with same values match)
+.toBe(obj)
+Is the same object (eg, different lists with same items don’t)
+.toContain(obj)
+Does object/array contain this item?
+.not.
+Add before matcher to invert (eg expect(...).not.toEqual(7))
+https://jasmine.github.io/api/edge/matchers.html
+
+What To Test
+Test every function in at least one way
+Think about “edges”
+What if the list were empty?
+What about non-integer numbers?
+What if the file can’t be found?
+Is the first case/last case handled differently?
+
+
+
+Jasmine Hooks
+beforeEach(() => {
+  code that runs before every it
+})
+
+beforeAll(() => {
+  Before all its run, this runs
+})
+
+afterAll(() => {
+  After all its run, this runs
+})
+
+
+Testing best practices
+Unit Testing vs Integration Testing
+
+Unit test
+  -unit tests are narrow in scope
+  -verify a module of code is doing what it is intended to do
+  *simple and cheap
+  *works well with pure functions that do not have side effects
+  
+Integration test
+  -broader in scope
+  -verify multiple modules of code are working together properly
+  *more complex and costly to maintain
+
+
+pure functions do not have side effects on external variables and are easily tested with a unit test
+- do not have side effects on external variables
+
+Test every function in at least one way
+Thing about edge cases
+  what if list were empty?, non-integer numbers? file can't be found?
+
+*Write code that is easier to test. More functions & smaller functions: easier to debug and test
+  -Don't mix logic and UI in a function
+  
+
 
 */
