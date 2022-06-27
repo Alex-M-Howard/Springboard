@@ -1734,4 +1734,37 @@ Thing about edge cases
   
 
 
+
+
+
+  //////////// Advanced Array Functions /////////////
+
+  ****forEach****
+
+let colors = ['red', 'blue', 'green'];
+
+colors.forEach(function (value, index, array) {
+	console.log(`Value: ${value}, Index: ${index}, Array: ${array}`);
+})
+* Will always return undefined!
+When You Would Use forEach
+You want to iterate over an array, but the return value of your callback is not important
+Almost all of the time there are better options…
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 */
