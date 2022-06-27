@@ -8,6 +8,7 @@ let summaryTds = document.querySelectorAll('#summaryTable tbody tr td');
 let allPayments = {};
 let paymentId = 0;
 
+
 paymentForm.addEventListener('submit', submitPaymentInfo);
 
 // Add a curPayment object to allPayments, update html and reset input values
