@@ -36,3 +36,32 @@
 // });
 
 
+let words = ['apple', 'banana', 'orange', 'cherry', 'cry'];
+
+let newWords = words.filter(function (word) {
+    if (word.length < 6) {
+        return word;
+    }
+});
+
+console.log(newWords)
+
+function filter(array, callback){
+    const filteredArray = [];
+    for (let i = 0; i < array.length; i++){
+        if (callback(arr[i]), i, arr) {
+            filteredArray.push(arr[i]);
+        }
+    }
+    return filteredArray;
+}
+
+
+
+
+
+
+
+
+
+

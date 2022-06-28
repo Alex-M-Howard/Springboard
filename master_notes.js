@@ -1811,6 +1811,38 @@ let newNumbers = numbers.map(function (value) {
 console.log(newNumbers);
 
 
+**** Filter ****
+
+filter
+Creates a new array
+Loops through an array
+Runs a callback function on each value in the array
+If the callback function returns true, that value is pushed to the new array
+If the callback function returns false, that value will not be included in the new array
+the result of the callback will always be evaluated into a boolean
+
+
+When You Would Use Filter
+You want to “transform” an array into another array of the same length or smaller length depending on a condition
+You want to see how many elements in an array satisfy a certain condition
+You do not want to modify the existing array you are filtering
+
+let words = ['apple', 'banana', 'orange', 'cherry', 'cry'];
+
+let newWords = words.filter(function (word) {
+    if (word.length < 6) {
+        return word;
+    }
+});
+
+console.log(newWords)
+
+
+
+
+
+
+
 
 
 
