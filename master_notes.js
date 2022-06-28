@@ -1751,7 +1751,7 @@ When You Would Use forEach
 You want to iterate over an array, but the return value of your callback is not important
 Almost all of the time there are better options…
 
-
+YOU DO NOT NEED to always call the array or index in forEach
 
 function holler() {
     console.log('HEY YOU');
@@ -1783,8 +1783,32 @@ doAllMath(5, 2, mathFuncs);
 
 
 
+****map****
 
 
+map
+Creates a new array
+Iterates through an array
+Runs a callback function for each value in the array
+Adds the result of that callback function to the new array
+Returns the new array
+map always returns a new array of the same length
+
+
+
+When You Would Use Map
+You want to “transform” an array into another array of the same length
+You do not want to overwrite an existing array and instead return a new copy
+
+
+
+let numbers = [1, 2, 3];
+
+let newNumbers = numbers.map(function (value) {
+    return (value * 10)
+});
+
+console.log(newNumbers);
 
 
 
