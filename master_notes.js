@@ -1753,6 +1753,33 @@ Almost all of the time there are better options…
 
 
 
+function holler() {
+    console.log('HEY YOU');
+}
+
+const whisper = function () {
+    console.log('psssst');
+}
+
+function add(x, y) { return x + y };
+function subtract(x, y) { return x - y };
+function multiply(x, y) { return x * y };
+function divide(x, y) { return x / y };
+
+const mathFuncs = [add, subtract, multiply, divide];
+
+function doMath(a, b, mathFunc) {
+    return mathFunc(a, b);
+}
+
+
+function doAllMath(x, y, mathFuncs) {
+    mathFuncs.forEach(function (value, index, array) {
+        console.log(value(x, y));
+    });
+};
+
+doAllMath(5, 2, mathFuncs);
 
 
 
