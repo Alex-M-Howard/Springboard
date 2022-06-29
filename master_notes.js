@@ -1839,13 +1839,85 @@ console.log(newWords)
 
 
 
+**** some/every ****
+iterates through array
+if at least one value returns true in the callback, returns true
+Else -> returns false
+
+let numbers = [1,2,3];
+
+numbers.some(function(value, index, array){
+  return value < 3;
+});
+
+// true
+
+let numbers = [1,2,3];
+
+numbers.some(function(value, index, array){
+  return value > 10;
+});
+
+// false
 
 
+function hasAdmin(arr){
+  return arr.some(function(value){
+    return value.admin
+  });
+}
+
+hasAdmin([
+  {name: "Colt", admin: true},
+  {name: "Poppy", admin: false}
+]); // true
+
+hasAdmin([{name: "Colt"}, {name: "Poppy", admin: false}]); // false
+function hasQuestionMark(str){
+  return str.split('').some(function(value){
+    return value === '?';
+  });
+}
+
+hasQuestionMark('How are you feeling'); // false
+hasQuestionMark('How are you feeling now?'); // true
+
+When You Would Use Some
+You need to determine if at least one value in an array exists and you have to determine this by using a callback (not includes/indexOf)
+A simple alternative to using filter and seeing if the array contains at least one element
 
 
+Every - > iterates an array. if any value returns false, entire function returns false
+let numbers = [1,2,3];
+
+numbers.every(function(value, index, array){
+  return value > 0;
+});
+
+// true
+let numbers = [1,2,3];
+
+numbers.every(function(value, index, array){
+  return value > 2;
+});
+
+// false
 
 
+function allVowels(str){
+  return str.split('').every(function(value){
+    return "aeiou".includes(value)
+  });
+}
 
+allVowels('awesome') // false
+allVowels('aiaieoeoiu') // true
+function allIntegers(arr){
+  return arr.every(Number.isInteger);
+}
+
+allIntegers([1,2,3,4,4,4,4]) // true
+allIntegers([5,1,4,3,2.2]) // false
 
 
 
