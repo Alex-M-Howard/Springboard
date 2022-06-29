@@ -43,7 +43,7 @@ describe("Payments test (with setup and tear-down)", function () {
     
 
 
-    afterEach(function () {      //This in theory should work. Commented out, it works 8/10 times. 
+    afterAll(function () {      //This in theory should work. Commented out, it works 8/10 times. 
         try {                    //When ran in random order, failures everywhere
             delete allServers.server1
             delete allServers.server2

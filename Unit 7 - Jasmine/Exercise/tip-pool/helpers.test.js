@@ -12,9 +12,9 @@ describe("Payments test (with setup and tear-down)", function () {
   });
 
   it('should post bill and tip amount in table', function () {
-      expect(sumPaymentTotal('billAmt')).toEqual(375);
-      expect(sumPaymentTotal('tipAmt')).toEqual(90);
-      expect(sumPaymentTotal('tipPercent')).toEqual(43);
+      expect(sumPaymentTotal('billAmt')).toEqual(525);
+      expect(sumPaymentTotal('tipAmt')).toEqual(105);
+      expect(sumPaymentTotal('tipPercent')).toEqual(53);
   });
 
     it('should calculate tip percent', function () {
