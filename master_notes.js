@@ -2221,8 +2221,14 @@ There’s really no need to use it
 Just be careful of block scoping with let
 
 
+variable hoisting
+  -When code is compiled, the var declarations will run at top of program
+  -so if you call on the variable before it is technically defined, it'll just show undefined
+  -let and const will not be hoisted
 
 
+NEVER USE VAR. Unless working on old code base. Use let and const
+Try to use const if you can.
 
 
 
