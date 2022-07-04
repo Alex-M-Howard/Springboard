@@ -1,0 +1,28 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+.squares {
+    border: 1px solid black;
+    width: 75px;
+    height: 75px;
+    color: blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.redfill{
+    background-color: red;
+    border: 7px solid red;
+    border-radius: 100%;
+    width: 3rem;
+    height: 3rem;
+}
