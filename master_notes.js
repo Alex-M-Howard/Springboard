@@ -2829,6 +2829,7 @@ Uniqueness required
 Efficiently checking if an item is in a collection (much better than arrays)
 
 
-
+If class contains - CLASSLIST CONTAINS INCLUDES
+classList.contains()
 
 */

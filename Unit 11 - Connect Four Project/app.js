@@ -18,46 +18,70 @@ const makeBoard = () => {
         row.classList.add("row");
         for (let y = 1; y <= WIDTH; y++){
             let newSquare = document.createElement("div");
-            newSquare.classList.add("square");
-            newSquare.innerText = `${y}${WIDTH-x}`
+            newSquare.classList.add("square", "empty",`row-${WIDTH - x}`,`column-${y}`);
 
             // If top row being created, outline so player knows where to place pieces
-            if (x === 0 ){newSquare.classList.add("column-top")}
+            if (x === 0){newSquare.classList.add("column-top")}
             row.append(newSquare);
         }
         document.getElementById("game-board").append(row);
     }
 }
 
-// Allow top row to be clicked to place pieces on to game board
+//Select top row, add event listeners to each square
 const addEventsToTopRow = () => {
-    const topSquares = document.querySelectorAll(".column-top");
-    for (square of topSquares) {
-        square.addEventListener("click", handleClick);
-    }
+    Array.from(document.querySelectorAll(".column-top")).map((square) => square.addEventListener("click", handleClick));
 }
 
-// Attempt to place game piece on the board
-const handleClick = (event) => findNextEmptyRowInCol(event.target)
+// Handle Click Event on top squares
+const handleClick = (event) => {
+    let emptySquare = findNextEmptyRowInCol(event.target); //Get first empty square
+    checkSquare(emptySquare);
+    checkForWinner();
+}
 
 
-// Return top empty spot (y) when column (x) clicked
+// Return first empty row when top square clicked
 const findNextEmptyRowInCol = (column) => {
-    let row = column.parentElement
+    let columnNumberClicked = column.getAttribute("class");
+    columnNumberClicked = columnNumberClicked[columnNumberClicked.indexOf("column-") + 7]; // Will grab col. number 7 is length of column-
     
-    console.log(row)
+    // Using Column number clicked, find all rows in column
+    const rows = Array.from(document.querySelectorAll(`.column-${columnNumberClicked}`)).reverse();
+    return rows.find((value) => { if (value.classList.contains("empty")) { return value } });
 }
 
-// function findSpotForCol(x) {
-//   // TODO: write the real version of this, rather than always returning 0
-//   return 0;
-// }
+const checkSquare = (square) => {
+    return square.classList.contains("row-7") ? true : placePieceInBoard(square);
+}
 
-// /** placeInTable: update DOM to place piece into HTML table of board */
+const placePieceInBoard = (square) => {
+    square.classList.toggle('empty');
+    if (currPlayer === 1) {
+        square.style.backgroundColor = 'blue';
+        currPlayer = 2;
+    } else {
+        square.style.backgroundColor = 'red';
+        currPlayer = 1;
+    }
+    return
+}
 
-// function placeInTable(y, x) {
-//   // TODO: make a div and insert into correct table cell
-// }
+const checkForWinner = () => {
+    const rows = Array.from(document.querySelectorAll(".row")).reverse();
+    rows.pop();         // Ignore top row where game pieces are added
+    
+    // Check if gameboard has more empty squares
+    rows.forEach(function (row) { row.querySelectorAll(".empty").length > 0 ? boardFull = false : boardFull = true; })
+    
+
+
+
+
+
+    if (boardFull){console.log('GAME OVER')}
+}
+
 
 // /** endGame: announce game end */
 
@@ -65,21 +89,7 @@ const findNextEmptyRowInCol = (column) => {
 //   // TODO: pop up alert message
 // }
 
-// /** handleClick: handle click of column top to play piece */
 
-// function handleClick(evt) {
-//   // get x from ID of clicked cell
-//   var x = +evt.target.id;
-
-//   // get next spot in column (if none, ignore click)
-//   var y = findSpotForCol(x);
-//   if (y === null) {
-//     return;
-//   }
-
-//   // place piece in board and add to HTML table
-//   // TODO: add line to update in-memory board
-//   placeInTable(y, x);
 
 //   // check for win
 //   if (checkForWin()) {
@@ -88,10 +98,6 @@ const findNextEmptyRowInCol = (column) => {
 
 //   // check for tie
 //   // TODO: check if all cells in board are filled; if so call, call endGame
-
-//   // switch players
-//   // TODO: switch currPlayer 1 <-> 2
-// }
 
 // /** checkForWin: check board cell-by-cell for "does a win start here?" */
 
