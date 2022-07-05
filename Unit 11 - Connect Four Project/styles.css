@@ -49,3 +49,11 @@ h1 {
 .column-top{
     border: 1px dotted black;
 }
+
+.player1 {
+    background-color: pink;
+}
+
+.player2 {
+    background-color: blueviolet;
+}

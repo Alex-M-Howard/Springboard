@@ -9,7 +9,7 @@ let WIDTH = 7;
 let HEIGHT = 6;
 
 let currPlayer = 1; // active player: 1 or 2
-const board = []; // array of rows, each row is array of cells  (board[y][x])
+const board = []; // array of rows, each row is array of cells  (board[WIDTH][HEIGHT])
 
 // Create game board 
 const makeBoard = () => {
@@ -19,7 +19,7 @@ const makeBoard = () => {
         for (let y = 1; y <= WIDTH; y++){
             let newSquare = document.createElement("div");
             newSquare.classList.add("square", "empty",`row-${WIDTH - x}`,`column-${y}`);
-
+            newSquare.innerText = (`${WIDTH - x}${y}`);
             // If top row being created, outline so player knows where to place pieces
             if (x === 0){newSquare.classList.add("column-top")}
             row.append(newSquare);
@@ -37,7 +37,8 @@ const addEventsToTopRow = () => {
 const handleClick = (event) => {
     let emptySquare = findNextEmptyRowInCol(event.target); //Get first empty square
     checkSquare(emptySquare);
-    checkForWinner();
+    checkForWin();
+    checkBoard();
 }
 
 
@@ -58,52 +59,75 @@ const checkSquare = (square) => {
 const placePieceInBoard = (square) => {
     square.classList.toggle('empty');
     if (currPlayer === 1) {
-        square.style.backgroundColor = 'blue';
+        square.classList.toggle("player1");
         currPlayer = 2;
     } else {
-        square.style.backgroundColor = 'red';
+        square.classList.toggle("player2");
         currPlayer = 1;
     }
     return
 }
 
-const checkForWinner = () => {
+const checkBoard = () => {
     const rows = Array.from(document.querySelectorAll(".row")).reverse();
     rows.pop();         // Ignore top row where game pieces are added
     
     // Check if gameboard has more empty squares
     rows.forEach(function (row) { row.querySelectorAll(".empty").length > 0 ? boardFull = false : boardFull = true; })
+    if (boardFull) endGame("TIE");
+}
+
+const endGame = (winner) => {
+    if (winner === "TIE") {
+        const timer = setTimeout(() => {
+            window.alert("DRAW! Game Over!")
+        }, 350)
+    } else {
+        const timer = setTimeout(() => {
+            window.alert(`Player ${winner} wins the game!`)
+        }, 350)
+    }
+}
+
+const checkForWin = () => {
+
+    const gameBoard = Array.from(document.querySelectorAll(".square")).reverse();
+    gameBoard.pop();                                        // Remove top row where game pieces are added;
+
+
+
+    
+    
+    for (let y = 0; y < HEIGHT; y++){
+        for (let x = 0; x < WIDTH; x++){
+            const horizontal = [gameBoard[x], gameBoard[x + 1], gameBoard[x + 2], gameBoard[x + 3]]
+            console.log(horizontal)
+            // const vertical = gameBoard
+            // const diagonalLeft = 
+            // const diagonalRight = 
+        }
+    }
+
+
+    // gameBoard.forEach((square) => {
+    //     let choice = square.getAttribute("class");
+    //     let column = choice[choice.indexOf("column-") + 7]; // Will start at index and add 7 for 'column-' to get col. #
+    //     let row = choice[choice.indexOf("row-") + 4];       // Will start at index and add 4 for 'row-' to get row #
+        
+
+
+
+    //     console.log(column, row);
+    // })
+    
     
 
 
-
-
-
-    if (boardFull){console.log('GAME OVER')}
 }
-
-
-// /** endGame: announce game end */
-
-// function endGame(msg) {
-//   // TODO: pop up alert message
-// }
-
-
-
-//   // check for win
-//   if (checkForWin()) {
-//     return endGame(`Player ${currPlayer} won!`);
-//   }
-
-//   // check for tie
-//   // TODO: check if all cells in board are filled; if so call, call endGame
-
-// /** checkForWin: check board cell-by-cell for "does a win start here?" */
 
 // function checkForWin() {
 //   function _win(cells) {
-//     // Check four cells to see if they're all color of current player
+//     // Check four cells to see if they're a"l color of current player
 //     //  - cells: list of four (y, x) cells
 //     //  - returns true if all are legal coordinates & all match currPlayer
 
