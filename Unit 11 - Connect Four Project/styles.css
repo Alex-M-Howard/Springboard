@@ -52,8 +52,10 @@ h1 {
 
 .player1 {
     background-color: pink;
+    border-radius: 100%;
 }
 
 .player2 {
     background-color: blueviolet;
+    border-radius: 100%;
 }

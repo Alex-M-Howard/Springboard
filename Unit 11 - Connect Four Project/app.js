@@ -7,7 +7,7 @@
 
 let WIDTH = 7;
 let HEIGHT = 6;
-
+let gameOver = false;
 let currPlayer = 1; // active player: 1 or 2
 const board = []; // array of rows, each row is array of cells  (board[WIDTH][HEIGHT])
 
@@ -35,12 +35,17 @@ const addEventsToTopRow = () => {
 
 // Handle Click Event on top squares
 const handleClick = (event) => {
+    if (gameOver) return;
     let emptySquare = findNextEmptyRowInCol(event.target); //Get first empty square
     checkSquare(emptySquare);
     checkForWin();
     checkBoard();
+    switchPlayer();
 }
 
+const switchPlayer = () => {
+    currPlayer === 1 ? currPlayer = 2 : currPlayer = 1;
+}
 
 // Return first empty row when top square clicked
 const findNextEmptyRowInCol = (column) => {
@@ -58,13 +63,7 @@ const checkSquare = (square) => {
 
 const placePieceInBoard = (square) => {
     square.classList.toggle('empty');
-    if (currPlayer === 1) {
-        square.classList.toggle("player1");
-        currPlayer = 2;
-    } else {
-        square.classList.toggle("player2");
-        currPlayer = 1;
-    }
+    currPlayer === 1 ? square.classList.toggle("player1") : square.classList.toggle("player2");
     return
 }
 
@@ -78,33 +77,38 @@ const checkBoard = () => {
 }
 
 const endGame = (winner) => {
+    console.log(winner)
     if (winner === "TIE") {
         const timer = setTimeout(() => {
             window.alert("DRAW! Game Over!")
         }, 350)
     } else {
         const timer = setTimeout(() => {
-            window.alert(`Player ${winner} wins the game!`)
+            window.alert(`${winner} wins the game!`)
         }, 350)
     }
 }
 
 const checkForWin = () => {
-
+    const rows = Array.from(document.querySelectorAll(".row")).reverse();
+    rows.pop();
     const gameBoard = Array.from(document.querySelectorAll(".square")).reverse();
     gameBoard.pop();                                        // Remove top row where game pieces are added;
 
 
 
-    
-    
+
     for (let y = 0; y < HEIGHT; y++){
+        if (gameOver) break;
         for (let x = 0; x < WIDTH; x++){
-            const horizontal = [gameBoard[x], gameBoard[x + 1], gameBoard[x + 2], gameBoard[x + 3]]
-            console.log(horizontal)
-            // const vertical = gameBoard
-            // const diagonalLeft = 
-            // const diagonalRight = 
+            console.log(rows)
+            // const horizontal = [gameBoard[x], gameBoard[x + 1], gameBoard[x + 2], gameBoard[x + 3]]
+            // console.log(horizontal)
+            // if (horizontal.every((square) => { return square.classList.contains(`player${currPlayer}`) })) {
+                // gameOver = true;
+                // endGame(`Player ${currPlayer}`)
+                // break;
+            // }            
         }
     }
 
@@ -144,13 +148,13 @@ const checkForWin = () => {
 //   // TODO: read and understand this code. Add comments to help you.
 
 //   for (var y = 0; y < HEIGHT; y++) {
-//     for (var x = 0; x < WIDTH; x++) {
-//       var horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
-//       var vert = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
-//       var diagDR = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
-//       var diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
-
-//       if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
+    //     for (var x = 0; x < WIDTH; x++) {
+        //       var horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
+        //       var vert = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
+        //       var diagDR = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
+        //       var diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
+        //       if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
+        
 //         return true;
 //       }
 //     }
