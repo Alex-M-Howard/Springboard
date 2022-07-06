@@ -100,18 +100,25 @@ const checkForWin = () => {
         const row = document.querySelectorAll(`.row-${y}`);
         const column = document.querySelectorAll(`.column-${y}`)
         
-        for (let x = 0; x < WIDTH; x++) {
+        for (let x = 0; x <= WIDTH; x++) {
+            console.log('x', x)
             try {
                 //Index 4 is the player name
                 let horizontal = [row[x].classList[4], row[x + 1].classList[4], row[x + 2].classList[4], row[x + 3].classList[4]];
                 let vertical = [column[x].classList[4], column[x + 1].classList[4], column[x + 2].classList[4], column[x + 3].classList[4]];
- 
+                let rightDiagonal = [document.getElementsByClassName(`row-${y} column-${x}`), document.getElementsByClassName(`row-${y + 1} column-${x + 1}`), document.getElementsByClassName(`row-${y + 2} column-${x + 2}`), document.getElementsByClassName(`row-${y + 3} column-${x + 3}`)]
+                let leftDiagonal = [document.getElementsByClassName(`row-${y} column-${x}`), document.getElementsByClassName(`row-${y + 1} column-${x - 1}`), document.getElementsByClassName(`row-${y + 2} column-${x - 2}`), document.getElementsByClassName(`row-${y + 3} column-${x - 3}`)]
+                
+                
+
                 // Check if every square in array is same player
                 horizontal = horizontal.every((square) => square === `player${currPlayer}`)
                 vertical = vertical.every((square) => square === `player${currPlayer}`)
+                rightDiagonal = rightDiagonal.every((square) => square === `player${currPlayer}`)
+                leftDiagonal = leftDiagonal.every((square) => square === `player${currPlayer}`)
                 
                 // Check for horizontal or vertical victory!
-                if (horizontal || vertical) { endGame(currPlayer) }
+                if (horizontal || vertical || rightDiagonal || leftDiagonal) { endGame(currPlayer) }
                 
             } catch {
                 continue;
@@ -133,7 +140,7 @@ const checkForWin = () => {
             rDiagonal = rDiagonal.map((square) => square[0].classList[4])
             lDiagonal = lDiagonal.map((square) => square[0].classList[4])
 
-            console.log(rDiagonal)
+            
           
             // Store player attached to square in array
             
