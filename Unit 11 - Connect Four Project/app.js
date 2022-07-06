@@ -18,10 +18,10 @@ const makeBoard = () => {
         let row = document.createElement("div");
         row.classList.add("row");
         for (let y = 1; y <= WIDTH; y++){
+            // Create new square - Label with Row # and Col #
             let newSquare = document.createElement("div");
-            newSquare.classList.add("square", "empty",`row-${WIDTH - x}`,`column-${y}`, `_${WIDTH-x}${y}`);
-            newSquare.innerText = (`${WIDTH - x}${y}`);
-           
+            newSquare.classList.add("square", "empty", `row-${WIDTH - x}`, `column-${y}`);
+            
             // If top row being created, outline so player knows where to place pieces
             if (x === 0){newSquare.classList.add("column-top")}
             row.append(newSquare);
@@ -52,7 +52,7 @@ const switchPlayer = () => {
 // Return first empty row when top square clicked
 const findNextEmptyRowInCol = (column) => {
     let columnNumberClicked = column.getAttribute("class");
-    columnNumberClicked = columnNumberClicked[columnNumberClicked.indexOf("column-") + 7]; // Will grab col. number 7 is length of column-
+    columnNumberClicked = columnNumberClicked[columnNumberClicked.indexOf("column-") + HEIGHT + 1]; // HEIGHT + 1 will always be top row where piece is added
     
     // Using Column number clicked, find all rows in column
     const rows = Array.from(document.querySelectorAll(`.column-${columnNumberClicked}`)).reverse();
@@ -92,71 +92,48 @@ const endGame = (winner) => {
 }
 
 const checkForWin = () => {
-
-    
-    // Vertical and Horizontal Checks
+    // Vertical and horizontal checks are separate from diagonal due to error handling order in TRY statments. 
     for (let y = 1; y <= HEIGHT + 1; y++) {
         
         const row = document.querySelectorAll(`.row-${y}`);
-        const column = document.querySelectorAll(`.column-${y}`)
+        const column = document.querySelectorAll(`.column-${y}`);
         
         for (let x = 0; x <= WIDTH; x++) {
-            console.log('x', x)
             try {
-                //Index 4 is the player name
-                let horizontal = [row[x].classList[4], row[x + 1].classList[4], row[x + 2].classList[4], row[x + 3].classList[4]];
-                let vertical = [column[x].classList[4], column[x + 1].classList[4], column[x + 2].classList[4], column[x + 3].classList[4]];
-                let rightDiagonal = [document.getElementsByClassName(`row-${y} column-${x}`), document.getElementsByClassName(`row-${y + 1} column-${x + 1}`), document.getElementsByClassName(`row-${y + 2} column-${x + 2}`), document.getElementsByClassName(`row-${y + 3} column-${x + 3}`)]
-                let leftDiagonal = [document.getElementsByClassName(`row-${y} column-${x}`), document.getElementsByClassName(`row-${y + 1} column-${x - 1}`), document.getElementsByClassName(`row-${y + 2} column-${x - 2}`), document.getElementsByClassName(`row-${y + 3} column-${x - 3}`)]
+                // Get horizontal and vertical squares
+                let horizontal = [row[x].classList[3], row[x + 1].classList[3], row[x + 2].classList[3], row[x + 3].classList[3]];
+                let vertical = [column[x].classList[3], column[x + 1].classList[3], column[x + 2].classList[3], column[x + 3].classList[3]];
+                                
+                //Check if every square in array contains same player
+                horizontal = horizontal.every((square) => square === `player${currPlayer}`);
+                vertical = vertical.every((square) => square === `player${currPlayer}`);
                 
+                if (horizontal || vertical) {endGame(currPlayer)}
+            } catch {}
+
+            try {
+                // Get right diagonal squares
+                let rightDiagonal = [document.getElementsByClassName(`row-${y} column-${x}`), document.getElementsByClassName(`row-${y + 1} column-${x + 1}`),
+                                     document.getElementsByClassName(`row-${y + 2} column-${x + 2}`), document.getElementsByClassName(`row-${y + 3} column-${x + 3}`)]
+                
+                // Check if every square in array contains same player
+                rightDiagonal = rightDiagonal.every((square) => square[0].classList[3] === `player${currPlayer}`);
+               
+                if (rightDiagonal){endGame(currPlayer)}
+            } catch {}
                 
 
-                // Check if every square in array is same player
-                horizontal = horizontal.every((square) => square === `player${currPlayer}`)
-                vertical = vertical.every((square) => square === `player${currPlayer}`)
-                rightDiagonal = rightDiagonal.every((square) => square === `player${currPlayer}`)
-                leftDiagonal = leftDiagonal.every((square) => square === `player${currPlayer}`)
+            try {
+                // Get left diagonal squares
+                let leftDiagonal  = [document.getElementsByClassName(`row-${y} column-${x}`), document.getElementsByClassName(`row-${y + 1} column-${x - 1}`),
+                                     document.getElementsByClassName(`row-${y + 2} column-${x - 2}`), document.getElementsByClassName(`row-${y + 3} column-${x - 3}`)]
                 
-                // Check for horizontal or vertical victory!
-                if (horizontal || vertical || rightDiagonal || leftDiagonal) { endGame(currPlayer) }
-                
-            } catch {
-                continue;
-            }
+                // Check if every square in array contains same player
+                leftDiagonal = leftDiagonal.every((square) => square[0].classList[3] === `player${currPlayer}`);
+
+                if (leftDiagonal){endGame(currPlayer)}
+            } catch {}
         }
-    }
-
-    // Diagonal Checks
-    for (let i = 1; i < WIDTH * HEIGHT; i++) {
-        let rDiagonal = [document.getElementsByClassName(`_${i}`), document.getElementsByClassName(`_${i + RIGHTdiagonal}`), document.getElementsByClassName(`_${i + 2 * RIGHTdiagonal}`), document.getElementsByClassName(`_${i + 3 * RIGHTdiagonal}`)]
-        let lDiagonal = [document.getElementsByClassName(`_${i}`), document.getElementsByClassName(`_${i + LEFTdiagonal}`), document.getElementsByClassName(`_${i + 2 * LEFTdiagonal}`), document.getElementsByClassName(`_${i + 3 * LEFTdiagonal}`)]
-        // console.log('Right', i, i + RIGHTdiagonal, i + 2 * RIGHTdiagonal, i + 3 * RIGHTdiagonal)
-        // console.log('Left', i, i + LEFTdiagonal, i + 2 * LEFTdiagonal, i + 3 * LEFTdiagonal)
-        
-        
-        try {
-        //    let rDiagonal = [document.getElementsByClassName(`${i}`), document.getElementsByClassName(`${i + RIGHTdiagonal}`), document.getElementsByClassName(`${i + 2 * RIGHTdiagonal}`), document.getElementsByClassName(`${i + 3 * RIGHTdiagonal}`)]
-        //    let lDiagonal = [document.getElementsByClassName(`${i}`), document.getElementsByClassName(`${i + LEFTdiagonal}`), document.getElementsByClassName(`${i + 2 * LEFTdiagonal}`), document.getElementsByClassName(`${i + 3 * LEFTdiagonal}`)]
-            rDiagonal = rDiagonal.map((square) => square[0].classList[4])
-            lDiagonal = lDiagonal.map((square) => square[0].classList[4])
-
-            
-          
-            // Store player attached to square in array
-            
-            // Check if every square in array is same player
- 
-            //rDiagonal = rDiagonal.every((square) => square.classList[4] === `player${currPlayer}`)
-            // lDiagonal = lDiagonal.every((square) => square[0][0].classList[4] === `player${currPlayer}`)
-            
-
-            // Check for a diagonal victory!
-            if (rDiagonal || lDiagonal) {(true) }//endGame(currPlayer) }
-           
-        } catch (error) {
-            continue;
-            console.log(error);
-        }   
     }
 }
 
