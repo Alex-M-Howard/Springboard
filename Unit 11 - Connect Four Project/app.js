@@ -4,7 +4,8 @@
 //  * column until a player gets four-in-a-row (horiz, vert, or diag) or until
 //  * board fills (tie)
 //  */
-
+const RIGHTdiagonal = 11;
+const LEFTdiagonal = 9;
 let WIDTH = 7;
 let HEIGHT = 6;
 let gameOver = false;
@@ -18,8 +19,9 @@ const makeBoard = () => {
         row.classList.add("row");
         for (let y = 1; y <= WIDTH; y++){
             let newSquare = document.createElement("div");
-            newSquare.classList.add("square", "empty",`row-${WIDTH - x}`,`column-${y}`);
+            newSquare.classList.add("square", "empty",`row-${WIDTH - x}`,`column-${y}`, `_${WIDTH-x}${y}`);
             newSquare.innerText = (`${WIDTH - x}${y}`);
+           
             // If top row being created, outline so player knows where to place pieces
             if (x === 0){newSquare.classList.add("column-top")}
             row.append(newSquare);
@@ -77,89 +79,79 @@ const checkBoard = () => {
 }
 
 const endGame = (winner) => {
-    console.log(winner)
+    gameOver = true;
     if (winner === "TIE") {
         const timer = setTimeout(() => {
             window.alert("DRAW! Game Over!")
-        }, 350)
+        }, 200);
     } else {
         const timer = setTimeout(() => {
-            window.alert(`${winner} wins the game!`)
-        }, 350)
+            window.alert(`Player ${winner} wins the game!`)
+        }, 200);
     }
 }
 
 const checkForWin = () => {
-    const rows = Array.from(document.querySelectorAll(".row")).reverse();
-    rows.pop();
-    const gameBoard = Array.from(document.querySelectorAll(".square")).reverse();
-    gameBoard.pop();                                        // Remove top row where game pieces are added;
 
-
-
-
-    for (let y = 0; y < HEIGHT; y++){
-        if (gameOver) break;
-        for (let x = 0; x < WIDTH; x++){
-            console.log(rows)
-            // const horizontal = [gameBoard[x], gameBoard[x + 1], gameBoard[x + 2], gameBoard[x + 3]]
-            // console.log(horizontal)
-            // if (horizontal.every((square) => { return square.classList.contains(`player${currPlayer}`) })) {
-                // gameOver = true;
-                // endGame(`Player ${currPlayer}`)
-                // break;
-            // }            
+    
+    // Vertical and Horizontal Checks
+    for (let y = 1; y <= HEIGHT + 1; y++) {
+        
+        const row = document.querySelectorAll(`.row-${y}`);
+        const column = document.querySelectorAll(`.column-${y}`)
+        
+        for (let x = 0; x < WIDTH; x++) {
+            try {
+                //Index 4 is the player name
+                let horizontal = [row[x].classList[4], row[x + 1].classList[4], row[x + 2].classList[4], row[x + 3].classList[4]];
+                let vertical = [column[x].classList[4], column[x + 1].classList[4], column[x + 2].classList[4], column[x + 3].classList[4]];
+ 
+                // Check if every square in array is same player
+                horizontal = horizontal.every((square) => square === `player${currPlayer}`)
+                vertical = vertical.every((square) => square === `player${currPlayer}`)
+                
+                // Check for horizontal or vertical victory!
+                if (horizontal || vertical) { endGame(currPlayer) }
+                
+            } catch {
+                continue;
+            }
         }
     }
 
-
-    // gameBoard.forEach((square) => {
-    //     let choice = square.getAttribute("class");
-    //     let column = choice[choice.indexOf("column-") + 7]; // Will start at index and add 7 for 'column-' to get col. #
-    //     let row = choice[choice.indexOf("row-") + 4];       // Will start at index and add 4 for 'row-' to get row #
+    // Diagonal Checks
+    for (let i = 1; i < WIDTH * HEIGHT; i++) {
+        let rDiagonal = [document.getElementsByClassName(`_${i}`), document.getElementsByClassName(`_${i + RIGHTdiagonal}`), document.getElementsByClassName(`_${i + 2 * RIGHTdiagonal}`), document.getElementsByClassName(`_${i + 3 * RIGHTdiagonal}`)]
+        let lDiagonal = [document.getElementsByClassName(`_${i}`), document.getElementsByClassName(`_${i + LEFTdiagonal}`), document.getElementsByClassName(`_${i + 2 * LEFTdiagonal}`), document.getElementsByClassName(`_${i + 3 * LEFTdiagonal}`)]
+        // console.log('Right', i, i + RIGHTdiagonal, i + 2 * RIGHTdiagonal, i + 3 * RIGHTdiagonal)
+        // console.log('Left', i, i + LEFTdiagonal, i + 2 * LEFTdiagonal, i + 3 * LEFTdiagonal)
         
+        
+        try {
+        //    let rDiagonal = [document.getElementsByClassName(`${i}`), document.getElementsByClassName(`${i + RIGHTdiagonal}`), document.getElementsByClassName(`${i + 2 * RIGHTdiagonal}`), document.getElementsByClassName(`${i + 3 * RIGHTdiagonal}`)]
+        //    let lDiagonal = [document.getElementsByClassName(`${i}`), document.getElementsByClassName(`${i + LEFTdiagonal}`), document.getElementsByClassName(`${i + 2 * LEFTdiagonal}`), document.getElementsByClassName(`${i + 3 * LEFTdiagonal}`)]
+            rDiagonal = rDiagonal.map((square) => square[0].classList[4])
+            lDiagonal = lDiagonal.map((square) => square[0].classList[4])
 
+            console.log(rDiagonal)
+          
+            // Store player attached to square in array
+            
+            // Check if every square in array is same player
+ 
+            //rDiagonal = rDiagonal.every((square) => square.classList[4] === `player${currPlayer}`)
+            // lDiagonal = lDiagonal.every((square) => square[0][0].classList[4] === `player${currPlayer}`)
+            
 
-
-    //     console.log(column, row);
-    // })
-    
-    
-
-
+            // Check for a diagonal victory!
+            if (rDiagonal || lDiagonal) {(true) }//endGame(currPlayer) }
+           
+        } catch (error) {
+            continue;
+            console.log(error);
+        }   
+    }
 }
-
-// function checkForWin() {
-//   function _win(cells) {
-//     // Check four cells to see if they're a"l color of current player
-//     //  - cells: list of four (y, x) cells
-//     //  - returns true if all are legal coordinates & all match currPlayer
-
-//     return cells.every(
-//       ([y, x]) =>
-//         y >= 0 &&
-//         y < HEIGHT &&
-//         x >= 0 &&
-//         x < WIDTH &&
-//         board[y][x] === currPlayer
-//     );
-//   }
-
-//   // TODO: read and understand this code. Add comments to help you.
-
-//   for (var y = 0; y < HEIGHT; y++) {
-    //     for (var x = 0; x < WIDTH; x++) {
-        //       var horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
-        //       var vert = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
-        //       var diagDR = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
-        //       var diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
-        //       if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
-        
-//         return true;
-//       }
-//     }
-//   }
-// }
 
 makeBoard();
 addEventsToTopRow();
