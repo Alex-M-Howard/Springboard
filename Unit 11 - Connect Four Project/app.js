@@ -279,8 +279,8 @@ const winGame = () => {
         loseBanner.setAttribute("src", "https://c.tenor.com/cVz_9uLJnKkAAAAC/frasier-yelling.gif");
         loseBanner.classList.add("lose-pic");
         
-        body.append(winBanner)
         body.append(loseBanner)
+        body.append(winBanner)
         title.innerText = 'Niles WINS!'
     }
 
