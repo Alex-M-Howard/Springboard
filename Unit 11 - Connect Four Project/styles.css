@@ -3,21 +3,27 @@ body {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    background-color: rgb(72, 70, 70);
+    /* TODO - Frasier Logo
+    background-color: black;
+    background-image: url('background.jpg');
+    background-size: 50% 50%;
+    background-repeat: no-repeat; */
 }
 
 #player-list {
     margin: 20px;
 }
 
-
 #game-area{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
 }
 
-#title {
+span {
     color: gold;
 }
 
@@ -57,6 +63,7 @@ h1 {
 #game-board{
     display: flex;
     flex-direction: column;
+    border: 5px solid black;
 
 }
 
@@ -79,6 +86,8 @@ img {
     justify-content: center;
     align-items: center;
     font-family: Florentine;
+    font-size: 1.5rem;
+    margin: 25px;
 }
 
 #player2{
@@ -86,8 +95,75 @@ img {
     justify-content: center;
     align-items: center;
     font-family: Florentine;
+    font-size: 1.5rem;
+    margin: 25px;
+}
+
+.player-pic{
+    margin: 20px;
 }
 
 .playertoken {
     margin: 1rem;
 }
+
+
+/* Credit to Lena Stanley from lenadesign.org for animation help  */
+.piece {
+    animation: drop forwards .5s;
+}
+
+@keyframes drop {
+  0% {transform: translateY(-200px) scaleY(0.9); opacity: .2;}
+  5% {opacity: .7;}
+  50% {transform: translateY(0px) scaleY(1); opacity: 1;}
+  65% {transform: translateY(-10px) scaleY(.9); opacity: 1;}
+  75% {transform: translateY(-12px) scaleY(.9); opacity: 1;}
+  100% {transform: translateY(0px) scaleY(1); opacity: 1;}
+}
+
+.tie-pic {
+    max-width: 700px;
+    max-height: 400px;
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+}
+
+.win-pic{
+    /* max-width: 75vw; */
+    position: absolute;
+    right: 50vw;
+    max-height: 75vh;
+    width: 700px;
+    height: auto;
+    margin: 0 auto;
+    animation: drop forwards .7s;
+}
+
+.lose-pic{
+    /* max-width: 75vw; */
+    position: absolute;
+    left: 50vw;
+    /* max-height: 75vh; */
+    width: 700px;
+    height: auto;
+    margin: 0 auto;
+    animation: drop forwards .7s;
+}
+
+
+.replay-game {
+    margin: 20px;
+    font-family: Florentine;
+    border-radius: 5px;
+    font-size: 2rem;
+    background-color: goldenrod;
+    width: 10rem;
+    height: 3rem
+}
+
+.replay-game:hover {
+    background-color: rgb(175, 132, 24);
+}
+
