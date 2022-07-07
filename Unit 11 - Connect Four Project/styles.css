@@ -17,9 +17,15 @@ body {
     align-items: center;
 }
 
+#title {
+    color: gold;
+}
+
 h1 {
     font-size: 2.5rem;
     margin: 5px;
+    font-family: Florentine;
+
 }
 
 .square {
