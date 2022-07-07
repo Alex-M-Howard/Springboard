@@ -117,6 +117,7 @@ const checkBoard = () => {
 }
 
 const endGame = (winner) => {
+
     gameOver = true;
     winner === 1 ? winner = 'Frasier' : winner = 'Niles';
 
@@ -125,9 +126,22 @@ const endGame = (winner) => {
             window.alert("DRAW! Game Over!")
         }, 200);
     } else {
+        colorWinner();
         const timer = setTimeout(() => {
             window.alert(`${winner} wins the game!`)
         }, 200);
+    }
+}
+
+const colorWinner = () => {
+    let squares = document.getElementsByClassName("square");
+    for (let square of squares) {
+        let test = square.getAttribute("class");
+        if (test.includes("win")) {
+            continue;
+        } else if(test.includes("player")){
+            square.style.opacity = 0.4; 
+        }
     }
 }
 
@@ -145,21 +159,45 @@ const checkForWin = () => {
                 let vertical = [column[x].classList[3], column[x + 1].classList[3], column[x + 2].classList[3], column[x + 3].classList[3]];
                                 
                 //Check if every square in array contains same player
-                horizontal = horizontal.every((square) => square === `player${currPlayer}`);
-                vertical = vertical.every((square) => square === `player${currPlayer}`);
+                let horizontalWin = horizontal.every((square) => square === `player${currPlayer}`);
+                let verticalWin = vertical.every((square) => square === `player${currPlayer}`);
                 
-                if (horizontal || vertical) {endGame(currPlayer)}
+                // Add win class so non-winning tokens can be dimmed
+                if (horizontalWin) {
+                    row[x].classList.add("win");
+                    row[x + 1].classList.add("win");
+                    row[x + 2].classList.add("win");
+                    row[x + 3].classList.add("win");
+                }
+                
+                if (verticalWin) {
+                    column[x].classList.add("win");
+                    column[x + 1].classList.add("win");
+                    column[x + 2].classList.add("win");
+                    column[x + 3].classList.add("win");
+                }
+
+                if (horizontalWin || verticalWin) endGame(currPlayer)
             } catch {}
 
             try {
                 // Get right diagonal squares
                 let rightDiagonal = [document.getElementsByClassName(`row-${y} column-${x}`), document.getElementsByClassName(`row-${y + 1} column-${x + 1}`),
                                      document.getElementsByClassName(`row-${y + 2} column-${x + 2}`), document.getElementsByClassName(`row-${y + 3} column-${x + 3}`)];
+                console.log(rightDiagonal)
                 
                 // Check if every square in array contains same player
-                rightDiagonal = rightDiagonal.every((square) => square[0].classList[3] === `player${currPlayer}`);
+                let rightDiagonalWin = rightDiagonal.every((square) => square[0].classList[3] === `player${currPlayer}`);
                
-                if (rightDiagonal){endGame(currPlayer)}
+                // Add win class so non-winning tokens can be dimmed
+                if (rightDiagonalWin) {
+                    document.getElementsByClassName(`row-${y} column-${x}`)[0].classList.add("win");
+                    document.getElementsByClassName(`row-${y+1} column-${x+1}`)[0].classList.add("win");
+                    document.getElementsByClassName(`row-${y+2} column-${x+2}`)[0].classList.add("win");
+                    document.getElementsByClassName(`row-${y+3} column-${x+3}`)[0].classList.add("win");
+                }
+
+                if (rightDiagonalWin) endGame(currPlayer)
             } catch {}
                 
 
@@ -169,9 +207,17 @@ const checkForWin = () => {
                                      document.getElementsByClassName(`row-${y + 2} column-${x - 2}`), document.getElementsByClassName(`row-${y + 3} column-${x - 3}`)]
                 
                 // Check if every square in array contains same player
-                leftDiagonal = leftDiagonal.every((square) => square[0].classList[3] === `player${currPlayer}`);
+                let leftDiagonalWin = leftDiagonal.every((square) => square[0].classList[3] === `player${currPlayer}`);
 
-                if (leftDiagonal){endGame(currPlayer)}
+                // Add win class so non-winning tokens can be dimmed
+                if (leftDiagonalWin) {
+                    document.getElementsByClassName(`row-${y} column-${x}`)[0].classList.add("win");
+                    document.getElementsByClassName(`row-${y+1} column-${x-1}`)[0].classList.add("win");
+                    document.getElementsByClassName(`row-${y+2} column-${x-2}`)[0].classList.add("win");
+                    document.getElementsByClassName(`row-${y+3} column-${x-3}`)[0].classList.add("win");
+                }
+
+                if (leftDiagonalWin) endGame(currPlayer)
             } catch {}
         }
     }
