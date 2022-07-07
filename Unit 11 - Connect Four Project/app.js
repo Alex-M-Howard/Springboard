@@ -32,47 +32,81 @@ const makeBoard = () => {
 
 //Select top row, add event listeners to each square
 const addEventsToTopRow = () => {
-    Array.from(document.querySelectorAll(".column-top")).map((square) => square.addEventListener("click", handleClick));
+    Array.from(document.querySelectorAll(".column-top")).map((square) => {
+        square.addEventListener("click", handleClick);
+        square.addEventListener("mouseenter", mouseEnter);
+        square.addEventListener("mouseleave", mouseLeave);
+    })
+}
+
+const mouseEnter = (event) => addPlayerToken(event);
+const mouseLeave = () => removePlayerToken();
+
+const addPlayerToken = (event) => {
+    let image = document.getElementById(`player${currPlayer}`).firstElementChild.getAttribute("src")
+    let playerToken = document.createElement("img");
+    playerToken.setAttribute("src", image);
+    playerToken.classList.add("player-token");
+    event.target.append(playerToken);
+}
+
+const removePlayerToken = () => {
+    let playerToken = document.getElementsByClassName("player-token")[0];
+    playerToken.remove();
+}
+
+const changePlayerToken = () => {
+    let image = document.getElementById(`player${currPlayer}`).firstElementChild.getAttribute("src")
+    let playerToken = document.getElementsByClassName("player-token")[0];
+    playerToken.setAttribute("src", image)
 }
 
 // Handle Click Event on top squares
-const handleClick = (event) => {
+const handleClick = () => {
+    square = document.getElementsByClassName("player-token")[0].parentElement;    
     if (gameOver) return;
-    let emptySquare = findNextEmptyRowInCol(event.target); //Get first empty square
-    checkSquare(emptySquare);
+    let emptySquare = findNextEmptyRowInCol(square); //Get first empty square
+    if (!emptySquare) return;
+
+    placePieceInBoard(emptySquare)
     checkForWin();
     checkBoard();
     switchPlayer();
+    changePlayerToken();
 }
 
 const switchPlayer = () => {
+    // Dim player token
+    let playertoken = document.getElementById(`player${currPlayer}`)
+    playertoken.style.opacity = 0.2;
     currPlayer === 1 ? currPlayer = 2 : currPlayer = 1;
+    playertoken = document.getElementById(`player${currPlayer}`)
+    playertoken.style.opacity = 1.0;
+
 }
 
 // Return first empty row when top square clicked
 const findNextEmptyRowInCol = (column) => {
     let columnNumberClicked = column.getAttribute("class");
-    columnNumberClicked = columnNumberClicked[columnNumberClicked.indexOf("column-") + HEIGHT + 1]; // HEIGHT + 1 will always be top row where piece is added
+    columnNumberClicked = columnNumberClicked[columnNumberClicked.indexOf("column-") + 7]; // 7 is length of the string column-
     
-    // Using Column number clicked, find all rows in column
+    // Using Column number clicked, find all rows in column. Return null if last row is only empty row
     const rows = Array.from(document.querySelectorAll(`.column-${columnNumberClicked}`)).reverse();
-    return rows.find((value) => { if (value.classList.contains("empty")) { return value } });
-}
-
-const checkSquare = (square) => {
-    return square.classList.contains(`row-${HEIGHT+1}`) ? true : placePieceInBoard(square);
+    let square =  rows.find((value) => { if (value.classList.contains("empty")) { return value } });
+    return square.classList.contains(`row-${HEIGHT + 1}`) ? null : square
 }
 
 const placePieceInBoard = (square) => {
     let image = document.createElement("img");
-    currPlayer === 1 ? image.setAttribute("src", "frasier.png") : image.setAttribute("src", "Niles.png")
-    square.append(image)
+    currPlayer === 1 ? image.setAttribute("src", "frasier.png") : image.setAttribute("src", "Niles.png");
+    square.append(image);
 
     square.classList.toggle('empty');
     currPlayer === 1 ? square.classList.toggle("player1") : square.classList.toggle("player2");
     return
 }
 
+// Checking if board still has empty squares
 const checkBoard = () => {
     const rows = Array.from(document.querySelectorAll(".row")).reverse();
     rows.pop();         // Ignore top row where game pieces are added
@@ -84,7 +118,7 @@ const checkBoard = () => {
 
 const endGame = (winner) => {
     gameOver = true;
-    winner === 1 ? winner = 'Frasier': winner = 'Niles'
+    winner === 1 ? winner = 'Frasier' : winner = 'Niles';
 
     if (winner === "TIE") {
         const timer = setTimeout(() => {
@@ -120,7 +154,7 @@ const checkForWin = () => {
             try {
                 // Get right diagonal squares
                 let rightDiagonal = [document.getElementsByClassName(`row-${y} column-${x}`), document.getElementsByClassName(`row-${y + 1} column-${x + 1}`),
-                                     document.getElementsByClassName(`row-${y + 2} column-${x + 2}`), document.getElementsByClassName(`row-${y + 3} column-${x + 3}`)]
+                                     document.getElementsByClassName(`row-${y + 2} column-${x + 2}`), document.getElementsByClassName(`row-${y + 3} column-${x + 3}`)];
                 
                 // Check if every square in array contains same player
                 rightDiagonal = rightDiagonal.every((square) => square[0].classList[3] === `player${currPlayer}`);
@@ -143,5 +177,7 @@ const checkForWin = () => {
     }
 }
 
+switchPlayer();   // Switch Player ran twice to activate opacity change on token
+switchPlayer();
 makeBoard();
 addEventsToTopRow();
