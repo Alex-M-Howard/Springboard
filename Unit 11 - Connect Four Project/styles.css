@@ -1,4 +1,16 @@
-body{
+body {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#player-list {
+    margin: 20px;
+}
+
+
+#game-area{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -6,7 +18,8 @@ body{
 }
 
 h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
+    margin: 5px;
 }
 
 .square {
@@ -62,4 +75,20 @@ h1 {
 img {
     width: 90px;
     height: 90px;
+}
+
+#player1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#player2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.playertoken {
+    margin: 1rem;
 }
