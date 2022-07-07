@@ -229,13 +229,13 @@ const checkForWin = () => {
 const tieGame = () => {
     let body = document.querySelector("body");
     let tieBanner = document.createElement("img");
-    let title = document.querySelector("h1")
+    let title = document.querySelector("h1");
     tieBanner.setAttribute("src", "tie-game.jpeg");
     tieBanner.classList.add("tie-pic");
     tieBanner.style.position = 'absolute';
 
-    body.append(tieBanner)
-    title.innerText = 'You TIED!'
+    body.append(tieBanner);
+    title.innerText = 'You TIED!';
     replayGame();
 }
 
@@ -243,14 +243,13 @@ const tieGame = () => {
 const replayGame = () => {
     let gameArea = document.getElementById("game-area");
     let replayButton = document.createElement("button");
-    replayButton.classList.add("replay-game")
-    replayButton.innerText = 'Play Again?'
+    replayButton.classList.add("replay-game");
+    replayButton.innerText = 'Play Again?';
     replayButton.addEventListener("click", () => {
         location.reload();
     })
 
     gameArea.append(replayButton);
-
 }
 
 const winGame = () => {
@@ -266,8 +265,8 @@ const winGame = () => {
         loseBanner.setAttribute("src", "https://c.tenor.com/9QTLDBQjHt4AAAAC/niles-frasier.gif");
         loseBanner.classList.add("lose-pic");
         
-        body.append(winBanner)
-        body.append(loseBanner)
+        body.append(winBanner);
+        body.append(loseBanner);
         title.innerText = 'Frasier WINS!'
 
     } else {
