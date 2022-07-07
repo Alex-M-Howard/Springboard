@@ -60,10 +60,14 @@ const findNextEmptyRowInCol = (column) => {
 }
 
 const checkSquare = (square) => {
-    return square.classList.contains("row-7") ? true : placePieceInBoard(square);
+    return square.classList.contains(`row-${HEIGHT+1}`) ? true : placePieceInBoard(square);
 }
 
 const placePieceInBoard = (square) => {
+    let image = document.createElement("img");
+    currPlayer === 1 ? image.setAttribute("src", "frasier.png") : image.setAttribute("src", "Niles.png")
+    square.append(image)
+
     square.classList.toggle('empty');
     currPlayer === 1 ? square.classList.toggle("player1") : square.classList.toggle("player2");
     return
@@ -80,13 +84,15 @@ const checkBoard = () => {
 
 const endGame = (winner) => {
     gameOver = true;
+    winner === 1 ? winner = 'Frasier': winner = 'Niles'
+
     if (winner === "TIE") {
         const timer = setTimeout(() => {
             window.alert("DRAW! Game Over!")
         }, 200);
     } else {
         const timer = setTimeout(() => {
-            window.alert(`Player ${winner} wins the game!`)
+            window.alert(`${winner} wins the game!`)
         }, 200);
     }
 }

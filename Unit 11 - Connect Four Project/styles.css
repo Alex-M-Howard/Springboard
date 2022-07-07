@@ -11,8 +11,8 @@ h1 {
 
 .square {
     border: 1px solid black;
-    width: 75px;
-    height: 75px;
+    width: 100px;
+    height: 100px;
     margin: 2px;
     display: flex;
     justify-content: center;
@@ -47,10 +47,10 @@ h1 {
 }
 
 .column-top{
-    border: 1px dotted black;
+    border: 1px dotted gray;
 }
 
-.player1 {
+/* .player1 {
     background-color: pink;
     border-radius: 100%;
 }
@@ -58,4 +58,8 @@ h1 {
 .player2 {
     background-color: blueviolet;
     border-radius: 100%;
+} */
+img {
+    width: 90px;
+    height: 90px;
 }
