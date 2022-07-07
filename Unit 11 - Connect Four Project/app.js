@@ -43,6 +43,7 @@ const mouseEnter = (event) => addPlayerToken(event);
 const mouseLeave = () => removePlayerToken();
 
 const addPlayerToken = (event) => {
+    if (gameOver) return;
     let image = document.getElementById(`player${currPlayer}`).firstElementChild.getAttribute("src")
     let playerToken = document.createElement("img");
     playerToken.setAttribute("src", image);
@@ -98,6 +99,7 @@ const findNextEmptyRowInCol = (column) => {
 
 const placePieceInBoard = (square) => {
     let image = document.createElement("img");
+    image.classList.add('piece')
     currPlayer === 1 ? image.setAttribute("src", "frasier.png") : image.setAttribute("src", "Niles.png");
     square.append(image);
 
@@ -117,22 +119,22 @@ const checkBoard = () => {
 }
 
 const endGame = (winner) => {
-
     gameOver = true;
-    winner === 1 ? winner = 'Frasier' : winner = 'Niles';
 
     if (winner === "TIE") {
         const timer = setTimeout(() => {
-            window.alert("DRAW! Game Over!")
-        }, 200);
+            tieGame()
+        }, 1000);
     } else {
+        winner === 1 ? winner = 'Frasier' : winner = 'Niles';  
         colorWinner();
         const timer = setTimeout(() => {
-            window.alert(`${winner} wins the game!`)
-        }, 200);
+            winGame();
+        }, 1000);
     }
 }
 
+// Highlight winning tokens
 const colorWinner = () => {
     let squares = document.getElementsByClassName("square");
     for (let square of squares) {
@@ -140,7 +142,7 @@ const colorWinner = () => {
         if (test.includes("win")) {
             continue;
         } else if(test.includes("player")){
-            square.style.opacity = 0.4; 
+            square.style.opacity = 0.2; 
         }
     }
 }
@@ -221,6 +223,68 @@ const checkForWin = () => {
             } catch {}
         }
     }
+}
+
+// Display banner for tie game
+const tieGame = () => {
+    let body = document.querySelector("body");
+    let tieBanner = document.createElement("img");
+    let title = document.querySelector("h1")
+    tieBanner.setAttribute("src", "tie-game.jpeg");
+    tieBanner.classList.add("tie-pic");
+    tieBanner.style.position = 'absolute';
+
+    body.append(tieBanner)
+    title.innerText = 'You TIED!'
+    replayGame();
+}
+
+// Create replay button 
+const replayGame = () => {
+    let gameArea = document.getElementById("game-area");
+    let replayButton = document.createElement("button");
+    replayButton.classList.add("replay-game")
+    replayButton.innerText = 'Play Again?'
+    replayButton.addEventListener("click", () => {
+        location.reload();
+    })
+
+    gameArea.append(replayButton);
+
+}
+
+const winGame = () => {
+    let body = document.querySelector("body");
+    let title = document.querySelector("h1");
+    
+    if (currPlayer === 2) {
+        let winBanner = document.createElement("img");
+        let loseBanner = document.createElement("img");
+        winBanner.setAttribute("src", "https://c.tenor.com/SCA26byYSjAAAAAC/frasier-pbs.gif");
+        winBanner.classList.add("win-pic");
+        
+        loseBanner.setAttribute("src", "https://c.tenor.com/9QTLDBQjHt4AAAAC/niles-frasier.gif");
+        loseBanner.classList.add("lose-pic");
+        
+        body.append(winBanner)
+        body.append(loseBanner)
+        title.innerText = 'Frasier WINS!'
+
+    } else {
+        let winBanner = document.createElement("img");
+        let loseBanner = document.createElement("img");
+        winBanner.setAttribute("src", "https://c.tenor.com/PgRxD0hsg7wAAAAC/niles-crane-frasier.gif");
+        winBanner.classList.add("win-pic");
+        
+        loseBanner.setAttribute("src", "https://c.tenor.com/cVz_9uLJnKkAAAAC/frasier-yelling.gif");
+        loseBanner.classList.add("lose-pic");
+        
+        body.append(winBanner)
+        body.append(loseBanner)
+        title.innerText = 'Niles WINS!'
+    }
+
+    replayGame();
 }
 
 switchPlayer();   // Switch Player ran twice to activate opacity change on token
