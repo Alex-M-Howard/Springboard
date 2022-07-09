@@ -3396,7 +3396,9 @@ Function-based JS “classes”
 
 
 
+anything to the left of the . on a method is the 'this' object. If there is no ., then the WINDOW!
 
+'use strict' -> strict mode. Changes value of this also. Classes automatically run in strict mode. 
 
 
 
