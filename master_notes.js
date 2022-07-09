@@ -3400,12 +3400,25 @@ anything to the left of the . on a method is the 'this' object. If there is no .
 
 'use strict' -> strict mode. Changes value of this also. Classes automatically run in strict mode. 
 
+call() -> specifies what THIS will be
+first argument will be the 'this', other argument will be normal arguments
+const cat = {
+  name: 'Blue',
+  dance : function(dance) {
+    console.log(`I like to ${dance})
+  }
+}
+
+const blueDance = cat.dance;
+blueDance.call(cat, "salsa")
+
+call is a one time thing
 
 
-
-
-
-
+bind() -> permanently bind an object to the function. doesn't execute function.
+const bDance = blueDance.bind(cat)
+bDance('salsa') // I like to salsa
+could also refactor -> const blueDance = cat.dance.bind(cat);
 
 
 
