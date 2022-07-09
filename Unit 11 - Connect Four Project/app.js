@@ -110,13 +110,15 @@ const placePieceInBoard = (square) => {
 
 // Checking if board still has empty squares
 const checkBoard = () => {
+    if(gameOver) return
+    
     const rows = Array.from(document.querySelectorAll(".row")).reverse();
     rows.pop();         // Ignore top row where game pieces are added
     
     // Check if gameboard has more empty squares
     rows.forEach(function (row) { row.querySelectorAll(".empty").length > 0 ? boardFull = false : boardFull = true; })
-    if (boardFull) endGame("TIE");
-}
+    if (boardFull) endGame("TIE") 
+};
 
 const endGame = (winner) => {
     gameOver = true;
@@ -124,13 +126,13 @@ const endGame = (winner) => {
     if (winner === "TIE") {
         const timer = setTimeout(() => {
             tieGame()
-        }, 1000);
+        }, 1500);
     } else {
         winner === 1 ? winner = 'Frasier' : winner = 'Niles';  
         colorWinner();
         const timer = setTimeout(() => {
             winGame();
-        }, 1000);
+        }, 1500);
     }
 }
 
@@ -186,7 +188,6 @@ const checkForWin = () => {
                 // Get right diagonal squares
                 let rightDiagonal = [document.getElementsByClassName(`row-${y} column-${x}`), document.getElementsByClassName(`row-${y + 1} column-${x + 1}`),
                                      document.getElementsByClassName(`row-${y + 2} column-${x + 2}`), document.getElementsByClassName(`row-${y + 3} column-${x + 3}`)];
-                console.log(rightDiagonal)
                 
                 // Check if every square in array contains same player
                 let rightDiagonalWin = rightDiagonal.every((square) => square[0].classList[3] === `player${currPlayer}`);
@@ -229,13 +230,13 @@ const checkForWin = () => {
 const tieGame = () => {
     let body = document.querySelector("body");
     let tieBanner = document.createElement("img");
-    let title = document.querySelector("h1");
+    let title = document.querySelector("h1")
     tieBanner.setAttribute("src", "tie-game.jpeg");
     tieBanner.classList.add("tie-pic");
     tieBanner.style.position = 'absolute';
 
-    body.append(tieBanner);
-    title.innerText = 'You TIED!';
+    body.append(tieBanner)
+    title.innerText = 'You TIED!'
     replayGame();
 }
 
@@ -243,8 +244,9 @@ const tieGame = () => {
 const replayGame = () => {
     let gameArea = document.getElementById("game-area");
     let replayButton = document.createElement("button");
-    replayButton.classList.add("replay-game");
-    replayButton.innerText = 'Play Again?';
+
+    replayButton.classList.add("replay-game")
+    replayButton.innerText = 'Play Again?'
     replayButton.addEventListener("click", () => {
         location.reload();
     })
@@ -265,8 +267,8 @@ const winGame = () => {
         loseBanner.setAttribute("src", "https://c.tenor.com/9QTLDBQjHt4AAAAC/niles-frasier.gif");
         loseBanner.classList.add("lose-pic");
         
-        body.append(winBanner);
-        body.append(loseBanner);
+        body.append(winBanner)
+        body.append(loseBanner)
         title.innerText = 'Frasier WINS!'
 
     } else {
