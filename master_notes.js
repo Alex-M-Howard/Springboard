@@ -3660,6 +3660,249 @@ jQuery has some of the best documentation out there
 
 
 
+///// Bootstrap /////
+
+Benefits
+
+    Make tricky column layouts easy
+    Provides consistent results across browsers
+    Make responsive design much easier
+    Includes useful interactive components
+        Modals, dropdowns, popovers, etc
+    “Declarative” look and feel
+        Easier to theme
+        Familiar for writing custom CSS
+
+Responsive Groups
+
+xs
+    Cell phones in portrait mode
+sm
+    Cell phones in landscape / small tablets
+md
+    Tablets
+lg
+    Most desktop users
+xl
+    Very-wide desktop windows
+
+Semantic Colors
+Name 	Purpose 	Default
+primary 	Brand color 	blue
+secondary 	Neutral brand-appropriate color 	grey
+success 	Operation successful 	green
+danger 	Dangerous operation / error 	red
+warning 	Risky operation 	orange
+info 	FYI message 	light blue
+
+Used for table cells, text, buttons, & more
+Using Bootstrap
+
+Include their CSS:
+
+
+<link rel=”stylesheet” href=”https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css” integrity=”sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2” crossorigin=”anonymous”>
+
+To use interactive components, include JS:
+
+<script src="https://unpkg.com/jquery"></script>
+<script src="https://unpkg.com/popper"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+
+Layout
+
+All content should descend from a container element:
+
+.container-fluid
+    Full-browser-width container (with small amount of breathing room).
+.container
+    Full-browser-width but at specific breakpoints. Makes UI testing easier: far fewer possible layouts to test.
+
+Content that doesn’t need to be in columns can go directly in this.
+Grids
+
+    12 Column Layout
+    Cells can span any number of columns
+    After all columns are used, will become new row
+    To use: all columns must be in a .row
+
+<div class="container">
+  <div class="row">
+    <div class="col-4">A</div>
+    <div class="col-4">B</div>
+    <div class="col-4">C</div>
+    <div class="col-4">D</div>
+    <div class="col-4">E</div>
+    <div class="col-4">F</div>
+  </div>
+</div>
+
+two rows of 3 columns
+Responsive Grid
+
+    Can specify a breakpoint: that size and above use this
+    Specification without breakpoint is for xs
+
+different # columns
+
+<div class="container">
+  <div class="row">
+    <div class="col-6 col-md-4">A</div>
+    <div class="col-6 col-md-4">B</div>
+    <div class="col-6 col-md-4">C</div>
+    <div class="col-6 col-md-4">D</div>
+    <div class="col-6 col-md-4">E</div>
+    <div class="col-6 col-md-4">F</div>
+  </div>
+</div>
+
+(2 columns on cell phones; 3 columns for larger devices)
+Auto-Columns
+
+    Can leave off numbers & divide by available size
+    Useful when you don’t know how many items there will be
+
+auto-columns
+
+<div class="container">
+  <div class="row">
+    <div class="col">A</div>
+    <div class="col">B</div>
+  </div>
+
+  <div class="row">
+    <div class="col">C</div>
+    <div class="col">D</div>
+    <div class="col">E</div>
+  </div>
+</div>
+
+Learning More
+
+Grid Docs
+Images
+
+.img-fluid
+    Make image responsive; won’t be wider than parent
+
+Learn more: Images Docs
+Tables
+
+.table
+    Get nice standard table look (use this plus other classes)
+.table-hover
+    Hover-effect over a row
+.table-sm
+    Tighten up margin around cells
+.table-striped
+    Stripe alternative rows
+
+Learn more: Table Docs
+Alerts
+
+Useful for providing feedback/warnings:
+
+.alert
+    (use this plus other classes)
+.alert-[semantic-color]
+    Use color scheme for this level of message.
+
+Learn more: Alerts
+Buttons
+
+.btn
+    (Use this plus other classes)
+.btn-[semantic-color]
+    Use color scheme for this level of message
+.btn-link
+    Make button look like a <a> link
+.btn-lg / .btn-sm
+    Make larger or smaller button
+
+Can use on <a> links to look like buttons—very useful!
+
+Learn more: Button Docs
+UI Components
+
+    Breadcrumbs
+    Forms
+    Lists
+    Media cards
+    Pagination sets
+    and more!
+
+Learn more: Components
+JavaScript Components
+
+Need to add JS for jQuery, Popper, and Bootstrap
+
+    Carousels
+    Collapse
+    Dropdown
+    Modals
+    Popovers
+    Tooltips
+    and more!
+
+Learn more: Components
+Bootstrap Wrap-Up
+Does Everyone Use Bootstrap?
+
+No
+
+But almost everyone uses some CSS framework
+
+Other popular frameworks:
+
+    Zurb Foundation
+    Materialize
+
+Theming Bootstrap
+
+    Can write your own CSS to change things
+    Can make your own Bootstrap with SASS (advanced)
+    Can find thousands of Bootstrap themes
+    Can easily use Bootswatch
+
+Font Awesome
+
+    Awesome set of icons for common symbols & brands
+    Comes as a font, so it scales & can be in any color
+    Convenient classes for resizing, animating, stacking, and more!
+
+Include this:
+
+<link rel="stylesheet"
+href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+
+Use icons by name on a i or span tag
+
+<!-- fab/fas/far for brand/solid/regular -->
+<i class="fab fa-apple"></i> <!-- Apple icon -->
+<i class="fas fa-star"></i>  <!-- solid star -->
+<i class="far fa-star"></i>  <!-- regular (outline) of star -->
+
+<!-- can add xs/sm/lg/2x/3x/4x/5x/6x/7x/8x/9x/10x to resize -->
+<i class="fab fa-apple 3x"></i>   <!-- 3x normal size Apple -->
+
+<!-- can animate -->
+<i class="fas fa-spinner fa-spin"></i>
+
+<!-- can stack one over another -->
+<span class="fa-stack fa-2x">
+  <i class="fas fa-square fa-stack-2x"></i>
+  <i class="fab fa-amazon fa-stack-1x fa-inverse"></i>
+</span>
+
+Font Awesome Docs
+Does Everyone Use Font Awesome?
+
+Pretty much.
+
+There are few competing projects, but none nearly as awesome.
+
+
+
 
 
 
