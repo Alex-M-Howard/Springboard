@@ -31,7 +31,7 @@ const addGif = (response) => {
     const url = response.data.data[0].images.original.url
     let img = document.createElement("img");
     img.src = url;
-    img.classList.add("col-3");
+    img.classList.add("col-4");
     img.classList.add("gif");
     document.querySelector("#gif-area").append(img)
     console.log(url)
