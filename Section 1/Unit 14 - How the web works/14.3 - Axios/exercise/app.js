@@ -22,15 +22,13 @@ removeButton.addEventListener("click", (event) => {
     }
 })
 
-
-
 const searchGiphy = async (q) => {   
     const params = { api_key, q }
     addGif(await axios.get(searchEndpoint, { params }));
 }
 
 const addGif = (response) => {
-    const url = response.data.data[0].url
+    const url = response.data.data[0].images.original.url
     let img = document.createElement("img");
     img.src = url;
     img.classList.add("col-3");
