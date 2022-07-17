@@ -1,5 +1,5 @@
 "use strict";
-
+const endPoint = 'https://api.tvmaze.com'
 const $showsList = $("#shows-list");
 const $episodesArea = $("#episodes-area");
 const $searchForm = $("#search-form");
@@ -12,46 +12,39 @@ const $searchForm = $("#search-form");
  *    (if no image URL given by API, put in a default image URL)
  */
 
-async function getShowsByTerm( /* term */) {
-  // ADD: Remove placeholder & make request to TVMaze search shows API.
-
-  return [
-    {
-      id: 1767,
-      name: "The Bletchley Circle",
-      summary:
-        `<p><b>The Bletchley Circle</b> follows the journey of four ordinary 
-           women with extraordinary skills that helped to end World War II.</p>
-         <p>Set in 1952, Susan, Millie, Lucy and Jean have returned to their 
-           normal lives, modestly setting aside the part they played in 
-           producing crucial intelligence, which helped the Allies to victory 
-           and shortened the war. When Susan discovers a hidden code behind an
-           unsolved murder she is met by skepticism from the police. She 
-           quickly realises she can only begin to crack the murders and bring
-           the culprit to justice with her former friends.</p>`,
-      image:
-          "http://static.tvmaze.com/uploads/images/medium_portrait/147/369403.jpg"
+async function getShowsByTerm(term) {
+  const params = { "q": term }
+  let response = await axios.get(`${endPoint}/search/shows`, { params })
+  const shows = [];
+  console.log(response.data)
+  
+  for (let i = 0; i < response.data.length; i++) {
+    //TODO Work on this function!!!
+      
+      
     }
-  ]
+ 
+  
+  return [shows]
 }
 
 
-/** Given list of shows, create markup for each and to DOM */
+/** Given list of shows, create markup for each and add to DOM */
 
 function populateShows(shows) {
   $showsList.empty();
-
+  console.log(shows.length)
   for (let show of shows) {
     const $show = $(
-        `<div data-show-id="${show.id}" class="Show col-md-12 col-lg-6 mb-4">
+        `<div data-show-id="${show[0].id}" class="Show col-md-12 col-lg-6 mb-4">
          <div class="media">
            <img 
-              src="http://static.tvmaze.com/uploads/images/medium_portrait/160/401704.jpg" 
+              src=${show[0].image}
               alt="Bletchly Circle San Francisco" 
               class="w-25 mr-3">
            <div class="media-body">
-             <h5 class="text-primary">${show.name}</h5>
-             <div><small>${show.summary}</small></div>
+             <h5 class="text-primary">${show[0].name}</h5>
+             <div><small>${show[0].summary}</small></div>
              <button class="btn btn-outline-light btn-sm Show-getEpisodes">
                Episodes
              </button>
@@ -69,7 +62,7 @@ function populateShows(shows) {
  */
 
 async function searchForShowAndDisplay() {
-  const term = $("#searchForm-term").val();
+  const term = $("#search-query").val();
   const shows = await getShowsByTerm(term);
 
   $episodesArea.hide();
