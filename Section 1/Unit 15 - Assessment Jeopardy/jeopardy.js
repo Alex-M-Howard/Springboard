@@ -1,37 +1,25 @@
-// categories is the main data structure for the app; it looks like this:
-
-//  [
-//    { title: "Math",
-//      clues: [
-//        {question: "2+2", answer: 4, showing: null},
-//        {question: "1+1", answer: 2, showing: null}
-//        ...
-//      ], 
-//    },
-//    { title: "Literature",
-//      clues: [
-//        {question: "Hamlet Author", answer: "Shakespeare", showing: null},
-//        {question: "Bell Jar Author", answer: "Plath", showing: null},
-//        ...
-//      ],
-//    },
-//    ...
-//  ]
-
-let categories = [];
+const apiEndpoint = "http://jservice.io"
+const cluesEndpoint = `${apiEndpoint}/api/clues`
+const categoriesEndpoint = `${apiEndpoint}/api/category`
 
 
-/** Get NUM_CATEGORIES random category from API.
- *
- * Returns array of category ids
- */
+/** Get 6 random category IDs **/
 
-function getCategoryIds() {
+async function getCategoryIds() {
+    const categories = [];
+
+    for (let i = 0; categories.length < 6; i++){
+        let id = Math.ceil(Math.random() * 18000);        
+        if (categories.includes(id)) { continue; }
+        else {categories.push(id);}      
+    }
+
+    return categories;
 }
 
 /** Return object with data about a category:
  *
- *  Returns { title: "Math", clues: clue-array }
+ *  Returns { category id: ###, category: "Math", clues by value: clue-array }
  *
  * Where clue-array is:
  *   [
@@ -41,7 +29,20 @@ function getCategoryIds() {
  *   ]
  */
 
-function getCategory(catId) {
+async function getCategoryData(category) {
+    const clues = {}
+    for (let i = 0, value = 200; i < 5; i++, value += 200) {
+        const response = await axios.get(cluesEndpoint, { params: { category } })
+
+        clues["id"] = category;
+        clues["category"] = response.data[0].category.title;
+        clues[value] = {
+            "answer": response.data[i].answer,
+            "question": response.data[i].question,
+            "showing": null
+        };
+    }
+    return clues;
 }
 
 /** Fill the HTML table#jeopardy with the categories & cells for questions.
@@ -52,7 +53,8 @@ function getCategory(catId) {
  *   (initally, just show a "?" where the question/answer would go.)
  */
 
-async function fillTable() {
+async function fillTable(gameData) {
+    
 }
 
 /** Handle clicking on a clue: show the question or answer.
@@ -87,6 +89,11 @@ function hideLoadingView() {
  * */
 
 async function setupAndStart() {
+    let categoryIDs = await getCategoryIds(); 
+    const gameData = await Promise.all(categoryIDs.map((id) => { return getCategoryData(id) }));
+    await fillTable(gameData);
+    
+    
 }
 
 /** On click of start / restart button, set up game. */
@@ -95,4 +102,4 @@ async function setupAndStart() {
 
 /** On page load, add event handler for clicking clues */
 
-// TODO
+setupAndStart()
