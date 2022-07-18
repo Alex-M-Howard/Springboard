@@ -56,11 +56,11 @@ async function getCategoryData(category) {
 async function fillTable(gameData) {
     for (clue of gameData) {
         $("#categories").append($(`<div>${clue["category"]}</div>`).attr("id", clue["id"]).addClass("col-2 text-center align-self-center"))
-        $("#200").append($("<div>$200</div>").attr("id", clue["id"]).addClass("col-2 text-center")).on("click", handleClick)
-        $("#400").append($("<div>$400</div>").attr("id", clue["id"]).addClass("col-2 text-center")).on("click", handleClick)
-        $("#600").append($("<div>$600</div>").attr("id", clue["id"]).addClass("col-2 text-center")).on("click", handleClick)
-        $("#800").append($("<div>$800</div>").attr("id", clue["id"]).addClass("col-2 text-center")).on("click", handleClick)
-        $("#1000").append($("<div>$1000</div>").attr("id", clue["id"]).addClass("col-2 text-center")).on("click", handleClick)
+        $("#200").append($("<div>$200</div>").attr("id", clue["id"]).addClass("col-2 text-center")).unbind().click(handleClick)
+        $("#400").append($("<div>$400</div>").attr("id", clue["id"]).addClass("col-2 text-center")).unbind().click(handleClick)
+        $("#600").append($("<div>$600</div>").attr("id", clue["id"]).addClass("col-2 text-center")).unbind().click(handleClick)
+        $("#800").append($("<div>$800</div>").attr("id", clue["id"]).addClass("col-2 text-center")).unbind().click(handleClick)
+        $("#1000").append($("<div>$1000</div>").attr("id", clue["id"]).addClass("col-2 text-center")).unbind().click(handleClick)
     }
 }
 
@@ -73,7 +73,7 @@ async function fillTable(gameData) {
  * */
 
 function handleClick(event) {
-    console.log($(event.target))
+    console.log(event.target)
 }
 
 /** Wipe the current Jeopardy board, show the loading spinner,
