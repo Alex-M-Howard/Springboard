@@ -4,6 +4,23 @@
   #28a200
   #8d2ab5
   #74119c
-
 */
 
+.row{
+    background-color: #060CE9;
+    color: #FFCC00;
+    font-family: "Roboto";
+    margin: 5px;
+}
+
+body{
+  background-color: darkblue;
+}
+
+#logo {
+  background-color: darkblue;
+}
+
+.clue{
+  height: 15vh;
+}
