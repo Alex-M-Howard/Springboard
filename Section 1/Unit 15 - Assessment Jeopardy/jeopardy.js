@@ -45,16 +45,20 @@ async function getCategoryData(category) {
     clues.push(data);
 }
 
-/** Populate the gameboard with all of the question values **/
+/** Populate the gameboard with all of the question values. Change start button to 'Restart' **/
 async function fillTable() {
-    for (clue of clues) {
-        $("#categories").append($(`<div>${clue["category"]}</div>`).attr("id", clue["id"]).addClass("col-2 border border-dark align-middle text-center align-self-center"))
-        $("#200").append($("<div>$200</div>").attr("id", `${clue["id"]}-200`).addClass("col-2 border border-dark align-middle text-center clue")).unbind().click(handleClick);
-        $("#400").append($("<div>$400</div>").attr("id", `${clue["id"]}-400`).addClass("col-2 border border-dark align-middle text-center clue")).unbind().click(handleClick);
-        $("#600").append($("<div>$600</div>").attr("id", `${clue["id"]}-600`).addClass("col-2 border border-dark align-middle text-center clue")).unbind().click(handleClick);
-        $("#800").append($("<div>$800</div>").attr("id", `${clue["id"]}-800`).addClass("col-2 border border-dark align-middle text-center clue")).unbind().click(handleClick);
-        $("#1000").append($("<div>$1000</div>").attr("id", `${clue["id"]}-1000`).addClass("col-2 border border-dark align-middle text-center clue")).unbind().click(handleClick);
+    $("table").remove()
+    $("#game-area").append($(" <table><tr id='categories'></tr><tr id='200'></tr><tr id='400'></tr><tr id='600'></tr><tr id='800'></tr><tr id='1000'></tr></table>"))
+
+    for (let clue of clues) {
+        $("#categories").append($(`<th>${clue["category"]}</th>`).attr("id", clue["id"]))
+        $("#200").append($("<td>$200</td>").attr("id", `${clue["id"]}-200`).addClass("clue")).unbind().click(handleClick);
+        $("#400").append($("<td>$400</td>").attr("id", `${clue["id"]}-400`).addClass("clue")).unbind().click(handleClick);
+        $("#600").append($("<td>$600</td>").attr("id", `${clue["id"]}-600`).addClass("clue")).unbind().click(handleClick);
+        $("#800").append($("<td>$800</td>").attr("id", `${clue["id"]}-800`).addClass("clue")).unbind().click(handleClick);
+        $("#1000").append($("<td>$1000</td>").attr("id", `${clue["id"]}-1000`).addClass("clue")).unbind().click(handleClick);
     }
+    $("#start-button").text("Restart")
 }
 
 /** Handle clicking on a clue: show the question or answer. Sends target ID to checkCard**/
@@ -67,7 +71,7 @@ function handleClick(event) {
 /** Wipe the current Jeopardy board, show the loading spinner,
  * and update the button used to fetch data. */
 function showLoadingView() {
-
+    $("#spinner").css("display", "block")
 }
 
 /** Check if card is showing dollar amount, question, or answer **/ 
@@ -90,7 +94,7 @@ const checkCard = (value, id) => {
 const showQuestion = (value, index, id) => {
     const question = clues[index][value].question;
     clues[index][value].showing = true;
-    $(`#${id}`).text(question).css("color", "white").css("font-family", "Roboto");
+    $(`#${id}`).text(question).addClass("question");
 }
 
 /** Show Answer on Board **/
@@ -104,9 +108,9 @@ const showAnswer = (value, index, id) => {
 }
 
 
-/** Remove the loading spinner and update the button used to fetch data. */
-
+/** Remove the loading spinner*/
 function hideLoadingView() {
+    $("#spinner").css("display", "none")
 }
 
 /** Start game:
@@ -117,15 +121,16 @@ function hideLoadingView() {
  * */
 
 async function setupAndStart() {
+    clues.length = 0;
+    $("table").remove();
     let categoryIDs = await getCategoryIds(); 
     await Promise.all(categoryIDs.map((id) => { return getCategoryData(id) }));
     await fillTable();
 }
 
 /** On click of start / restart button, set up game. */
-
-// TODO
-
-/** On page load, add event handler for clicking clues */
-
-setupAndStart()
+$("#start-button").on("click", async () => {
+    showLoadingView();
+    try{await setupAndStart()}catch{await setupAndStart()}
+    hideLoadingView();
+})
