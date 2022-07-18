@@ -17,7 +17,7 @@ $('<li>Check Me Out!</li>').appendTo($('ol'))
 $('aside').empty().text('We apologize for having a list here before. This isn\'t even a great website.')
 
 // When you change the numbers in the three inputs on the bottom, the background color of the body should change to match whatever the three values in the inputs are.
-let r = $('input').get(0);
+let r = $('input').get(0); 
 let g = $('input').get(1);
 let b = $('input').get(2);
 console.log(r, g, b)
