@@ -1,4 +1,4 @@
-const apiEndpoint = "http://jservice.io";
+const apiEndpoint = "//jservice.io";
 const cluesEndpoint = `${apiEndpoint}/api/clues`;
 const categoriesEndpoint = `${apiEndpoint}/api/category`;
 const clues = [];
