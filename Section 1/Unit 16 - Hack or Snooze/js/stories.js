@@ -20,8 +20,6 @@ async function getAndShowStoriesOnStart() {
  */
 
 function generateStoryMarkup(story) {
-  // console.debug("generateStoryMarkup", story);
-
   const hostName = story.getHostName();
   return $(`
       <li id="${story.storyId}">
@@ -38,8 +36,6 @@ function generateStoryMarkup(story) {
 /** Gets list of stories from server, generates their HTML, and puts on page. */
 
 function putStoriesOnPage() {
-  console.debug("putStoriesOnPage");
-
   $allStoriesList.empty();
 
   // loop through all of our stories and generate HTML for them
@@ -50,3 +46,4 @@ function putStoriesOnPage() {
 
   $allStoriesList.show();
 }
+ 
