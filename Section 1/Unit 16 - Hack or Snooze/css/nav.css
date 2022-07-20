@@ -21,3 +21,22 @@ nav {
   margin-left: auto;
   text-align: right;
 }
+
+.nav-left {
+  display: inline-block;
+}
+
+#nav-submit-story{
+  border-left: 1px solid black;
+  padding-left: 5px;
+}
+
+#nav-favorites{
+  border-left: 1px solid black;
+  padding-left: 5px;
+}
+
+#nav-stories{
+  border-left: 1px solid black;
+  padding-left: 5px;
+}
