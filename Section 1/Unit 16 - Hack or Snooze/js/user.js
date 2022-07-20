@@ -49,7 +49,7 @@ async function signup(evt) {
   $signupForm.trigger("reset");
 }
 
-$signupForm.on("submit", signup);
+$signupForm.on("submit", signup); 
 
 /** Handle click of logout button
  *
@@ -73,7 +73,7 @@ $navLogOut.on("click", logout);
  */
 
 async function checkForRememberedUser() {
-  console.debug("checkForRememberedUser");
+  //console.debug("checkForRememberedUser");
   const token = localStorage.getItem("token");
   const username = localStorage.getItem("username");
   if (!token || !username) return false;
@@ -108,9 +108,42 @@ function saveUserCredentialsInLocalStorage() {
  */
 
 function updateUIOnUserLogin() {
-  console.debug("updateUIOnUserLogin");
+  //console.debug("updateUIOnUserLogin");
 
   $allStoriesList.show();
 
   updateNavOnLogin();
+}
+
+/******************************************************************************
+ * Handle click of submit nav button
+ * Handle click of submit story button
+ *
+ *  -show submit form
+ *  -once submit button clicked -> call addStory inside of StoryList
+ * 
+ * */
+
+$navSubmitStory.on("click", () =>{$submitStoryForm.show()});
+$addStory.on("click", async (event) => {
+  event.preventDefault();
+  await StoryList.addStory();
+  
+  
+  //$submitStoryForm.hide();
+});
+
+/******************************************************************************
+ * Handle click of Hack or Snooze in nav bar
+ * 
+ * Hide forms and just show stories
+ * 
+ */
+ 
+$navAll.on("click", resetHome);
+
+function resetHome() {
+  $submitStoryForm.hide();
+  $loginForm.hide();
+  $signupForm.hide();
 }
