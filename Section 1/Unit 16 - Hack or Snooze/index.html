@@ -37,12 +37,41 @@
   <div class="navbar-brand">
     <a class="nav-link" href="#" id="nav-all">Hack or Snooze</a>
   </div>
+  <div class="nav-left">
+    <a class="nav-link hidden" href="#" id="nav-submit-story">submit</a>
+    <a class="nav-link hidden" href="#" id="nav-favorites">favorites</a>
+    <a class="nav-link hidden" href="#" id="nav-stories">my stories</a>
+  </div>
   <div class="nav-right">
     <a class="nav-link" href="#" id="nav-login">login/signup</a>
     <a class="nav-link" href="#" id="nav-user-profile"></a>
     <a class="hidden" id="nav-logout" href="#"><small>(logout)</small></a>
   </div>
 </nav>
+
+<!-- Submit User Story -->
+<section class="user-area">
+
+  <!-- Submit Story form -->
+  <form action="#" id="submit-story-form" class="account-form hidden" method="post">
+    <div class="submit-input">
+      <label for="author-name">author</label>
+      <input id="author-name" type="text" placeholder="author name">
+    </div>
+    <div class="submit-input">
+      <label for="story-title">title</label>
+      <input id="story-title" type="text" placeholder="story title">
+    </div>
+    <div class="submit-input">
+      <label for="story-url">url</label>
+      <input id="story-url" type="text" placeholder="story url">
+    </div>
+    <button id="add-story" type="submit">submit</button>
+    <hr>
+  </form>
+</section>
+
+
 
 <!-- area for stories (all stories, user stories, favorites) -->
 <section class="stories-container container">
@@ -95,6 +124,7 @@
     <button type="submit">create account</button>
   </form>
 </section>
+
 
 <!-- Library JS & our JS -->
 <script src="https://unpkg.com/jquery"></script>
