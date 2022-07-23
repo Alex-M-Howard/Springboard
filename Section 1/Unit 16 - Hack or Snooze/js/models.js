@@ -72,21 +72,19 @@ class StoryList {
 
   static async addStory() {
     const token = currentUser.loginToken;
-    console.log(token)
+    const author = $("#author-name").val();
+    const title = $("#story-title").val();
+    let url = $("#story-url").val();
+    if (!url.includes("http")){url = "https://" + url}
+
     const response = await axios({
       method: "POST",
       url: `${BASE_URL}/stories`,
       data: {
         token,
-        story: {
-          "author": $("#author-name").val(),
-          "title": $("#story-title").val(),
-          "url": $("#story-url").val()
-        }
+        story: { author, title, url }
       }
     })
-
-    console.log(response)
   }
 }
 
