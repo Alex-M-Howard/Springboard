@@ -108,10 +108,7 @@ function saveUserCredentialsInLocalStorage() {
  */
 
 function updateUIOnUserLogin() {
-  //console.debug("updateUIOnUserLogin");
-
   $allStoriesList.show();
-
   updateNavOnLogin();
 }
 
@@ -128,9 +125,8 @@ $navSubmitStory.on("click", () =>{$submitStoryForm.show()});
 $addStory.on("click", async (event) => {
   event.preventDefault();
   await StoryList.addStory();
-  
-  
-  //$submitStoryForm.hide();
+  getAndShowStoriesOnStart(); 
+  resetHome();
 });
 
 /******************************************************************************
@@ -143,6 +139,10 @@ $addStory.on("click", async (event) => {
 $navAll.on("click", resetHome);
 
 function resetHome() {
+  $("#author-name").val("");
+  $("#story-title").val("");
+  $("#story-url").val("");
+
   $submitStoryForm.hide();
   $loginForm.hide();
   $signupForm.hide();
