@@ -11,3 +11,15 @@ def mode(nums):
         >>> mode([2, 2, 3, 3, 2])
         2
     """
+    count = 0
+    max = 0
+    
+    for each in nums:
+        if nums.count(each) > count:
+            count = nums.count(each)
+            max = each
+        
+        return max
+    
+print(mode([1,2,1]))
+print(mode([2,2,3,3,2]))

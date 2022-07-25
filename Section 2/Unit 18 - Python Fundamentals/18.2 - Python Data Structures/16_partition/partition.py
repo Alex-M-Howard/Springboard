@@ -1,4 +1,7 @@
 def partition(lst, fn):
+    
+    
+    
     """Partition lst by predicate.
      
      - lst: list of items
@@ -19,3 +22,5 @@ def partition(lst, fn):
         >>> partition(["hi", None, 6, "bye"], is_string)
         [['hi', 'bye'], [None, 6]]
     """
+    
+    
