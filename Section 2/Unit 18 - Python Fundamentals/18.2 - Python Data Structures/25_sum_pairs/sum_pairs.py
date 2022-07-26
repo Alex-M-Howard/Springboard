@@ -21,3 +21,30 @@ def sum_pairs(nums, goal):
         >>> sum_pairs([11, 20, 4, 2, 1, 5], 100)
         ()
     """
+
+    # for x in nums:
+    #     for y in nums:
+    #         if x + y == goal:
+    #             return (x, y)
+    
+    # return tuple()
+
+
+
+    already_visited = set()
+
+    for i in nums:
+        difference = goal - i
+
+        if difference in already_visited:
+            return (difference, i)
+
+        already_visited.add(i)
+
+    return ()
+
+
+print(sum_pairs([4,2,10,5,1], 6))
+print(sum_pairs([1,2,2,10], 4))
+print(sum_pairs([5,1,4,8, 3, 2], 7))
+print(sum_pairs([5,1,4,8, 3, 2], 100))
