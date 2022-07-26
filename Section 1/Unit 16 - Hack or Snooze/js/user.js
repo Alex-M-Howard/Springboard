@@ -147,3 +147,18 @@ function resetHome() {
   $loginForm.hide();
   $signupForm.hide();
 }
+
+function addEventToFavorites() {
+  $("i").on("click", (event) => {
+    const star = event.target;
+    if ($(star).hasClass('fa-regular')) {
+      $(star).removeClass('fa-regular')
+      $(star).addClass('fa-solid')
+      addFavorite(star);
+    } else {
+      $(star).removeClass('fa-solid')
+      $(star).addClass('fa-regular')
+      removeFavorite(star);
+    }
+    })
+}
