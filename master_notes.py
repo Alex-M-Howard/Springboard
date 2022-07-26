@@ -176,6 +176,116 @@ yield	  To end a function, returns a generator
 
 
 
+############## EXCEPTIONS ################
+ArithmeticError 	    Raised when an error occurs in numeric calculations
+AssertionError     	    Raised when an assert statement fails
+AttributeError 	        Raised when attribute reference or assignment fails
+Exception 	            Base class for all exceptions
+EOFError 	            Raised when the input() method hits an "end of file" condition (EOF)
+FloatingPointError 	    Raised when a floating point calculation fails
+GeneratorExit 	        Raised when a generator is closed (with the close() method)
+ImportError 	        Raised when an imported module does not exist
+IndentationError 	    Raised when indendation is not correct
+IndexError 	            Raised when an index of a sequence does not exist
+KeyError 	            Raised when a key does not exist in a dictionary
+KeyboardInterrupt 	    Raised when the user presses Ctrl+c, Ctrl+z or Delete
+LookupError 	        Raised when errors raised cant be found
+MemoryError 	        Raised when a program runs out of memory
+NameError       	    Raised when a variable does not exist
+NotImplementedError 	Raised when an abstract method requires an inherited class to override the method
+OSError 	            Raised when a system related operation causes an error
+OverflowError 	        Raised when the result of a numeric calculation is too large
+ReferenceError 	        Raised when a weak reference object does not exist
+RuntimeError 	        Raised when an error occurs that do not belong to any specific expections
+StopIteration 	        Raised when the next() method of an iterator has no further values
+SyntaxError 	        Raised when a syntax error occurs
+TabError 	            Raised when indentation consists of tabs or spaces
+SystemError 	        Raised when a system error occurs
+SystemExit 	            Raised when the sys.exit() function is called
+TypeError 	            Raised when two different types are combined
+UnboundLocalError 	    Raised when a local variable is referenced before assignment
+UnicodeError 	        Raised when a unicode problem occurs
+UnicodeEncodeError 	    Raised when a unicode encoding problem occurs
+UnicodeDecodeError 	    Raised when a unicode decoding problem occurs
+UnicodeTranslateError 	Raised when a unicode translation problem occurs
+ValueError 	            Raised when there is a wrong value in a specified data type
+ZeroDivisionError 	    Raised when the second operator in a division is zero
+
+
+
+
+############## BUILT IN FUNCTIONS ################
+abs()	        Returns the absolute value of a number
+all()	        Returns True if all items in an iterable object are true
+any()	        Returns True if any item in an iterable object is true
+ascii()	        Returns a readable version of an object. Replaces none-ascii characters with escape character
+bin()	        Returns the binary version of a number
+bool()	        Returns the boolean value of the specified object
+bytearray()	    Returns an array of bytes
+bytes()	        Returns a bytes object
+callable()	    Returns True if the specified object is callable, otherwise False
+chr()	        Returns a character from the specified Unicode code.
+classmethod()	Converts a method into a class method
+compile()	    Returns the specified source as an object, ready to be executed
+complex()	    Returns a complex number
+delattr()	    Deletes the specified attribute (property or method) from the specified object
+dict()	        Returns a dictionary (Array)
+dir()	        Returns a list of the specified object's properties and methods
+divmod()	    Returns the quotient and the remainder when argument1 is divided by argument2
+enumerate()	    Takes a collection (e.g. a tuple) and returns it as an enumerate object
+eval()	        Evaluates and executes an expression
+exec()	        Executes the specified code (or object)
+filter()	    Use a filter function to exclude items in an iterable object
+float()	        Returns a floating point number
+format()	    Formats a specified value
+frozenset()	    Returns a frozenset object
+getattr()	    Returns the value of the specified attribute (property or method)
+globals()	    Returns the current global symbol table as a dictionary
+hasattr()	    Returns True if the specified object has the specified attribute (property/method)
+hash()	        Returns the hash value of a specified object
+help()	        Executes the built-in help system
+hex()	        Converts a number into a hexadecimal value
+id()	        Returns the id of an object
+input()	        Allowing user input
+int()	        Returns an integer number
+isinstance()	Returns True if a specified object is an instance of a specified object
+issubclass()	Returns True if a specified class is a subclass of a specified object
+iter()	        Returns an iterator object
+len()	        Returns the length of an object
+list()	        Returns a list
+locals()	    Returns an updated dictionary of the current local symbol table
+map()	        Returns the specified iterator with the specified function applied to each item
+max()	        Returns the largest item in an iterable
+memoryview()	Returns a memory view object
+min()	        Returns the smallest item in an iterable
+next()	        Returns the next item in an iterable
+object()	    Returns a new object
+oct()	        Converts a number into an octal
+open()	        Opens a file and returns a file object
+ord()	        Convert an integer representing the Unicode of the specified character
+pow()	        Returns the value of x to the power of y
+print()	        Prints to the standard output device
+property()	    Gets, sets, deletes a property
+range()	        Returns a sequence of numbers, starting from 0 and increments by 1 (by default)
+repr()	        Returns a readable version of an object
+reversed()	    Returns a reversed iterator
+round()	        Rounds a numbers
+set()	        Returns a new set object
+setattr()	    Sets an attribute (property/method) of an object
+slice()	        Returns a slice object
+sorted()	    Returns a sorted list
+staticmethod()	Converts a method into a static method
+str()	        Returns a string object
+sum()	        Sums the items of an iterator
+super()	        Returns an object that represents the parent class
+tuple()	        Returns a tuple
+type()	        Returns the type of an object
+vars()	        Returns the __dict__ property of an object
+zip()	        Returns an iterator, from two or more iterators
+
+
+
+
 
 
 Why Python?
@@ -206,108 +316,9 @@ Python 3.7.0 (v3.7.0:1bf9cc5093, Jun 26 2018, 23:26:24)
 Type 'copyright', 'credits' or 'license' for more information
 IPython 6.5.0: An enhanced Interactive Python. Type '?' for help.
 
-In [1]: print("Hello, World!")
-Hello, World
-
-(Control-D to exit)
-Printing
-
-print(value, value, ...)
-
-    Puts spaces between values
-    Puts return character (“newline”) at the end
-
-x = "awesome"
-
-print("Python is", x)
-
-Indentation
-
-In many programming languages, you use { and } to show blocks:
-
-if (age >= 18) {
-  console.log("Please go vote!");
-  registerToVote();
-}
-
-Programmers also tend to indent this code, but that’s just visually prettiness.
-
-This would work the same:
-
-if (age >= 18) {
-console.log("Please go vote!");
-registerToVote();
-}
-
-(That is so ugly. Please don’t do that.)
-
-In Python, you don’t use {/} for blocks; the indentation is what matters:
-
-if age >= 18:
-    print("Please go vote!")
-    register_to_vote()
-
-That’s very different than:
-
-if age >= 18:
-    print("Please go vote!")
-register_to_vote()
-
-In JS, people often use 2 or 4 spaces for indentation (styles vary)
-
-In Python, everyone agrees: it should always be 4 spaces
-Variables
-
-    Python variable name style is like_this (lower-snake-case)
-
-    There is no keyword for declaring variables; ie no let or var
-
-    No specific way to make un-re-bindable like const
-        It’s good style to write constants LIKE_THIS
-
-    “Lexical function scoped”
-
-    x = 42
-
-    def my_function():
-        x = 12
-        print(x)   # 12
-
-    print(x)       # 42
-
-Strings
-
-    Like JS, can use " or ' as delimiters
 
 
-
-    Can interpolate expressions with f-strings:
-
-    food = "cheese"
-
-    print(f"I love {food}")
-
-Numbers
-
-Very much like JavaScript!
-
-    Separate types for integers (can be any size) or floating-point
-        In JS, there are only floating-point numbers
-        Separate type for complex numbers
-    +, -, *, / (true division), // (integer division)
-    % (modulo: remainder after division)
-    Dividing by zero is an error (JS: is Infinity, except 0/0, which is NaN)
-    Can use + and * on strings: "cat" + "food" or "yay" * 3
-
-Lists
-
-Like JS arrays:
-
-    ordered
-    can be heterogeneous: [1, "apple", 13.5]
-
-Equality
-
+############## EQUALITY ################
 JavaScript
 
     == loose equality
@@ -325,7 +336,9 @@ Python
     Use is to check obj identity
         [1, 2] is [1, 2]  # False
 
-Truthiness
+
+
+############## TRUTHINESS ################
 
     In JS, these things are falsy:
         0, 0.0, "", undefined, null, NaN, false
@@ -338,36 +351,9 @@ Truthiness
         Any non-empty string, non-empty list/dict/set, non-0 number
         True
 
-And/Or/Not
 
-    JS: &&, ||, !
-    Python: and, or, not
-    Just like in JS, these “short circuit”
 
-If
-
-if grade == "A":
-    print("awesome job!")
-
-elif grade == "F":
-    print("ut oh")
-
-else:
-    print("don't worry too much")
-
-(parens around condition aren’t required, unlike JS)
-
-if age >= 18:
-    if unregistered:
-        print("please register")
-
-    else:
-        print("keep voting!")
-
-else:
-    print ("Wait a bit")
-
-Ternary
+############## TERNARY ################
 JavaScript
 
 let msg = (age >= 18) ? "go vote!" : "go play!"
@@ -377,81 +363,15 @@ Python
 msg = "go vote!" if (age >= 18) else "go play!"
 
 (in both, parens are optional but often helpful)
-Loops
-While Loops
 
-count = 10
 
-while count > 0:
-    print(count)
-    count = count - 1   # or "count -= 1", but not "count--"
 
-print("Liftoff!")
 
-For Loops
-
-Python for loops are like JS for … of loops:
-
-for snack in ["Peanut", "Twizzler", "Mars Bar"]:
-    print("I ate a", snack)
-
-To loop 5 times:
-
-for num in [1, 2, 3, 4, 5]:
-    print(num)
-
-Can also use range() function:
-
-for num in range(5):   # makes [0, 1, 2, 3, 4]
-    print(num)
-
-Functions
-
-def add_numbers(a, b):
-    sum = a + b
-    print("doing math!")
-    return sum
-
-Functions that don’t explicitly return return None
-
-Can pass arguments by name:
-
-def order_pizza(size, flavor):
-    print(f"{size} pizza with {flavor} topping")
-
-order_pizza("large", "mushroom")
-
-order_pizza(size="small", flavor="sausage")
-
-# Same thing
-order_pizza(flavor="sausage", size="small")
-
-Can provide defaults for parameters:
-
-def send_invite(name, city="SF", state="California"):
-    print(f"mailing invitation to {city}, {state}")
-
-send_invite("Jenny", "Portland", "Oregon")
-
-send_invite("Joel")
-
-Providing too many/too few arguments is an error (in JS, this is ignored / becomes undefined):
-
-def add_three_numbers(a, b, c):
-    return a + b + c
-
-add_three_numbers(10, 20, 30)       # 60, yay!
-
-add_three_numbers(10, 20)           # error!
-
-add_three_numbers(10, 20, 30, 40)   # error!
-
-Comments and Docstrings
-
-    #: rest of line is comment (use to explain complex code)
-    String as very first thing in file/function is “docstring”
-        Use to document what the function/file does
-        Shown when you ask for help(some_function)
+############## COMMENTS AND DOCSTRINGS ################
+#: rest of line is comment (use to explain complex code)
+String as very first thing in file/function is “docstring”
+    Use to document what the function/file does
+    Shown when you ask for help(some_function)
 
 def add_limited_numbers(a, b):
     """Add two numbers, making sure sum caps at 100."""
@@ -465,33 +385,12 @@ def add_limited_numbers(a, b):
 
     return sum
 
-Modes
-Running a Source File
 
-$ python3 mygame.py
-You win! Your score is 10
 
-$ # back in shell
 
-    runs Python
-    loads mygame.py
-    executes the code
-    returns to the terminal when done.
 
-Running in IPython
 
-$ ipython
-In [1]: %run mygame.py
-
-    runs mygame.py
-    stays in IPython, variables are still set
-
-Play in the Console
-
-It’s. The. Best. Way. To. Learn.
-
-Good idea: open a console at the same time as your editor!
-Getting Help
+############## USING HELP FUNCTION ################
 dir()
 
 “Show me the methods and attributes of this object”
@@ -517,7 +416,9 @@ q to quit that
 
 
 
-Python Data Structures
+
+
+############## DATA STRUCTURES ################
 
 Includes excellent, high-performance data structures as part of language.
 Length of Structure
@@ -529,7 +430,7 @@ Generic len(x) returns length of x:
     # items in dictionary
     # items in a set
 
-Lists
+********** LISTS **********
 
 Like JS arrays:
 
@@ -569,7 +470,7 @@ fav_foods[-1]   # last item
 
 fav_foods[-3]   # third from end
 
-Slicing
+******* Slicing *******
 
 Can retrieve list from list:
 
@@ -588,7 +489,7 @@ alpha[::2]       # ['a', 'c', 'e']
 alpha[3:0:-1]    # ['d', 'c', 'b']
 alpha[::-2]      # ['e', 'c', 'a']
 
-Splicing
+******* Splicing *******
 
 Can assign a list to a splice:
 
@@ -620,11 +521,6 @@ alpha[3] == 'd'           # error!
 alpha.append('d')         # ok!
 
 Functions that mutate list return None, not data:
-JavaScript
-
-let ltrs = ["c", "a", "b"];
-ltrs.sort(); // sorts in-place; returns ltrs
-
 Python
 
 ltrs = ["c", "a", "b"]
@@ -662,19 +558,8 @@ Membership / Substrings
     for letter in word:
         print(letter)
 
-Core API
-s.count(t) 	Returns # times t occurs in s
-s.endswith(t) 	Does s end with string t?
-s.find(t) 	Index of first occurence of t in s (-1 for failure)
-s.isdigit() 	Is s entirely made up of digits?
-s.join(seq) 	Make new string of seq joined by s ("|".join(nums))
-s.lower() 	Return lowercased copy of s
-s.replace(old,new,count) 	Replace count (default: all) occurrences of t in s
-s.split(sep) 	Return list of items made from splitting s on sep
-s.splitlines() 	Split s at newlines
-s.startswith(t) 	Does s start with t?
-s.strip() 	Remove whitespace at start/end of s
-Dictionaries
+
+******* Dictionaries *******
 
 Mutable, ordered mapping of keys → values
 
@@ -731,7 +616,9 @@ d.get(x, default) 	Retrieve value of x (return optional default if missing)
 d.items() 	Return iterable of (key, value) pairs
 d.keys() 	Return iterable of keys
 d.values() 	Return iterable of values
-Sets
+
+
+******* Sets *******
 
 Unordered, unique collection of items, like JS Set
 
@@ -755,11 +642,7 @@ Use in for membership check:
 
 "red" in colors
 
-Core API
-s.add(x) 	Add item x to s
-s.copy() 	Make new copy of s
-s.pop() 	Remove & return arbitrary item from s
-s.remove(x) 	Remove x from s
+
 Set Operations
 
 moods = {"happy", "sad", "grumpy"}
@@ -777,7 +660,10 @@ dwarfs - moods    # difference: {"doc"}
 moods ^ dwarfs    # symmetric difference: {"sad", "doc"}
 
 (These are so awesome!)
-Tuples
+
+
+
+******* Tuples *******
 
 Immutable, ordered sequence
 
