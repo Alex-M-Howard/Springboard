@@ -148,17 +148,65 @@ function resetHome() {
   $signupForm.hide();
 }
 
+
+
+/******************************************************************************
+ * Add click event to star icons to mark favorite/unmark favorite stories
+ * 
+*/
 function addEventToFavorites() {
   $("i").on("click", (event) => {
     const star = event.target;
+    const storyId = $(star).parent().attr("id")
     if ($(star).hasClass('fa-regular')) {
       $(star).removeClass('fa-regular')
       $(star).addClass('fa-solid')
-      addFavorite(star);
+      StoryList.addStoryToFavorites(storyId);
+      addFavoriteToLocalStorage(storyId);
     } else {
       $(star).removeClass('fa-solid')
       $(star).addClass('fa-regular')
-      removeFavorite(star);
+      StoryList.removeStoryFromFavorites(storyId);
+      removeFavoriteFromLocalStorage(storyId);
     }
     })
 }
+
+function addFavoriteToLocalStorage(storyId) {
+  if (localStorage.getItem('Favorites') === null) {
+    localStorage.setItem('Favorites', storyId)
+  } else {
+    let totalFavorites = localStorage.getItem('Favorites').split(',');
+    totalFavorites.push(storyId);
+    localStorage.setItem('Favorites', totalFavorites);
+  }
+}
+function removeFavoriteFromLocalStorage(storyId) {
+    let totalFavorites = localStorage.getItem('Favorites').split(',');
+    totalFavorites.splice(totalFavorites.indexOf(storyId), 1)
+  if (totalFavorites === ' ') {
+    localStorage.removeItem("Favorites")
+  } else {
+    localStorage.setItem('Favorites', totalFavorites);
+  }
+  }
+
+
+/******************************************************************************
+ * Mark favorited stories with solid star when page loads
+ * 
+*/
+function markFavoritedStories() {
+  let storage = localStorage.Favorites.split(',');
+  for (let id of storage) {
+    if(id === ''){continue}
+    $(`#${id}`).find("i").removeClass("fa-regular")
+    $(`#${id}`).find("i").addClass("fa-solid")
+    }
+}
+  
+
+/******************************************************************************
+ * Handle clicks on favorites button
+ * Handle clicks on 
+*/

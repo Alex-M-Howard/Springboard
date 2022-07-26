@@ -86,6 +86,30 @@ class StoryList {
       }
     })
   }
+
+  static async addStoryToFavorites(storyId) {
+      const response = await axios({
+        method: "POST",
+        url: `${BASE_URL}/users/${currentUser.username}/favorites/${storyId}`,
+        data: {
+          token: currentUser.loginToken,
+        }
+      })
+    
+  }
+
+  static async removeStoryFromFavorites(storyId) {
+    const response = await axios({
+      method: "DELETE",
+      url: `${BASE_URL}/users/${currentUser.username}/favorites/${storyId}`,
+      data: {
+        token: currentUser.loginToken,
+      }
+    })
+  
+}
+
+
 }
 
 

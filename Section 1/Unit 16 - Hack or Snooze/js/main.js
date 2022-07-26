@@ -6,7 +6,6 @@ const $body = $("body");
 
 const $storiesLoadingMsg = $("#stories-loading-msg");
 const $allStoriesList = $("#all-stories-list");
-const $listItem = $("li")
 
 const $loginForm = $("#login-form");
 const $signupForm = $("#signup-form");
@@ -51,6 +50,9 @@ async function start() {
 
   // Add event listener to favorite icons
   await addEventToFavorites();
+
+  // Mark favorited stories with solid star
+  await markFavoritedStories();
 }
 
 
