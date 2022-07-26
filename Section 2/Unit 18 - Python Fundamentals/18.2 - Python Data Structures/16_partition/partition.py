@@ -1,7 +1,4 @@
 def partition(lst, fn):
-    
-    
-    
     """Partition lst by predicate.
      
      - lst: list of items
@@ -22,5 +19,38 @@ def partition(lst, fn):
         >>> partition(["hi", None, 6, "bye"], is_string)
         [['hi', 'bye'], [None, 6]]
     """
+    # true_list = []
+    # false_list = []
     
+    # for val in lst:
+    #     if fn == 'is_even':
+    #         if val % 2 == 0:
+    #             true_list.append(val)
+    #         else:
+    #             false_list.append(val)
+    #     else:
+    #         if type(val) == str:
+    #             true_list.append(val)
+    #         else:
+    #             false_list.append(val)
+
+    # return [true_list, false_list]
+
+    true_list = []
+    false_list = []
     
+    for val in lst:
+        if fn(val):
+            true_list.append(val)
+        else:
+            false_list.append(val)
+    
+    return [true_list, false_list]
+
+is_string = lambda val: type(val) == str
+is_even = lambda val: val % 2 == 0
+
+print(partition([1, 2, 3, 4], is_even))        
+print(partition(["hi", None, 6, "bye"], is_string))
+# print(partition([1, 2, 3, 4], 'is_even'))        
+# print(partition(["hi", None, 6, "bye"], 'is_string'))
