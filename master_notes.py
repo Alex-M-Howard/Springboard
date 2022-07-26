@@ -1,29 +1,182 @@
-
 '''
-Intro
-The Dark Side
 
-    We’ve seen a lot of client-side stuff: HTML, CSS, & JS. There’s even more stuff to learn!
+############## STRING METHODS ################
+capitalize()	    Converts the first character to upper case
+casefold()	        Converts string into lower case
+center()	        Returns a centered string
+count()         	Returns the number of times a specified value occurs in a string
+encode()	        Returns an encoded version of the string
+endswith()	        Returns true if the string ends with the specified value
+expandtabs()	    Sets the tab size of the string
+find()          	Searches the string for a specified value and returns the position of where it was found
+format()	        Formats specified values in a string
+format_map()	    Formats specified values in a string
+index()	            Searches the string for a specified value and returns the position of where it was found
+isalnum()	        Returns True if all characters in the string are alphanumeric
+isalpha()	        Returns True if all characters in the string are in the alphabet
+isascii()	        Returns True if all characters in the string are ascii characters
+isdecimal()	        Returns True if all characters in the string are decimals
+isdigit()	        Returns True if all characters in the string are digits
+isidentifier()	    Returns True if the string is an identifier
+islower()	        Returns True if all characters in the string are lower case
+isnumeric()	        Returns True if all characters in the string are numeric
+isprintable()	    Returns True if all characters in the string are printable
+isspace()	        Returns True if all characters in the string are whitespaces
+istitle() 	        Returns True if the string follows the rules of a title
+isupper()	        Returns True if all characters in the string are upper case
+join()	            Converts the elements of an iterable into a string
+ljust()	            Returns a left justified version of the string
+lower()	            Converts a string into lower case
+lstrip()	        Returns a left trim version of the string
+maketrans()	        Returns a translation table to be used in translations
+partition()	        Returns a tuple where the string is parted into three parts
+replace()	        Returns a string where a specified value is replaced with a specified value
+rfind()	            Searches the string for a specified value and returns the last position of where it was found
+rindex()	        Searches the string for a specified value and returns the last position of where it was found
+rjust()	            Returns a right justified version of the string
+rpartition()	    Returns a tuple where the string is parted into three parts
+rsplit()	        Splits the string at the specified separator, and returns a list
+rstrip()	        Returns a right trim version of the string
+split()	            Splits the string at the specified separator, and returns a list
+splitlines()	    Splits the string at line breaks and returns a list
+startswith()	    Returns true if the string starts with the specified value
+strip()	            Returns a trimmed version of the string
+swapcase()	        Swaps cases, lower case becomes upper case and vice versa
+title()	            Converts the first character of each word to upper case
+translate()	        Returns a translated string
+upper()	            Converts a string into upper case
+zfill()	            Fills the string with a specified number of 0 values at the beginning
 
-    It’s time for us to spend some time on the other, more mysterious side…the server side!
 
-    There are tons of languages we could use to write server-side code with:
 
-            Ruby
-            JS (Node)
-            PHP
-            Java
 
-    But we’ll be working with Python! (and eventually Node)
 
-The Game Plan
+############## LIST METHODS ################
+append()	  Adds an element at the end of the list
+clear()	      Removes all the elements from the list
+copy()	      Returns a copy of the list
+count()	      Returns the number of elements with the specified value
+extend()      Add the elements of a list (or any iterable), to the end of the current list
+index()	      Returns the index of the first element with the specified value
+insert()	  Adds an element at the specified position
+pop()	      Removes the element at the specified position
+remove()	  Removes the first item with the specified value
+reverse()	  Reverses the order of the list
+sort()	      Sorts the list
 
-    We’ll start by learning basic Python syntax: variables, loops, functions, etc.
-    Then we’ll move on to Object Oriented Programming in Python
-    We’ll learn how to create our own servers using Python!
-    Then it’s on to Python testing
-    We’ll take a detour to learn SQL and see how to connect to a DB using Python
-    We’ll cover authentication and deployment as well
+
+
+
+
+############## DICTIONARY METHODS ################
+clear()	       Removes all the elements from the dictionary
+copy()	       Returns a copy of the dictionary
+fromkeys()	   Returns a dictionary with the specified keys and value
+get()	       Returns the value of the specified key
+items()	       Returns a list containing a tuple for each key value pair
+keys()	       Returns a list containing the dictionary's keys
+pop()	       Removes the element with the specified key
+popitem()	   Removes the last inserted key-value pair
+setdefault()   Returns the value of the specified key. If the key does not exist: insert the key, with the specified value
+update()	   Updates the dictionary with the specified key-value pairs
+values()	   Returns a list of all the values in the dictionary
+
+
+
+############## SET METHODS ################
+add()	                Adds an element to the set
+clear()	                Removes all the elements from the set
+copy()	                Returns a copy of the set
+difference()	        Returns a set containing the difference between two or more sets
+difference_update()	    Removes the items in this set that are also included in another, specified set
+discard()	            Remove the specified item
+intersection()	        Returns a set, that is the intersection of two or more sets
+intersection_update()	Removes the items in this set that are not present in other, specified set(s)
+isdisjoint()	        Returns whether two sets have a intersection or not
+issubset()	            Returns whether another set contains this set or not
+issuperset()	        Returns whether this set contains another set or not
+pop()	                Removes an element from the set
+remove()	            Removes the specified element
+symmetric_difference()	Returns a set with the symmetric differences of two sets
+symmetric_difference_update()	inserts the symmetric differences from this set and another
+union()	                Return a set containing the union of sets
+update()	            Update the set with another set, or any other iterable
+
+
+
+
+
+
+
+
+############## TUPLE METHODS ################
+count()	     Returns the number of times a specified value occurs in a tuple
+index()	     Searches the tuple for a specified value and returns the position of where it was found
+
+
+
+
+############## FILE METHODS ################
+close()	       Closes the file
+detach()	   Returns the separated raw stream from the buffer
+fileno()	   Returns a number that represents the stream, from the operating system's perspective
+flush()	       Flushes the internal buffer
+isatty()	   Returns whether the file stream is interactive or not
+read()	       Returns the file content
+readable()	   Returns whether the file stream can be read or not
+readline()	   Returns one line from the file
+readlines()    Returns a list of lines from the file
+seek()	       Change the file position
+seekable()	   Returns whether the file allows us to change the file position
+tell()	       Returns the current file position
+truncate()	   Resizes the file to a specified size
+writable()	   Returns whether the file can be written to or not
+write()	       Writes the specified string to the file
+writelines()   Writes a list of strings to the file
+
+
+
+
+
+
+############## KEYWORDS ################
+and	      A logical operator
+as	      To create an alias
+assert	  For debugging
+break	  To break out of a loop
+class	  To define a class
+continue  To continue to the next iteration of a loop
+def	      To define a function
+del	      To delete an object
+elif	  Used in conditional statements, same as else if
+else	  Used in conditional statements
+except	  Used with exceptions, what to do when an exception occurs
+False	  Boolean value, result of comparison operations
+finally	  Used with exceptions, a block of code that will be executed no matter if there is an exception or not
+for	      To create a for loop
+from	  To import specific parts of a module
+global	  To declare a global variable
+if	      To make a conditional statement
+import	  To import a module
+in	      To check if a value is present in a list, tuple, etc.
+is	      To test if two variables are equal
+lambda	  To create an anonymous function
+None	  Represents a null value
+nonlocal  To declare a non-local variable
+not	      A logical operator
+or	      A logical operator
+pass	  A null statement, a statement that will do nothing
+raise	  To raise an exception
+return	  To exit a function and return a value
+True	  Boolean value, result of comparison operations
+try	      To make a try...except statement
+while	  To create a while loop
+with	  Used to simplify exception handling
+yield	  To end a function, returns a generator
+
+
+
+
 
 Why Python?
 
@@ -36,45 +189,16 @@ Why Python?
 (This comic is from the days of Python 2; in modern Python, that would be print("Hello, world"), with parentheses.
 But what about server-side JS?
 
-    Yes, you could use Node JS to write a server, connect to a DB, etc.
-    (and we will be doing just that later on)
-    But we’re starting with Python because…
 
-Why Not Node?
-
-    Learning a 2nd language helps you see many of the similarities between languages
-    It also helps you better understand what makes each language unique
-    Learning exclusively full-stack JS is a recipe for misconceptions
-    We want to force you out of your comfort zone a little bit, because learing new tools is a HUGE part of being a developer
-
-Python Versions
-
-Python 2
-
-    Latest is 2.7
-    What some people still use
-    What comes by default on OSX
-
-Python 3
-
-    Latest is 3.7
-    Slightly different language & syntax
-    What we’ll use at Rithm
-
-Installing Python
-
-Head over to https://www.python.org/downloads/
 
 Test that it works: in a new Terminal window
 
 $ which python3
 
 Install another Python utility: ipython:
-
 $ pip3 install ipython
 
 Interactive Python
-
 IPython is a program for interactive exploring of Python
 
 $ ipython
@@ -730,6 +854,373 @@ a_words = {w for w in words if w.startswith("a")}
 
 
 
+
+Packing / Unpacking
+Unpacking
+
+Can “unpack” iterables:
+
+point = [10, 20]
+
+x, y = point
+
+a = 2
+b = 3
+
+b, a = (a, b)
+
+Can gather rest using * before variable:
+
+letters = ["a", "b", "c"]
+
+first, *rest = letters
+
+Spread
+
+Can “spread” iterables:
+
+fruits = {"apple", "berry", "cherry"}
+
+foods = ["kale", "celery", *fruits]
+
+Error Handling
+Errors
+
+In general, Python raises errors in places JS returns undefined:
+
+    provide too few/too many arguments to a function
+    index a list beyond length of list
+    retrieve item from dictionary that doesn’t exist
+    use missing attribute on an instance
+    conversion failures (eg, converting “hello” to an int)
+    division by zero
+    and more!
+
+In general, in Python: explicit is better than implicit
+Catching Errors
+
+# try to convert this to a number
+
+try:
+    age = int(data_we_received)
+    print("You are", age)
+
+except:
+    print("Hey, you, that's not an age!")
+
+# next line is run either way
+
+It’s risky, though, to just say except — that catches all errors!
+
+data_we_received = "42"
+
+try:
+    age = int(data_we_received)
+    print("You are", Age)
+
+except:
+    print("Hey, you, that's not an age!")
+
+Better to catch the specific error you’re looking for:
+
+age_we_received = "42"
+
+try:
+    age = int(data_we_received)
+    print("You are", Age)
+
+except ValueError:
+    print("Hey, you, that's not an age!")
+
+Common Exception Types
+AttributeError 	Couldn’t find attr: o.missing
+KeyError 	Couldn’t find key: d["missing"]
+IndexError 	Couldn’t find index: lst[99]
+NameError 	Couldn’t find variable: not_spelled_right
+OSError 	Operating system error: can’t read/write file, etc
+ValueError 	Incorrect value (tried to convert “hello” to int, etc)
+Raising Errors
+
+In Python, it’s common for you to “raise” errors to signal problems:
+
+if color not in {"red", "green", "blue"}:
+    raise ValueError("Not a valid color!")
+
+Error Handling Pattern
+
+Raise exception when you know it should be an error Handle it at the point you can give good feedback
+
+def bounded_avg(nums):
+    "Return avg of nums (makes sure nums are 1-100)"
+
+    for n in nums:
+        if n < 1 or n > 100:
+            raise ValueError("Outside bounds of 1-100")
+
+    return sum(nums) / len(nums)
+
+def handle_data():
+    "Process data from database"
+
+    ages = get_ages(from_my_db)
+
+    try:
+        avg = bounded_avg(ages)
+        print("Average was", avg)
+
+    except ValueError as exc:
+        # exc is exception object -- you can examine it!
+        print("Invalid age in list of ages")
+
+Docstrings & Doctests
+Docstrings
+
+Docstrings are the strings at top of function or file that document it:
+
+def bounded_avg(nums):
+    "Return avg of nums (makes sure nums are 1-100)"
+
+    for n in nums:
+        if n < 1 or n > 100:
+            raise ValueError("Outside bounds of 1-100")
+
+    return sum(nums) / len(nums)
+
+It’s incredibly good style for every function to have one!
+Doctests
+
+Doctests are snippets of interactive demonstration in a docstring:
+
+def bounded_avg(nums):
+    """Return avg of nums (makes sure nums are 1-100)
+
+       >>> bounded_avg([1, 2, 3])
+       2
+
+       >>> bounded_avg([1, 2, 101])
+       Traceback (most recent call last):
+           ...
+       ValueError: Outside bounds of 1-100
+    """
+
+    for n in nums:
+        if n < 1 or n > 100:
+            raise ValueError("Outside bounds of 1-100")
+
+    return sum(nums) / len(nums)
+
+Can run this test:
+
+$ python3 -m doctest -v your-file.py
+
+(use the doctest module, verbosely showing tests found & run)
+
+Doctests are awesome
+
+Testable documentation and readable tests.
+Importing
+
+Python includes a “standard library” of dozens of useful modules.
+
+These are not in the namespace of your script automatically.
+
+You have to import them
+
+choice(seq) is a useful function: given a sequence, it returns a random item
+
+from random import choice
+
+print("Let's play", choice(games))
+
+“From random, pull in choice function as choice”
+
+# can pull in several things from a place
+
+from random import choice, randint
+
+
+# can change the local name of it
+
+from random import choice as pick_a_thing
+
+pick_a_thing(games)
+
+Sometimes, it helpful to pull in the library itself:
+
+import random
+
+# now, we have the obj `random`, with all the funcs/classes
+# within available to us
+
+random.choice(games)
+
+Exporting/Importing Your Code
+score.py
+
+def get_high_score():
+    ...
+
+def save_high_score():
+    ...
+
+(unlike JS, nothing needed to “export”)
+game.py
+
+from score import get_high_score
+
+high = get_high_score()
+
+Installing Libraries
+
+Python includes dozens of useful libraries
+
+There are over 100,000 additional available ones :)
+Using Pip
+
+To install a new package:
+
+$ pip3 install forex_python
+... pip output here...
+
+$ ipython
+In [1]: from forex_python.converter import convert
+In [2]: convert("USD", "GBP", 10)
+7.6543
+
+Virtual Environments
+
+Normally, pip makes the installed library available everywhere
+
+This is convenient, but a little messy:
+
+    you might not need it for every project
+    you might want to more explicitly keep track of which libraries a project needs
+    you might want a new version of a library for one project, but not another
+
+Python can help us by using a “virtual environment”
+Creating a Virtual Environment
+
+$ cd my-project-directory
+$ python3 -m venv venv
+
+(“using venv module, make a folder, venv, with all the needed stuff”)
+
+That makes the virtual environment folder — but you’re not using it yet!
+Using Your Virtual Environment
+
+$ source venv/bin/activate
+(venv) $   <-- notice shell prompt!
+
+    You only need to create the virtual environment once
+    You need to use source every time you open a new terminal window
+
+What does it mean to be “using” a virtual environment?
+
+    It makes certain python is the version of Python used to create the venv
+    You have access to the standard library of Python
+    You don’t have access to globally installed pip stuff
+    You get to explicitly install what you want — and it will be only for here!
+
+Installing into Virtual Environment
+
+    Make sure you’re using your venv — do you see it in your prompt?
+    Use pip install, as usual
+        But now it’s downloaded & installed into that venv folder
+        It won’t be available/confuse global Python or other venvs — tidy!
+
+Tracking Required Libraries
+
+To see a list of installed libraries in a venv:
+
+$ pip3 freeze
+... list of installed things...
+
+It’s helpful to save this info in a file (typically named “requirements.txt”):
+
+$ pip3 freeze > requirements.txt
+
+Using Virtual Environments
+
+    Virtual environments are large & full of stuff you didn’t write yourself
+    You don’t want this to get into git / Github
+    So, add venv/ to your project’s .gitignore
+        Use git status to make sure it’s being ignored
+
+Recreating a Virtual Environment
+
+When using a new Python project:
+
+$ git clone http://path-to-project
+$ cd that-project
+$ python3 -m venv venv
+
+Then, as usual when working with a venv:
+
+$ source venv/bin/activate
+(venv) $ pip3 install -r requirements.txt
+... pip output here ...
+
+Leaving Virtual Environments
+
+Use the deactivate shell command to leave the virtual environment:
+
+$ source venv/bin/activate
+(venv) $ deactivate
+$ ... back to regular terminal ...
+
+Files
+
+You can open an on-disk file with open(filepath, mode)
+
+    filepath: absolute or relative path to file
+    mode: string of how to open file (eg, “r” for reading or “w” for writing)
+
+This returns an file-type instance.
+Reading
+
+Line-by-line:
+
+file = open("/my/file.txt")
+
+for line in file:
+    print("line =", line)
+
+file.close()
+
+All at once:
+
+file = open("/my/file.txt")
+
+text = file.read()
+
+file.close()
+
+Writing
+
+file = open("/my/file.txt", "w")
+
+file.write("This is a new line.")
+file.write("So is this.")
+
+file.close()
+
+“with” blocks
+
+Python has an intermediate bit of syntax called a “with block”.
+
+For example:
+
+with open("/my/file.txt", "r") as file:
+    for line in file:
+        print("line=", line)
+
+    # our file is still open here
+
+# but it will be automagically closed here
+
+Python will keep that file open as long as you’re inside the with block. At the point the your code is no longer indented inside that block, it will automatically close the file you’ve used.
+
+These with-blocks are used for other kinds of resources besides files; to learn more about them, you can search for “python context mananagers”.
 
 
 
