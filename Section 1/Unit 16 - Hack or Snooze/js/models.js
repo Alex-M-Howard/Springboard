@@ -227,4 +227,13 @@ class User {
       return null;
     }
   }
+
+  static async getUser(username) {
+    const response = await axios({
+        url: `${BASE_URL}/users/${username}`,
+        method: "GET",
+        params: {token: currentUser.loginToken}
+    });
+    return response.data.user;
+  }
 }

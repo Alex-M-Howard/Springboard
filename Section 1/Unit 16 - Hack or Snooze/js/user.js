@@ -143,6 +143,7 @@ function resetHome() {
   $("#story-title").val("");
   $("#story-url").val("");
 
+  markFavoritedStories();
   $submitStoryForm.hide();
   $loginForm.hide();
   $signupForm.hide();
@@ -152,7 +153,8 @@ function resetHome() {
 
 /******************************************************************************
  * Add click event to star icons to mark favorite/unmark favorite stories
- * 
+ *
+ * Change pointer to a hand when hovering over star, change back afterwards 
 */
 function addEventToFavorites() {
   $("i").on("click", (event) => {
@@ -162,51 +164,46 @@ function addEventToFavorites() {
       $(star).removeClass('fa-regular')
       $(star).addClass('fa-solid')
       StoryList.addStoryToFavorites(storyId);
-      addFavoriteToLocalStorage(storyId);
     } else {
       $(star).removeClass('fa-solid')
       $(star).addClass('fa-regular')
       StoryList.removeStoryFromFavorites(storyId);
-      removeFavoriteFromLocalStorage(storyId);
     }
-    })
+  })
+  
+  $("i").on("mouseover", () => {
+    $("i").css("cursor", "hand")
+  })
+  
+  $("i").on("mouseout", () => {
+    $("i").css("cursor", "pointer")
+  })
 }
 
-function addFavoriteToLocalStorage(storyId) {
-  if (localStorage.getItem('Favorites') === null) {
-    localStorage.setItem('Favorites', storyId)
-  } else {
-    let totalFavorites = localStorage.getItem('Favorites').split(',');
-    totalFavorites.push(storyId);
-    localStorage.setItem('Favorites', totalFavorites);
-  }
-}
-function removeFavoriteFromLocalStorage(storyId) {
-    let totalFavorites = localStorage.getItem('Favorites').split(',');
-    totalFavorites.splice(totalFavorites.indexOf(storyId), 1)
-  if (totalFavorites === ' ') {
-    localStorage.removeItem("Favorites")
-  } else {
-    localStorage.setItem('Favorites', totalFavorites);
-  }
-  }
 
 
 /******************************************************************************
  * Mark favorited stories with solid star when page loads
  * 
 */
-function markFavoritedStories() {
-  let storage = localStorage.Favorites.split(',');
-  for (let id of storage) {
-    if(id === ''){continue}
-    $(`#${id}`).find("i").removeClass("fa-regular")
-    $(`#${id}`).find("i").addClass("fa-solid")
-    }
+async function markFavoritedStories() {
+  let user = await User.getUser(currentUser.username);
+  user = user.favorites 
+
+  for (let favorite of user) {
+    const storyId = favorite.storyId
+    $(`#${storyId}`).find("i").removeClass("fa-regular")
+    $(`#${storyId}`).find("i").addClass("fa-solid")
+  }
 }
   
 
 /******************************************************************************
  * Handle clicks on favorites button
- * Handle clicks on 
+ * 
 */
+$navFavorites.on("click", async () => {
+  $submitStoryForm.hide()
+  let user = await User.getUser(currentUser.username);
+  putFavoritesOnPage(user);
+})

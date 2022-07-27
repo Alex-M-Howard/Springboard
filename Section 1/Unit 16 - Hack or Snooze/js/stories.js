@@ -34,6 +34,22 @@ function generateStoryMarkup(story) {
     `);
 }
 
+function generateFavoritesMarkup(story) {
+  
+  const hostName = new URL(story.url).hostname;
+  return $(`
+      <li id="${story.storyId}">
+        <i class="fa-regular fa-star"></i>
+        <a href="${story.url}" target="a_blank" class="story-link">
+          ${story.title}
+        </a>
+        <small class="story-hostname">(${hostName})</small>
+        <small class="story-author">by ${story.author}</small>
+        <small class="story-user">posted by ${story.username}</small>
+      </li>
+    `);
+}
+
 /** Gets list of stories from server, generates their HTML, and puts on page. */
 
 function putStoriesOnPage() {
@@ -48,3 +64,20 @@ function putStoriesOnPage() {
   $allStoriesList.show();
 }
  
+function putFavoritesOnPage(favorites) {
+  console.log(favorites)
+  $allStoriesList.empty();
+   
+    // loop through all of our stories and generate HTML for them
+    for (let story of favorites.favorites) {
+      const $story = generateFavoritesMarkup(story);
+      const storyId = story.storyId
+
+      $allStoriesList.append($story);     
+      $(`#${storyId}`).find("i").removeClass("fa-regular")
+      $(`#${storyId}`).find("i").addClass("fa-solid")
+    }
+
+    $allStoriesList.show();
+  
+}
