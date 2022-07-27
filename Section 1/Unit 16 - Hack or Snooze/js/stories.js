@@ -64,10 +64,15 @@ function putStoriesOnPage() {
   $allStoriesList.show();
 }
  
+
+// Show user favorited stories and add solid star to stories
 function putFavoritesOnPage(favorites) {
-  console.log(favorites)
   $allStoriesList.empty();
    
+  if (favorites.favorites.length === 0) {
+    $allStoriesList.append($("<div>No favorited stories to show...</div>"))
+  }
+
     // loop through all of our stories and generate HTML for them
     for (let story of favorites.favorites) {
       const $story = generateFavoritesMarkup(story);
@@ -81,3 +86,24 @@ function putFavoritesOnPage(favorites) {
     $allStoriesList.show();
   
 }
+
+// Show user submitted stories on page and add delete icon
+function putMyStoriesOnPage(stories) {
+  $allStoriesList.empty();
+   
+  if (stories.stories.length === 0) {
+    $allStoriesList.append($("<div>You have no stories. Add one for everyone to read!</div>"))
+  }
+
+    // loop through all of our stories and generate HTML for them
+    for (let story of stories.stories) {
+      const $story = generateFavoritesMarkup(story);
+      const storyId = story.storyId
+
+      $allStoriesList.append($story);     
+      $(`#${storyId}`).find("i").removeClass("fa-regular fa-star")
+      $(`#${storyId}`).find("i").addClass("fa-solid fa-trash-can")
+    }
+    $allStoriesList.show();
+}
+

@@ -138,15 +138,16 @@ $addStory.on("click", async (event) => {
  
 $navAll.on("click", resetHome);
 
-function resetHome() {
+async function resetHome() {
   $("#author-name").val("");
   $("#story-title").val("");
   $("#story-url").val("");
-
+  
   markFavoritedStories();
   $submitStoryForm.hide();
   $loginForm.hide();
   $signupForm.hide();
+
 }
 
 
@@ -195,15 +196,51 @@ async function markFavoritedStories() {
     $(`#${storyId}`).find("i").removeClass("fa-regular")
     $(`#${storyId}`).find("i").addClass("fa-solid")
   }
+  addEventToFavorites()
 }
   
 
 /******************************************************************************
  * Handle clicks on favorites button
- * 
+ * Hide other stories. 
+ * Show favorites only
 */
 $navFavorites.on("click", async () => {
-  $submitStoryForm.hide()
+  resetHome();
   let user = await User.getUser(currentUser.username);
   putFavoritesOnPage(user);
+  addEventToFavorites();
 })
+
+
+/******************************************************************************
+ * Handle clicks on stories button
+ * Hide other stories. 
+ * Show only user submitted stories
+ * add event listener for delete button 
+*/
+$navStories.on("click", async () => {
+  resetHome();
+  let user = await User.getUser(currentUser.username);
+  putMyStoriesOnPage(user);
+  addEventDelete();
+})
+
+
+function addEventDelete() {
+  $("i").on("click", (event) => {
+    const trash = event.target;
+    const storyId = $(trash).parent().attr("id")
+    StoryList.deleteUserStory(storyId);
+    alert('Story Deleted!')
+    getAndShowStoriesOnStart();  
+  })
+  
+  $("i").on("mouseover", () => {
+    $("i").css("cursor", "hand")
+  })
+  
+  $("i").on("mouseout", () => {
+    $("i").css("cursor", "pointer")
+  })
+}

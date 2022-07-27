@@ -87,6 +87,7 @@ class StoryList {
     })
   }
 
+  // Allow user to favorite a story
   static async addStoryToFavorites(storyId) {
       const response = await axios({
         method: "POST",
@@ -98,6 +99,7 @@ class StoryList {
     
   }
 
+  // Allow user to un-favorite a story
   static async removeStoryFromFavorites(storyId) {
     const response = await axios({
       method: "DELETE",
@@ -106,8 +108,24 @@ class StoryList {
         token: currentUser.loginToken,
       }
     })
+    }
   
-}
+  
+  // Allow user to delete a story they submitted
+  static async deleteUserStory(storyId) {
+    const response = await axios({
+      method: "DELETE",
+      url: `${BASE_URL}/stories/${storyId}`,
+      data: {
+        token: currentUser.loginToken,
+      }
+    })
+
+  }
+  
+
+
+
 
 
 }
