@@ -125,10 +125,10 @@ function hideLoadingView() {
 async function setupAndStart() {
     clues.length = 0;
     $("table").remove();
-    getCluesNoAPI();
+    //getCluesNoAPI();
     
-    //let categoryIDs = await getCategoryIds();
-    //await Promise.all(categoryIDs.map((id) => { return getCategoryData(id) }));
+    let categoryIDs = await getCategoryIds();
+    await Promise.all(categoryIDs.map((id) => { return getCategoryData(id) }));
     
     
     
