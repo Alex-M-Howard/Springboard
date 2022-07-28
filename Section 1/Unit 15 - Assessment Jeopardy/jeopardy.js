@@ -2,21 +2,22 @@ const apiEndpoint = "//jservice.io";
 const cluesEndpoint = `${apiEndpoint}/api/clues`;
 const categoriesEndpoint = `${apiEndpoint}/api/category`;
 const clues = [];
-
+const ids = [];
 
 
 /** Get 6 random category IDs **/
 
-async function getCategoryIds() {
-    const categories = [];
+async function getCategoryId() {
+    // const categories = [];
 
-    for (let i = 0; categories.length < 6; i++){
-        let id = Math.ceil(Math.random() * 18000);        
-        if (categories.includes(id)) { continue; }
-        else {categories.push(id);}      
-    }
+    // for (let i = 0; categories.length < 6; i++){
+    //     let id = Math.ceil(Math.random() * 18000);
+    //     if (categories.includes(id)) { continue; }
+    //     else {categories.push(id);}
+    // }
 
-    return categories;
+    // return categories;
+    return Math.ceil(Math.random()*18000);
 }
 
 /** Return object with data about a category:
@@ -44,7 +45,8 @@ async function getCategoryData(category) {
             "showing": null
         };
     }
-    clues.push(data);
+    return data
+    //clues.push(data);
 }
 
 /** Populate the gameboard with all of the question values. Change start button to 'Restart' **/
@@ -127,21 +129,30 @@ async function setupAndStart() {
     $("table").remove();
     //getCluesNoAPI();
     
-    let categoryIDs = await getCategoryIds();
-    await Promise.all(categoryIDs.map((id) => { return getCategoryData(id) }));
-    
-    
-    
-    
-    
+    while(clues.length < 6) {
+        let id = await getCategoryId();
+        
+        if (ids.includes(id)) { continue; }
+        else {ids.push(id);}
+        
+        try {
+            let data = await getCategoryData(id);
+            clues.push(data)
+        } catch (err) {
+            console.log(err)
+            ids.pop();
+            continue;
+        }
+
+    }
 
     await fillTable();
 }
 
 /** On click of start / restart button, set up game. */
 $("#start-button").on("click", async () => {
-    showLoadingView();
-    try{await setupAndStart()}catch{await setupAndStart()}
+    showLoadingView(); 
+    await setupAndStart()
     hideLoadingView();
 })
 
