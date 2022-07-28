@@ -20,3 +20,23 @@ class SerialGenerator:
     100
     """
 
+    def __init__(self, start=0) -> None:
+        """Make a new generator, starting at start"""
+        
+        self.start = self.next = start
+        
+    def __repr__(self) -> str:
+        """Show representation of object"""
+        
+        return f"SerialGenerator start={self.start} next={self.next}"
+        
+    def generate(self):
+        """Rturn next serial"""
+        
+        self.next += 1
+        return self.next - 1
+    
+    def reset(self):
+        """Reset generator to original start"""
+        
+        self.next = self.start
