@@ -973,7 +973,7 @@ In [1]: from forex_python.converter import convert
 In [2]: convert("USD", "GBP", 10)
 7.6543
 
-Virtual Environments
+********** Virtual Environments ***********
 
 Normally, pip makes the installed library available everywhere
 
