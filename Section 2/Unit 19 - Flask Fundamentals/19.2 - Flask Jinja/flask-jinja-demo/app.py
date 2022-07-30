@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template
-from random import choice, sample
+from random import choice, sample, randint
 
 from flask_debugtoolbar import DebugToolbarExtension
 
@@ -17,6 +17,13 @@ def index():
     """Return homepage."""
 
     return render_template("hello.html")
+
+@app.route('/lucky')
+def show_lucky_num():
+    """Example of simple dynamic template"""
+    
+    num = randint(1, 100)
+    return render_template("lucky.html", lucky_num=num)
 
 
 # SIMPLE VERSION OF FORM/GREET
