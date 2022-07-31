@@ -1731,6 +1731,12 @@ Templates
 Route List
     What are all routes your app defines?
 
+
+
+JINJA ENUMERATE
+{{ loop.index0 }}
+
+
 Dynamic Templates
 
 Jinja will replace things like {{ msg }} with value of msg passed when rendering:
