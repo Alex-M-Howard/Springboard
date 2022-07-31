@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %} Welcome! {% endblock %}
+
+{% block content %}
+<h1>MAD LIBS</h1>
+<h2>Are you ready to have some fun?</h1>
+
+<form action="/story">
+    {% for prompt in prompts%}
+        <label for="{{prompt}}{{loop.index0}}">{{prompt}}: </label>
+        <input type="text" name="{{prompt}}" id="{{prompt}}{{loop.index0}}">
+        <br><br>
+        
+    {% endfor %}
+    <button type="submit">Submit</button>
+</form>
+
+{% endblock %}
