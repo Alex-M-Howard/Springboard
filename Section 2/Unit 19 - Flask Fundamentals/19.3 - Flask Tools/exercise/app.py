@@ -39,7 +39,7 @@ def survey_page():
 
 
 
-@app.route('/answer', methods=["POST", "GET"])
+@app.route('/answer', methods=["POST"])
 def store_answer():
     """Store survey answers"""
     if request.method == "POST":
