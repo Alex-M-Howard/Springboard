@@ -1,0 +1,19 @@
+body{
+    background-color: aquamarine;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+hr{
+    width: 50vw;
+}
+
+.radioleft{
+    text-align: left;
+}
+
+button{
+    margin: 1rem;
+}
+
