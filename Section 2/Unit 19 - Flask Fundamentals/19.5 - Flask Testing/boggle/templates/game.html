@@ -1,0 +1,32 @@
+
+{% extends 'base.html' %}
+
+
+{%block title%} Boggle! {% endblock%}
+
+{% block content%}
+
+<div class="board">
+<img src="../static/logo.png" alt="Boggle Logo">
+<div id="score">Score: {{score}}</div>
+{% for row in board %}
+ <div class="row">
+    {% for letter in row %}
+        <div class="letter">{{letter}}</div>
+    {% endfor %}
+ </div>
+{% endfor %}
+
+
+<div class="entry">
+<form >
+    <input type="text" name="word-input" id="word-input" placeholder="Enter a word">
+    <button id="try-word">Submit</button>
+</form>
+
+
+</div>
+
+</div>
+
+{% endblock %}

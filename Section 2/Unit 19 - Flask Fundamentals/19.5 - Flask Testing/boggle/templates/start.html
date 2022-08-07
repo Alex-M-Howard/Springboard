@@ -1,11 +1,19 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
-
-{%block title%} Boggle! {% endblock%}
+{% block title %} Boggle Start {% endblock %}
 
 {% block content%}
 
-{% for num in board%}
-    <h1>num</h1>
-{% endfor %}
+<h2>Welcome to the start page</h2>
+<hr>
+
+<form action="/session" method="POST">
+    <button>Start Game</button>
+</form>
+
+
+
 {% endblock %}
+
+
+
