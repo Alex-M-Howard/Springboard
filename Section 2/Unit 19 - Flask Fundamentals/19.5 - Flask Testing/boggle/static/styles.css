@@ -1,0 +1,79 @@
+body {
+	background-color: whitesmoke;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.board {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	background-color: orange;
+	width: 30rem;
+	margin: 0 auto;
+	border: 2px solid #ffa600;
+	border-radius: 5%;
+}
+
+.row {
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+	align-items: center;
+}
+
+.letter {
+	display: inline;
+	text-align: center;
+	width: 4.5rem;
+	margin: 10px;
+    font-size: 4rem;
+	font-weight: bold;
+	border: 2px solid black;
+	border-radius: 10%;
+	background-color: white;
+}
+
+img{
+	display: inline-block;
+	margin: 0 auto;
+	height: 10%;
+}
+
+.entry{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 90%;
+}
+
+#word-input{
+	width: 80%;
+	height: 2rem;
+}
+#score{
+	width: 100%;
+	font-size: 1.5rem;
+	margin-left: 1.25rem;
+}
+
+form{
+	width: 100%;
+	display: flex;
+	align-items: center;
+}
+
+input[type="text"] {
+    font-size: 2rem;
+}
+
+#try-word{
+	width: 20%;
+	height: 2rem;
+	font-size: 1rem;
+	margin-left: 1rem;
+	border-radius: 5%;
+}
