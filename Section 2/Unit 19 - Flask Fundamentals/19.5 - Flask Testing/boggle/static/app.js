@@ -7,30 +7,33 @@ const reset = $("#reset")
  */
 $(button).on("click", async (event) => {
     event.preventDefault();
-    const guess = $("#word-input").val().toLowerCase();
+    let guess = $("#word-input")
+    if (guess.length === 0) return;
+
+    guess = $(guess).val().toLowerCase();
     let response = await checkAnswer(guess);
     $("#word-input").val("")
-    console.log('button function before score added')
+    
     if (response.data["result"] === "valid") {
         updateScore(response.data["score"]);
         updateWords(guess)
     }
-    console.log('button function after score added')
     console.log(response)
 })
 
+
+////////////////////////////////////////////////
 /**
  * Handle click of reset button
  */
 $(reset).on("click", async (event) => {
-    console.log('hello')
     event.preventDefault();
-    console.log('clicking button')
     axios({
+        method: "POST",
         url: "/reset"
     })
 })
-
+////////////////////////////////////////////////
 
 
 /**

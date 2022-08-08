@@ -17,14 +17,12 @@ def home_page():
 def start_session():
     """Initialize session data when clicking start button"""
    
-    # Init Boggle board and score
-    
+    # Init Boggle board and score 
     board = BOGGLE.make_board()
     session["words"] = []
     session["board"] = board
     session["score"] = 0
     
-        
     return redirect("/boggle")
 
 @app.route("/boggle")
@@ -78,8 +76,10 @@ def add_score(word):
     
     return
 
+##############################################
 @app.route("/reset", methods=["POST", "GET"])
 def reset():
     """Reset Boggle Game"""
 
     return redirect("/session")
+##############################################
