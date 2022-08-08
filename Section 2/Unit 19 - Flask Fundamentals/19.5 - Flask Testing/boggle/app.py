@@ -6,7 +6,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "secretKey"
 #debug = DebugToolbarExtension(app)
-
+BOGGLE = Boggle()
 
 @app.route("/")
 def home_page():
@@ -16,18 +16,15 @@ def home_page():
 @app.route("/session", methods=["POST"])
 def start_session():
     """Initialize session data when clicking start button"""
-    if request.method == "POST":
-        # Init Boggle board and score
-        boggle = Boggle()
-        board = boggle.make_board()
+   
+    # Init Boggle board and score
+    
+    board = BOGGLE.make_board()
+    session["words"] = []
+    session["board"] = board
+    session["score"] = 0
+    
         
-        session["board"] = board
-        session["score"] = 0
-        
-        print("###############################")
-        print(session["board"])
-        print("Score:", session["score"])
-        print("###############################")
     return redirect("/boggle")
 
 @app.route("/boggle")
@@ -38,12 +35,51 @@ def boggle():
 
 @app.route("/check", methods=["POST"])
 def check():
-    """Check answer from boggle input"""
-    response = request.get_json()
-    print(response["guess"])
+    """Get json response input. Check answer. Return if word, and score"""
+    guess = request.get_json()["guess"]
+    result = check_answer(guess)
     
-    
-    return 'guess'
+    if result == "not-on-board" or result == "not-word": 
+        return json.dumps({
+            "result": "invalid",
+            "score": session["score"],
+            "words": session["words"]
+        })
+    elif result == "Already Guessed": 
+        return json.dumps({
+            "result": "Already Guessed",
+            "score": session["score"],
+            "words": session["words"]
+        })
+    else:
+        add_score(guess)
+        return json.dumps({
+            "result": "valid", 
+            "score": session["score"],
+            "words": session["words"]
+        })
 
-def check_answer(guess):
-    """Get session board and check if guess can be found inside"""
+
+def check_answer(word):
+    """Get session board and check if guess can be found inside. Add to session word list"""
+    if word in session["words"]:
+        return "Already Guessed"
+    
+    response = BOGGLE.check_valid_word(board=session["board"], word=word)    
+    if response == 'ok': session["words"].append(word)
+
+    return response
+
+def add_score(word):
+    """Add to total score based on length of word"""
+    score = session["score"]
+    score += len(word)
+    session["score"] = score
+    
+    return
+
+@app.route("/reset", methods=["POST", "GET"])
+def reset():
+    """Reset Boggle Game"""
+
+    return redirect("/session")
