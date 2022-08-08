@@ -9,6 +9,9 @@
 <div class="board">
 <img src="../static/logo.png" alt="Boggle Logo">
 <div id="score">Score: {{score}}</div>
+<form>
+    <button type="submit" id="reset">RESET</button>
+</form>
 {% for row in board %}
  <div class="row">
     {% for letter in row %}
@@ -23,10 +26,16 @@
     <input type="text" name="word-input" id="word-input" placeholder="Enter a word" style="text-transform:uppercase">
     <button id="try-word">Submit</button>
 </form>
-
+</div>
 
 </div>
 
+<div id="words-list" class="hidden">
+    <h2>Words Found</h2>
+    <hr>
+    <ul>
+
+    </ul>
 </div>
 
 {% endblock %}
