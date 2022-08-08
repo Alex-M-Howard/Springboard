@@ -1,4 +1,5 @@
 from boggle import Boggle
+import json
 from flask import Flask, request, session, render_template, redirect, url_for
 from flask_debugtoolbar import DebugToolbarExtension
 
@@ -33,5 +34,16 @@ def start_session():
 def boggle():
     """Display Boggle Game and Score"""
     
-    
     return render_template("game.html", board=session["board"], score=session["score"])
+
+@app.route("/check", methods=["POST"])
+def check():
+    """Check answer from boggle input"""
+    response = request.get_json()
+    print(response["guess"])
+    
+    
+    return 'guess'
+
+def check_answer(guess):
+    """Get session board and check if guess can be found inside"""
