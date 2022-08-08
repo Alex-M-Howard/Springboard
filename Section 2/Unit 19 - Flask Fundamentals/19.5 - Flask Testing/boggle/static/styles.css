@@ -52,6 +52,8 @@ body {
 
 img{
 	display: inline-block;
+	position: relative;
+	top: 2rem;
 	margin: 0 auto;
 	height: 10%;
 }
@@ -70,8 +72,10 @@ img{
 }
 #score{
 	width: 100%;
+	position: relative;
 	font-size: 1.5rem;
 	margin-left: 1.25rem;
+	top: .75rem;
 }
 
 form{
@@ -90,4 +94,24 @@ input[type="text"] {
 	font-size: 1.25rem;
 	margin-left: 1rem;
 	border-radius: 7%;
+}
+
+.hidden{
+	display: none;
+}
+
+ul {
+  columns: 2;
+  -webkit-columns: 2;
+  -moz-columns: 2;
+}
+#reset{
+	display: inline;
+	position: relative;
+	left: 82%;
+	bottom: 1.25rem;
+	width: 15%;
+	height: 2rem;
+	border: 2px solid hsl(0, 0%, 0%);
+	border-radius: 10%;
 }
