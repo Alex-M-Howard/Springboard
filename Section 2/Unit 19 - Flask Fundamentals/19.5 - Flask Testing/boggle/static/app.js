@@ -17,12 +17,9 @@ $(button).on("click", async (event) => {
     if (response.data["result"] === "valid") {
         updateScore(response.data["score"]);
         updateWords(guess)
-        showUserWordResult("valid");
+        showUserWordResult(response.data["result"]);
     } else {
-        showUserWordResult("invalid")
-        ///////////////////////////////////////////////////////
-        console.log('Not valid. Create something to show user')
-        ///////////////////////////////////////////////////////
+        showUserWordResult(response.data["result"])
     }
 
 })
@@ -142,8 +139,8 @@ function showUserWordResult(result){
         $(display).addClass("fail");
         $(display).removeClass("success");
     }
-    $(display).toggleClass("hidden").text(result.toUpperCase())
-    $(display).fadeOut("slow", () => {
-        //Pass in callback function
-    })
+
+    $(display).css("display", "inline").text(result.toUpperCase())
+    $(display).fadeOut(800)
+
 }
