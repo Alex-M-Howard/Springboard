@@ -96,15 +96,8 @@ input[type="text"] {
 	border-radius: 7%;
 }
 
-.hidden{
-	display: none;
-}
 
-ul {
-  columns: 2;
-  -webkit-columns: 2;
-  -moz-columns: 2;
-}
+
 #reset{
 	display: inline;
 	position: relative;
@@ -116,10 +109,14 @@ ul {
 	border-radius: 10%;
 }
 
+.hidden{
+	display: none;
+}
+
 .success{
 	display: inline;
     position: absolute;
-   
+	
     bottom: 50%;
     width: 100%;
     margin: auto;
@@ -128,7 +125,8 @@ ul {
     text-align: center;
     color: rgb(47, 220,47);
     font-size: 3rem;
-    line-height: 3rem;
+    line-height: 5rem;
+	opacity: 1;
 }
 
 .fail{
@@ -144,4 +142,31 @@ ul {
     color: rgb(228, 1, 1);
     font-size: 3rem;
     line-height: 5rem;
+	opacity: 1;
+}
+
+#words-list{
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	width: 30rem;
+	margin: 0 auto;
+}
+
+ul {
+	justify-content: center;
+    align-items: center;
+    columns: 3;
+    width: 30rem;
+	padding: 0;
+}
+
+hr{
+	width: 30rem;
+}
+
+li{
+	display: flex;
+	justify-content: center;
 }
