@@ -27,7 +27,7 @@
     <input type="text" name="word-input" id="word-input" placeholder="Enter a word" style="text-transform:uppercase">
     <button id="try-word">Submit</button>
 </form>
-<h1 id="result" class="hidden"></h1>
+<h1 id="result"></h1>
 </div>
 
 </div>
@@ -36,7 +36,11 @@
     <h2>Words Found</h2>
     <hr>
     <ul>
-
+        {% if words|length > 0 %}
+            {% for word in words %}
+                <li>{{word}}</li>
+            {% endfor %}
+        {% endif %}
     </ul>
 </div>
 
