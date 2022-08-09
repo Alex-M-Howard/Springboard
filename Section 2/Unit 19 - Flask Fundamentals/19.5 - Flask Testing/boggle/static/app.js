@@ -22,18 +22,16 @@ $(button).on("click", async (event) => {
 })
 
 
-////////////////////////////////////////////////
 /**
  * Handle click of reset button
  */
 $(reset).on("click", async (event) => {
     event.preventDefault();
-    axios({
-        method: "POST",
-        url: "/reset"
-    })
+    let promise = await resetGameData();
+    console.log(promise)
+    promise.then(reloadPage())
 })
-////////////////////////////////////////////////
+
 
 
 /**
@@ -82,3 +80,28 @@ function updateWords(word) {
 }
 
 
+
+function resetGameData() {
+    console.log('RESETTING GAME')
+    let promise = new Promise(() => {
+        console.log('I PROMISE TO DO THIS')
+        let response = axios({
+            method: "POST",
+            url: "/reset"
+        })
+        console.log(response)
+        return response
+    })
+    console.log(promise)
+    return promise
+}
+
+function reloadPage() {
+
+        axios({
+            method: "GET",
+            url: "/boggle"
+        })
+    
+    
+}
