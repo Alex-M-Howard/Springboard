@@ -32,26 +32,22 @@ def check():
     guess = request.get_json()["guess"]
     result = check_answer(guess)
     
-    if result == "not-on-board" or result == "not-word": 
-        return json.dumps({
-            "result": "invalid",
-            "score": session["score"],
-            "words": session["words"]
-        })
-    elif result == "Already Guessed": 
-        return json.dumps({
-            "result": "Already Guessed",
-            "score": session["score"],
-            "words": session["words"]
-        })
+    data = {
+        "result": "",
+        "score": session["score"],
+        "words": session["words"]
+    }
+    
+    if result == "not-on-board" or result == "not-word":
+        data["result"] = "invalid"
+    elif result == "Already Guessed":
+        data["result"] = "Already Guessed"
     else:
-        add_score(guess)
-        return json.dumps({
-            "result": "valid", 
-            "score": session["score"],
-            "words": session["words"]
-        })
+        data["result"] = "valid"
+        session["score"] = add_score(guess)
+        data["score"] = session["score"]
 
+    return json.dumps(data)
 
 def check_answer(word):
     """Get session board and check if guess can be found inside. Add to session word list"""
@@ -67,23 +63,21 @@ def add_score(word):
     """Add to total score based on length of word"""
     score = session["score"]
     score += len(word)
-    session["score"] = score
     
-    return
+    return score
 
 
 @app.route("/reset", methods=["POST"])
 def reset():
-    """Reset Boggle Game"""
+    """Reset Boggle Game - Return new board"""
     print("RESETTING BOGGLE")
     initialize_game()
     
-    return "RESET"
+    return json.dumps(session["board"])
 
 
 def initialize_game():
     """Initalize variables and create new board"""
-    # Init Boggle board and score 
     board = BOGGLE.make_board()
     session["words"] = []
     session["board"] = board
@@ -95,3 +89,4 @@ def initialize_game():
     print(session["score"])
     print("#####################")    
     return
+
