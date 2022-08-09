@@ -115,3 +115,33 @@ ul {
 	border: 2px solid hsl(0, 0%, 0%);
 	border-radius: 10%;
 }
+
+.success{
+	display: inline;
+    position: absolute;
+   
+    bottom: 50%;
+    width: 100%;
+    margin: auto;
+    height: 5rem;
+    background-color: #ffa600;
+    text-align: center;
+    color: rgb(47, 220,47);
+    font-size: 3rem;
+    line-height: 3rem;
+}
+
+.fail{
+	display: inline;
+    position: absolute;
+   
+    bottom: 50%;
+    width: 100%;
+    margin: auto;
+    height: 5rem;
+    background-color: #ffa600;
+    text-align: center;
+    color: rgb(228, 1, 1);
+    font-size: 3rem;
+    line-height: 5rem;
+}
