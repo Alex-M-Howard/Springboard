@@ -17,29 +17,31 @@ $(button).on("click", async (event) => {
     if (response.data["result"] === "valid") {
         updateScore(response.data["score"]);
         updateWords(guess)
+    } else {
+        ///////////////////////////////////////////////////////
+        console.log('Not valid. Create something to show user')
+        ///////////////////////////////////////////////////////
     }
-    console.log(response)
-})
 
+})
 
 /**
  * Handle click of reset button
+ * Call reset of game data server side
+ * Call redrawing of board
  */
 $(reset).on("click", async (event) => {
     event.preventDefault();
-    let promise = await resetGameData();
-    console.log(promise)
-    promise.then(reloadPage())
+    let response = await resetGameData();
+    redrawBoard(response.data);
+
 })
 
 
-
 /**
- * 
  * @param {string} guess 
  * @returns either "valid" or "invalid"
  */
-
 function checkAnswer(guess) {
     let response = axios({
         method: "POST",
@@ -53,12 +55,9 @@ function checkAnswer(guess) {
 } 
 
 /**
- *  
  * Changes score on screen
- * @param {integer} score
- * 
+ * @param {integer} score 
  */
-
 function updateScore(newScore){
     const score = $("#score")
     $(score).text(`Score: ${newScore}`)
@@ -68,7 +67,6 @@ function updateScore(newScore){
 /**
  * Reveals a list of successful words guessed
  * @param {string} word 
- * 
  */
 function updateWords(word) {
     if ($("#words-list").hasClass("hidden")) {
@@ -79,29 +77,56 @@ function updateWords(word) {
     return
 }
 
+/**
+ * Clears word list and hides section
+ */
+function clearWords() {
+    // Empty words list
+    $("ul").empty()
 
+    // Hide area
+    $("#words-list").addClass("hidden")
 
+    return
+}
+
+/**
+ * Resets game data on the server
+ * @returns get response with new game board
+ */
 function resetGameData() {
     console.log('RESETTING GAME')
-    let promise = new Promise(() => {
-        console.log('I PROMISE TO DO THIS')
-        let response = axios({
+    return axios({
             method: "POST",
             url: "/reset"
         })
-        console.log(response)
-        return response
-    })
-    console.log(promise)
-    return promise
 }
 
-function reloadPage() {
 
-        axios({
-            method: "GET",
-            url: "/boggle"
-        })
-    
-    
+/**
+ * Empty letters on board, recreate game board
+ * Set score to 0 on screen
+ * Clear words list
+ * @param {array} rows - Contains letters for each row 
+ */
+function redrawBoard(rows) {
+    // Change letters on game board
+    let boardArea = $("#letters").empty();
+    for (let row of rows) {
+        let div = $("<div>").addClass("row");
+        
+        for (let letter of row) {
+            let letterSquare = $(`<div>${letter}</div>`).addClass("letter");
+            $(div).append(letterSquare);
+        }
+        
+        $(boardArea).append(div);
+    }
+
+    // Reset score on board back to 0
+    updateScore(0);
+
+    // Hide Words Found and Empty list on screen
+    clearWords();
+
 }

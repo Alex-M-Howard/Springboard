@@ -12,6 +12,7 @@
 <form>
     <button type="submit" id="reset">RESET</button>
 </form>
+<div id="letters">
 {% for row in board %}
  <div class="row">
     {% for letter in row %}
@@ -19,7 +20,7 @@
     {% endfor %}
  </div>
 {% endfor %}
-
+</div>
 
 <div class="entry">
 <form >
