@@ -17,7 +17,9 @@ $(button).on("click", async (event) => {
     if (response.data["result"] === "valid") {
         updateScore(response.data["score"]);
         updateWords(guess)
+        showUserWordResult("valid");
     } else {
+        showUserWordResult("invalid")
         ///////////////////////////////////////////////////////
         console.log('Not valid. Create something to show user')
         ///////////////////////////////////////////////////////
@@ -129,4 +131,19 @@ function redrawBoard(rows) {
     // Hide Words Found and Empty list on screen
     clearWords();
 
+}
+
+function showUserWordResult(result){
+    let display = $("#result")
+    if (result === "valid") {
+        $(display).addClass("success");
+        $(display).removeClass("fail");
+    } else {
+        $(display).addClass("fail");
+        $(display).removeClass("success");
+    }
+    $(display).toggleClass("hidden").text(result.toUpperCase())
+    $(display).fadeOut("slow", () => {
+        //Pass in callback function
+    })
 }
