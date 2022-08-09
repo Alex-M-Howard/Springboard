@@ -24,7 +24,7 @@ def start_session():
 def boggle():
     """Display Boggle Game and Score"""
     
-    return render_template("game.html", board=session["board"], score=session["score"])
+    return render_template("game.html", board=session["board"], score=session["score"], words=session["words"])
 
 @app.route("/check", methods=["POST"])
 def check():
