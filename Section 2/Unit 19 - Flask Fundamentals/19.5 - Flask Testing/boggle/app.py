@@ -83,10 +83,5 @@ def initialize_game():
     session["board"] = board
     session["score"] = 0
     
-    print("#####################")
-    print(session["words"])
-    print(session["board"])
-    print(session["score"])
-    print("#####################")    
     return
 
