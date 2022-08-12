@@ -37,7 +37,7 @@ class FlaskTests(TestCase):
             response = self.client.post('/session', follow_redirects=True)
             html = response.get_data(as_text=True)
             
-            self.assertIn('<div id="time">', html)
+            self.assertIn('<div id="timer">', html)
             self.assertEqual(response.status_code, 200)   
             
             
@@ -47,20 +47,31 @@ class FlaskTests(TestCase):
         with self.client:
             with self.client.session_transaction() as session:
                 board = [["B", "A", "T", "M", "A"],
-                                    ["B", "A", "T", "M", "A"],
-                                    ["B", "A", "T", "M", "A"],
-                                    ["B", "A", "T", "M", "A"],
-                                    ["B", "A", "T", "M", "A"],
+                         ["B", "A", "T", "M", "A"],
+                         ["B", "A", "T", "M", "A"],
+                         ["B", "A", "T", "M", "A"],
+                         ["B", "A", "T", "M", "A"],
                                     ]
                 boggle = Boggle()
                 result = boggle.check_valid_word(board, "bat")
-                self.assertIs(result, "ok")
-                result = boggle.check_valid_word(board, "MAN")
-                self.assertIs(result, "not-on-board")
-                result = boggle.check_valid_word(board, "STYEKADFOIU")
-                self.assertIs(result, "not-word")
+                self.assertEqual(result, "ok")
+                result = boggle.check_valid_word(board, "jaw")
+                self.assertEqual(result, "not-on-board")
+
             
     def test_invalid_word(self):
-        pass
-    def non_english_word(self):
+        """Make sure words are invalid"""
+        board = [["B", "A", "T", "M", "A"],
+                ["B", "A", "T", "M", "A"],
+                ["B", "A", "T", "M", "A"],
+                ["B", "A", "T", "M", "A"],
+                ["B", "A", "T", "M", "A"],
+                ]
+        boggle = Boggle()
+        result = boggle.check_valid_word(board, "ttm")
+        self.assertEqual(result, "not-word")
+        result = boggle.check_valid_word(board, "task")
+        self.assertEqual(result, "not-on-board")
+        result = boggle.check_valid_word(board, "tmam")
+        self.assertEqual(result, "not-word")
         pass

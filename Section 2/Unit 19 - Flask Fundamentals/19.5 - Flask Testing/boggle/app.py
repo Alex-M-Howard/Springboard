@@ -24,7 +24,7 @@ def start_session():
 def boggle():
     """Display Boggle Game and Score"""
     
-    return render_template("game.html", board=session["board"], score=session["score"], words=session["words"])
+    return render_template("game.html", board=session["board"], score=session["score"], words=session["words"], highScore=session["highScore"])
 
 @app.route("/check", methods=["POST"])
 def check():
@@ -70,9 +70,12 @@ def add_score(word):
 @app.route("/reset", methods=["POST"])
 def reset():
     """Reset Boggle Game - Return new board"""
-    print("RESETTING BOGGLE")
+    if session["score"] > session["highScore"]:
+        session["highScore"] = session["score"]
+
+    highScore = session["highScore"];
     initialize_game()
-    
+    session["highScore"] = highScore
     return json.dumps(session["board"])
 
 
@@ -82,6 +85,7 @@ def initialize_game():
     session["words"] = []
     session["board"] = board
     session["score"] = 0
+    session["highScore"] = 0
     
     return
 

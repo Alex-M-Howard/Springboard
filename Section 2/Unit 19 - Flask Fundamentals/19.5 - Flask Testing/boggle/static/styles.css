@@ -204,3 +204,11 @@ li{
     line-height: 5rem;
 	opacity: 1;
 }
+
+#start-img{
+	display: inline;
+    position: absolute;
+    height: 15vh;
+    right: 40%;
+    top: 15%;
+}

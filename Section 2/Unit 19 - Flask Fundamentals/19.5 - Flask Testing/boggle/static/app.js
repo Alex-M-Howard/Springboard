@@ -1,4 +1,4 @@
-let timer = 10;
+let timer = 60;
 $("#time-left").text(timer)
 
 const button = $("#try-word");
@@ -175,5 +175,8 @@ function showGameOver() {
     let display = $("#result")  
     $(display).addClass("game-over");
     $(display).css("display", "inline").text("GAME OVER")
+    let time = setTimeout(() => {
+        resetGameData();
+    }, 3000)
 
 }
