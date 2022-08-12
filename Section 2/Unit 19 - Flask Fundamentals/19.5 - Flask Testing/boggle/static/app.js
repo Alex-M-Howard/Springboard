@@ -1,5 +1,9 @@
-const button = $("#try-word")
-const reset = $("#reset")
+let timer = 10;
+$("#time-left").text(timer)
+
+const button = $("#try-word");
+const reset = $("#reset");
+let gameOver = false;
 
 /**
  * Get guessed word and send to "/check"
@@ -8,8 +12,10 @@ const reset = $("#reset")
 $(button).on("click", async (event) => {
     event.preventDefault();
     let guess = $("#word-input")
+    if (gameOver) return;
     if (guess.length === 0) return;
 
+    startTimer();
     guess = $(guess).val().toLowerCase();
     let response = await checkAnswer(guess);
     $("#word-input").val("")
@@ -142,5 +148,31 @@ function showUserWordResult(result){
 
     $(display).css("display", "inline").text(result.toUpperCase())
     $(display).fadeOut(800)
+
+}
+
+
+function startTimer() {
+    let timeLeft = $("#time-left").text();
+    timeLeft = parseInt(timeLeft);
+
+    let time = setInterval(() => {
+        if (timeLeft === 0) {
+            clearInterval(time);
+            showGameOver();
+            
+
+        } else {
+            timeLeft = timeLeft - 1
+            $("#time-left").text(timeLeft)
+        }
+    }, 1000);
+}
+
+function showGameOver() {
+    gameOver = true;
+    let display = $("#result")  
+    $(display).addClass("game-over");
+    $(display).css("display", "inline").text("GAME OVER")
 
 }
