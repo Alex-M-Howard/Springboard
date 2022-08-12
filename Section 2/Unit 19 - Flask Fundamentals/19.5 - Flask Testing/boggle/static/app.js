@@ -101,10 +101,11 @@ function clearWords() {
  */
 function resetGameData() {
     console.log('RESETTING GAME')
-    return axios({
+    axios({
             method: "POST",
             url: "/reset"
-        })
+    })
+    document.location.reload ()
 }
 
 
