@@ -12,7 +12,7 @@ body {
 	align-items: center;
 	background-color: orange;
 	width: 30rem;
-	height: 40rem;
+	height: 45rem;
 	margin: 0 auto;
 	border: 2px solid #ffa600;
 	border-radius: 5%;
@@ -70,13 +70,7 @@ img{
 	width: 80%;
 	height: 2rem;
 }
-#score{
-	width: 100%;
-	position: relative;
-	font-size: 1.5rem;
-	margin-left: 1.25rem;
-	top: .75rem;
-}
+
 
 form{
 	width: 100%;
@@ -169,4 +163,44 @@ hr{
 li{
 	display: flex;
 	justify-content: center;
+}
+#score{
+	width: 10rem;
+	position: relative;
+	font-size: 1.5rem;
+	margin-left: 1.25rem;
+	top: .75rem;
+	right: 31%;
+}
+#timer{
+	width: 5rem;
+	display: inline-block;
+	position: relative;
+	font-size: 1.5rem;
+	margin-left: 1.25rem;
+	top: .75rem;
+	right: 40%;
+}
+
+
+#time-left{
+	position: absolute;
+    bottom: 0%;
+    left: 85%;
+}
+
+.game-over{
+	display: inline;
+    position: absolute;
+   
+    bottom: 50%;
+    width: 75%;
+    margin: auto;
+    height: 5rem;
+    background-color: #ffa600;
+    text-align: center;
+    color: rgb(228, 1, 1);
+    font-size: 3rem;
+    line-height: 5rem;
+	opacity: 1;
 }
