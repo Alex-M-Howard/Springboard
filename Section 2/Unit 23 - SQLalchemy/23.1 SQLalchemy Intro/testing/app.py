@@ -18,3 +18,8 @@ def home():
     
     return render_template("home.html", pets=all_pets)
 
+@app.route("/<int:pet_id>")
+def display_pet(pet_id):
+    """Display pet info"""
+    pet = Pet.query.get(pet_id)
+    return render_template("details.html", pet=pet)
