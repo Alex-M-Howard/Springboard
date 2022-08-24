@@ -26,18 +26,14 @@ def show_users():
   users = User.query.all()
   return render_template("users.html", users=users)
 
-
 @app.route("/users/<int:id>")
 def show_user(id):
   """Show user info"""
   user = User.query.get(id)
   return render_template(f"user.html", user=user)
     
-  
 @app.route("/users/new", methods=["POST", "GET"])
 def add_form():
-
-
   """Show userform or add user to db"""
   if request.method == "GET" : return render_template("new.html")
   else:
@@ -51,12 +47,21 @@ def add_form():
     
     return redirect("/")
   
-        
-@app.route("/users/<int:id>/edit")
+@app.route("/users/<int:id>/edit", methods=["POST", "GET"])
 def edit_user(id):
   """Show edit page"""
-  
-  return render_template("edit.html")
+  if request.method == "GET" : 
+    user = User.query.get(id)
+    return render_template("edit.html", user=user)
+  else:
+    r = request    
+    user = User.query.get(id)
+    user.first_name = r.form["first_name"] if r.form["first_name"] else user.first_name
+    user.last_name = r.form["last_name"] if r.form["last_name"] else user.last_name
+    user.img = r.form["image_url"] if r.form["image_url"] else None
+
+    User.edit_user(user)
+    return redirect('/users')
 
 @app.route("/users/<int:id>/delete", methods=["POST"])
 def delete_user(id):
