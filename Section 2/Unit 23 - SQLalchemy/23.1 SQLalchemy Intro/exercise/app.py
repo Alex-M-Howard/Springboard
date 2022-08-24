@@ -61,7 +61,10 @@ def edit_user(id):
 @app.route("/users/<int:id>/delete", methods=["POST"])
 def delete_user(id):
   """Delete user"""
-  User.delete_user(id)
-  
-  # Add flash message
+  try:
+    User.delete_user(id)
+    flash("User successfully deleted!", 'success')
+  except Exception as e: 
+    print(e)
+
   return redirect("/users")
