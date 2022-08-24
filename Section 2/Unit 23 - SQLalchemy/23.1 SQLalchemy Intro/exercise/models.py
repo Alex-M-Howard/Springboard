@@ -32,6 +32,9 @@ class User(db.Model):
     """Edit current user"""
     db.session.add(self)
     db.session.commit()
+    
+  def get_full_name(self):
+    return  f"{self.first_name} {self.last_name}"
   
   @classmethod  
   def delete_user(cls, user_id):

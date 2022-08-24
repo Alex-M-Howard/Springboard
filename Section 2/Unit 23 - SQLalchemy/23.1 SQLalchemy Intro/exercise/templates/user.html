@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
-{% block title %}{{user.first_name}} {{user.last_name}}{% endblock %}
+{% block title %}{{user.get_full_name()}}{% endblock %}
 
 {% block content%}
 
-  <img src="{{user.image_url}}" class="profile-pic" alt="{{user.first_name}} {{user.last_name}}Profile Picture">
-  <h1>{{user.first_name}} {{user.last_name}}</h1>
+  <img src="{{user.image_url}}" class="profile-pic" alt="{{user.get_full_name()}} Profile Picture">
+  <h1>{{user.get_full_name()}}</h1>
   <form action="/users/{{user.id}}/edit" method="GET">
     <button>Edit</button>
   </form>

@@ -23,7 +23,7 @@ def home():
 @app.route("/users")
 def show_users():
   """Show list of users"""
-  users = User.query.all()
+  users = User.query.order_by('last_name', 'first_name').all()
   return render_template("users.html", users=users)
 
 @app.route("/users/<int:id>")

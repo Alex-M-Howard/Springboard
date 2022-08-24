@@ -4,5 +4,6 @@ body{
 
 .profile-pic{
   display: inline;
-  height: 15rem;
+  height: 25vh;
+  border-radius: 100%;
 }
