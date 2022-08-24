@@ -54,6 +54,14 @@ def add_form():
         
 @app.route("/users/<int:id>/edit")
 def edit_user(id):
-  """Edit"""
+  """Show edit page"""
   
-  return redirect("/")
+  return render_template("edit.html")
+
+@app.route("/users/<int:id>/delete", methods=["POST"])
+def delete_user(id):
+  """Delete user"""
+  User.delete_user(id)
+  
+  # Add flash message
+  return redirect("/users")

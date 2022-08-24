@@ -27,3 +27,9 @@ class User(db.Model):
     """Add user to DB"""
     db.session.add(self)
     db.session.commit()
+  
+  @classmethod  
+  def delete_user(cls, user_id):
+    """Delete user from DB"""
+    User.query.filter_by(id=user_id).delete()
+    db.session.commit()
