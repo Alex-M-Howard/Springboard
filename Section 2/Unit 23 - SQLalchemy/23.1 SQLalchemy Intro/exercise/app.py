@@ -16,22 +16,30 @@ db.create_all()
 
 @app.route("/")
 def home():
-  """Landing page showing all users"""
+  """Landing page. Redirect for now"""
  
+  return redirect("/users")
+
+@app.route("/users")
+def show_users():
+  """Show list of users"""
   users = User.query.all()
   return render_template("users.html", users=users)
 
-@app.route("/user<int:id>")
+
+@app.route("/users/<int:id>")
 def show_user(id):
   """Show user info"""
   user = User.query.get(id)
   return render_template(f"user.html", user=user)
     
   
-@app.route("/add-user", methods=["POST", "GET"])
+@app.route("/users/new", methods=["POST", "GET"])
 def add_form():
+
+
   """Show userform or add user to db"""
-  if request.method == "GET" : return render_template("add.html")
+  if request.method == "GET" : return render_template("new.html")
   else:
     r = request
     fname = r.form["first_name"]
@@ -42,3 +50,10 @@ def add_form():
     new_user.add_user()
     
     return redirect("/")
+  
+        
+@app.route("/users/<int:id>/edit")
+def edit_user(id):
+  """Edit"""
+  
+  return redirect("/")
