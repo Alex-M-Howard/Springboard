@@ -22,20 +22,8 @@ class User(db.Model):
     """User description in console"""
     u = self
     return f"<User id={u.id} first_name={u.first_name} last_name={u.last_name} image_url={u.image_url}"
-
-  def get_all_users(self):
-    """Get list of users"""
-    return User.query.all()
   
-  @classmethod  
-  def get_user(id):
-    """return user"""
-    return User.query.get(id)
-  
-  @classmethod
-  def add_user(first_name, last_name, image_url):
-    """Add user to database"""
-  
-    new_user = User(first_name=first_name, last_name=last_name, image_url=image_url)
-    db.session.add(new_user)
+  def add_user(self):
+    """Add user to DB"""
+    db.session.add(self)
     db.session.commit()
