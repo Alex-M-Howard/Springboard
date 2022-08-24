@@ -34,7 +34,11 @@ def add_form():
   if request.method == "GET" : return render_template("add.html")
   else:
     r = request
-    new_user = User(first_name=r.form["first_name"], last_name=r.form["last_name"], image_url=r.form["image_url"])
+    fname = r.form["first_name"]
+    lname = r.form["last_name"]
+    img  = r.form["image_url"] if r.form["image_url"] else None
+
+    new_user = User(first_name=fname, last_name=lname, image_url=img)
     new_user.add_user()
     
     return redirect("/")
