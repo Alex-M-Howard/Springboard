@@ -58,18 +58,16 @@ def edit_user(id):
     user = User.query.get_or_404(id)
     user.first_name = r.form["first_name"] if r.form["first_name"] else user.first_name
     user.last_name = r.form["last_name"] if r.form["last_name"] else user.last_name
-    user.img = r.form["image_url"] if r.form["image_url"] else None
-
+    user.image_url = r.form["image_url"] if r.form["image_url"] else None
+    
     User.edit_user(user)
     return redirect('/users')
 
 @app.route("/users/<int:id>/delete", methods=["POST"])
 def delete_user(id):
   """Delete user"""
-  try:
-    User.delete_user(id)
-    flash("User successfully deleted!", 'success')
-  except Exception as e: 
-    print(e)
+  
+  User.delete_user(id)
+  flash("User successfully deleted!", 'success')
 
   return redirect("/users")
