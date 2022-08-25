@@ -29,7 +29,7 @@ def show_users():
 @app.route("/users/<int:id>")
 def show_user(id):
   """Show user info"""
-  user = User.query.get(id)
+  user = User.query.get_or_404(id)
   return render_template(f"user.html", user=user)
     
 @app.route("/users/new", methods=["POST", "GET"])
@@ -51,11 +51,11 @@ def add_form():
 def edit_user(id):
   """Show edit page"""
   if request.method == "GET" : 
-    user = User.query.get(id)
+    user = User.query.get_or_404(id)
     return render_template("edit.html", user=user)
   else:
     r = request    
-    user = User.query.get(id)
+    user = User.query.get_or_404(id)
     user.first_name = r.form["first_name"] if r.form["first_name"] else user.first_name
     user.last_name = r.form["last_name"] if r.form["last_name"] else user.last_name
     user.img = r.form["image_url"] if r.form["image_url"] else None
