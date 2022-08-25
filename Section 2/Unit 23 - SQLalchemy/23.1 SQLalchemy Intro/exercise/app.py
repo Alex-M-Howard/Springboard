@@ -60,7 +60,7 @@ def edit_user(id):
     user.last_name = r.form["last_name"] if r.form["last_name"] else user.last_name
     user.image_url = r.form["image_url"] if r.form["image_url"] else None
     
-    User.edit_user(user)
+    user.edit_user()
     return redirect('/users')
 
 @app.route("/users/<int:id>/delete", methods=["POST"])
