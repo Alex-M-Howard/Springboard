@@ -3,5 +3,6 @@
 .profile-pic{
   display: inline;
   height: 25vh;
+  object-fit: scale-down;
 
 }
