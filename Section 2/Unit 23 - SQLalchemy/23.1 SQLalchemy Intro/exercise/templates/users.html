@@ -5,6 +5,23 @@
 {% block content %}
 
 <h1 class="text-center">Users</h1>
+{% with messages = get_flashed_messages(with_categories=true)%}
+{% if messages%}
+<div class="row">
+  <div class="col-md-5"></div>
+  <ul class="col-md-2 list-group flashes">
+    {% for category, message in messages%}
+    
+    <li class="list-group-item list-group-item-success my-4">{{message}}</li>
+    
+    {% endfor %}
+  </ul>
+  <div class="col-md-5"></div>
+</div>
+  {% endif %}
+  {% endwith %}
+
+
 <div class="row">
 <div class="col-md-4"></div>
 <ul class="list-group col-md-4">
