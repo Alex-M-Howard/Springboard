@@ -3,18 +3,32 @@
 {% block title %}Add User{% endblock %}
 
 {% block content %}
-<h1>Create a user</h1>
-<form action="/users/new" method="POST">
-<label for="first_name">First Name</label>
-<input type="text" name="first_name" id="first_name" placeholder="Enter a first name" required>
 
-<label for="last_name">Last Name</label>
-<input type="text" name="last_name" id="last_name" placeholder="Enter a last name" required>
+<h1 class="text-center">Create a user</h1>
 
-<label for="image_url">Image URL</label>
-<input type="text" name="image_url" id="image_url" placeholder="Provide an image of this user">
+<form action="/users/new" method="POST" class="row g-3">
+  <div class="col-md-2"></div>
+  <div class="col-md-4">
+  <label for="first_name" class="form-label">First Name</label>
+  <input type="text" name="first_name" class="form-control" id="first_name" placeholder="Enter a first name" required>
+</div>
 
-<button id="add-user">Add</button>
+<div class="col-md-4">
+  <label for="last_name" class="form-label">Last Name</label>
+  <input type="text" name="last_name" class="form-control" id="last_name"  placeholder="Enter a last name" required>
+</div>
+<div class="col-md-2"></div>
+
+<div class="col-md-2"></div>
+
+<div class="col-md-8">
+  <label for="image_url" class="form-label">Image URL</label>
+  <input type="text" name="image_url" class="form-control" id="image_url" placeholder="Provide an image of this user">
+</div>
+<div class="col-md-2"></div>
+<div class="col-md-2"></div>
+<button id="add-user" class="col-md-8 btn btn-primary">Add</button>
+<div class="col-md-2"></div>
 </form>
 
 {% endblock %}

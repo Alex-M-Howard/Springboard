@@ -4,11 +4,23 @@
 
 {% block content %}
 
-<h1>Users</h1>
-<ul>
+<h1 class="text-center">Users</h1>
+<div class="row">
+<div class="col-md-4"></div>
+<ul class="list-group col-md-4">
   {% for user in users%}
-  <li><a href="/users/{{user.id}}">{{user.get_full_name()}}</a></li>
+  <li class="list-group-item"><a href="/users/{{user.id}}">{{user.get_full_name()}}</a></li>
   {% endfor %}
 </ul>
-<form action="/users/new" method="get"><button>Add User</button>
+<div class="col-md-4"></div>
+</div>
+
+  
+<form action="/users/new" method="get" class="row g-3">
+<div class="col-md-4"></div>
+  <button class="btn btn-primary col-md-4 my-5"">Add User</button>
+<div class="col-md-4"></div>
+</form>
+
+
 {% endblock %}
