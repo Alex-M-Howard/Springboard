@@ -43,7 +43,7 @@ HTML wrapper methods return a string wrapped inside an HTML tag.
 
 ////////// Loops ////////
 for (let i = 0; i < 10; i++){
-    DO Something here!
+    console.log(i) --> 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
 }
 
 colors = ['red', 'blue', 'green']
@@ -56,18 +56,20 @@ for (color in colors) {
 }
 
 
+
+i = 0
 do{
     i++;
+    console.log(i)
 }
-while (i < 5); --> Do while loop will run AT LEAST ONCE!
+while (i < 5); --> Do while loop will run AT LEAST ONCE!   1, 2, 3, 4, 5
+
+
 
 while (i < 10){   --> While loop will check condition before running
     i++
+    console.log(i)
 }
-
-
-
-
 
 
 
@@ -85,9 +87,6 @@ valueOf()	Returns the primitive value of a number
 
 
 
-
-
-
 ///////// FALSY VALUES ////////
 0
 false
@@ -95,10 +94,6 @@ NaN
 null
 ""
 undefined
-
-
-
-
 
 
 
@@ -143,10 +138,6 @@ trunc(x)	Returns the integer part of a number (x)
 &&	logical and
 ||	logical or
 !	logical not
-
-
-
-
 
 
 
@@ -203,10 +194,6 @@ valueOf()	Returns the primitive value of a Date object
 
 
 
-
-
-
-
 ///////////// ARRAY METHODS ///////////
 concat()	Joins two or more arrays, and returns a copy of the joined arrays
 copyWithin()	Copies array elements within the array, to and from specified positions
@@ -238,6 +225,7 @@ splice()	Adds/Removes elements from an array
 toString()	Converts an array to a string, and returns the result
 unshift()	Adds new elements to the beginning of an array, and returns the new length
 valueOf()	Returns the primitive value of an array
+
 
 
 ///////// SWITCH STATEMENT ///////////
@@ -273,16 +261,7 @@ switch (day) { // Once a case matches, it will return the rest of the cases! So 
 
 
 
-
-
-
-
 //////////// OBEJCTS ////////////
-Object keys in JavaScript are (almost) strings, symbols can also be keys …but we won’t talk about Symbols yet
-
-Values In Objects
-Values can be variables!
-
 const movieTitle = "Titanic";
 const releaseYear = 1997;
 const dudeWhoDirectedIt = "James Cameron";
@@ -292,10 +271,6 @@ const movie = {
   year: releaseYear,
   director: dudeWhoDirectedIt
 };
-Accessing Values In An Object
-To access a value in an object, you need to know the value’s key
-
-Given the key, you can obtain the value either with dot notation or bracket notation
 
 const language = {
   name: "JavaScript",
@@ -304,52 +279,28 @@ const language = {
   isSuperFun: true
 };
 
+//Accessing keys
 language.name; // "JavaScript"
 language.hasObjects; // true
 language["name"]; // "JavaScript"
-Dot Vs. Bracket - What???
-When using bracket notation, the key is evaluated as an expression
 
+When using bracket notation, the key is evaluated as an expression
 When using dot notation, the key is NOT evaluated as an expression
 
-If you don’t know with 100% certainty what the name of the key is that you are looking for, use bracket notation.
-
-Otherwise always use dot notation.
-
-Updating Values In An Object
-Like with arrays, values in an object can be updated with a simple assignment.
-
-const obj = {
-  key: "old value"
-};
 
 obj.key = "new value"
 obj["key"] = "newer value"
+
 Removing Keys From An Object
 To remove a key-value pair from an object, you can use the delete keyword.
-
-const obj = {
-  key: "old value"
-};
 
 delete obj.key; // true
 You can use this to remove values from an array as well, though this is less common.
 
-Storing Values From An Object
-Storing values by accessing them
 
-const language = {
-  name: "JavaScript",
-  hasObjects: true,
-  yearReleased: 1995,
-  isSuperFun: true
-};
-const name = language.name; // dot notation works
-const hasObjects = language["hasObjects"]; // brackets work too!
-const yearReleased = language.yearReleased;
+
 hasOwnProperty
-Called on an object
-Accepts the name of a key
+
 Returns true if the key exists in the object, otherwise false
 const cat = {
   name: "Blue",
@@ -362,16 +313,8 @@ cat.hasOwnProperty("favoriteFood"); // false
 
 
 
-//////// DOM /////////
+//////// DOM Document Object Model/////////
 DOM is Document Object Model - programming interface for HTML
-
-Things we can do with document object:
-*finding elements
-*make new elements
-*updating elements
-*change properties on elements
-*listening for events
-
 
 use console.dir(document) and you'll be able to explore like a json
 
@@ -385,36 +328,111 @@ document.querySelector("#main");  - this gets elements with id of main
 document.querySelector("h2.section-heading"); - gets even more specific
 querySelectorAll will return all matches, the others only the first!
 
-fancier. An hr that is direct descendant of body
+DOM direct descendant
 document.querySelectorAll('body > hr')
 
 We can use these in variable and serach in them!
 let form = document.querySelector('form');
-form.querySelector('btn'); -> will search just the form section for a buttoN!
+form.querySelector('btn'); -> will search just the form section for a button!
 
 
-innerText = GRAB text from an element
-TextContent = Similar concept as innerText, but ignores previous stylings!
 
-innerText is aware of what is showing on screen, textContent will show everything
-even if you have it hidden by css
+///////// DOM Element Attributes /////////
+accessKey 	                Sets or returns the accesskey attribute of an element
+addEventListener() 	        Attaches an event handler to an element
+appendChild() 	            Adds (appends) a new child node to an element
+attributes 	                Returns a NamedNodeMap of an element's attributes
+blur() 	                    Removes focus from an element
+childElementCount 	        Returns an elements's number of child elements
+childNodes 	                Returns a NodeList of an element's child nodes
+children 	                  Returns an HTMLCollection of an element's child elements
+classList 	                Returns the class name(s) of an element
+className 	                Sets or returns the value of the class attribute of an element
+click() 	                  Simulates a mouse-click on an element
+clientHeight 	              Returns the height of an element, including padding
+clientLeft 	                Returns the width of the left border of an element
+clientTop 	                Returns the width of the top border of an element
+clientWidth 	              Returns the width of an element, including padding
+cloneNode() 	              Clones an element
+closest() 	                Searches the DOM tree for the closest element that matches a CSS selector
+compareDocumentPosition() 	Compares the document position of two elements
+contains()        	        Returns true if a node is a descendant of a node
+contentEditable 	          Sets or returns whether the content of an element is editable or not
+dir 	                      Sets or returns the value of the dir attribute of an element
+firstChild 	                Returns the first child node of an element
+firstElementChild 	        Returns the first child element of an element
+focus() 	                  Gives focus to an element
+getAttribute() 	            Returns the value of an element's attribute
+getAttributeNode() 	        Returns an attribute node
+getBoundingClientRect() 	  Returns the size of an element and its position relative to the viewport
+getElementsByClassName() 	  Returns a collection of child elements with a given class name
+getElementsByTagName() 	    Returns a collection of child elements with a given tag name
+hasAttribute() 	            Returns true if an element has a given attribute
+hasAttributes() 	          Returns true if an element has any attributes
+hasChildNodes() 	          Returns true if an element has any child nodes
+id 	                        Sets or returns the value of the id attribute of an element
+innerHTML 	                Sets or returns the content of an element
+innerText 	                Sets or returns the text content of a node and its descendants
+insertAdjacentElement() 	  Inserts a new HTML element at a position relative to an element
+insertAdjacentHTML() 	      Inserts an HTML formatted text at a position relative to an element
+insertAdjacentText() 	      Inserts text into a position relative to an element
+insertBefore() 	            Inserts a new child node before an existing child node
+isContentEditable 	        Returns true if an element's content is editable
+isDefaultNamespace() 	      Returns true if a given namespaceURI is the default
+isEqualNode() 	            Checks if two elements are equal
+isSameNode() 	              Checks if two elements are the same node
+lang 	                      Sets or returns the value of the lang attribute of an element
+lastChild 	                Returns the last child node of an element
+lastElementChild 	          Returns the last child element of an element
+matches() 	                Returns true if an element is matched by a given CSS selector
+namespaceURI 	              Returns the namespace URI of an element
+nextSibling 	              Returns the next node at the same node tree level
+nextElementSibling 	        Returns the next element at the same node tree level
+nodeName 	                  Returns the name of a node
+nodeType 	                  Returns the node type of a node
+nodeValue 	                Sets or returns the value of a node
+normalize() 	              Joins adjacent text nodes and removes empty text nodes in an element
+offsetHeight 	              Returns the height of an element, including padding, border and scrollbar
+offsetWidth 	              Returns the width of an element, including padding, border and scrollbar
+offsetLeft 	                Returns the horizontal offset position of an element
+offsetParent 	              Returns the offset container of an element
+offsetTop 	                Returns the vertical offset position of an element
+outerHTML 	                Sets or returns the content of an element (including the start tag and the end tag)
+outerText 	                Sets or returns the outer text content of a node and its descendants
+ownerDocument 	            Returns the root element (document object) for an element
+parentNode 	                Returns the parent node of an element
+parentElement 	            Returns the parent element node of an element
+previousSibling 	          Returns the previous node at the same node tree level
+previousElementSibling 	    Returns the previous element at the same node tree level
+querySelector() 	          Returns the first child element that matches a CSS selector(s)
+querySelectorAll() 	        Returns all child elements that matches a CSS selector(s)
+remove() 	                  Removes an element from the DOM
+removeAttribute() 	        Removes an attribute from an element
+removeAttributeNode() 	    Removes an attribute node, and returns the removed node
+removeChild() 	            Removes a child node from an element
+removeEventListener() 	    Removes an event handler that has been attached with the addEventListener() method
+replaceChild() 	            Replaces a child node in an element
+scrollHeight 	              Returns the entire height of an element, including padding
+scrollIntoView() 	          Scrolls the an element into the visible area of the browser window
+scrollLeft 	                Sets or returns the number of pixels an element's content is scrolled horizontally
+scrollTop 	                Sets or returns the number of pixels an element's content is scrolled vertically
+scrollWidth 	              Returns the entire width of an element, including padding
+setAttribute() 	            Sets or changes an attribute's value
+setAttributeNode() 	        Sets or changes an attribute node
+style 	                    Sets or returns the value of the style attribute of an element
+tabIndex 	                  Sets or returns the value of the tabindex attribute of an element
+tagName 	                  Returns the tag name of an element
+textContent 	              Sets or returns the textual content of a node and its descendants
+title 	                    Sets or returns the value of the title attribute of an element
+toString() 	                Converts an element to a string
 
-innerHTML will return all elements inside the object.
-const paragraph = document.querySelector('p');
-console.log(paragraph.innerHTML);
+
+
+
 
 Modifying styling
 paragraph.style.backgroundColor = 'red'; //Remember camelcase!
 
-
-//modifying multiple stylings at once!
-//const allPs = document.querySelectorAll - Would return a nodelist
-//We must loop!
-const allPs = document.querySelectorAll('p');
-for (let paras of allPs) {
-	paras.style.backgroundColor = 'blue';
-	paras.style.fontSize = '1.25rem';
-}
 
 const images = document.querySelectorAll('img');
 for (let all of images) {
@@ -433,28 +451,13 @@ for (let all of images) {
 *value
 
 getAttribute
-const imgs = document.querySelectorAll('img');
-
-for (img of imgs) { 
-    console.log(img.getAttribute('src'));
-}
-/You can set attributes too
-const input = document.querySelector('input')
+console.log(img.getAttribute('src'));
 input.setAttribute('type', 'checkbox');
-
-
-let source = imgs[0].getAttribute('src')
-for (img of imgs) {
-    img.setAttribute('src', source);
-
-
-//We can change classes too
+img.setAttribute('src', source);
 quote[0].setAttribute('class', 'section-title')
 
 
 //direct attribute access
-//use dot notation and grab directly
-
 const form = document.querySelector('#muffin-form');
 form.id = 'Now-what'
 console.log(form.id);
@@ -467,8 +470,8 @@ input2.value = '5'
 
 
 ///////// TIMERS /////////
-//First Class Functions
-/*
+First Class Functions
+
 Most programming lanugages do not terat functions the same as other data types
 Functions are considered first - class, like any other data type
 Functions are objects, which is why they can be passed as an argument or in a variable
@@ -477,11 +480,11 @@ They are first-class because:
 -Can be passed as arguments to other functions
 -return value of a function can be another function
 -can be assigned to a variable
-*/
+
 
 
 //Threading in JavaScript
-/*
+
 JavaScript is a single threaded language!
 
 A thread is essentially a process that runs.
@@ -515,9 +518,6 @@ This will print:
 I love you,
 I love you,
 You suck
-
-
-
 
 
 greet();
@@ -579,36 +579,25 @@ const printOne = function () {
 /////// ADDING NEW ELEMENTS TO HTML /////////
 // Make a new empty LI
 const newTodo = document.createElement('li');
-// Make a new empty B element
 const boldText = document.createElement('b');
-//Add some text to the new B element:
 boldText.textContent = "DON'T FORGET TO LOCK THE COOP!"
-//Add a class to
 newTodo.classList.add('todo');
-//Add the B element as a child of the LI
 newTodo.append(boldText);
 
-//Create a second LI
 const secondTodo = document.createElement('li');
 secondTodo.textContent = "Order more la croix";
 secondTodo.className = 'todo';
 
-// Select the UL we want to append to
 const ul = document.querySelector('ul');
-//Append both new LIs at once!
 ul.append(newTodo, secondTodo);
 
-//Prepending a new LI to the UL
 const thirdTodo = document.createElement('li');
 thirdTodo.textContent = "Feed Cats";
 ul.prepend(thirdTodo);
 
-// Making a new image
 const newImg = document.createElement('img');
 newImg.classList.add('thumbnail') //adding a class (to resize the img)
-// Setting the img src
 newImg.setAttribute('src', 'https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1320&q=80')
-
 document.body.prepend(newImg)
 
 
@@ -649,70 +638,45 @@ Every element is a node, but not all nodes are elements!
 
 
 /////////// JAVASCRIPT EVENTS /////////////
-
-
-What is an event?
-DOM events are “actions” that occur as a result of something the user or the browser does.
-
-We can use JavaScript to execute code when these kinds of “events” happen.
-
-What Kinds Of Events Do We Have?
-clicking on something
-hovering over something with the mouse
-pressing certain keys
-when the DOM has loaded
-when a form is submitted
-This Is Really What Most Browser Based JS Is About!
-We write code that listens for events - and react accordingly!
-
-This is commonly called Event Driven Programming
-
-What kinds of web pages have you used recently that have JavaScript that listens for events?
-
-So How Do We Do It?
-We have three options!
-
 Attach the name of the function to the element in HTML
 Attach the name of the function to an element in JavaScript
 Use the addEventListener method
+
 Attaching The Name Of The Function
 <h1 onclick="runClickHandler()"> Hello World </h1>
+
 In HTML
 function runClickHandler(){
   console.log("You just clicked the h1 element!";
 })
+
+
 Adding In Javascript
 const h1 = document.querySelector("h1");
 
 h1.onclick = function(){
   console.log("You just clicked the h1 element!";
 }
+
+
 Using addEventListener
 const h1 = document.querySelector("h1");
 
 h1.addEventListener("click", function(){
   console.log("You just clicked the h1 element!";
 })
-Which One Should We Use?
-We’re going to go with addEventListener - here’s why:
 
+Use addEventListener
 It gives us the most flexibility around our event listeners
 It avoids writing any inline code in our HTML and keeps our HTML and JS seperate
 This is commonly called “Separation of Concerns”
-A Gotcha - Waiting For The Dom To Load
-If you are trying to access properties in the DOM, before the web page has loaded - it won’t work! This becomes an issue if you put <script> tags in the <head> before the DOM has loaded
 
-Thankfully we have an event we can listen for to handle this! It’s called DOMContentLoaded
-
+DOM can take time to load
 document.addEventListener("DOMContentLoaded", function(){
   // place your code inside here
 })
-Accessing The Event Object
-Inside of the callback to addEventListener, we get access to a special object as a parameter - the event object
 
-const h1 = document.querySelector("h1");
 
-// we can call this parameter whatever we want - event is very common
 h1.addEventListener("click", function(event){
   console.log(event) // let's take a look!
 })
@@ -721,139 +685,8 @@ target - what element is the target of the event
 pageX / pageY - where on the page did this event occur?
 key - what key was pressed that triggered this event?
 preventDefault() - a function used to prevent the default behavior of the event.
-This is very useful for stopping form submissions from refreshing the page which is their default behavior
-Let’s see this in action
-<form>
-  Name: <input id="firstName" type="text">
-  <button>Add your name!</button>
-</form>
-const formElement = document.querySelector("form");
 
-formElement.addEventListener("submit", function(event){
-  console.log("you just submitted the form!")
-})
-Unfortunately this will not work! The default behavior of a form is to trigger a refreshing of the page.
 
-Solving our problem
-If we want to stop the default behavior of an event, we need to use the special event.preventDefault() method.
-
-const formElement = document.querySelector("form");
-
-formElement.addEventListener("submit", function(event){
-  event.preventDefault();
-  console.log("you just submitted the form!");
-})
-Another example
-So far we’ve seen click and submit, events - let’s take a look at another one, keyPress!
-
-demo/keypress-demo/index.html
-<!DOCTYPE html>
-<html>
-<body>
-  <h1>Press the "a" key!</h1>
-  <script src="script.js"></script>
-</body>
-</html>
-demo/keypress-demo/script.js
-// listen for the keypress everywhere
-document.addEventListener("keypress", function(event) {
-  if (event.key === "a") {
-    alert("you just pressed the 'a' key!");
-  }
-});
-Adding Multiple Event Listeners
-It’s very common that you will want to add multiple event listeners on elements
-
-Let’s see an example:
-
-  <body>
-    <h1>See your friend list!</h1>
-    <ul id="friend-list">
-      <li>Michelle <button>Remove</button></li>
-      <li>Juan <button>Remove</button></li>
-      <li>Emma <button>Remove</button></li>
-    </ul>
-    <script src="script-list.js"></script>
-  </body>
-const buttons = document.querySelectorAll("button");
-
-for (let button of buttons) {
-  button.addEventListener("click", function(event) {
-    event.target.parentElement.remove();
-  });
-}
-Everything seems to be working!
-
-What happens when we want to add new elements?
-  <body>
-    <h1>See your friend list!</h1>
-    <ul id="friend-list"></ul>
-    <form>
-      <label for="first-name"></label>
-      <input type="text" id="first-name" />
-      <button>Add a friend!</button>
-    </form>
-    <script src="script-form.js"></script>
-  </body>
-const form = document.querySelector("form");
-const friendList = document.querySelector("#friend-list");
-
-const buttons = document.querySelectorAll("li button");
-
-for (let button of buttons) {
-  button.addEventListener("click", function(event) {
-    event.target.parentElement.remove();
-  });
-}
-
-form.addEventListener("submit", function(event) {
-  event.preventDefault();
-  const newFriendInput = document.querySelector("#first-name");
-  const newLi = document.createElement("li");
-  const newButton = document.createElement("button");
-  newLi.innerText = newFriendInput.value;
-  newButton.innerText = "Remove";
-
-  newLi.append(newButton);
-  friendList.append(newLi);
-  form.reset();
-});
-It doesn’t work!
-The issue here is that our event listener only works for elements currently on the page
-
-There are two ways we can fix this
-
-Adding the event listener when we create elements
-Event Delegation
-Let’s start with adding an event listener when we create
-
-Adding the listener when we create
-const form = document.querySelector("form");
-const friendList = document.querySelector("#friend-list");
-
-form.addEventListener("submit", function(event) {
-  event.preventDefault();
-  const newFriendInput = document.querySelector("#first-name");
-  const newLi = document.createElement("li");
-  const newButton = document.createElement("button");
-  newLi.innerText = newFriendInput.value;
-  newButton.innerText = "Remove";
-
-  newButton.addEventListener("click", function(event) {
-    event.target.parentElement.remove();
-  });
-
-  newLi.append(newButton);
-  friendList.append(newLi);
-  form.reset();
-});
-This will work, but it’s not the most efficient approach
-
-We’re adding an event listener for every single button inside of each <li>
-
-This means if we had 1,000,000 friends, we’d have 1,000,000 listeners!
-
-We can fix this using event delegation
 
 Event delegation
 The idea behind event delegation is that we make a parent element the “delegate”
@@ -874,57 +707,21 @@ Event Bubbling And Capturing
 The process of an event moving from the place it is clicked to its target is called capturing
 
 When an event happens on an element, it first runs the handlers on it, then on its parent, then all the way up on other ancestors.
-
 This is called bubbling.
 
+
 Removing Event Listeners
-Sometimes after you add an event listener, you will want to remove it.
-
-Some examples of this include:
-
-A game is over and no more events should be registered
-You can no longer drag and drop something into a part of the page
-You do not want the user submitting any more information
-How it works
-We can use the removeEventListener function to remove any event listeners
-
-This can not be called on multiple elements
-
-let buttons = document.getElementsByTagName("button");
-
-buttons.removeEventListener("click", function(){
-  alert("You just clicked a button");
-});
-The code above will not work!
-
-Maybe we can just add it to an element individually like this:
-
-for(let button of buttons){
-  button.removeEventListener("click", function(){
-    alert('You just clicked on a button!');
-  });
-}
-But this won’t work either!
-
-Removing Event Listeners Correctly
-removeEventListener needs a reference to the name of the function to remove
-
-function alertData(){
-  alert("You just clicked a button");
-}
 
 for(let button of buttons){
   button.removeEventListener("click", alertData);
 }
-annonymous functions will not work here!
+
+
 
 Data attributes
 When creating elements and HTML pages, it’s very common that you might want to add some metadata or additional information about elements
-
 These are not things that the user should see, but accessible information in CSS and JavaScript
-
 Instead of placing this in an id or class, we can create custom attributes called data attributes
-
 These attributes start with data- and then anything you would like. You can read them easily in CSS and JavaScript
 
 An example
@@ -952,10 +749,6 @@ ul.addEventListener("click", function(event) {
     selectedElement.getAttribute("data-model")
   );
 });
-Recap
-We can add event listeners using addEventListener and remove them using removeEventListener
-Using the event object, we can gather useful information about the target, tagName and much more
-To add element metadata, we can use data attributes and read them using getAttribute or dataset
 
 
 
@@ -1301,336 +1094,6 @@ option(win) + right -> jumps between words to the right
 
 
 
-
-///////// GIT //////////
-What is Git?
-If you google “what is git” you will probably see the definition for “an unpleasant or contemptible person.” Thankfully, Git is much better than that. According to [the Git documentation](https://git-scm.com/):
-
-“Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.”
-
-In plain English, Git is a tool that allows developers to track versions of their code over time.
-
-It does this by creating “snapshots” of the current state of the code base whenever you tell it to.
-
-Put simply, Git is essential when collaborating with other developers to ensure that previous “snapshots” of the code can be revisited if necessary.
-
-This is helpful when revisiting breaking changes or undoing changes.
-
-When you’re learning about tools like Git, you’ll often see the acronym VCS. This stands for Version Control System
-
-Git is a VCS because it lets you create different versions of your code and easily swap back and forth between different versions.
-
-While Git is a hugely popular VCS, it’s not the only one. Subversion is another example.
-
-Installing Git
-Before we can get started with anything Git related, we need to make sure you have Git installed.
-
-In your terminal, type in git --version; if you do not see an error, you are good to go.
-
-If you are seeing any errors, you may need to install Git on your computer.
-
-If you’re on Linux, try running sudo apt-get install git or
-
-If you’re on Windows - https://git-scm.com/download
-
-Getting started with Git
-Once you have Git installed, you need to “initialize” a repository with Git before you can start using it
-
-run the command git init inside of a folder to do this!
-
-This creates a .git folder which is what allows you to start using git in that folder
-
-Initializing a repository in the wrong place
-If you accidentally initialize a repository in the wrong directory, you can just remove the .git folder using rm -rf .git.
-
-You don’t want to make your Desktop or Home folder a git repository!
-
-Local workflow
-Three areas
-Working Directory
-Staging Area (added, but not committed)
-Repository (added and committed)
-Git status
-In order to see where our files are in the local workflow we run the command git status
-Untracked files will be in red text
-Tracked but uncommited files will be in green text
-After commiting our working directory will be clean and no longer show the commited files
-Working Directory
-The working directory holds files that we are working on but have not yet saved to git
-As files are edited, git sees that they have been modified but their changes are not recorded
-Lets imagine we just created a new repository
-If we run the command git status, it would look something like this
-_images/untracked_files.jpg
-All files that have been modified are shown in red text
-These files are untracked until we move them to the staging area with the command git add
-Git add
-Git add is used to save our modified files so that they will be included in the next commit
-This allows us to choose what modified changes we want to save and which changes we want to ignore
-The command git add followed by the name of the file moves that file to the staging area
-To move all modified files to the staging area at once we use git add .
-This is what git status would look like after adding ‘app.js’ and ‘index.html’
-
-_images/tracked_files.jpg
-‘main.css’ will not be included in the next commit unless it is moved to staging
-
-Staging Area
-If we move a modified file to the staging area, we are preparing to commit the state of the file at that point
-If we continue working on that file we have to add again or the new changes won’t be tracked
-The staging area is where we save the state of the work we are preparing to include with the next commit
-Files that are staged are shown in green text
-Git commit
-Once we are satisfied with the work of a file in our staging area we commit it to the local repository
-We need include a commit message that sumarizes the changes that were made in that commit
-The message is connected to the commit with the -m flag
-git commit -m “summary of this commit”
-A commit is still local until we push it to a remote repository (more on this later)
-After making the commit will see a message similar to this
-
-_images/committed_files.jpg
-Committing Workflow
-git status - What files have been added / modified?
-git diff - Among those files, what has been changed?
-git add <NAME_OF_FILE> - Add NAME_OF_FILE to staging area
-git commit -m - Commit the file with a message!
-Optional: git log - See a log of all your commits
-.gitconfig Settings
-If you take a look at git log you may not see any information for the author and email.
-
-Here’s how you change it:
-
-git config --global user.name "YOUR NAME"
-git config --global user.email "YOUR EMAIL"
-If you also find it annoying to press q every time in git log, you can change this as well
-
-git config --global --replace-all core.pager cat
-These global configuration settings live in a file called .gitconfig which typically lives in your home directory. Try running cat ~/.gitconfig to see all of your settings!
-
-
-use git status to check if you have already initailized a repo. 
-Nested gits mess up. So check first.
-git init -> initialize repository
-
-rm -rf .git -> will delete a git repository
-
-git add -> moves to staging area
-git commit -m "summary of this commit"
-
-git add . will stage ALL files with untracked changes
-git diff -> shows what was modified
-
-
-////// GIT BRANCHING MERGING /////////
-Branching
-So far in our Git workflow we’ve only been working on a single branch.
-
-But when you’re working with a team, this isn’t usually desirable.
-
-What if you want to go off on your own and work on some experimental new feature?
-
-You want to be able to work without worrying about breaking the current code or conflicting with other coders
-
-Typically everyone does not code on a single branch
-A branch holds a collection of commits related to a specific purpose (bug fixes, new features, deployment)
-A code base typically has multiple branches being worked on at once
-Once the purpose of the branch is complete we merge the commits of the branch to the main codebase
-After making your initial commit in a new git repo, a branch named main is generated automatically
-To see your branches, type git branch in the terminal.
-At this point, you should only see main, we will see how to create a branch next
-‘An Important Note’: GitHub used to call the default ‘main’ branch of a repository the ‘master’ branch. As of late 2020, GitHub has decided to rename the default branch from ‘master’ to ‘main’. All new repositories have a ‘main’ branch, but many older repositories will still call this branch ‘master’. If you are using an existing GitHub account, or are using an older version of Git, your ‘main’ branch might be called ‘master’. We are using the ‘main’ branch in this set of instructions to keep up with the latest industry trends. If you have an older version of git or older repositories, simply swap out ‘main’ with ‘master’ when you are entering these commands into your terminal.
-‘Read More About Naming Conventions’: If you are curious about GitHub’s decision to rename the default branch to ‘main’, read their documentation here - https://github.com/github/renaming
-Creating a branch
-To create a new branch we use the git checkout command with the -b flag and then pass in a name of a branch.
-
-git checkout -b NAME_OF_BRANCH
-This creates the branch and moves you to the newly created branch
-
-Also note that where you create a new branch matters
-
-All code on the branch you were on when you created the new branch will automatically be included in the new branch code
-
-Moving between branches
-To move back to main (or to any other branch) we use the command git checkout NAME_OF_BRANCH
-If we have unsaved work on a branch we will get an error message
-The easiest way to get around this is to finish and commit the work on this branch
-We will explore different approaches later such as
-How to git reset our code without saving
-How to git stash the current state of our code and later retrieve it using git stash pop
-Deleting a branch
-Typically we will delete a branch after
-The branch has been merged to the primary codebase
-We decide we don’t want to merge the code
-In order to delete a branch we have to be currenlty be on a different branch
-
-Then we can run the command git branch -d NAME_OF_BRANCH
-
-We may run into error message when trying to delete if we try to delete a branch that has unsaved work
-This is git’s way of warning us “are you sure you want to delete this branch, you didn’t commit your work”
-To force the delete use a capital D flag in our command git branch -D NAME_OF_BRANCH
-To see all of the branches we have locally, we use the command git branch.
-Sometimes we also want to see the branches others are working on remotley
-To list all branches on GitHub or remote branch we pass the -a flag
-The flag does not matter right now, but it’s good to get in the habit of using git branch -a.
-Merging
-With a branch workflow, we usually create a new branch for something we are working on (a new feature, a redesign, etc.).
-Traditionally, the main branch is reserved for production code and immediate bug fixes.
-When we are done modifying our branch, we need to merge the code into the main branch.
-Here’s what we’re going to do:
-
-Create a folder called learn_branching and cd into it => mkdir learn_branching && cd learn_branching.
-Initialize a git repository => git init.
-Create a file called first.txt => touch first.txt.
-Add that file git add ..
-Commit that file git commit -m “initial commit”.
-Create a new branch called feature => git checkout -b feature.
-Now that you are on the feature branch, create a file called new.txt => touch new.txt.
-
-Add that file => git add ..
-Commit that file => git commit -m “adding new.txt”.
-Create another file called another.txt => touch another.txt.
-Add that file => git add ..
-Commit that file => git commit -m “adding another.txt”.
-Now lets move back to the main branch using git checkout main
-Note that the main branch has no awareness of new.txt or another.txt!
-Merge our changes from the feature branch into the main branch => git merge feature
-Delete our branch called feature => git branch -d feature
-Now if you take a look at git log --oneline --decorate you’ll see that the commit history on feature has ben merged into main!
-
-
-git branch "nameOfBranch" -No quotes -> creates new branch
-git checkout "nameOfBranch" -> changes to another branch
-
-to create branch in one line -> git checkout -b "nameOfBranch"
-
-delete a branch after code has been merged, or decide you don't want to merge
-git branch -d "nameOfBranch"
-
-merging branches. 
-git merge "nameOfBranch" -> wherever you run it from, it iwll merge to that branch!
-
-merge conflicts
-fast forward merge will put all changes chronologically into new branch
-recursive merge has different times on each branch. Two developers working on same file for example.
-
-
-
-
-
-
-
-//////// GITHUB //////////
-What is GitHub?
-GitHub is a web-based Git repository hosting service.
-
-Simply put, it is a tool that enables collaboration by hosting shared Git repositories that teams of developers can all contribute to.
-
-While GitHub uses Git, the functionality it provides is VERY different from Git so make sure you understand that Git and GitHub are not the same thing.
-
-In short, Git is a Version Control System. GitHub is an online platform for hosting and sharing code, text files and even more complex file formats.
-
-Why use GitHub?
-It provides a great way for you to store your code in a remote location
-
-It’s a fantastic way to collaborate with other developers both privately and publicly
-
-Many large open source projects are hosted on GitHub, which makes it very easy to examine the code both on GitHub and locally
-
-In the next couple of chapters, we will learn how to move code from our local repository to a remote repository on GitHub using the push command
-
-Who uses GitHub?
-Here are some projects you may have heard of that are hosted there:
-
-React - https://github.com/facebook/react
-Node.js - https://github.com/nodejs/node
-Angular - https://github.com/angular/angular
-Ruby on Rails - https://github.com/rails/rails
-Twitter Bootstrap - https://github.com/twbs/bootstrap
-jQuery - https://github.com/jquery/jquery
-Homebrew - https://github.com/Homebrew/brew
-Getting started with GitHub
-If you don’t have an account with GitHub yet, head to https://github.com/ and create an account
-
-Be sure to use whatever email address is in your .gitconfig for your email address when you sign up with GitHub.
-
-If you’d rather sign up with a different email address, change your .gitconfig accordingly.
-
-You’ll run into some minor annoyances if there’s a mismatch between the email address in your GitHub profile and the email address in your .gitconfig.
-
-Creating Remote Repositories on GitHub
-Navigate to https://www.github.com/new
-After naming and creating a new repository click create repository
-Follow the second block of instructions for pushing an existing repository from the command line
-What are we doing here?
-Adding a remote
-Calling it “origin”
-What’s a remote?
-It’s a nickname for a URL where your repository lives!
-Instead of typing/remembering the entire URL, we give it a nickname
-By default this nickname is ‘origin’
-git remote add NAME_OF_REMOTE URL_FOR_REPOSITORY
-NAME_OF_REMOTE: origin
-URL_FOR_REPOSITORY: https://github.com/YOUR_USERNAME/YOUR_REPO.git
-git remote add
-This command tells our local repository about a remote repository located somewhere.
-
-The location of our remote repository is https://github.com/YOUR_USERNAME/YOUR_REPO.git.
-
-git push origin
-Now if we want to send our code to GitHub we could type in
-
-git push https://github.com/YOUR_USERNAME/YOUR_REPO.git master
-
-but typing that whole URL is quite a pain.
-
-Instead, we give the URL a nickname (also called an alias) - “origin”
-
-Once the alias is set up we can simply type
-git push origin master
-This will send the code from our master branch to this remote repository.
-To see where your remotes are pointing to locally, type git remote -v.
-This will display both the alias and the remote url
-If you need to remove a remote you can use git remote rm NAME_OF_REMOTE
-
-Pushing Your Code
-The command we use is git push NAME_OF_REMOTE NAME_OF_BRANCH
-
-Setting the upstream
-git push -u origin master
-Now we can send our code from a local repository to our remote repository (which we aliased to origin in the previous command).
-
-The -u flag allows us in the future to only have to type git push instead of git push origin master.
-
-Pushing code up to GitHub
-Now when you type in git push, you will be prompted to enter your username and password for GitHub. While that is fine once or twice, it becomes quite a nuisance if you are pushing or pulling (retrieving code) frequently.
-
-It would be nice if we could establish some trust between our computer and GitHub so that when we run git push or git pull, GitHub does not need to authenticate us. To do that we are going to create an SSH key.
-
-
-
-Git pull - bring updated code from repo
-
-
-
-
-Practice
-Generate some code files on your machine and set up a local repository using git init .
-Create a remote repository on github to push your code to
-Use ‘git remote add’ to point the local repo to the remote repo and set up an alias (origin)
-Add and commit your code to generate a master branch
-Push your code to the remote repo using ‘git push origin master’
-Go back to github and refresh the page, you should be able to see your code
-Change some code and add and commit a second time
-This time set the upstream branch
-You should now be able to push your code with ‘git push’ in the future
-More Practice
-Create another remote repo on github
-Point the existing local repo to the new remote repo and set up an alias
-We have shown how to view, add and remove the remote
-Research git remote set-url if you are curious how update the remote with one line of code
-Push your code to the second remote repo
-Examine both the repos on Github that you have pushed code to
-Notice the new repo has all of the commit history
-The commit history belongs to the local git repo
-The remote github repo just provides a interface for people to share code
 
 
 
@@ -4486,7 +3949,6 @@ If you want extra practice, check out https://jsonplaceholder.typicode.com/
 
 //// AJAX ////
      
-
 AJAX
 Traditional Requests
 
@@ -4518,7 +3980,6 @@ In all cases:
   </form>
 
 AJAX
-
 AJAX web request:
 
     Made from JavaScript in browser
@@ -4528,11 +3989,7 @@ AJAX web request:
 
 AJAX is a technique in Javascript for sending requests and receiving responses from a server without having to reload the browser page.
 
-What Does AJAX stand for?
-
-AJAX originally was an acronym for “Asynchronous Javascript and XML”. However many people don’t send XML over AJAX nowadays; it’s more common to send HTML or JSON. The technology is still the same, though, even if the data payload is commonly different. Ultimately, AJAX is a cooler sounding acronym than AJAJ or AJAH.
-
-Regular Request
+What Does AJAX stand for --> Asynchronous Javascript
 
 AJAX Request
 Why Use AJAX?
@@ -4540,29 +3997,18 @@ Why Use AJAX?
     Don’t need to reload entire page if just 1 thing is changing
     Interactive web sites
     Fewer full page loads from server
-        Your JS can talk to other servers directly
+    Your JS can talk to other servers directly
     Less info has to go across network
 
 AJAX with Axios
 
 You don’t have to use Axios for this
-
     There is an old, clunky built-in tool: (XMLHttpRequest)
-
     Or a newer-but-still-clunky built-in tool: (fetch)
-
     Or lots of other libraries (including jQuery)
 
-    … but we’ll use axios for now! It’s featureful & popular
-
-Getting Axios
-
-Can easily include it using a CDN link:
-
-<script src="https://unpkg.com/axios/dist/axios.js"></script>
 
 Making a Simple Request
-
 axios.get(url)
 
 Make a GET request to that URL
@@ -4584,23 +4030,15 @@ Asynchronicity
 
 AJAX requests are asynchronous
 
-    The axios.get() completes before the response is received
-    This means that if we want to use the data we get back from our AJAX requests, we need to wait until the response has been given to us
-    We’re going to use two newer keywords in JS to do this: async and await!
-
 Await
-
-Here’s what it looks like:
-
 await axios.get('/api/card');
-
-// returns response object, with `.data` as response body
+returns response object, with `.data` as response body
 
 The code is asynchronous, but it “waits” for the AJAX request to complete.
+
 Async
 
 When you are using Chrome DevTools in the console, you can just use await. This is great for testing, but normally you will use ‘await’ in the context of an ‘async’ function.
-
 To use in a function, you must mark that function as async:
 
 async function getCardInfo() {
@@ -4610,8 +4048,8 @@ async function getCardInfo() {
 }
 
 When calling asnyc function, you should await it:
-
 let card = await getCardInfo();
+
 
 Callbacks Vs Async/Await
 
@@ -4624,7 +4062,6 @@ Axios API
 .get
 
 axios.get(url, [config])
-
 config is an optional object many Axios methods use
 
 It hold specific configuration for what you need.
@@ -4786,1145 +4223,5 @@ Big Ideas
         Functions that use await must be async
     JSON
         Axios parses JSON responses automatically for us
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 */
