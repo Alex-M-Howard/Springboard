@@ -1,0 +1,12 @@
+
+
+.profile-pic{
+  display: inline;
+  height: 25vh;
+  object-fit: scale-down;
+
+}
+
+a{
+  text-decoration: none;
+}

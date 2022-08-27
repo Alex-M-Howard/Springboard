@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title%}Users{% endblock %}
+
+{% block content %}
+
+<h1 class="text-center">Users</h1>
+{% with messages = get_flashed_messages(with_categories=true)%}
+{% if messages%}
+<div class="row">
+  <div class="col-md-5"></div>
+  <ul class="col-md-2 list-group flashes">
+    {% for category, message in messages%}
+    
+    <li class="list-group-item list-group-item-success my-4">{{message}}</li>
+    
+    {% endfor %}
+  </ul>
+  <div class="col-md-5"></div>
+</div>
+  {% endif %}
+  {% endwith %}
+
+
+<div class="row">
+<div class="col-md-4"></div>
+<ul class="list-group col-md-4">
+  {% for user in users%}
+  <li class="list-group-item"><a href="/users/{{user.id}}">{{user.get_full_name()}}</a></li>
+  {% endfor %}
+</ul>
+<div class="col-md-4"></div>
+</div>
+
+  
+<form action="/users/new" method="get" class="row g-3">
+<div class="col-md-4"></div>
+  <button class="btn btn-primary col-md-4 my-5"">Add User</button>
+<div class="col-md-4"></div>
+</form>
+
+
+{% endblock %}
