@@ -63,7 +63,16 @@ class Post(db.Model):
     db.session.add(self)
     db.session.commit()
     
-    
+  def edit_post(self):
+    """Edit current post"""
+    db.session.add(self)
+    db.session.commit()
+
+  @classmethod  
+  def delete_post(cls, post_id):
+    """Delete user from DB"""
+    cls.query.filter_by(id=post_id).delete()
+    db.session.commit()    
   
   
   
