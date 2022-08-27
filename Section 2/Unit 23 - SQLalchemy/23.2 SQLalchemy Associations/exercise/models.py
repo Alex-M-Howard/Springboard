@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 db = SQLAlchemy()
 
@@ -7,6 +8,7 @@ def connect_db(app):
   db.init_app(app)
   
 class User(db.Model):
+  """Users of the blog"""
 
   __tablename__ = 'users' 
   
@@ -38,3 +40,30 @@ class User(db.Model):
     """Delete user from DB"""
     cls.query.filter_by(id=user_id).delete()
     db.session.commit()
+    
+  def get_all_posts(self):
+    """Get all posts from the user"""
+    return self.posts
+    
+class Post(db.Model):
+  """Posts that users can create for blog"""
+  
+  __tablename__ = 'posts'
+  
+  id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+  title = db.Column(db.String(100), nullable=False)
+  content = db.Column(db.String(5000), nullable=False)
+  created_at = db.Column(db.DateTime, default=db.func.now())
+  user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+  
+  user = db.relationship('User', backref='posts')
+  
+  def add_post(self):
+    """Add post to DB"""
+    db.session.add(self)
+    db.session.commit()
+    
+    
+  
+  
+  
