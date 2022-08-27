@@ -89,3 +89,33 @@ def add_new_post(id):
     new_post.add_post()
     
     return redirect(f"/users/{id}")
+  
+@app.route("/posts/<int:post_id>")
+def show_post(post_id):
+  """Show clicked on post"""
+  post = Post.query.get_or_404(post_id)
+  return render_template(f"post.html", post=post)
+
+@app.route("/posts/<int:post_id>/edit", methods=["POST", "GET"])
+def edit_post(post_id):
+  """Show edit post page"""
+  if request.method == "GET":
+    post = Post.query.get_or_404(post_id)
+    return render_template("edit_post.html", post=post)
+  else:
+    r = request.form
+    post = Post.query.get_or_404(post_id)
+    post.title = r["title"] if r["title"] else post.title
+    post.content = r["content"] if r["content"] else post.content
+
+    post.edit_post()
+    return redirect(f"/posts/{post_id}")
+     
+@app.route("/posts/<int:post_id>/delete", methods=["POST"])
+def delete_post(post_id):
+  """Delete post from database"""
+  post = Post.query.get_or_404(post_id)
+  Post.delete_post(post_id)
+  flash("Post successfully deleted!", 'success')
+  
+  return redirect(f"/users/{post.user_id}")
