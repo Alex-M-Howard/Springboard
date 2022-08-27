@@ -21,4 +21,16 @@
     <div class="col-md-4"></div>
   </form>
 
+  <h3 class="text-center">Posts</h3>
+  {% if user.posts|length > 0 %}
+  <ul>  
+    {% for post in user.posts %}
+      <li><a href="/posts/{{post.id}}">{{post.title}}</a></li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  <form action="/users/{{user.id}}/posts/new" method="GET">
+    <button class='btn btn-info mt-2'>Add</button>
+  </form>
 {% endblock%}
