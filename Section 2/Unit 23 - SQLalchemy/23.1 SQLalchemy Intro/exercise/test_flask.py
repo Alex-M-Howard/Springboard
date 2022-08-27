@@ -55,16 +55,10 @@ class BloglyViewsTestCase(TestCase):
 
     def test_add_User(self):
         with app.test_client() as client:
-            newer_user = {"first_name": "Lena", "last_name": "Ziegler", "image_url":None}
-            resp = client.post("/users/new", data=newer_user)
-            print('######################')
-            print(resp)
-            print(newer_user)
-            print(resp.request)
-            print(resp.response)
-            print('######################')
+            form = {"first_name": "Lena", "last_name": "Ziegler", "image_url": 'www.google.com'}
+            resp = client.post('/users/new', data=form, follow_redirects=True)
             html = resp.get_data(as_text=True)
             all_users = User.query.all()
-            print(all_users)
-            self.assertEqual(resp.status_code, 200)            
-           # self.assertIn("<h1>TestUser2</h1>", html)
+            
+            self.assertEqual(resp.status_code, 200)          
+            self.assertIn("Lena Ziegler</a>", html)
