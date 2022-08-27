@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_ECHO'] = True
+app.config['SQLALCHEMY_ECHO'] = False
 app.config['SECRET_KEY'] = "SECRET!"
 
 connect_db(app)
@@ -38,6 +38,9 @@ def add_form():
   if request.method == "GET" : return render_template("new.html")
   else:
     r = request
+    print('########################')
+    print(r.form)
+    print('########################')
     fname = r.form["first_name"]
     lname = r.form["last_name"]
     img  = r.form["image_url"] if r.form["image_url"] else None
