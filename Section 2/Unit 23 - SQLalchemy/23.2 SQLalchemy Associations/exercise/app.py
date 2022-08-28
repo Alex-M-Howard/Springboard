@@ -44,8 +44,9 @@ def add_form():
     fname = r["first_name"]
     lname = r["last_name"]
     img  = r["image_url"] if r["image_url"] else None
-
+    
     new_user = User(first_name=fname, last_name=lname, image_url=img)
+    
     new_user.add_user()
     
     return redirect("/")
