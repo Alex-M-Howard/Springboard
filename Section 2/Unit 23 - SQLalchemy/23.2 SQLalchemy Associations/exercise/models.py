@@ -16,7 +16,8 @@ class User(db.Model):
   first_name = db.Column(db.String(25), nullable=False)
   last_name = db.Column(db.String(25), nullable=False)
   image_url = db.Column(db.String(300), default='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png')
-
+  posts = db.relationship('Post', back_populates="user", cascade="all, delete", passive_deletes=True)
+  
   def __repr__(self):
     """User description in console"""
     u = self
@@ -54,9 +55,9 @@ class Post(db.Model):
   title = db.Column(db.String(100), nullable=False)
   content = db.Column(db.String(5000), nullable=False)
   created_at = db.Column(db.DateTime, default=db.func.now())
-  user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+  user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete="CASCADE"))
   
-  user = db.relationship('User', backref='posts')
+  user = db.relationship('User', back_populates="posts")
   
   def add_post(self):
     """Add post to DB"""
