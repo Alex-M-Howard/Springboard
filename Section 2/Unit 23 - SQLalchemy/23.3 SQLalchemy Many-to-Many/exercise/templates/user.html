@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}{{user.get_full_name()}}{% endblock %}
+
+{% block content%}
+  <div class="row">
+    <div class="col-md-4"></div>
+    <img src="{{user.image_url}}" class="profile-pic col-md-4" alt="{{user.get_full_name()}} Profile Picture">
+    <div class="col-md-4"></div>
+  </div>
+  
+  <h1 class="text-center">{{user.get_full_name()}}</h1>
+  <form action="/users/{{user.id}}/edit" method="GET" class="row g-3">
+    <div class="col-md-4"></div>
+    <button class="col-md-4 btn btn-info my-2">Edit</button>
+    <div class="col-md-4"></div>
+  </form>
+  <form action="/users/{{user.id}}/delete" method="POST" class="row g-3">
+    <div class="col-md-4"></div>
+    <button class="col-md-4 btn btn-danger">Delete</button>
+    <div class="col-md-4"></div>
+  </form>
+
+  <h3 class="text-center">Posts</h3>
+  {% if user.posts|length > 0 %}
+  <ul>  
+    {% for post in user.posts %}
+      <li><a href="/posts/{{post.id}}">{{post.title}}</a></li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  <form action="/users/{{user.id}}/posts/new" method="GET">
+    <button class='btn btn-info mt-2'>Add</button>
+  </form>
+{% endblock%}
