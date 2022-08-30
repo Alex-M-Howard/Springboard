@@ -3,5 +3,25 @@
 {% block title %}Edit Tag{% endblock %}
 
 {% block content %}
+<h1 class="text-center">Edit Tag</h1>
 
+<form action="/tags/{{tag.id}}/edit" class="row g-3" method="post">
+ <div class="col-md-2"></div>
+  <div class="col-md-4">
+  <label for="name" class="form-label">Name</label>
+  <input type="text" name="name" class="form-control" value="{{tag.title}}">
+</div>
+
+
+
+<button id="Save" class="col-md-8 btn btn-primary my-2">Edit</button>
+<div class="col-md-2"></div>
+
+</form>
+
+<form action="/tags" method="get" class="row g-3">
+  <div class="col-md-2"></div>
+  <button class="col-md-8 btn btn-danger">Cancel</button>
+  <div class="col-md-2"></div>
+</form>
 {% endblock %}

@@ -3,5 +3,19 @@
 {% block title %}New Tag{% endblock %}
 
 {% block content %}
+<h1 class="text-center">Create a tag</h1>
+
+<form action="/tags/new" method="POST" class="row g-3">
+  <div class="col-md-2"></div>
+  <div class="col-md-4">
+  <label for="name" class="form-label">name</label>
+  <input type="text" name="name" class="form-control" placeholder="Enter a name" required>
+</div>
+
+
+<div class="col-md-2"></div>
+<button id="add-tag" class="col-md-8 btn btn-primary">Add</button>
+<div class="col-md-2"></div>
+</form>
 
 {% endblock %}
