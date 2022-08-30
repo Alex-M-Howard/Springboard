@@ -78,7 +78,7 @@ class Post(db.Model):
     db.session.commit()    
   
   
-class Tag(db.model):
+class Tag(db.Model):
   """Tag that will sort posts""" 
   
   __tablename__ = 'tags' 
@@ -106,7 +106,7 @@ class Tag(db.model):
     db.session.commit()
     
 
-class PostTags(db.model):
+class PostTags(db.Model):
   """Posts and their tags and Tags and their Posts"""
   
   post_id = db.Column(db.Integer, primary_key=True, ForeignKey=("posts.id"))

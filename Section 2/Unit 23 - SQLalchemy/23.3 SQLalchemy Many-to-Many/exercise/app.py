@@ -1,7 +1,7 @@
 """Blogly application."""
 
 from flask import Flask, redirect, request, flash, render_template, session
-from models import connect_db, db, User, Post
+from models import connect_db, db, User, Post, Tag, PostTags
 from blogly_seed import seed
 
 app = Flask(__name__)
@@ -124,7 +124,8 @@ def delete_post(post_id):
 @app.route("/tags")
 def list_tags():
   """List all tags with links to tag detail page"""
-  return render_template('tag_list.html')
+  tags = Tag.query.all()
+  return render_template('tag_list.html', tags=tags)
 
 @app.route("/tags/<int:tag_id>")
 def show_tag_detail(tag_id):
