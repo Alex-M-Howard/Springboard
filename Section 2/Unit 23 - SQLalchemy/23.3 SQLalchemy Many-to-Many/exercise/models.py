@@ -59,7 +59,7 @@ class Post(db.Model):
   user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete="CASCADE"))
   
   user = db.relationship('User', back_populates="posts")
-  tags = db.relationship("PostTags", back_populates="posts")
+  tags = db.relationship("PostTags")
   
   def add_post(self):
     """Add post to DB"""
@@ -86,7 +86,7 @@ class Tag(db.Model):
   id = db.Column(db.Integer, primary_key=True, autoincrement=True)
   name = db.Column(db.Text, nullable=False)
   
-  posts = db.relationship("PostTags", back_populates="tags")
+  posts = db.relationship("PostTags")
   
   
   def add_tag(self):
@@ -109,5 +109,5 @@ class Tag(db.Model):
 class PostTags(db.Model):
   """Posts and their tags and Tags and their Posts"""
   
-  post_id = db.Column(db.Integer, primary_key=True, ForeignKey=("posts.id"))
-  tag_id = db.Column(db.Integer, primary_key=True, ForeignKey=("tags.id"))
+  post_id = db.Column(db.Integer, db.ForeignKey("posts.id"),primary_key=True)
+  tag_id = db.Column(db.Integer, db.ForeignKey("tags.id"), primary_key=True)

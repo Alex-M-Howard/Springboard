@@ -130,7 +130,8 @@ def list_tags():
 @app.route("/tags/<int:tag_id>")
 def show_tag_detail(tag_id):
   """Show tag detail, have links to edit form and to delete"""
-  return render_template('tag.html')
+  tag = Tag.query.get(tag_id)
+  return render_template('tag.html', tag=tag)
 
 @app.route("/tags/new", methods=["POST", "GET"])
 def new_tag():
