@@ -120,3 +120,35 @@ def delete_post(post_id):
   flash("Post successfully deleted!", 'success')
   
   return redirect(f"/users/{post.user_id}")
+
+@app.route("/tags")
+def list_tags():
+  """List all tags with links to tag detail page"""
+  return render_template('tag_list.html')
+
+@app.route("/tags/<int:tag_id>")
+def show_tag_detail(tag_id):
+  """Show tag detail, have links to edit form and to delete"""
+  return render_template('tag.html')
+
+@app.route("/tags/new", methods=["POST", "GET"])
+def new_tag():
+  """Get new_tag form, else post tag data to database"""
+  if request.method=="GET": return render_template('new_tag.html')
+  else:
+    pass
+  
+@app.route("/tags/<int:tag_id>/edit", methods=["POST", "GET"])
+def edit_tag(tag_id):
+  """Get edit tag page, else post tag edits"""
+  if request.method=="GET": return render_template('edit_tag.html')
+  else:
+    pass
+  
+@app.route("/tags/<int:tag_id>/delete", methods=["POST"])
+def delete_tag(tag_id):
+  """Delete selected tag"""
+  pass
+    
+
+
