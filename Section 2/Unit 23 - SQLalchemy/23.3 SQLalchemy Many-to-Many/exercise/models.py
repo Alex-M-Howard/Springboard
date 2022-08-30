@@ -46,6 +46,7 @@ class User(db.Model):
     """Get all posts from the user"""
     return self.posts
     
+
 class Post(db.Model):
   """Posts that users can create for blog"""
   
@@ -58,6 +59,7 @@ class Post(db.Model):
   user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete="CASCADE"))
   
   user = db.relationship('User', back_populates="posts")
+  tags = db.relationship("PostTags", back_populates="posts")
   
   def add_post(self):
     """Add post to DB"""
@@ -76,4 +78,36 @@ class Post(db.Model):
     db.session.commit()    
   
   
+class Tag(db.model):
+  """Tag that will sort posts""" 
   
+  __tablename__ = 'tags' 
+  
+  id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+  name = db.Column(db.Text, nullable=False)
+  
+  posts = db.relationship("PostTags", back_populates="tags")
+  
+  
+  def add_tag(self):
+    """Add tag to DB"""
+    db.session.add(self)
+    db.session.commit()
+    
+  def edit_tag(self):
+    """Edit current tag"""
+    db.session.add(self)
+    db.session.commit()
+
+  @classmethod  
+  def delete_tag(cls, tag_id):
+    """Delete tag from DB"""
+    cls.query.filter_by(id=tag_id).delete()
+    db.session.commit()
+    
+
+class PostTags(db.model):
+  """Posts and their tags and Tags and their Posts"""
+  
+  post_id = db.Column(db.Integer, primary_key=True, ForeignKey=("posts.id"))
+  tag_id = db.Column(db.Integer, primary_key=True, ForeignKey=("tags.id"))
