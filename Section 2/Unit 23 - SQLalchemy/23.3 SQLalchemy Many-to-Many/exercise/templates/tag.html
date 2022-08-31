@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Tag Name{% endblock %}
+{% block title %}{{tag.name}}{% endblock %}
 
 {% block content %}
  <div class="row">
@@ -9,7 +9,7 @@
     <div class="col-md-4"></div>
   </div>
   
-  <h1 class="text-center">Tags</h1>
+  <h1 class="text-center">{{tag.name}}</h1>
 
 
   {% if tag.posts|length > 0 %}
@@ -31,5 +31,12 @@
     <button class="col-md-4 btn btn-danger">Delete</button>
     <div class="col-md-4"></div>
   </form>
+  <form action="/tags" method="GET" class="row g-3">
+    <div class="col-md-4"></div>
+    <button class="col-md-4 btn btn-info">Back to Tags</button>
+    <div class="col-md-4"></div>
+  </form>
+
+
 
 {% endblock %}
