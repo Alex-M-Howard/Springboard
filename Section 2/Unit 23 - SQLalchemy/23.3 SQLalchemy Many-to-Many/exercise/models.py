@@ -16,7 +16,7 @@ class User(db.Model):
   first_name = db.Column(db.String(25), nullable=False)
   last_name = db.Column(db.String(25), nullable=False)
   image_url = db.Column(db.String(300), default='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png')
-  posts = db.relationship('Post', back_populates="user", cascade="all, delete", passive_deletes=True)
+  posts = db.relationship('Post', cascade="all, delete", passive_deletes=True)
   
   def __repr__(self):
     """User description in console"""
@@ -59,7 +59,7 @@ class Post(db.Model):
   user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete="CASCADE"))
   
   user = db.relationship('User', back_populates="posts")
-  tags = db.relationship("PostTags")
+  tags = db.relationship("Tag", secondary='post_tags', backref='posts')
   
   def add_post(self):
     """Add post to DB"""
@@ -86,7 +86,6 @@ class Tag(db.Model):
   id = db.Column(db.Integer, primary_key=True, autoincrement=True)
   name = db.Column(db.Text, nullable=False)
   
-  posts = db.relationship("PostTags")
   
   
   def add_tag(self):
@@ -108,6 +107,8 @@ class Tag(db.Model):
 
 class PostTags(db.Model):
   """Posts and their tags and Tags and their Posts"""
+  
+  __tablename__ = 'post_tags'
   
   post_id = db.Column(db.Integer, db.ForeignKey("posts.id"),primary_key=True)
   tag_id = db.Column(db.Integer, db.ForeignKey("tags.id"), primary_key=True)
