@@ -80,11 +80,16 @@ def delete_user(id):
 def add_new_post(id):
   if request.method == "GET": 
     user = User.query.get_or_404(id)
-    return render_template("new_post.html", user=user)
+    tags = Tag.query.all()
+    return render_template("new_post.html", user=user, tags=tags)
   else:
     r = request.form
     title = r["title"]
     content = r["content"]
+    
+    for each in r:
+      print(type(each))
+    
 
     new_post = Post(title=title, content=content, user_id=id)
     new_post.add_post()
