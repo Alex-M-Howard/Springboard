@@ -7,6 +7,13 @@
   <p>{{post.content}}</p>
   <i>By {{post.user.get_full_name()}}</i>
 
+  <h3>TAGS</h3>
+  <ul>
+    {% for tag in post.tags %}
+      <li>{{tag.name}}</li>
+    {% endfor %}
+  </ul>
+  
   <form action="/users/{{post.user.id}}" method="get"><button class="btn btn-info">Cancel</button></form>
   <form action="/posts/{{post.id}}/edit" method="get"><button class="btn btn-info">Edit</button></form>
   <form action="/posts/{{post.id}}/delete" method="post"><button class="btn btn-danger">Delete</button></form>
