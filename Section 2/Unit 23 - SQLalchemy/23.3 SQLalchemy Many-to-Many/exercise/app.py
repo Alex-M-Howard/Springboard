@@ -85,14 +85,18 @@ def add_new_post(id):
   else:
     r = request.form
     title = r["title"]
-    content = r["content"]
-    
-    for each in r:
-      print(type(each))
+    content = r["content"]    
+    tags = r.getlist('tag')
+
     
 
     new_post = Post(title=title, content=content, user_id=id)
     new_post.add_post()
+    
+    if tags:
+      for each in tags:
+        new_post_tag = PostTags(post_id=new_post.id, tag_id=each)
+        new_post_tag.add()
     
     return redirect(f"/users/{id}")
   
@@ -107,14 +111,21 @@ def edit_post(post_id):
   """Show edit post page"""
   if request.method == "GET":
     post = Post.query.get_or_404(post_id)
-    return render_template("edit_post.html", post=post)
+    tags = Tag.query.all()
+    post_tags = PostTags.query.filter_by(post_id=post.id).all()
+    tag_ids = [post_tag.tag_id for post_tag in post_tags]
+    
+    return render_template("edit_post.html", post=post, tags=tags, tag_ids=tag_ids)
   else:
     r = request.form
     post = Post.query.get_or_404(post_id)
     post.title = r["title"] if r["title"] else post.title
     post.content = r["content"] if r["content"] else post.content
-
+    tags = r.getlist("tag")
+    post.tags = Tag.query.filter(Tag.id.in_(tags)).all()
+        
     post.edit_post()
+            
     return redirect(f"/posts/{post_id}")
      
 @app.route("/posts/<int:post_id>/delete", methods=["POST"])

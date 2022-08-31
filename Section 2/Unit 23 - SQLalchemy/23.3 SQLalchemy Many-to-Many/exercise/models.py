@@ -112,3 +112,8 @@ class PostTags(db.Model):
   
   post_id = db.Column(db.Integer, db.ForeignKey("posts.id", ondelete="CASCADE"),primary_key=True)
   tag_id = db.Column(db.Integer, db.ForeignKey("tags.id", ondelete="CASCADE"), primary_key=True)
+  
+  def add(self):
+    """Add post-tag combo to DB"""
+    db.session.add(self)
+    db.session.commit()
