@@ -9,7 +9,7 @@
  <div class="col-md-2"></div>
   <div class="col-md-4">
   <label for="name" class="form-label">Name</label>
-  <input type="text" name="name" class="form-control" value="{{tag.title}}">
+  <input type="text" name="name" class="form-control" value="{{tag.name}}">
 </div>
 
 
@@ -19,7 +19,7 @@
 
 </form>
 
-<form action="/tags" method="get" class="row g-3">
+<form action="/tags/{{tag.id}}" method="get" class="row g-3">
   <div class="col-md-2"></div>
   <button class="col-md-8 btn btn-danger">Cancel</button>
   <div class="col-md-2"></div>
