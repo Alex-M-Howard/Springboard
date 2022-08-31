@@ -138,7 +138,12 @@ def new_tag():
   """Get new_tag form, else post tag data to database"""
   if request.method=="GET": return render_template('new_tag.html')
   else:
-    pass
+    r = request.form
+    tag = Tag(name=r["name"])
+    tag.add_tag()
+    
+    flash(f"{tag.name} tag added")
+    return redirect("/tags")
   
 @app.route("/tags/<int:tag_id>/edit", methods=["POST", "GET"])
 def edit_tag(tag_id):
