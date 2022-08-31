@@ -124,7 +124,7 @@ def delete_post(post_id):
 @app.route("/tags")
 def list_tags():
   """List all tags with links to tag detail page"""
-  tags = Tag.query.all()
+  tags = Tag.query.order_by('name').all()
   return render_template('tag_list.html', tags=tags)
 
 @app.route("/tags/<int:tag_id>")
@@ -143,14 +143,25 @@ def new_tag():
 @app.route("/tags/<int:tag_id>/edit", methods=["POST", "GET"])
 def edit_tag(tag_id):
   """Get edit tag page, else post tag edits"""
-  if request.method=="GET": return render_template('edit_tag.html')
+  if request.method=="GET": 
+    tag = Tag.query.get_or_404(tag_id)
+    return render_template('edit_tag.html', tag=tag)
   else:
-    pass
+    r = request.form
+    tag = Tag.query.get_or_404(tag_id)
+    tag.name = r["name"]
+    
+    tag.edit_tag()
+    return redirect(f"/tags/{tag_id}")
   
 @app.route("/tags/<int:tag_id>/delete", methods=["POST"])
 def delete_tag(tag_id):
   """Delete selected tag"""
-  pass
+  tag = Tag.query.get_or_404(tag_id)
+  Tag.delete_tag(tag_id)
+  flash("Tag successfully deleted")
+  
+  return redirect("/tags")
     
 
 
