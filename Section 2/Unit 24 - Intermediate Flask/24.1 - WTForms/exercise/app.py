@@ -37,7 +37,7 @@ def add_pet():
       photo_url = form.photo_url.data if form.photo_url.data else None
       age = form.age.data
       notes = form.notes.data
-      flash(f"{name} added!")
+      flash(f"{name} added!", 'success')
       Pet(name=name, species=species, photo_url=photo_url, age=age, notes=notes).add_pet()
       
       return redirect("/")
@@ -58,7 +58,7 @@ def pet_profile(pet_id):
         pet.notes = form.notes.data if form.notes.data else pet.notes
         pet.available = form.available.data if form.available.data else pet.available    
         pet.edit_pet()
-        
+        flash(f"{pet.name} successfully changed!", 'success')
         return redirect(f"/{pet_id}")
     else:
         form.photo_url.data = pet.photo_url
