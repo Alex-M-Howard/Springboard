@@ -10,20 +10,18 @@
 <div>
 {%for pet in pets%}
     <img src="{{pet.photo_url}}" alt="{{pet.photo_url}} profile picture">
-    <h1>{{pet.name}}</h1>
-    <ul>
+    
         {%if pet.available == True%}
-        <b>AVAILABLE</b>
+        <h3>{{pet.name}}</h3> is <b>available</b>!
+        {%else%}
+        <h3>{{pet.name}}</h3>
         {%endif%}
-        <li>Species: {{pet.species}}</li>
-        <li>Age: {{pet.age}}</li>
-        <li>Notes: {{pet.notes}}</li>
         
-    </ul>
     <br>
     <br>
     <br>
 {%endfor%}
 </div>
+<a href="/add">Add</a>
 
 {%endblock%}

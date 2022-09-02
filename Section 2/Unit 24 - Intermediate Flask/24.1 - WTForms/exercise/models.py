@@ -1,5 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 
+
+allowed_pets = ['CAT', 'DOG', 'PORCUPINE']
 db = SQLAlchemy()
 
 def connect_db(app):
@@ -21,6 +23,11 @@ class Pet(db.Model):
     available = db.Column(db.Boolean, nullable=False, default=True)
     
     def add_pet(self):
-        """Commit Pet to DB"""
+        """Add & Commit Pet to DB"""
+        db.session.add(self)
+        db.session.commit()
+    
+    def edit_pet(self):
+        """Edit & Commit Pet to DB"""
         db.session.add(self)
         db.session.commit()

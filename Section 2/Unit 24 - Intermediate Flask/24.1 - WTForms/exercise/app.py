@@ -2,7 +2,7 @@ from flask import Flask, request, session, flash, render_template, redirect
 from flask_debugtoolbar import DebugToolbarExtension
 from models import connect_db, db, Pet
 from seed import seed
-from forms import AddPetForm
+from forms import AddPetForm, EditPetForm
 
 app = Flask(__name__)
 
@@ -46,4 +46,17 @@ def add_pet():
       return render_template("add_pet_form.html", form=form)
     
 
-
+@app.route("/<int:pet_id>", methods=["GET", "POST"])
+def pet_profile(pet_id):
+    """Display pet info, edit pet info"""
+    pet = Pet.query.get(pet_id)
+    form = EditPetForm()
+    
+    if form.validate_on_submit():
+        pet.photo_url = form.photo_url.data if form.photo_url.data else pet.photo_url
+        pet.notes = form.notes.data if form.notes.data else pet.notes
+        pet.available = form.available.data if form.available.data else pet.available    
+        pet.edit_pet()
+        
+    else:
+        return render_template("pet_profile.html")
