@@ -19,3 +19,8 @@ class Pet(db.Model):
     age = db.Column(db.Integer, nullable=True)
     notes = db.Column(db.Text, nullable=True)
     available = db.Column(db.Boolean, nullable=False, default=True)
+    
+    def add_pet(self):
+        """Commit Pet to DB"""
+        db.session.add(self)
+        db.session.commit()
