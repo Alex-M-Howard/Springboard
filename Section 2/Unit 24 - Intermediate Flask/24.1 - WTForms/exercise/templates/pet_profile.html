@@ -2,6 +2,9 @@
 {%block title%}{{pet.name}}{%endblock%}
 {%block content%}
 <h1>{{pet.name}}</h1>
+<h3>Species:</h3> {{pet.species}}
+<h3>Age:</h3> {{pet.age}}
+
 <form id="pet-add-form" method="POST">
   {{ form.hidden_tag() }} <!--add type=hidden form fields -->
 
