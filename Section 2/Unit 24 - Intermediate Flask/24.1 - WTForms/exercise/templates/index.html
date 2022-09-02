@@ -1,0 +1,27 @@
+{%extends 'base.html'%}
+
+{%block title%}Welcome to our Agency!{%endblock%}
+
+{%block content%}
+<h1>Pets looking for a new home</h1>
+
+<div>
+{%for pet in pets%}
+    <img src="{{pet.photo_url}}" alt="{{pet.photo_url}} profile picture">
+    <h1>{{pet.name}}</h1>
+    <ul>
+        {%if pets.available == True%}
+        <b>AVAILABLE</b>
+        {%endif%}
+        <li>Species: {{pet.species}}</li>
+        <li>Age: {{pet.age}}</li>
+        <li>Notes: {{pet.notes}}</li>
+        
+    </ul>
+    <br>
+    <br>
+    <br>
+{%endfor%}
+</div>
+
+{%endblock%}
