@@ -4,9 +4,7 @@
 {% block content %}
   <h1>Add/Edit Pet Info</h1>
 
-  {% for category, msg in get_flashed_messages(with_categories=true) %}
-    <div class={{category}}>{{ msg }}</div>
-  {% endfor %}
+ 
 
   <form id="pett-add-form" method="POST">
   {{ form.hidden_tag() }} <!--add type=hidden form fields -->
