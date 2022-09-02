@@ -4,13 +4,15 @@
 
 {%block content%}
 <h1>Pets looking for a new home</h1>
-
+ {% for category, msg in get_flashed_messages(with_categories=true) %}
+    <div class={{category}}>{{ msg }}</div>
+  {% endfor %}
 <div>
 {%for pet in pets%}
     <img src="{{pet.photo_url}}" alt="{{pet.photo_url}} profile picture">
     <h1>{{pet.name}}</h1>
     <ul>
-        {%if pets.available == True%}
+        {%if pet.available == True%}
         <b>AVAILABLE</b>
         {%endif%}
         <li>Species: {{pet.species}}</li>
