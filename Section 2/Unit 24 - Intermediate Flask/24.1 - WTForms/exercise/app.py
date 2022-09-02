@@ -21,7 +21,7 @@ seed(db)
 @app.route('/')
 def home():
     """Home page - Lists Pets"""
-    pets = Pet.query.all()
+    pets = Pet.query.order_by('name').all()
         
     return render_template('index.html', pets=pets)
 
@@ -51,6 +51,7 @@ def pet_profile(pet_id):
     """Display pet info, edit pet info"""
     pet = Pet.query.get(pet_id)
     form = EditPetForm()
+
     
     if form.validate_on_submit():
         pet.photo_url = form.photo_url.data if form.photo_url.data else pet.photo_url
@@ -58,5 +59,9 @@ def pet_profile(pet_id):
         pet.available = form.available.data if form.available.data else pet.available    
         pet.edit_pet()
         
+        return redirect(f"/{pet_id}")
     else:
-        return render_template("pet_profile.html")
+        form.photo_url.data = pet.photo_url
+        form.notes.data = pet.notes
+        form.available.data = pet.available
+        return render_template("pet_profile.html", pet=pet, form=form)

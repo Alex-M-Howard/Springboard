@@ -12,9 +12,9 @@
     <img src="{{pet.photo_url}}" alt="{{pet.photo_url}} profile picture">
     
         {%if pet.available == True%}
-        <h3>{{pet.name}}</h3> is <b>available</b>!
+        <a href="/{{pet.id}}"><h3>{{pet.name}}</h3></a> is <b>available</b>!
         {%else%}
-        <h3>{{pet.name}}</h3>
+        <a href="/{{pet.id}}"><h3>{{pet.name}}</h3></a>
         {%endif%}
         
     <br>

@@ -1,12 +1,8 @@
-{% extends 'base.html' %}
-
-{% block title %}Add Pet{% endblock %}
-{% block content %}
-  <h1>Add/Edit Pet Info</h1>
-
- 
-
-  <form id="pet-add-form" method="POST">
+{%extends 'base.html'%}
+{%block title%}{{pet.name}}{%endblock%}
+{%block content%}
+<h1>{{pet.name}}</h1>
+<form id="pet-add-form" method="POST">
   {{ form.hidden_tag() }} <!--add type=hidden form fields -->
 
   {% for field in form
@@ -23,13 +19,7 @@
 
   {% endfor %}
 
-  <button type="submit">Submit</button>
+  <button type="submit">Edit</button>
 </form>
-
-
-
-
-
-
-
-{% endblock %}
+<a href="/">All Pets</a>
+{%endblock%}
