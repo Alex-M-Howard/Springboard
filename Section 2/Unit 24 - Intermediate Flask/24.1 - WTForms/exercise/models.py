@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 
-
+GENERIC_IMAGE = "https://mylostpetalert.com/wp-content/themes/mlpa-child/images/nophoto.gif"
 allowed_pets = ['CAT', 'DOG', 'PORCUPINE']
 db = SQLAlchemy()
 
@@ -17,7 +17,7 @@ class Pet(db.Model):
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     name = db.Column(db.Text, nullable=False)
     species = db.Column(db.Text, nullable=False)
-    photo_url = db.Column(db.Text, nullable=True, default='https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/9ddb0896352685.5eac4787a818f.jpg')
+    photo_url = db.Column(db.Text, nullable=True)
     age = db.Column(db.Integer, nullable=True)
     notes = db.Column(db.Text, nullable=True)
     available = db.Column(db.Boolean, nullable=False, default=True)
@@ -31,3 +31,7 @@ class Pet(db.Model):
         """Edit & Commit Pet to DB"""
         db.session.add(self)
         db.session.commit()
+        
+    def image_url(self):
+        """Return image for pet or else generic"""
+        return self.photo_url or GENERIC_IMAGE

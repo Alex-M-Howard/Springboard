@@ -9,17 +9,17 @@
   {% endfor %}
 <div>
 {%for pet in pets%}
-    <img src="{{pet.photo_url}}" alt="{{pet.photo_url}} profile picture">
+    <img src="{{pet.image_url()}}" alt="URL for {{pet.name}} profile picture">
     
         {%if pet.available == True%}
         <a href="/{{pet.id}}"><h3>{{pet.name}}</h3></a> is <b>available</b>!
         {%else%}
         <a href="/{{pet.id}}"><h3>{{pet.name}}</h3></a>
         {%endif%}
-        
-    <br>
-    <br>
-    <br>
+
+        {%else%}
+        <div>No pets yet...</div>
+
 {%endfor%}
 </div>
 <a href="/add">Add</a>

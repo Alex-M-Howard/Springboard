@@ -1,6 +1,7 @@
 {%extends 'base.html'%}
 {%block title%}{{pet.name}}{%endblock%}
 {%block content%}
+<img src="{{pet.image_url()}}" alt="URL for {{pet.name}}">
 <h1>{{pet.name}}</h1>
 <h3>Species:</h3> {{pet.species}}
 <h3>Age:</h3> {{pet.age}}
