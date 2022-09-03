@@ -30,15 +30,12 @@ def home():
 def add_pet():
     """Show add pet form; Add pet to DB"""
     form = AddPetForm()
-  
+    form.__dict__["_fields"]
     if form.validate_on_submit():
-      name = form.name.data
-      species = form.species.data
-      photo_url = form.photo_url.data if form.photo_url.data else None
-      age = form.age.data
-      notes = form.notes.data
-      flash(f"{name} added!", 'success')
-      Pet(name=name, species=species, photo_url=photo_url, age=age, notes=notes).add_pet()
+      data = {field: value for field, value in form.data.items() if field != "csrf_token"}
+      new_pet = Pet(**data)
+      new_pet.add_pet()
+      flash(f"{new_pet.name} added!", 'success')
       
       return redirect("/")
   
