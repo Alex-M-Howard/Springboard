@@ -9,13 +9,20 @@
   {% endfor %}
 <div>
 {%for pet in pets%}
-    <img src="{{pet.image_url()}}" alt="URL for {{pet.name}} profile picture">
-    
-        {%if pet.available == True%}
-        <a href="/{{pet.id}}"><h3>{{pet.name}}</h3></a> is <b>available</b>!
-        {%else%}
-        <a href="/{{pet.id}}"><h3>{{pet.name}}</h3></a>
-        {%endif%}
+<div class="grid-container">
+  <div class="grid-x grid-margin-x small-up-2 medium-up-3">
+    <div class="card" style="width: 300px">
+        <img src="{{pet.image_url()}}" alt="URL for {{pet.name}} profile picture">
+        <div class="card-section">
+            {%if pet.available == True%}
+            <a href="/{{pet.id}}"><h3>{{pet.name}}</h3></a> <b>AVAILABLE</b>
+            {%else%}
+            <a href="/{{pet.id}}"><h3>{{pet.name}}</h3></a>
+            {%endif%}
+        </div>
+    </div>
+  </div>
+</div>
 
         {%else%}
         <div>No pets yet...</div>
