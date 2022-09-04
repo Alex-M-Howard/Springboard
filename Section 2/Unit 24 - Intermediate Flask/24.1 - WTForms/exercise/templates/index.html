@@ -3,32 +3,41 @@
 {%block title%}Welcome to our Agency!{%endblock%}
 
 {%block content%}
-<h1>Pets looking for a new home</h1>
- {% for category, msg in get_flashed_messages(with_categories=true) %}
-    <div class={{category}}>{{ msg }}</div>
+<h1 class="text-center">Pets looking for a new home</h1>
+<div class="grid-x grid-padding-x align-center">
+  {% for category, msg in get_flashed_messages(with_categories=true) %}
+    <div class="label {{category}} text-center"><h4>{{ msg }}</h4></div>
   {% endfor %}
-<div>
-{%for pet in pets%}
+</div>
+
 <div class="grid-container">
   <div class="grid-x grid-margin-x small-up-2 medium-up-3">
-    <div class="card" style="width: 300px">
+    
+  {%for pet in pets%}
+  <div class="cell small-4">
+    <div class="card">
         <img src="{{pet.image_url()}}" alt="URL for {{pet.name}} profile picture">
-        <div class="card-section">
+        <div class="card-section text-center">
             {%if pet.available == True%}
-            <a href="/{{pet.id}}"><h3>{{pet.name}}</h3></a> <b>AVAILABLE</b>
+            <a href="/{{pet.id}}"><h3>{{pet.name}}</h3></a>
+            <br> 
+            <b>AVAILABLE</b>
             {%else%}
             <a href="/{{pet.id}}"><h3>{{pet.name}}</h3></a>
             {%endif%}
         </div>
-    </div>
+     </div>
   </div>
-</div>
-
         {%else%}
         <div>No pets yet...</div>
 
 {%endfor%}
+
+  </div>
 </div>
-<a href="/add">Add</a>
+
+<div class="grid-x grid-padding-x align-center">
+<a class="button large" href="/add">Add New Pet</a>
+</div>
 
 {%endblock%}

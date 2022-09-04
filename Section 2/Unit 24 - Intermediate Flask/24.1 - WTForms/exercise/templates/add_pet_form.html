@@ -2,11 +2,13 @@
 
 {% block title %}Add Pet{% endblock %}
 {% block content %}
-  <h1>Add/Edit Pet Info</h1>
+  <h1 class="text-center">Add/Edit Pet Info</h1>
 
- 
-
-  <form id="pet-add-form" method="POST">
+ <div class="grid-container">
+  <div class="grid-x grid-margin-x">
+    <div class="cell small-4"></div>
+    <div class="cell small-4">
+      <form id="pet-add-form" method="POST">
   {{ form.hidden_tag() }} <!--add type=hidden form fields -->
 
   {% for field in form
@@ -22,14 +24,15 @@
     </p>
 
   {% endfor %}
-
-  <button type="submit">Submit</button>
+<div class="grid-x grid-margin-x align-center">
+  <button class="submit success button" type="submit">Submit</button>
+</div>      
 </form>
-
-
-
-
-
+    </div>
+    <div class="cell small-4"></div>
+  </div>
+ </div>
+  
 
 
 {% endblock %}

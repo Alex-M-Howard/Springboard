@@ -1,6 +1,18 @@
-img{
-    width: 10vw;
-}
+
 h3{
     display:inline-block;
+}
+
+img{
+    width: 100%;
+    height: auto;
+}
+
+button, .button{
+    width: 20%;
+    border-radius: 10px;
+}
+
+.label{
+    border-radius: 5px;
 }
