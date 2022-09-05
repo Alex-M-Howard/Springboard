@@ -1,3 +1,4 @@
+import json
 from flask import Flask, request, session, flash, render_template, redirect, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from models import connect_db, db, Cupcake
@@ -49,3 +50,22 @@ def show_single_cupcake(cupcake_id):
     
     return jsonify(cupcake=cupcake.serialize())
     
+@app.route('/api/cupcakes/<int:cupcake_id>', methods=['PATCH'])
+def update_cupcake(cupcake_id):
+    """ -> JSON {cupcake: {id, flavor, size, rating, image}"""
+    cupcake = Cupcake.query.get_or_404(cupcake_id)
+    cupcake.flavor = request.json.get('flavor', cupcake.flavor)
+    cupcake.size = request.json.get('size', cupcake.size)
+    cupcake.rating = request.json.get('rating', cupcake.rating)
+    cupcake.image = request.json.get('image', cupcake.image)
+    
+    cupcake.update()
+    return jsonify(cupcake=cupcake.serialize())
+
+@app.route('/api/cupcakes/<int:cupcake_id>', methods=['DELETE'])
+def delete_cupcake(cupcake_id):
+    """ -> JSON {message: "Deleted"}"""
+    cupcake = Cupcake.query.get_or_404(cupcake_id)
+    cupcake.delete()
+    
+    return jsonify({"message": "Deleted"})
