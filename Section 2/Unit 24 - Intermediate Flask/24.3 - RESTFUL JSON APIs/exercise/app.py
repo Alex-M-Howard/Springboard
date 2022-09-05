@@ -21,6 +21,11 @@ db.create_all()
 
 #seed(db)
 
+@app.route('/')
+def index():
+    """Page with cupcakes/Form to add new"""
+    cupcakes = Cupcake.query.all()
+    return render_template('index.html', cupcakes=cupcakes)
 
 @app.route('/api/cupcakes')
 def list_all_cupcakes():

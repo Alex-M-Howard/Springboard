@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Cupcake API</title>
+</head>
+<body>
+    <h1>Cupcakes</h1>
+    <ul id="cupcake-list"></ul>
+
+    <form>
+        <label for="flavor">Flavor</label>
+        <input type="text" id="flavor" required>
+        <br>
+        <label for="size">Size</label>
+        <input type="text" id="size" required>
+        <br>
+        <label for="rating">Rating</label>
+        <input type="text" id="rating" required>
+        <br>
+        <label for="image">Image URL</label>
+        <input type="text" id="image">
+        <br>
+        <button id='add-button'>Add New Cupcake</button>
+    </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"
+    integrity="sha256-T/f7Sju1ZfNNfBh7skWn0idlCBcI3RwdLSS4/I7NQKQ=" crossorigin="anonymous"></script>
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+    <script src="../static/app.js"></script>
+</body>
+</html>
