@@ -79,7 +79,7 @@ class CupcakeViewsTestCase(TestCase):
                     "id": self.cupcake.id,
                     "flavor": "TestFlavor",
                     "size": "TestSize",
-                    "rating": 5,
+                    "rating": 5.0,
                     "image": "http://test.com/cupcake.jpg"
                 }
             })
