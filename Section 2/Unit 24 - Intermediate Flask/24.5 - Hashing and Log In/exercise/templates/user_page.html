@@ -7,7 +7,7 @@
 </div>
 
 
-  <h1>Secret secrets are no fun. Secret secrets, hurt someone</h1>
+  <h3>{{user.username}} Profile</h3>
 {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
     <ul class='flashes grid-x grid-padding-x align-center'>
@@ -17,4 +17,11 @@
     </ul>
   {% endif %}
 {% endwith %}
+
+<h4>{{user.email}}</h4>
+<h4>{{user.first_name}}</h4>
+<h4>{{user.last_name}}</h4>
+
+
+
   {% endblock %}

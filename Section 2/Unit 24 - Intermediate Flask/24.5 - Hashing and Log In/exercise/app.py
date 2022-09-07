@@ -19,7 +19,7 @@ toolbar = DebugToolbarExtension(app)
 @app.route('/')
 def home_page():
     if 'user_id' in session:
-        return redirect('/secret')
+        return redirect(f'/users/{session["user_id"]}')
     else:
         return redirect('/login')
 
@@ -40,7 +40,7 @@ def show_registration():
         if user_added:
             session['user_id'] = new_user.id
             flash('Thanks for signing up!', "label success")
-            return redirect('/secret')
+            return redirect(f'/users/{session["user_id"]}')
     
     return render_template('register.html', form=form)
             
@@ -58,18 +58,20 @@ def show_login():
         if user:
             session['user_id'] = user.id
             flash('Successfully logged in!', "label success")
-            return redirect('/secret')
+            return redirect(f'/users/{session["user_id"]}')
         else:
             flash('Username/Password Incorrect', "label alert")
     
     return render_template('login.html', form=form)
 
 
-@app.route('/secret')
-def show_secrets():
+@app.route('/users/<int:user_id>')
+def show_user_profile(user_id):
     if 'user_id' in session:
+        if user_id != session['user_id']:
+            return redirect(f"/users/{session['user_id']}")
         user = User.query.get(session['user_id'])
-        return render_template('secret.html', user=user)
+        return render_template('user_page.html', user=user)
     else:
         flash('Must be logged in', 'label alert')
         return redirect('/login')
