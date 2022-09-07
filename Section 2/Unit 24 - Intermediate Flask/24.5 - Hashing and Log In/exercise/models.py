@@ -59,10 +59,10 @@ class User(db.Model):
             form.username.errors.append('Username already taken')
             status = False
         except DataError:
-            form.username.errors.append('Too many characters')
-            form.email.errors.append('Too many characters')
-            form.first_name.errors.append('Too many characters')
-            form.last_name.errors.append('Too many characters')
+            if len(form.username.data) > 20: form.username.errors.append('Max Character Limit of 20')
+            if len(form.email.data) > 50: form.email.errors.append('Max Character Limit of 50')
+            if len(form.first_name.data) > 30: form.first_name.errors.append('Max Character Limit of 30')
+            if len(form.last_name.data) > 30: form.last_name.errors.append('Max Character Limit of 30')
             status = False
         finally:
-            return form, False
+            return form, status
