@@ -16,7 +16,12 @@
 
     <p>
       {{ field.label }}
-      {{ field }}
+      {% if field.name == 'username' %}{{ field(maxlength=20) }}{% endif %}
+      {% if field.name == 'email' %}{{ field(maxlength=50) }}{% endif %}
+      {% if field.name == 'first_name' %}{{ field(maxlength=30) }}{% endif %}
+      {% if field.name == 'last_name' %}{{ field(maxlength=30) }}{% endif %}
+      {% if field.name == 'password' %}{{ field }}{% endif %}
+      
 
       {% for error in field.errors %}
         {{ error }}
