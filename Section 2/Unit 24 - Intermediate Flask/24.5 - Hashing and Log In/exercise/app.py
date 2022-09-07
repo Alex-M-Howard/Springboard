@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, session, flash
 from flask_debugtoolbar import DebugToolbarExtension
 from models import connect_db, db, User
-from forms import AddUserForm
+from forms import AddUserForm, UserLoginForm
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql:///auth"
@@ -18,11 +18,16 @@ toolbar = DebugToolbarExtension(app)
 
 @app.route('/')
 def home_page():
-    return redirect('/register')
+    if 'user_id' in session:
+        return redirect('/secret')
+    else:
+        return redirect('/login')
 
 @app.route('/register', methods=["GET", "POST"])
 def show_registration():
     """Show registration form/Add User"""
+    if 'user_id' in session:
+        return redirect('/')
     form = AddUserForm()
  
     if form.validate_on_submit():
@@ -34,23 +39,43 @@ def show_registration():
         
         if user_added:
             session['user_id'] = new_user.id
-            flash('Thanks for signing up!', "success")
-            return redirect('/secrets')
+            flash('Thanks for signing up!', "label success")
+            return redirect('/secret')
     
     return render_template('register.html', form=form)
             
         
-@app.route('/login')
+@app.route('/login', methods=["GET", "POST"])
 def show_login():
-    pass
+    """Show Login/Login user"""
+    if 'user_id' in session:
+        return redirect('/')
+    
+    form = UserLoginForm()
+    
+    if form.validate_on_submit():
+        user = User.authenticate(form.username.data, form.password.data)
+        if user:
+            session['user_id'] = user.id
+            flash('Successfully logged in!', "label success")
+            return redirect('/secret')
+        else:
+            flash('Username/Password Incorrect', "label alert")
+    
+    return render_template('login.html', form=form)
 
-@app.route('/login', methods=["POST"])
-def login_user():
-    pass
 
 @app.route('/secret')
 def show_secrets():
-    pass
+    if 'user_id' in session:
+        user = User.query.get(session['user_id'])
+        return render_template('secret.html', user=user)
+    else:
+        flash('Must be logged in', 'label alert')
+        return redirect('/login')
 
-
-
+@app.route('/sign-out')
+def sign_out():
+    if 'user_id' in session:
+        session.pop('user_id')
+    return redirect('/')
