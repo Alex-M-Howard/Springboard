@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+ <ul class="menu align-right">
+  <li><a href="/register">Register</a></li>
+</ul>
+  <h1 class="text-center">Login</h1>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class='flashes grid-x grid-padding-x align-center'>
+    {% for category, message in messages %}
+    
+      <div class="{{category}}">{{ message }}</div>
+    
+      {% endfor %}
+    </div>
+  {% endif %}
+  {% endwith %}
+
+ <div class="grid-container">
+  <div class="grid-x grid-margin-x align-center">
+ 
+      <form id="login-form" method="POST">
+  {{ form.hidden_tag() }} 
+
+  {% for field in form
+         if field.widget.input_type != 'hidden' %}
+
+    <div>
+      {{ field.label }}
+      {{ field }}
+      
+
+      {% for error in field.errors %}
+        {{ error }}
+      {% endfor %}
+    </div>
+
+  {% endfor %}
+<div class="grid-x grid-margin-x align-center">
+  <button class="submit success button" type="submit">Login</button>
+</div>      
+</form>
+
+  </div>
+ </div>
+  
+{% endblock %}
