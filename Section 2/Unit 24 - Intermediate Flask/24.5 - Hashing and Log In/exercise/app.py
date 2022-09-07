@@ -1,7 +1,6 @@
 from flask import Flask, render_template, redirect, session, flash
 from flask_debugtoolbar import DebugToolbarExtension
 from models import connect_db, db, User
-from sqlalchemy.exc import IntegrityError
 from forms import AddUserForm
 
 app = Flask(__name__)
@@ -23,27 +22,22 @@ def home_page():
 
 @app.route('/register', methods=["GET", "POST"])
 def show_registration():
-    """Show registration form"""
+    """Show registration form/Add User"""
     form = AddUserForm()
  
     if form.validate_on_submit():
-        username = form.username.data
-        password = form.password.data
-        
-        new_user = User.register(username, password)
+        new_user = User.register(form.username.data, form.password.data)
         new_user.email = form.email.data
         new_user.first_name = form.first_name.data
         new_user.last_name = form.last_name.data
-        form, response = new_user.add_new_user(form)
+        form, user_added = new_user.add_new_user(form)
         
-        if response:
+        if user_added:
             session['user_id'] = new_user.id
             flash('Thanks for signing up!', "success")
             return redirect('/secrets')
-        else:
-            return render_template('register.html', form=form)
-    else:
-        return render_template('register.html', form=form)
+    
+    return render_template('register.html', form=form)
             
         
 @app.route('/login')
