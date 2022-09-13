@@ -541,3 +541,10 @@ p.card-bio {
 .message-404 .form-inline input {
   flex: 1;
 }
+
+#header-image{
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  height: 400px;
+}
