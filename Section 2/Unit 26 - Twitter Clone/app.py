@@ -220,11 +220,17 @@ def profile():
 
     user = User.query.get_or_404(g.user.id)
     form = EditForm(obj=user)
-    
+    ########### VERIFY THAT PASSWORD IS STORED CORRECTLY TO BEGIN WITH ##############
     if form.validate_on_submit():        
+        print('*******************')
+        print(user.username, user.password)
+        print(form.username.data, form.password.data)
+        print('*******************')
+        
         user = User.authenticate(user.username,
                                  form.password.data)
 
+        
         if user:
             form.populate_obj(user)
             db.session.add(user)
