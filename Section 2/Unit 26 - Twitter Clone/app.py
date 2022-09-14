@@ -218,31 +218,27 @@ def profile():
         flash("Access unauthorized.", "danger")
         return redirect("/")
 
-    user = User.query.get_or_404(g.user.id)
-    form = EditForm(obj=user)
-    ########### VERIFY THAT PASSWORD IS STORED CORRECTLY TO BEGIN WITH ##############
-    if form.validate_on_submit():        
-        print('*******************')
-        print(user.username, user.password)
-        print(form.username.data, form.password.data)
-        print('*******************')
-        
-        user = User.authenticate(user.username,
-                                 form.password.data)
+    form = EditForm(obj=g.user)
 
+    if form.validate_on_submit():        
+        user = User.authenticate(g.user.username,
+                                 form.password.data)
         
         if user:
-            form.populate_obj(user)
+            password = g.user.password
+            form.populate_obj(user)            
+            user.password = password            
+        
             db.session.add(user)
             db.session.commit()
             flash("Changes Confirmed!", 'success')
             return redirect(f'/users/{user.id}')
+        
         else:
             flash("Invalid credentials.", 'danger')
             return redirect('/users/profile')
-        
-        
-    return render_template('users/edit.html', user=user, form=form)
+    
+    return render_template('users/edit.html', user=g.user, form=form)
 
 @app.route('/users/delete', methods=["POST"])
 def delete_user():
