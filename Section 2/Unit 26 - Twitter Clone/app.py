@@ -322,10 +322,11 @@ def homepage():
                    .query
                    .filter_by(user_following_id=g.user.id)
                    .all())        
+        follows = [id for id in follows.user_following_id]
         
         messages = (Message
                     .query
-                    
+                    .filter(user_id = g.user.id | user_id.in_(follows)
                     .order_by(Message.timestamp.desc())
                     .limit(100)
                     .all())
