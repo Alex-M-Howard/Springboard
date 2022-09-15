@@ -305,6 +305,22 @@ def messages_destroy(message_id):
     return redirect(f"/users/{g.user.id}")
 
 
+@app.route('/users/add_like/<int:message_id>', methods=["POST"])
+def like_unlike_message(message_id):
+    """ Allow user to like or unlike a message in their feed """
+    
+    if not g.user:
+        flash("Access unathorized.", "danger")
+        return redirect("/")
+    
+    msg = Message.query.get_or_404(message_id)
+    
+    if msg in g.user.likes: g.user.likes.remove(msg)
+    else: g.user.likes.append(msg)    
+        
+    db.session.commit()
+    
+    return redirect("/")
 ##############################################################################
 # Homepage and error pages
 
