@@ -3,7 +3,7 @@
 {% block user_details %}
   <div class="col-sm-9">
     <div class="row">
-
+      {% if user.followers | length > 0 %}
       {% for follower in user.followers %}
 
         <div class="col-lg-4 col-md-6 col-12">
@@ -41,6 +41,9 @@
 
       {% endfor %}
 
+      {% else %}
+        <h3 class="text-center">No followers yet!</h3>
+      {% endif %}
     </div>
   </div>
 

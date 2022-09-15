@@ -2,7 +2,7 @@
 {% block user_details %}
   <div class="col-sm-9">
     <div class="row">
-
+      {% if user.following | length > 0 %}
       {% for followed_user in user.following %}
 
         <div class="col-lg-4 col-md-6 col-12">
@@ -38,7 +38,9 @@
         </div>
 
       {% endfor %}
-
+      {% else %}
+      <h3 class="text-center">No followed users!</h3>
+      {% endif %}
     </div>
   </div>
 {% endblock %}
