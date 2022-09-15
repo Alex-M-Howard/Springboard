@@ -321,6 +321,16 @@ def like_unlike_message(message_id):
     db.session.commit()
     
     return redirect("/")
+    
+@app.route('/users/<int:user_id>/likes', methods=["GET"])
+def show_liked_messages(user_id):
+    """ Show posts users have liked """
+    
+    user = User.query.get_or_404(user_id)
+    
+    return render_template("users/likes.html", user=user)
+    
+
 ##############################################################################
 # Homepage and error pages
 
