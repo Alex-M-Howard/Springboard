@@ -40,7 +40,7 @@ class UserViewTestCase(TestCase):
         """Create test client, add sample data."""
 
         User.query.delete()
-        Message.query.delete()
+        Follows.query.delete()
 
         self.client = app.test_client()
 
@@ -73,7 +73,6 @@ class UserViewTestCase(TestCase):
 
             self.assertEqual(response.status_code, 200)
             self.assertIn('<p>@testuser2</p>', str(response.data, 'UTF-8'))
-           
 
     def test_users_show(self):
         """Can we see user's profile?"""
@@ -86,9 +85,7 @@ class UserViewTestCase(TestCase):
 
             self.assertEqual(response.status_code, 200)
             self.assertIn('id="header-image"', str(response.data, 'UTF-8'))
-            
-        
-             
+                   
     def test_show_following(self):
         """ Can we see who user is following? """
         
@@ -104,6 +101,7 @@ class UserViewTestCase(TestCase):
             
             
             # Add person to follow
+
             user = User.query.get(self.testuser.id)
             user.following.append(self.testuser2)
             
@@ -113,55 +111,41 @@ class UserViewTestCase(TestCase):
             
             self.assertEqual(response.status_code, 200)
             self.assertIn('testuser2', str(response.data, 'UTF-8'))
+                    
+    def test_users_followers(self):
+        """ Can we see who is following user? """
+        with self.client as c:
+            with c.session_transaction() as sess:
+                sess[CURR_USER_KEY] = self.testuser.id
             
+            response = c.get(f"/users/{self.testuser.id}/followers")
             
-    # def test_users_followers(self):
-    #     """ Can we see who is following user? """
-    #     with self.client as c:
-    #         with c.session_transaction() as sess:
-    #             sess[CURR_USER_KEY] = self.testuser.id
-            
-    #         response = c.get(f"/users/{self.testuser.id}/followers")
-            
-    #         self.assertEqual(response.status_code, 200)
-    #         self.assertIn('No followers yet', str(response.data, 'UTF-8'))   
+            self.assertEqual(response.status_code, 200)
+            self.assertIn('No followers yet', str(response.data, 'UTF-8'))   
 
-        
 
-        
-    #     # with self.client as d:
-    #     #     with d.session_transaction() as sess:
-    #     #         sess[CURR_USER_KEY] = self.testuser2.id
-                
-                       
-    #     print(self.testuser2)
+            # Create follower for user 1
+            user = User.query.get(self.testuser.id)
+            user.followers.append(self.testuser2)
+            db.session.commit()
+
+            response = c.get(f"/users/{self.testuser.id}/followers")
             
+            self.assertEqual(response.status_code, 200)
+            self.assertIn('testuser2', str(response.data, 'UTF-8'))   
             
-    
+
+            
             
     # def test_add_follow(self):
-    #     """ Can we messages we've liked? """
+    #     """ Can we add a follower? """
         
     #     with self.client as c:
     #         with c.session_transaction() as sess:
     #             sess[CURR_USER_KEY] = self.testuser.id
             
-    #         # Check for liked messages     
-    #         message = Message.query.filter_by(text="HELLO TEST").one()
-    #         response = c.post(f"/users/add_like/{message.id}", follow_redirects=True)
-    #         user = User.query.get(self.testuser.id)
-    #         response = c.get(f"/users/{self.testuser.id}/likes")
+    #         response = c.post("/users/follow/")
             
-    #         self.assertIn('<p>HELLO TEST</p>', str(response.data, 'UTF-8'))
-            
-            
-    #         # Unlike message and check again
-    #         message = Message.query.filter_by(text="HELLO TEST").one()
-    #         response = c.post(f"/users/add_like/{message.id}", follow_redirects=True)
-    #         user = User.query.get(self.testuser.id)
-    #         response = c.get(f"/users/{self.testuser.id}/likes")
-            
-    #         self.assertNotIn('<p>HELLO TEST</p>', str(response.data, 'UTF-8'))        
     
     # def test_stop_following(self):
     #   pass
