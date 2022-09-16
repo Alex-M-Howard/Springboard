@@ -56,103 +56,110 @@ class UserViewTestCase(TestCase):
         
         db.session.commit()
         
+        with self.client as c:
+            with c.session_transaction() as sess:
+                sess[CURR_USER_KEY] = self.testuser.id
+        
     def test_list_users(self):
         """Can we see a list of users? """
+        
+        response = self.client.get("/users")
 
-        # Since we need to change the session to mimic logging in,
-        # we need to use the changing-session trick:
-
-        with self.client as c:
-            with c.session_transaction() as sess:
-                sess[CURR_USER_KEY] = self.testuser.id
-
-            # Now, that session setting is saved, so we can have
-            # the rest of ours test
-
-            response = c.get("/users")
-
-            self.assertEqual(response.status_code, 200)
-            self.assertIn('<p>@testuser2</p>', str(response.data, 'UTF-8'))
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('<p>@testuser2</p>', str(response.data, 'UTF-8'))
 
     def test_users_show(self):
-        """Can we see user's profile?"""
-        
-        with self.client as c:
-            with c.session_transaction() as sess:
-                sess[CURR_USER_KEY] = self.testuser.id
-                
-            response = c.get(f"/users/{self.testuser.id}")
+        """Can we see user's profile?"""    
+                    
+        response = self.client.get(f"/users/{self.testuser.id}")
 
-            self.assertEqual(response.status_code, 200)
-            self.assertIn('id="header-image"', str(response.data, 'UTF-8'))
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('id="header-image"', str(response.data, 'UTF-8'))
                    
     def test_show_following(self):
-        """ Can we see who user is following? """
+        """ Can we see who user is following? """        
         
-        with self.client as c:
-            with c.session_transaction() as sess:
-                sess[CURR_USER_KEY] = self.testuser.id
-            
-            response = c.get(f"/users/{self.testuser.id}/following")
-            
-            self.assertEqual(response.status_code, 200)
-            self.assertIn('No followed users', str(response.data, 'UTF-8'))
-            
-            
-            
-            # Add person to follow
-
-            user = User.query.get(self.testuser.id)
-            user.following.append(self.testuser2)
-            
-            db.session.commit()
-            
-            response = c.get(f"/users/{self.testuser.id}/following")
-            
-            self.assertEqual(response.status_code, 200)
-            self.assertIn('testuser2', str(response.data, 'UTF-8'))
-                    
+        response = self.client.get(f"/users/{self.testuser.id}/following")
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('No followed users', str(response.data, 'UTF-8'))
+        
+        
+        # Add person to follow
+        user = User.query.get(self.testuser.id)
+        user.following.append(self.testuser2)
+        
+        db.session.commit()
+        
+        response = self.client.get(f"/users/{self.testuser.id}/following")
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('testuser2', str(response.data, 'UTF-8'))
+                
     def test_users_followers(self):
         """ Can we see who is following user? """
-        with self.client as c:
-            with c.session_transaction() as sess:
-                sess[CURR_USER_KEY] = self.testuser.id
-            
-            response = c.get(f"/users/{self.testuser.id}/followers")
-            
-            self.assertEqual(response.status_code, 200)
-            self.assertIn('No followers yet', str(response.data, 'UTF-8'))   
 
-
-            # Create follower for user 1
-            user = User.query.get(self.testuser.id)
-            user.followers.append(self.testuser2)
-            db.session.commit()
-
-            response = c.get(f"/users/{self.testuser.id}/followers")
-            
-            self.assertEqual(response.status_code, 200)
-            self.assertIn('testuser2', str(response.data, 'UTF-8'))   
-            
-
-            
-            
-    # def test_add_follow(self):
-    #     """ Can we add a follower? """
+        response = self.client.get(f"/users/{self.testuser.id}/followers")
         
-    #     with self.client as c:
-    #         with c.session_transaction() as sess:
-    #             sess[CURR_USER_KEY] = self.testuser.id
-            
-    #         response = c.post("/users/follow/")
-            
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('No followers yet', str(response.data, 'UTF-8'))   
+
+        # Create follower for user 1
+        user = User.query.get(self.testuser.id)
+        user.followers.append(self.testuser2)
+        db.session.commit()
+
+        response = self.client.get(f"/users/{self.testuser.id}/followers")
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('testuser2', str(response.data, 'UTF-8'))   
+                        
+    def test_add_follow(self):
+        """ Can we add a follower? """
+
+        user_to_follow = User.query.filter_by(username='testuser2').one()
+        response = self.client.post(f"/users/follow/{user_to_follow.id}", follow_redirects=True)
+        
+        self.assertEqual(response.status_code, 200)        
+        self.assertIn('testuser2', str(response.data, 'UTF-8'))
+        
+    def test_stop_following(self):
+        """ Can we stop following a user? """
+
+        user_to_follow = User.query.filter_by(username='testuser2').one()
+        response = self.client.post(f"/users/follow/{user_to_follow.id}", follow_redirects=True)
+        user_to_follow = User.query.filter_by(username='testuser2').one()
+        response = self.client.post(f"/users/stop-following/{user_to_follow.id}", follow_redirects=True)
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('No followed users', str(response.data, 'UTF-8'))
     
-    # def test_stop_following(self):
-    #   pass
-    
-    # def test_edit_profile(self):
-    #   pass 
-    
-    # def delete_user(self):
-    #   pass 
-    
+    def test_edit_profile(self):
+        """ Can we edit our profile? """
+        
+        form = {
+            "username": 'testuser',
+            "email": 'newemail@gmail.com',
+            "password": "testuser",
+            "image_url": "www.dogphoto.com",
+            "header_image_url": "www.dogphoto.com",
+            "bio": "This says it all"            
+        }
+        
+        response = self.client.post("/users/profile", follow_redirects=True, data=form)
+        user = User.query.get(self.testuser.id)
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(user.email, 'newemail@gmail.com')
+        self.assertEqual(user.image_url, 'www.dogphoto.com')
+        self.assertEqual(user.header_image_url, 'www.dogphoto.com')
+        self.assertEqual(user.bio, 'This says it all')
+        
+    def test_delete_user(self):
+        """ Can we delete the user """
+      
+        response = self.client.post("/users/delete", follow_redirects=True)
+        user = User.query.filter_by(username="testuser").all()
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(user), 0)
