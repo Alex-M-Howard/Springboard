@@ -10,9 +10,6 @@ from unittest import TestCase
 
 from models import db, Message, User
 
-from sqlalchemy.exc import IntegrityError
-from psycopg2 import errors
-
 os.environ['DATABASE_URL'] = "postgresql:///warbler-test"
 
 
