@@ -11,9 +11,6 @@ from unittest import TestCase
 from models import db, User, Message, Follows, Likes
 
 from sqlalchemy.exc import IntegrityError
-
-#from psycopg2.errors import UniqueViolation
-from psycopg2.errorcodes import UNIQUE_VIOLATION
 from psycopg2 import errors
 
 # BEFORE we import our app, let's set an environmental variable
@@ -66,6 +63,7 @@ class UserModelTestCase(TestCase):
         self.assertEqual(len(u.followers), 0)
         self.assertEqual(len(u.following), 0)
         self.assertEqual(len(u.likes), 0)
+  
         
     def test_user_repr(self):
         """Does user__repr__() work?"""
@@ -143,53 +141,62 @@ class UserModelTestCase(TestCase):
     def test_signup(self):
         """Can a new user sign up?"""
         
-        user = User(
+        user = User.signup(
             email="test@test.com",
             username="testuser",
-            password="HASHED_PASSWORD"
+            password="HASHED_PASSWORD",
+            image_url = "www.dogpile.com"
         )
         
-        db.session.add(user)
         db.session.commit()
-        
-        user = User.query.filter_by(username='testuser').one()
-        
         self.assertTrue(user)
         
+        
         # What about a username/email that already exists?
-        user2 = User(
+        User.signup(
             email="test2@test.com",
             username="testuser",
-            password="HASHED_PASSWORD"
+            password="HASHED_PASSWORD",
+            image_url = "www.dogpile.com"
         )
         
-        user3 = User(
-            email="test@test.com",
-            username="StarLord",
-            password="hashed_pass"
-        )
-
-        db.session.add(user2)
         try:
             db.session.commit()
         except IntegrityError as e:
             self.assertIsInstance(e.orig, errors.UniqueViolation) # Username is same
         except Exception as e:
-            print(e)
+            raise
         
         
         db.session.rollback()
-        db.session.add(user3)
-        
+        User.signup(
+            email="test@test.com",
+            username="StarLord",
+            password="hashed_pass",
+            image_url = "www.dogpile.com"
+        )
+
         try:
             db.session.commit()
         except IntegrityError as e:
             self.assertIsInstance(e.orig, errors.UniqueViolation) # Email is same
         except Exception as e:
-            print(e)
+            raise
         
         
     def test_authenticate(self):
         """Does authentication work?"""
-        pass
+        
+        User.signup(
+            email="test@test.com",
+            username="testuser",
+            password="HASHED_PASSWORD",
+            image_url = "www.dogpile.com"
+        )
+        
+        user = User.authenticate(username='testuser', password='HASHED_PASSWORD_WRONG')
+        self.assertFalse(user)
+
+        user = User.authenticate(username='testuser', password='HASHED_PASSWORD')
+        self.assertTrue(user)
             
