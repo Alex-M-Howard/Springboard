@@ -68,6 +68,7 @@ class UserViewTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn('<p>@testuser2</p>', str(response.data, 'UTF-8'))
 
+
     def test_users_show(self):
         """Can we see user's profile?"""    
                     
@@ -75,6 +76,7 @@ class UserViewTestCase(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertIn('id="header-image"', str(response.data, 'UTF-8'))
+    
                    
     def test_show_following(self):
         """ Can we see who user is following? """        
@@ -95,6 +97,7 @@ class UserViewTestCase(TestCase):
         
         self.assertEqual(response.status_code, 200)
         self.assertIn('testuser2', str(response.data, 'UTF-8'))
+    
                 
     def test_users_followers(self):
         """ Can we see who is following user? """
@@ -113,6 +116,7 @@ class UserViewTestCase(TestCase):
         
         self.assertEqual(response.status_code, 200)
         self.assertIn('testuser2', str(response.data, 'UTF-8'))   
+    
                         
     def test_add_follow(self):
         """ Can we add a follower? """
@@ -123,6 +127,17 @@ class UserViewTestCase(TestCase):
         self.assertEqual(response.status_code, 200)        
         self.assertIn('testuser2', str(response.data, 'UTF-8'))
         
+        
+        # Log user out and test again                
+        self.client.get("/logout", follow_redirects=True)
+        
+        user_to_follow = User.query.filter_by(username='testuser2').one()
+        response = self.client.post(f"/users/follow/{user_to_follow.id}", follow_redirects=True)
+        
+        self.assertEqual(response.status_code, 200)        
+        self.assertIn('Access unauthorized', str(response.data, 'UTF-8'))
+        
+                
     def test_stop_following(self):
         """ Can we stop following a user? """
 
@@ -133,6 +148,19 @@ class UserViewTestCase(TestCase):
         
         self.assertEqual(response.status_code, 200)
         self.assertIn('No followed users', str(response.data, 'UTF-8'))
+        
+        
+        # Log user out and test again
+        self.client.get("/logout", follow_redirects=True)
+
+        user_to_follow = User.query.filter_by(username='testuser2').one()
+        response = self.client.post(f"/users/follow/{user_to_follow.id}", follow_redirects=True)
+        user_to_follow = User.query.filter_by(username='testuser2').one()
+        response = self.client.post(f"/users/stop-following/{user_to_follow.id}", follow_redirects=True)
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('Access unauthorized', str(response.data, 'UTF-8'))
+   
     
     def test_edit_profile(self):
         """ Can we edit our profile? """
@@ -155,6 +183,29 @@ class UserViewTestCase(TestCase):
         self.assertEqual(user.header_image_url, 'www.dogphoto.com')
         self.assertEqual(user.bio, 'This says it all')
         
+        # Log out and test again
+        self.client.get("/logout", follow_redirects=True)
+        
+        form = {
+            "username": 'testuser',
+            "email": 'oldemail@gmail.com',
+            "password": "testuser",
+            "image_url": "www.catphoto.com",
+            "header_image_url": "www.catphoto.com",
+            "bio": "This says nothing"            
+        }
+        
+        response = self.client.post("/users/profile", follow_redirects=True, data=form)
+        user = User.query.get(self.testuser.id)
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('Access unauthorized', str(response.data, 'UTF-8'))
+        self.assertEqual(user.email, 'newemail@gmail.com')
+        self.assertEqual(user.image_url, 'www.dogphoto.com')
+        self.assertEqual(user.header_image_url, 'www.dogphoto.com')
+        self.assertEqual(user.bio, 'This says it all')
+        
+        
     def test_delete_user(self):
         """ Can we delete the user """
       
@@ -163,3 +214,15 @@ class UserViewTestCase(TestCase):
         
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(user), 0)
+        
+        
+    def test_delete_user_unauthorized(self):
+        """ Are we unauthorized from deleting a user when logged out?"""
+        self.client.get("/logout", follow_redirects=True)
+        
+        response = self.client.post("/users/delete", follow_redirects=True)
+        user = User.query.filter_by(username="testuser").all()
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(user), 1)
+        self.assertIn('Access unauthorized', str(response.data, 'UTF-8'))
