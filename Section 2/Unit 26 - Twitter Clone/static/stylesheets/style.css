@@ -209,6 +209,8 @@ nav + .container {
   position: relative;
   left: 50%;
   right: 50%;
+  padding-right: 0px;
+  padding-left: 0px;
 }
 
 .row.full-width {
@@ -544,4 +546,5 @@ p.card-bio {
   display: flex;
   background-color: white;
   height: 360px;
+  width: inherit;
 } 
