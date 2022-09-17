@@ -202,6 +202,8 @@ class Message(db.Model):
     likes = db.relationship('User', 
                              secondary="likes")
 
+    def __repr__(self):
+        return f"<Message #{self.id}:\n {self.user.username} - {self.timestamp} - {len(self.likes)} likes\n {self.text}>"
 
 def connect_db(app):
     """Connect this database to provided Flask app.
