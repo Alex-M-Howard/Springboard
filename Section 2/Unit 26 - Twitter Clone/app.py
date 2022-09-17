@@ -310,7 +310,7 @@ def like_unlike_message(message_id):
     """ Allow user to like or unlike a message in their feed """
     
     if not g.user:
-        flash("Access unathorized.", "danger")
+        flash("Access unauthorized.", "danger")
         return redirect("/")
     
     msg = Message.query.get_or_404(message_id)
