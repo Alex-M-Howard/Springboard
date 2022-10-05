@@ -1,9 +1,54 @@
 /*
+TABLE OF CONTENTS
+
+Variables
+String Methods
+String Properties
+Loops
+Number Methods
+Falsy Values
+Math methods
+AND, OR, NOT
+
+DATE METHODS
+ARRAY METHODS
+SWITCH STATEMENT
+OBJECTS
+DOM Document Object Model
+DOM Element Attributes
+HTML Attributes
+Timers
+
+Adding New elements to HTML
+Removing Elements from HTML
+Parent Child Siblings
+Nodes vs Elements
+JS Events
+Local Storage
+Terminal
+CLI / Terminal Commands
+
+Jasmine
+Advanced Array Functions     *forEach* | *map* | *filter* | *some/every* | *find/findIndex* | *reduce* 
+ES 2015
+This Keyword
+JQUERY
+Bootstrap
+How the Web Works
+API
+
+AJAX
+
+
 //////// Variables ///////
 const and let have 'block' Scope
 var has function scope(can be accessed before code is run)
+Arrow Functions
 
-
+Rest & Spread
+Object Enhancements
+Destructuring
+Maps & Sets
 
 //////// String Methods /////////
 charAt()	           Returns the character at a specified index (position)
