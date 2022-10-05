@@ -1,4 +1,45 @@
 '''
+Table of Contents
+
+String Methods
+List Methods
+Dictionary Methods
+Set Methods
+Tuple Methods
+File Methods
+Keywords
+
+Exceptions
+Built In Functions
+Equality
+Truthiness
+Ternary
+Comments and Docstrings
+Using Help function
+
+Data Structures
+Lists
+Slicing
+Dictionaries
+Sets
+Tuples
+Comprehensions
+Packing / Unpacking
+Error Handling
+
+Doctests
+Importing
+Installing Libraries
+Virtual Environments
+Object Oriented
+Flask
+Jinja
+Flask Tools
+Flask Session
+Testing
+
+
+
 
 ############## STRING METHODS ################
 capitalize()	    Converts the first character to upper case
@@ -687,7 +728,9 @@ What Are These Good For?
 Slightly smaller, faster than lists
 
 Since they’re immutable, they can be used as dict keys or put into sets
-Comprehensions
+
+
+******* Comprehensions *******
 
 Python has filter() and map(), like JS
 
@@ -741,7 +784,7 @@ a_words = {w for w in words if w.startswith("a")}
 
 
 
-Packing / Unpacking
+****** Packing / Unpacking ******
 Unpacking
 
 Can “unpack” iterables:
@@ -769,7 +812,7 @@ fruits = {"apple", "berry", "cherry"}
 
 foods = ["kale", "celery", *fruits]
 
-Error Handling
+********* Error Handling ********
 Errors
 
 In general, Python raises errors in places JS returns undefined:
@@ -873,7 +916,12 @@ def bounded_avg(nums):
     return sum(nums) / len(nums)
 
 It’s incredibly good style for every function to have one!
-Doctests
+
+
+
+*********Doctests********
+
+
 
 Doctests are snippets of interactive demonstration in a docstring:
 
@@ -904,7 +952,11 @@ $ python3 -m doctest -v your-file.py
 Doctests are awesome
 
 Testable documentation and readable tests.
-Importing
+
+
+
+
+******* Importing *******
 
 Python includes a “standard library” of dozens of useful modules.
 
@@ -956,7 +1008,7 @@ from score import get_high_score
 
 high = get_high_score()
 
-Installing Libraries
+****** Installing Libraries ****** 
 
 Python includes dozens of useful libraries
 
