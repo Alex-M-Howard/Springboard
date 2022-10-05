@@ -1,3 +1,24 @@
+-- Table of Contents
+
+-- Creating a database
+-- Seeding a database
+-- Backing up a database
+-- Dropping database
+-- Common Commands
+-- Querying
+
+-- SQL Aggregates
+-- Modifying Data
+-- Relationships
+-- Types of Joins
+-- Schema
+-- Column Manipulation
+-- Indexing
+
+
+
+
+
 -- Introduction to Databases
 -- Goals
 -- Define what a database is & give examples
@@ -87,7 +108,7 @@
 -- Create Databases
 -- Each project will have a separate database
 
--- Creating a database:
+-- ********* Creating a database **********
 
 -- $ createdb my_database_name
 -- Good database names are short and straightforward, and in lower_snake_case.
@@ -101,13 +122,13 @@
 
 -- Saving your project in Git won’t save your database!
 
--- Seeding a Database
+-- ********* Seeding a Database ********* 
 -- You can feed .sql scripts into the program psql:
 
 -- $ psql < my_database.sql
 -- This is often used to seed an empty database by building tables, filling in rows, or both.
 
--- Backing Up a Database
+-- ********* Backing Up a Database ********* 
 -- You can also make a backup of your database by “dumping it” to a file:
 
 -- $ pg_dump -C -c -O my_database_name > backup.sql
@@ -115,11 +136,13 @@
 
 -- It contains all of the commands necessary to re-create the current database when seeding.
 
--- Dropping Databases
+-- ********* Dropping Databases ********* 
 -- A database that is “dropped” is completely deleted (schema & data).
 
 -- $ dropdb my_database_name
--- Common Commands
+
+
+-- *********  Common Commands ********* 
 -- \l — List all databases
 -- \c DB_NAME — connect to DB_NAME
 -- \dt —- List all tables (in current db)
@@ -284,7 +307,10 @@
 -- SELECT title, price
 --   FROM books
 --   ORDER BY price;
--- SQL Aggregates
+-- 
+
+
+-- ********* SQL Aggregates ********* 
 -- Aggregates are used to combine multiple rows together to extract data
 
 -- Common aggregate functions include COUNT, AVG, SUM, MIN, and MAX
@@ -320,7 +346,10 @@
 --   FROM books
 --   GROUP BY author
 --   ORDER BY total DESC;
--- Modifying Data
+
+
+
+-- ********* Modifying Data ********* 
 -- Creating data with INSERT
 -- -- Inserting a new book with title and author
 -- INSERT INTO books (title, author)
@@ -352,7 +381,7 @@
 -- DELETE FROM books;
 
 
--- -- Relationships --
+-- -- ********* Relationships *********  --
 -- Data Example: Movies
 -- id	title	studio
 -- 1	Star Wars: The Force Awakens	Walt Disney Studios Motion Pictures
@@ -462,7 +491,10 @@
 --     ON movies.studio_id = studios.id;
 -- JOIN and INNER JOIN are the same, the INNER keyword is optional.
 
--- Types of Joins
+
+
+
+-- ********* Types of Joins ********* 
 -- There are two primary types of joins: inner and outer.
 
 -- Inner
@@ -573,7 +605,7 @@
 --  HAVING count(*) >= 2;
 -- Your Turn!
 
---SCHEMA
+-- ********* SCHEMA ********* 
 
 -- DDL Basics
 -- Creating and Dropping Databases
@@ -661,7 +693,10 @@
 --     password TEXT NOT NULL,
 --     account_balance FLOAT CHECK (account_balance > 0)
 -- );
--- Column Manipulation
+
+
+
+-- ********* Column Manipulation ********* 
 -- Adding / Removing / Renaming columns
 
 -- ALTER TABLE books ADD COLUMN in_paperback BOOLEAN;
@@ -793,7 +828,10 @@
 -- 1	3
 -- 2	2
 -- 3	1
--- Indexing
+
+
+
+-- ********* Indexing ********* 
 -- A database index is a special data structure that efficiently stores column values to speed up row retrieval via SELECT and WHERE (i.e. “read”) queries.
 
 -- For instance, if you place an index on a username column in a users table, any query using username will execute faster since fewer rows have to be scanned due to the efficient structure.
