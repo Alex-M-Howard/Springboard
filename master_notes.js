@@ -6,57 +6,60 @@ var has function scope(can be accessed before code is run)
 
 
 //////// String Methods /////////
-charAt()	Returns the character at a specified index (position)
-charCodeAt()	Returns the Unicode of the character at a specified index
-concat()	Returns two or more joined strings
-endsWith()	Returns if a string ends with a specified value
-fromCharCode()	Returns Unicode values as characters
-includes()	Returns if a string contains a specified value
-indexOf()	Returns the index (position) of the first occurrence of a value in a string
-lastIndexOf()	Returns the index (position) of the last occurrence of a value in a string
-localeCompare()	Compares two strings in the current locale
-match()	Searches a string for a value, or a regular expression, and returns the matches
-repeat()	Returns a new string with a number of copies of a string
-replace()	Searches a string for a value, or a regular expression, and returns a string where the values are replaced
-search()	Searches a string for a value, or regular expression, and returns the index (position) of the match
-slice()	Extracts a part of a string and returns a new string
-split()	Splits a string into an array of substrings
-startsWith()	Checks whether a string begins with specified characters
-substr()	Extracts a number of characters from a string, from a start index (position)
-substring()	Extracts characters from a string, between two specified indices (positions)
-toLocaleLowerCase()	Returns a string converted to lowercase letters, using the host's locale
-toLocaleUpperCase()	Returns a string converted to uppercase letters, using the host's locale
-toLowerCase()	Returns a string converted to lowercase letters
-toString()	Returns a string or a string object as a string
-toUpperCase()	Returns a string converted to uppercase letters
-trim()	Returns a string with removed whitespaces
-valueOf()	Returns the primitive value of a string or a string object
+charAt()	           Returns the character at a specified index (position)
+charCodeAt()	       Returns the Unicode of the character at a specified index
+concat()	           Returns two or more joined strings
+endsWith()	           Returns if a string ends with a specified value
+fromCharCode()	       Returns Unicode values as characters
+includes()	           Returns if a string contains a specified value
+indexOf()	           Returns the index (position) of the first occurrence of a value in a string
+lastIndexOf()	       Returns the index (position) of the last occurrence of a value in a string
+localeCompare()	       Compares two strings in the current locale
+match()	               Searches a string for a value, or a regular expression, and returns the matches
+repeat()	           Returns a new string with a number of copies of a string
+replace()	           Searches a string for a value, or a regular expression, and returns a string where the values are replaced
+search()	           Searches a string for a value, or regular expression, and returns the index (position) of the match
+slice()	               Extracts a part of a string and returns a new string
+split()	               Splits a string into an array of substrings
+startsWith()	       Checks whether a string begins with specified characters
+substr()	           Extracts a number of characters from a string, from a start index (position)
+substring()	           Extracts characters from a string, between two specified indices (positions)
+toLocaleLowerCase()	   Returns a string converted to lowercase letters, using the host's locale
+toLocaleUpperCase()	   Returns a string converted to uppercase letters, using the host's locale
+toLowerCase()	       Returns a string converted to lowercase letters
+toString()	           Returns a string or a string object as a string
+toUpperCase()	       Returns a string converted to uppercase letters
+trim()	               Returns a string with removed whitespaces
+valueOf()	           Returns the primitive value of a string or a string object
 
 
 ///////// String Properties /////////
-constructor	Returns the string's constructor function
-length	Returns the length of a string
-prototype	Allows you to add properties and methods to an object
-String HTML Wrapper Methods
-HTML wrapper methods return a string wrapped inside an HTML tag.
+constructor	                  Returns the string's constructor function
+length	                      Returns the length of a string
+prototype	                  Allows you to add properties and methods to an object
+String HTML Wrapper Methods   HTML wrapper methods return a string wrapped inside an HTML tag.
 
 
 ////////// Loops ////////
+/// FOR LOOP -> Using iterator /// 
+
 for (let i = 0; i < 10; i++){
     console.log(i) --> 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
 }
 
+/// FOR LOOP -> Using OF /// 
 colors = ['red', 'blue', 'green']
 for (color of colors) {
     console.log(color)   --> red, then blue, then green
 }
 
+/// FOR LOOP -> Using IN /// 
 for (color in colors) {
     console.log(color)   --> returns index 0, 1, 2 of a list. OR an object's keys!!!
 }
 
 
-
+/// DO WHILE LOOP /// 
 i = 0
 do{
     i++;
@@ -65,7 +68,7 @@ do{
 while (i < 5); --> Do while loop will run AT LEAST ONCE!   1, 2, 3, 4, 5
 
 
-
+/// WHILE LOOP /// 
 while (i < 10){   --> While loop will check condition before running
     i++
     console.log(i)
@@ -74,16 +77,16 @@ while (i < 10){   --> While loop will check condition before running
 
 
 //////// Number methods ///////////
-isFinite()	Checks whether a value is a finite number
-isInteger()	Checks whether a value is an integer
-isNaN()	Checks whether a value is Number.NaN
-isSafeInteger()	Checks whether a value is a safe integer
-toExponential(x)	Converts a number into an exponential notation
-toFixed(x)	Formats a number with x numbers of digits after the decimal point
-toLocaleString()	Converts a number into a string, based on the locale settings
-toPrecision(x)	Formats a number to x length
-toString()	Converts a number to a string
-valueOf()	Returns the primitive value of a number
+isFinite()	        Returns whether a value is a finite number
+isInteger()	        Returns whether a value is an integer
+isNaN()	            Returns whether a value is Number.NaN
+isSafeInteger()	    Returns whether a value is a safe integer
+toExponential(x)	Returns a number in exponential notation
+toFixed(x)	        Returns a number with x numbers of digits after the decimal point
+toLocaleString()	Returns a number converted into a string, based on the locale settings
+toPrecision(x)	    Returns a number to x length
+toString()	        Returns a number converted to a string
+valueOf()	        Returns the primitive value of a number
 
 
 
@@ -98,142 +101,142 @@ undefined
 
 
 //////////// MATH METHODS //////////////
-abs(x)	Returns the absolute value of x
-acos(x)	Returns the arccosine of x, in radians
-acosh(x)	Returns the hyperbolic arccosine of x
-asin(x)	Returns the arcsine of x, in radians
-asinh(x)	Returns the hyperbolic arcsine of x
-atan(x)	Returns the arctangent of x as a numeric value between -PI/2 and PI/2 radians
-atan2(y, x)	Returns the arctangent of the quotient of its arguments
-atanh(x)	Returns the hyperbolic arctangent of x
-cbrt(x)	Returns the cubic root of x
-ceil(x)	Returns x, rounded upwards to the nearest integer
-clz32(x)	Returns the number of leading zeros in a 32-bit binary representation of x
-cos(x)	Returns the cosine of x (x is in radians)
-cosh(x)	Returns the hyperbolic cosine of x
-exp(x)	Returns the value of Ex
-expm1(x)	Returns the value of Ex minus 1
-floor(x)	Returns x, rounded downwards to the nearest integer
-fround(x)	Returns the nearest (32-bit single precision) float representation of a number
-log(x)	Returns the natural logarithmof x
-log10(x)	Returns the base-10 logarithm of x
-log1p(x)	Returns the natural logarithm of 1 + x
-log2(x)	Returns the base-2 logarithm of x
+abs(x)	                Returns the absolute value of x
+acos(x)	                Returns the arccosine of x, in radians
+acosh(x)	            Returns the hyperbolic arccosine of x
+asin(x)	                Returns the arcsine of x, in radians
+asinh(x)	            Returns the hyperbolic arcsine of x
+atan(x)	                Returns the arctangent of x as a numeric value between -PI/2 and PI/2 radians
+atan2(y, x)	            Returns the arctangent of the quotient of its arguments
+atanh(x)	            Returns the hyperbolic arctangent of x
+cbrt(x)	                Returns the cubic root of x
+ceil(x)	                Returns x, rounded upwards to the nearest integer
+clz32(x)	            Returns the number of leading zeros in a 32-bit binary representation of x
+cos(x)	                Returns the cosine of x (x is in radians)
+cosh(x)	                Returns the hyperbolic cosine of x
+exp(x)	                Returns the value of Ex
+expm1(x)	            Returns the value of Ex minus 1
+floor(x)	            Returns x, rounded downwards to the nearest integer
+fround(x)	            Returns the nearest (32-bit single precision) float representation of a number
+log(x)	                Returns the natural logarithmof x
+log10(x)	            Returns the base-10 logarithm of x
+log1p(x)	            Returns the natural logarithm of 1 + x
+log2(x)	                Returns the base-2 logarithm of x
 max(x, y, z, ..., n)	Returns the number with the highest value
 min(x, y, z, ..., n)	Returns the number with the lowest value
-pow(x, y)	Returns the value of x to the power of y
-random()	Returns a random number between 0 and 1
-round(x)	Rounds x to the nearest integer
-sign(x)	Returns the sign of a number (checks whether it is positive, negative or zero)
-sin(x)	Returns the sine of x (x is in radians)
-sinh(x)	Returns the hyperbolic sine of x
-sqrt(x)	Returns the square root of x
-tan(x)	Returns the tangent of an angle
-tanh(x)	Returns the hyperbolic tangent of a number
-trunc(x)	Returns the integer part of a number (x)
+pow(x, y)	            Returns the value of x to the power of y
+random()	            Returns a random number between 0 and 1
+round(x)	            Returns x to the nearest integer
+sign(x)	                Returns the sign of a number (checks whether it is positive, negative or zero)
+sin(x)	                Returns the sine of x (x is in radians)
+sinh(x)	                Returns the hyperbolic sine of x
+sqrt(x)	                Returns the square root of x
+tan(x)	                Returns the tangent of an angle
+tanh(x)	                Returns the hyperbolic tangent of a number
+trunc(x)	            Returns the integer part of a number (x)
 
 
 
 //////// AND, OR, NOT /////////
-&&	logical and
-||	logical or
-!	logical not
+&&	--> logical and
+||	--> logical or
+!	--> logical not
 
 
 
 /////////// DATE METHODS ///////////
-getDate()	Returns the day of the month (from 1-31)
-getDay()	Returns the day of the week (from 0-6)
-getFullYear()	Returns the year
-getHours()	Returns the hour (from 0-23)
-getMilliseconds()	Returns the milliseconds (from 0-999)
-getMinutes()	Returns the minutes (from 0-59)
-getMonth()	Returns the month (from 0-11)
-getSeconds()	Returns the seconds (from 0-59)
-getTime()	Returns the number of milliseconds since midnight Jan 1 1970, and a specified date
-getTimezoneOffset()	Returns the time difference between UTC time and local time, in minutes
-getUTCDate()	Returns the day of the month, according to universal time (from 1-31)
-getUTCDay()	Returns the day of the week, according to universal time (from 0-6)
-getUTCFullYear()	Returns the year, according to universal time
-getUTCHours()	Returns the hour, according to universal time (from 0-23)
+getDate()	            Returns the day of the month (from 1-31)
+getDay()	            Returns the day of the week (from 0-6)
+getFullYear()	        Returns the year
+getHours()	            Returns the hour (from 0-23)
+getMilliseconds()	    Returns the milliseconds (from 0-999)
+getMinutes()	        Returns the minutes (from 0-59)
+getMonth()	            Returns the month (from 0-11)
+getSeconds()	        Returns the seconds (from 0-59)
+getTime()	            Returns the number of milliseconds since midnight Jan 1 1970, and a specified date
+getTimezoneOffset()	    Returns the time difference between UTC time and local time, in minutes
+getUTCDate()	        Returns the day of the month, according to universal time (from 1-31)
+getUTCDay()	            Returns the day of the week, according to universal time (from 0-6)
+getUTCFullYear()	    Returns the year, according to universal time
+getUTCHours()	        Returns the hour, according to universal time (from 0-23)
 getUTCMilliseconds()	Returns the milliseconds, according to universal time (from 0-999)
-getUTCMinutes()	Returns the minutes, according to universal time (from 0-59)
-getUTCMonth()	Returns the month, according to universal time (from 0-11)
-getUTCSeconds()	Returns the seconds, according to universal time (from 0-59)
-getYear()	Deprecated. Use the getFullYear() method instead
-now()	Returns the number of milliseconds since midnight Jan 1, 1970
-parse()	Parses a date string and returns the number of milliseconds since January 1, 1970
-setDate()	Sets the day of the month of a date object
-setFullYear()	Sets the year of a date object
-setHours()	Sets the hour of a date object
-setMilliseconds()	Sets the milliseconds of a date object
-setMinutes()	Set the minutes of a date object
-setMonth()	Sets the month of a date object
-setSeconds()	Sets the seconds of a date object
-setTime()	Sets a date to a specified number of milliseconds after/before January 1, 1970
-setUTCDate()	Sets the day of the month of a date object, according to universal time
-setUTCFullYear()	Sets the year of a date object, according to universal time
-setUTCHours()	Sets the hour of a date object, according to universal time
+getUTCMinutes()	        Returns the minutes, according to universal time (from 0-59)
+getUTCMonth()	        Returns the month, according to universal time (from 0-11)
+getUTCSeconds()	        Returns the seconds, according to universal time (from 0-59)
+getYear()	            Deprecated. Use the getFullYear() method instead
+now()	                Returns the number of milliseconds since midnight Jan 1, 1970
+parse()	                Parses a date string and returns the number of milliseconds since January 1, 1970
+setDate()	            Sets the day of the month of a date object
+setFullYear()	        Sets the year of a date object
+setHours()	            Sets the hour of a date object
+setMilliseconds()	    Sets the milliseconds of a date object
+setMinutes()	        Set the minutes of a date object
+setMonth()	            Sets the month of a date object
+setSeconds()	        Sets the seconds of a date object
+setTime()	            Sets a date to a specified number of milliseconds after/before January 1, 1970
+setUTCDate()	        Sets the day of the month of a date object, according to universal time
+setUTCFullYear()	    Sets the year of a date object, according to universal time
+setUTCHours()	        Sets the hour of a date object, according to universal time
 setUTCMilliseconds()	Sets the milliseconds of a date object, according to universal time
-setUTCMinutes()	Set the minutes of a date object, according to universal time
-setUTCMonth()	Sets the month of a date object, according to universal time
-setUTCSeconds()	Set the seconds of a date object, according to universal time
-setYear()	Deprecated. Use the setFullYear() method instead
-toDateString()	Converts the date portion of a Date object into a readable string
-toGMTString()	Deprecated. Use the toUTCString() method instead
-toISOString()	Returns the date as a string, using the ISO standard
-toJSON()	Returns the date as a string, formatted as a JSON date
+setUTCMinutes()	        Set the minutes of a date object, according to universal time
+setUTCMonth()	        Sets the month of a date object, according to universal time
+setUTCSeconds()	        Set the seconds of a date object, according to universal time
+setYear()	            Deprecated. Use the setFullYear() method instead
+toDateString()	        Converts the date portion of a Date object into a readable string
+toGMTString()	        Deprecated. Use the toUTCString() method instead
+toISOString()	        Returns the date as a string, using the ISO standard
+toJSON()	            Returns the date as a string, formatted as a JSON date
 toLocaleDateString()	Returns the date portion of a Date object as a string, using locale conventions
 toLocaleTimeString()	Returns the time portion of a Date object as a string, using locale conventions
-toLocaleString()	Converts a Date object to a string, using locale conventions
-toString()	Converts a Date object to a string
-toTimeString()	Converts the time portion of a Date object to a string
-toUTCString()	Converts a Date object to a string, according to universal time
-UTC()	Returns the number of milliseconds in a date since midnight of January 1, 1970, according to UTC time
-valueOf()	Returns the primitive value of a Date object
+toLocaleString()	    Converts a Date object to a string, using locale conventions
+toString()	            Converts a Date object to a string
+toTimeString()	        Converts the time portion of a Date object to a string
+toUTCString()	        Converts a Date object to a string, according to universal time
+UTC()	                Returns the number of milliseconds in a date since midnight of January 1, 1970, according to UTC time
+valueOf()	            Returns the primitive value of a Date object
 
 
 
 ///////////// ARRAY METHODS ///////////
-concat()	Joins two or more arrays, and returns a copy of the joined arrays
-copyWithin()	Copies array elements within the array, to and from specified positions
-entries()	Returns a key/value pair Array Iteration Object
-every()	Checks if every element in an array pass a test
-fill()	Fill the elements in an array with a static value
-filter()	Creates a new array with every element in an array that pass a test
-find()	Returns the value of the first element in an array that pass a test
-findIndex()	Returns the index of the first element in an array that pass a test
-forEach()	Calls a function for each array element
-from()	Creates an array from an object
-includes()	Check if an array contains the specified element
-indexOf()	Search the array for an element and returns its position
-isArray()	Checks whether an object is an array
-join()	Joins all elements of an array into a string
-keys()	Returns a Array Iteration Object, containing the keys of the original array
+concat()	    Joins two or more arrays, and returns a copy of the joined arrays
+copyWithin()    Copies array elements within the array, to and from specified positions
+entries()	    Returns a key/value pair Array Iteration Object
+every()	        Checks if every element in an array pass a test
+fill()	        Fill the elements in an array with a static value
+filter()	    Creates a new array with every element in an array that pass a test
+find()	        Returns the value of the first element in an array that pass a test
+findIndex()	    Returns the index of the first element in an array that pass a test
+forEach()	    Calls a function for each array element
+from()	        Creates an array from an object
+includes()	    Check if an array contains the specified element
+indexOf()	    Search the array for an element and returns its position
+isArray()	    Checks whether an object is an array
+join()	        Joins all elements of an array into a string
+keys()	        Returns a Array Iteration Object, containing the keys of the original array
 lastIndexOf()	Search the array for an element, starting at the end, and returns its position
-map()	Creates a new array with the result of calling a function for each array element
-pop()	Removes the last element of an array, and returns that element
-push()	Adds new elements to the end of an array, and returns the new length
-reduce()	Reduce the values of an array to a single value (going left-to-right)
+map()	        Creates a new array with the result of calling a function for each array element
+pop()	        Removes the last element of an array, and returns that element
+push()	        Adds new elements to the end of an array, and returns the new length
+reduce()	    Reduce the values of an array to a single value (going left-to-right)
 reduceRight()	Reduce the values of an array to a single value (going right-to-left)
-reverse()	Reverses the order of the elements in an array
-shift()	Removes the first element of an array, and returns that element
-slice()	Selects a part of an array, and returns the new array
-some()	Checks if any of the elements in an array pass a test
-sort()	Sorts the elements of an array
-splice()	Adds/Removes elements from an array
-toString()	Converts an array to a string, and returns the result
-unshift()	Adds new elements to the beginning of an array, and returns the new length
-valueOf()	Returns the primitive value of an array
+reverse()	    Reverses the order of the elements in an array
+shift()	        Removes the first element of an array, and returns that element
+slice()	        Selects a part of an array, and returns the new array
+some()	        Checks if any of the elements in an array pass a test
+sort()	        Sorts the elements of an array
+splice()	    Adds/Removes elements from an array
+toString()	    Converts an array to a string, and returns the result
+unshift()	    Adds new elements to the beginning of an array, and returns the new length
+valueOf()	    Returns the primitive value of an array
 
 
 
 ///////// SWITCH STATEMENT ///////////
-//SWITCH - Not as commonly used. But its awesome. It is like Case statements in Siemens
+//SWITCH - Not as commonly used. But its awesome. Depending on variable, it will goto a certain "function"
 let day = 3;
 
 
-switch (day) { // Once a case matches, it will return the rest of the cases! So need for RETURN!!!
+switch (day) { // Once a case matches, it will return the rest of the cases! So need for return or break
 	case 1:
 		console.log('Monday');
 		break;
@@ -299,7 +302,7 @@ You can use this to remove values from an array as well, though this is less com
 
 
 
-hasOwnProperty
+hasOwnProperty()
 
 Returns true if the key exists in the object, otherwise false
 const cat = {
@@ -345,84 +348,84 @@ attributes 	                Returns a NamedNodeMap of an element's attributes
 blur() 	                    Removes focus from an element
 childElementCount 	        Returns an elements's number of child elements
 childNodes 	                Returns a NodeList of an element's child nodes
-children 	                  Returns an HTMLCollection of an element's child elements
+children 	                Returns an HTMLCollection of an element's child elements
 classList 	                Returns the class name(s) of an element
 className 	                Sets or returns the value of the class attribute of an element
-click() 	                  Simulates a mouse-click on an element
-clientHeight 	              Returns the height of an element, including padding
+click() 	                Simulates a mouse-click on an element
+clientHeight 	            Returns the height of an element, including padding
 clientLeft 	                Returns the width of the left border of an element
 clientTop 	                Returns the width of the top border of an element
-clientWidth 	              Returns the width of an element, including padding
-cloneNode() 	              Clones an element
+clientWidth 	            Returns the width of an element, including padding
+cloneNode() 	            Clones an element
 closest() 	                Searches the DOM tree for the closest element that matches a CSS selector
 compareDocumentPosition() 	Compares the document position of two elements
 contains()        	        Returns true if a node is a descendant of a node
-contentEditable 	          Sets or returns whether the content of an element is editable or not
-dir 	                      Sets or returns the value of the dir attribute of an element
+contentEditable 	        Sets or returns whether the content of an element is editable or not
+dir 	                    Sets or returns the value of the dir attribute of an element
 firstChild 	                Returns the first child node of an element
 firstElementChild 	        Returns the first child element of an element
-focus() 	                  Gives focus to an element
+focus() 	                Gives focus to an element
 getAttribute() 	            Returns the value of an element's attribute
 getAttributeNode() 	        Returns an attribute node
-getBoundingClientRect() 	  Returns the size of an element and its position relative to the viewport
-getElementsByClassName() 	  Returns a collection of child elements with a given class name
+getBoundingClientRect() 	Returns the size of an element and its position relative to the viewport
+getElementsByClassName() 	Returns a collection of child elements with a given class name
 getElementsByTagName() 	    Returns a collection of child elements with a given tag name
 hasAttribute() 	            Returns true if an element has a given attribute
-hasAttributes() 	          Returns true if an element has any attributes
-hasChildNodes() 	          Returns true if an element has any child nodes
+hasAttributes() 	        Returns true if an element has any attributes
+hasChildNodes() 	        Returns true if an element has any child nodes
 id 	                        Sets or returns the value of the id attribute of an element
 innerHTML 	                Sets or returns the content of an element
 innerText 	                Sets or returns the text content of a node and its descendants
-insertAdjacentElement() 	  Inserts a new HTML element at a position relative to an element
-insertAdjacentHTML() 	      Inserts an HTML formatted text at a position relative to an element
-insertAdjacentText() 	      Inserts text into a position relative to an element
+insertAdjacentElement() 	Inserts a new HTML element at a position relative to an element
+insertAdjacentHTML() 	    Inserts an HTML formatted text at a position relative to an element
+insertAdjacentText() 	    Inserts text into a position relative to an element
 insertBefore() 	            Inserts a new child node before an existing child node
 isContentEditable 	        Returns true if an element's content is editable
-isDefaultNamespace() 	      Returns true if a given namespaceURI is the default
+isDefaultNamespace() 	    Returns true if a given namespaceURI is the default
 isEqualNode() 	            Checks if two elements are equal
-isSameNode() 	              Checks if two elements are the same node
-lang 	                      Sets or returns the value of the lang attribute of an element
+isSameNode() 	            Checks if two elements are the same node
+lang 	                    Sets or returns the value of the lang attribute of an element
 lastChild 	                Returns the last child node of an element
-lastElementChild 	          Returns the last child element of an element
+lastElementChild 	        Returns the last child element of an element
 matches() 	                Returns true if an element is matched by a given CSS selector
-namespaceURI 	              Returns the namespace URI of an element
-nextSibling 	              Returns the next node at the same node tree level
+namespaceURI 	            Returns the namespace URI of an element
+nextSibling 	            Returns the next node at the same node tree level
 nextElementSibling 	        Returns the next element at the same node tree level
-nodeName 	                  Returns the name of a node
-nodeType 	                  Returns the node type of a node
+nodeName 	                Returns the name of a node
+nodeType 	                Returns the node type of a node
 nodeValue 	                Sets or returns the value of a node
-normalize() 	              Joins adjacent text nodes and removes empty text nodes in an element
-offsetHeight 	              Returns the height of an element, including padding, border and scrollbar
-offsetWidth 	              Returns the width of an element, including padding, border and scrollbar
+normalize() 	            Joins adjacent text nodes and removes empty text nodes in an element
+offsetHeight 	            Returns the height of an element, including padding, border and scrollbar
+offsetWidth 	            Returns the width of an element, including padding, border and scrollbar
 offsetLeft 	                Returns the horizontal offset position of an element
-offsetParent 	              Returns the offset container of an element
+offsetParent 	            Returns the offset container of an element
 offsetTop 	                Returns the vertical offset position of an element
 outerHTML 	                Sets or returns the content of an element (including the start tag and the end tag)
 outerText 	                Sets or returns the outer text content of a node and its descendants
 ownerDocument 	            Returns the root element (document object) for an element
 parentNode 	                Returns the parent node of an element
 parentElement 	            Returns the parent element node of an element
-previousSibling 	          Returns the previous node at the same node tree level
+previousSibling 	        Returns the previous node at the same node tree level
 previousElementSibling 	    Returns the previous element at the same node tree level
-querySelector() 	          Returns the first child element that matches a CSS selector(s)
+querySelector() 	        Returns the first child element that matches a CSS selector(s)
 querySelectorAll() 	        Returns all child elements that matches a CSS selector(s)
-remove() 	                  Removes an element from the DOM
+remove() 	                Removes an element from the DOM
 removeAttribute() 	        Removes an attribute from an element
 removeAttributeNode() 	    Removes an attribute node, and returns the removed node
 removeChild() 	            Removes a child node from an element
 removeEventListener() 	    Removes an event handler that has been attached with the addEventListener() method
 replaceChild() 	            Replaces a child node in an element
-scrollHeight 	              Returns the entire height of an element, including padding
-scrollIntoView() 	          Scrolls the an element into the visible area of the browser window
+scrollHeight 	            Returns the entire height of an element, including padding
+scrollIntoView() 	        Scrolls the an element into the visible area of the browser window
 scrollLeft 	                Sets or returns the number of pixels an element's content is scrolled horizontally
 scrollTop 	                Sets or returns the number of pixels an element's content is scrolled vertically
-scrollWidth 	              Returns the entire width of an element, including padding
+scrollWidth 	            Returns the entire width of an element, including padding
 setAttribute() 	            Sets or changes an attribute's value
 setAttributeNode() 	        Sets or changes an attribute node
 style 	                    Sets or returns the value of the style attribute of an element
-tabIndex 	                  Sets or returns the value of the tabindex attribute of an element
-tagName 	                  Returns the tag name of an element
-textContent 	              Sets or returns the textual content of a node and its descendants
+tabIndex 	                Sets or returns the value of the tabindex attribute of an element
+tagName 	                Returns the tag name of an element
+textContent 	            Sets or returns the textual content of a node and its descendants
 title 	                    Sets or returns the value of the title attribute of an element
 toString() 	                Converts an element to a string
 
@@ -430,7 +433,7 @@ toString() 	                Converts an element to a string
 
 
 
-Modifying styling
+Modifying styling in DOM
 paragraph.style.backgroundColor = 'red'; //Remember camelcase!
 
 
@@ -450,7 +453,7 @@ for (let all of images) {
 *type
 *value
 
-getAttribute
+getAttribute()
 console.log(img.getAttribute('src'));
 input.setAttribute('type', 'checkbox');
 img.setAttribute('src', source);
@@ -472,7 +475,7 @@ input2.value = '5'
 ///////// TIMERS /////////
 First Class Functions
 
-Most programming lanugages do not terat functions the same as other data types
+Most programming lanugages do not treat functions the same as other data types
 Functions are considered first - class, like any other data type
 Functions are objects, which is why they can be passed as an argument or in a variable
 
@@ -496,7 +499,7 @@ greet()
 // alert("I am alert!")
 diss()
 
-//These run one after the other. The alert stops anythign else
+//These run one after the other. The alert stops anything else
 //Diss can't run at same time as the alert 
 
 //We have options to prevent threads from being blocked
@@ -509,15 +512,15 @@ diss();
 
 setTimeout(function to call, delay) - wait ms to call some code
 
-redoign the above:
+redoing the above:
 greet();
 setTimeout(diss, 3000)  - this will run diss after 3 seconds, but then sends the delay elsewhere. will run other code until timer is up
 greet()
 
 This will print:
-I love you,
-I love you,
-You suck
+Hello,
+Hello,
+Goodbye
 
 
 greet();
@@ -764,13 +767,12 @@ localStorage
 What is localStorage?
 localStorage is a mechanism for storing information in the browser for a specific domain
 
-The API is quite easy to use and very minimal - so let’s get started with it!
-
 localStorage vs sessionStorage
 When you read more about localStorage you will also hear about something called sessionStorage
 
 data stored in localStorage has no expiration time
 data stored in sessionStorage gets cleared when the browsing session ends
+
 modifying localStorage
 The most important thing to remember is that all of your keys in localStorage or sessionStorage must be strings.
 
@@ -815,7 +817,6 @@ In order to get back our original data type, we need to convert this array to a 
 
 JSON (JavaScript Object Notation) is a lightweight data-interchange format. It is easy for humans to read and write. It is easy for machines to parse and generate
 
-We will be discussing it quite a bit more later on
 
 Working with JSON in the browser
 JavaScript has a built-in JSON object, and on this object are two methods used to convert JavaScript data into JSON, and to parse JSON strings into JavaScript
@@ -1035,24 +1036,32 @@ Top most directory is root directory. noted by an    /
 to access home ~ 
 
 
-ls - list of directory
-pwd - print working directory
-cd - change directory
+/////////// CLI / TERMINAL COMMANDS ////////////
+ls        list of directory
+pwd       print working directory
+cd        change directory
+man       manual     
+mkdir     make directory
+touch     create file. also updates file time if it already exists
+cat       prints data inside file to terminal
+echo      prints back text you type. If you use a 'redirect', takes output from echo and writes
+rm        remove file/s   The file is completely removed from the computer, not put in trash
+rmdir     remove directory
+rm -rf    deletes an entire (doesn't have to be empty) directory
+mv        move files and folders
+open      . will open current folder. Open .. will open previous directory or just open a file
+cp        copy a file or folder
+
+
+
 
 flags have a dash and a letter. Modifies the command
 ls -a  -> lists all in directory. Even hidden files
 ls -l (el) -> prints outlists details. Date, size, user created file
 You can combine also ls -a -l or ls -al
 
-man command - manual
 man ls -> gives you manual page for ls. USE Q TO EXIT MANUAL
   
-
-mkdir -> make directory
-touch -> create file. also updates file time if it already exists
-cat -> prints data inside file to terminal
-echo -> prints back text you type. If you use a 'redirect', takes output from echo and wriets
-it to a file. will create new file if the redirect is to non-existant file
 
 echo "hello World" > first_file
 The > will overwrite the file contents
@@ -1060,22 +1069,13 @@ In git, there is a gitignore file. sometimes we put a ".env" in it and that's it
 a great usecase for echo.
 
 
-rm -> remove file/s   The file is completely removed from the computer, not put in trash
-rmdir -> remove directory
-rm -rf -> deletes an entire (doesn't have to be empty) directory
 
-You can also open a file or directory
-open
 
-open . will open current folder. Open .. will open previous directory
-
-mv -> move files and folders
 we can also use mv to rename something
 you can rename and move at same time:
 touch rename_me.html
 mv rename_me.html ../index.html
 
-cp -> copy a file or folder
 cp PATH_TO_ORIGINAL_FILE PATH_TO_COPIED_FILE
 
 to copy a directory
