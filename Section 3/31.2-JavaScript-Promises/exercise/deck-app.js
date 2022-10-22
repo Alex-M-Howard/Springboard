@@ -34,3 +34,31 @@ axios.get(`${baseURL}/new/draw/?count=1`)
                 console.log("//////////////////////////////////");
             })
     })
+
+
+    // 3
+
+let deckId;
+
+document.addEventListener("DOMContentLoaded", async () => {
+    $("body").append($("<button>Click Me</button>"))
+    $("body").append($("<div id='results'></div>"))    
+    
+    axios.get(`${baseURL}/new/shuffle`, { params }).then((res) => { deckId = res.data.deck_id })
+        .then(() => {
+            $("button").on("click", async () => {
+                axios.get(`${baseURL}/${deckId}/draw/?count=1`).then((res) => {
+                    
+                    if (res.data.success) {
+                        $("#results").append($(`<img src='${res.data.cards[0].image}'></img>`));
+                    } else {
+                        $("button").off()
+                        $("button").remove()
+                    }
+            });
+            });
+        })
+
+
+})
+
