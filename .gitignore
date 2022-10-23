@@ -5,3 +5,4 @@ __pycache__/
 .pyc
 Section 2/Unit 24 - Intermediate Flask/24.5 - Hashing and Log In/exercise/models.pyc
 Section 2/Unit 24 - Intermediate Flask/24.5 - Hashing and Log In/exercise/app.pyc
+node_modules/
