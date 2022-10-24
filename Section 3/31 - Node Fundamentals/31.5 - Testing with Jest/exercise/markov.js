@@ -8,6 +8,10 @@ class MarkovMachine {
   constructor(text) {
     let words = text.split(/[ \r\n]+/);
     this.words = words.filter(c => c !== "");
+    this.words = this.words.forEach(element => {
+      return element.toLowerCase();
+    });
+    this.chain = {};
     this.makeChains();
   }
 
@@ -17,7 +21,16 @@ class MarkovMachine {
    *  {"the": ["cat", "hat"], "cat": ["in"], "in": ["the"], "hat": [null]} */
 
   makeChains() {
-    // TODO
+    
+    for (let i = 0; i < this.words.length; i++) {
+      if (this.words[i] in this.chain) {
+        i < this.words.length ? this.chain[this.words[i]].push(this.words[i + 1]) : this.chain[this.words[i]].push(null); 
+      } else {
+        i < this.words.length ? this.chain[this.words[i]] = this.words[i+1] : this.chain[this.words[i]] = [null]
+      }
+    }
+
+    console.log(this.chain);
   }
 
 
@@ -27,3 +40,5 @@ class MarkovMachine {
     // TODO
   }
 }
+
+const mm = new MarkovMachine('The cat in the hat');
