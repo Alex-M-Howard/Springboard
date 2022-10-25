@@ -6,11 +6,8 @@ class MarkovMachine {
   /** build markov machine; read in text.*/
 
   constructor(text) {
-    let words = text.split(/[ \r\n]+/);
+    let words = text.split(/[ \r\n]+/);   
     this.words = words.filter(c => c !== "");
-    this.words = this.words.forEach(element => {
-      return element.toLowerCase();
-    });
     this.chain = {};
     this.makeChains();
   }
