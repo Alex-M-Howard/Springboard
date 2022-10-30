@@ -5,10 +5,6 @@ const { CLIENT_RENEG_LIMIT } = require("tls");
 
 const router = new express.Router();
 
-router.get("/", function (req, res) {
-    res.send("HOME")
-})
-
 router.get("/items", function (req, res) {
     return res.json(items);
 })
@@ -19,7 +15,7 @@ router.post("/items", function (req, res, next) {
 
         items.push({"item": req.body.item, "cost": req.body.cost})
     
-        return res.json({ 'added': { 'name': req.body.item, 'cost': req.body.cost } })
+        return res.json({ 'added': { 'item': req.body.item, 'cost': req.body.cost } })
     } catch (err) {
         next(err)
     }
