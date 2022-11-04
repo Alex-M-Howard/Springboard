@@ -4,7 +4,7 @@ const axios = require('axios');
 
 /** handle output: write to file if out given, else print */
 
-function handleOutput(text, out) {
+function handleOutput(texta, out) {
   if (out) {
     fs.writeFile(out, text, 'utf8', function(err) {
       if (err) {
