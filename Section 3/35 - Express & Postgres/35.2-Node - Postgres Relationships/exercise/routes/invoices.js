@@ -9,7 +9,7 @@ router.get("/", async function (req, res, next) {
 
     return res.json({ invoices: results.rows });
   } catch (err) {
-    return next(err);
+    next(err);
   }
 });
 
@@ -33,11 +33,11 @@ router.get("/:id", async function (req, res, next) {
     );
 
     if (results.rows.length < 1) {
-      return res.status(404).json([{ message: "Invoice Not Found" }]);
+      throw new ExpressError(`Invoice ${req.params.id} not found`, 404);
     }
     return res.status(200).json({ invoice: results.rows });
   } catch (err) {
-    return next(err);
+    next(err);
   }
 });
 
@@ -55,7 +55,7 @@ router.post("/", async function (req, res, next) {
 
     return res.status(201).json({ invoice: results.rows });
   } catch (err) {
-    return next(err);
+    next(err);
   }
 });
 
@@ -72,11 +72,11 @@ router.patch("/:id", async function (req, res, next) {
     );
 
     if (results.rows.length < 1) {
-      return res.status(404).json([{ message: "Invoice Not Found" }]);
+      throw new ExpressError(`Invoice ${req.params.id} not found`, 404);
     }
     return res.status(200).json({ invoice: results.rows });
   } catch (err) {
-    return next(err);
+    next(err);
   }
 });
 
@@ -90,11 +90,11 @@ router.delete("/:id", async function (req, res, next) {
     );
 
     if (results.rowCount === 0) {
-      return res.status(404).json([{ message: "Invoice Not Found" }]);
+      throw new ExpressError(`Invoice ${req.params.id} not found`, 404);
     }
     return res.status(200).json({ message: "Deleted" });
   } catch (err) {
-    return next(err);
+    next(err);
   }
 });
 

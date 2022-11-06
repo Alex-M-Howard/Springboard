@@ -10,7 +10,7 @@ router.get("/", async function (req, res, next) {
         return res.json({ companies: results.rows });
     }
     catch (err) {
-        return next(err);
+        next(err);
     }
 })
 
@@ -22,7 +22,7 @@ router.get("/:code", async function (req, res, next) {
         const invResult = await db.query(`
         SELECT id FROM invoices WHERE comp_code=$1`, [req.params.code]);
 
-        if (compResult.rows.length < 1) { return res.status(404).json([{ "message": "Company Not Found" }]) }
+        if (compResult.rows.length < 1) { throw new ExpressError(`No such company: ${req.params.code}`, 404); }
         
         const company = compResult.rows[0];
         const invoices = invResult.rows;
@@ -31,7 +31,7 @@ router.get("/:code", async function (req, res, next) {
         return res.status(200).json({ "company": company });
     }
     catch (err) {
-        return next(err);
+        next(err);
     }
 })
 
@@ -48,7 +48,7 @@ router.post("/", async function (req, res, next) {
         return res.status(201).json({ company: results.rows });
     }
     catch (err) {
-        return next(err);
+        next(err);
     }
 })
 
@@ -64,11 +64,11 @@ router.patch("/:code", async function (req, res, next) {
             [name, description, req.params.code]
         );
 
-        if (results.rows.length < 1) {return res.status(404).json([{ message: "Company Not Found" }])}
+        if (results.rows.length < 1) {throw new ExpressError(`No such company: ${req.params.code}`, 404);}
         return res.status(200).json({ company: results.rows });
     }
     catch (err) {
-        return next(err);
+        next(err);
     }
 })
 
@@ -81,11 +81,11 @@ router.delete("/:code", async function (req, res, next) {
             [req.params.code]
         );
 
-        if (results.rowCount === 0) { return res.status(404).json([{message:"Company Not Found"}])}
+        if (results.rowCount === 0) { throw new ExpressError(`No such company: ${req.params.code}`, 404);}
         return res.status(200).json({ message: "Deleted" });
     }
     catch (err) {
-        return next(err);
+        next(err);
     }
 })
 
