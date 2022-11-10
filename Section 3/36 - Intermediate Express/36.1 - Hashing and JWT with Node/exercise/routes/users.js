@@ -34,6 +34,9 @@ router.post("/", async function (req, res, next) {
         return res.send(user);
 
     } catch (e) {
+        if (e.code === '23505') {
+            return next(new ExpressError("Username already taken. Pick another!", 400))
+        }
         return next(e)
     }
 
