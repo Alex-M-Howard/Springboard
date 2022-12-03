@@ -1,48 +1,16 @@
 /** User class for message.ly */
 
-const db = require("../db")
-const bcrypt = require("bcrypt");
-const ExpressError = require("../expressError");
-const { BCRYPT_WORK_FACTOR } = require("../config");
 
 
 /** User of the site. */
 
 class User {
 
-  constructor({ username, password, first_name, last_name, phone }) {
-    this.username = username;
-    this.password = password;
-    this.first_name = first_name;
-    this.last_name = last_name;
-    this.phone = phone;
-  }
-
   /** register new user -- returns
    *    {username, password, first_name, last_name, phone}
    */
 
-  static async register({ username, password, first_name, last_name, phone }) {
-   
-      //hash password
-      const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
-
-      const result = await db.query(
-        `
-        INSERT INTO users (
-                username,
-                password,
-                first_name,
-                last_name,
-                phone,
-                join_at)
-        VALUES ($1, $2, $3, $4, $5, current_timestamp)
-        RETURNING username, first_name, last_name, phone, join_at`,
-
-        [username, hashedPassword, first_name, last_name, phone]);
-
-      return new Object(result.rows[0])
-   }
+  static async register({username, password, first_name, last_name, phone}) { }
 
   /** Authenticate: is this username/password valid? Returns boolean. */
 
@@ -55,17 +23,7 @@ class User {
   /** All: basic info on all users:
    * [{username, first_name, last_name, phone}, ...] */
 
-  static async all() {
-    const results = await db.query(
-      `SELECT
-        username,
-        first_name,
-        last_name,
-        phone
-      FROM users`
-    );
-    return results.rows.map(u => new User(u))
-   }
+  static async all() { }
 
   /** Get: get user by username
    *
