@@ -24,13 +24,13 @@ app.use(morgan('combined'))
 
 /** routes */
 
-//const authRoutes = require("./routes/auth");
+const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/users");
-//const messageRoutes = require("./routes/messages");
+const messageRoutes = require("./routes/messages");
 
-//app.use("/auth", authRoutes);
+app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
-//app.use("/messages", messageRoutes);
+app.use("/messages", messageRoutes);
 
 /** 404 handler */
 
@@ -46,8 +46,7 @@ app.use(function(err, req, res, next) {
   if (process.env.NODE_ENV != "test") console.error(err.stack);
 
   return res.json({
-    error: err,
-    message: err.message
+    error: err
   });
 });
 

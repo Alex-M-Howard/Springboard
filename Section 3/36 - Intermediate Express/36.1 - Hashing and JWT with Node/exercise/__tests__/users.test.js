@@ -24,7 +24,7 @@ describe("Test User class", function () {
       last_name: "Burton",
       phone: "+14155551212",
     });
-
+    console.log(u);
     expect(u.username).toBe("joel");
     expect(u.password).not.toBe(undefined);
   });
@@ -32,9 +32,13 @@ describe("Test User class", function () {
   test("can authenticate", async function () {
     let isValid = await User.authenticate("test", "password");
     expect(isValid).toBeTruthy();
-
-    isValid =  await User.authenticate("test", "xxx");
-    expect(isValid).toBeFalsy();
+    
+    try {
+      isValid = await User.authenticate("test", "xxx");
+    } catch (error) {
+      expect.stringContaining("Invalid user/password");
+    } 
+    
   });
 
 
