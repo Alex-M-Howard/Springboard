@@ -20,7 +20,7 @@ router.get("/", authenticateJWT, ensureLoggedIn, async (req, res, next) => {
 
 
 
-/** GET /:username - get detail of users.
+/** GET /:username - get detail of user.
  *
  * => {user: {username, first_name, last_name, phone, join_at, last_login_at}}
  *
