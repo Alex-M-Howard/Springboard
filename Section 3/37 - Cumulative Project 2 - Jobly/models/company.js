@@ -100,6 +100,8 @@ class Company {
    */
 
   static async update(handle, data) {
+
+    console.log(data);
     const { setCols, values } = sqlForPartialUpdate(
         data,
         {
