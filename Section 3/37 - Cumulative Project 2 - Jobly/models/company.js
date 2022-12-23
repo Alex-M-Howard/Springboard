@@ -178,7 +178,7 @@ class Company {
       
       if (column === "nameLike"){
         values[idx] = `%${values[idx].toLowerCase()}%`;
-        return `LOWER(name) LIKE LOWER($${idx + 1})`;
+        return `name ILIKE $${idx + 1}`;
       }
     });
 
