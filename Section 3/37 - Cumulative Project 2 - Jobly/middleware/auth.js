@@ -15,12 +15,15 @@ const { UnauthorizedError } = require("../expressError");
  * It's not an error if no token was provided or if the token is not valid.
  */
 
-function authenticateJWT(req, res, next) {
+async function authenticateJWT(req, res, next) {
   try {
     const authHeader = req.headers && req.headers.authorization;
     if (authHeader) {
       const token = authHeader.replace(/^[Bb]earer /, "").trim();
       res.locals.user = jwt.verify(token, SECRET_KEY);
+      
+      let isAdmin = await db.query(`SELECT is_admin FROM users WHERE username = $1`, [res.locals.user.username]);
+      res.locals.user.isAdmin = isAdmin.rows[0].is_admin;
     }
     return next();
   } catch (err) {
