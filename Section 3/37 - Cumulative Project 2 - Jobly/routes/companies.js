@@ -60,7 +60,7 @@ router.get("/", async function (req, res, next) {
       results = await Company.getFilteredCompanies(req.query)
     }
 
-    return res.json({ results });
+    return res.json({ companies: results });
 
   } catch (err) {
     return next(err);
