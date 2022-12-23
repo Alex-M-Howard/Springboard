@@ -177,18 +177,18 @@ class Company {
       }
       
       if (column === "nameLike"){
-        values[idx] = values[idx].toLowerCase();
-        return `nameLike LIKE "%$${idx + 1}%"`;
+        values[idx] = `%${values[idx].toLowerCase()}%`;
+        return `name LIKE $${idx + 1}`;
       }
     });
 
     
-    cols = cols.join(", ")
+    cols = cols.join(" AND ")
 
-    // If min and max specified, replace the comma with AND
-    if (cols.split("num_employees").length - 1 > 1) {
-      cols = cols.replace("num_employees >= $1, num_employees <= $2", "num_employees >= $1 AND num_employees <= $2");
-    }
+    // // If min and max specified, replace the comma with AND
+    // if (cols.split("num_employees").length - 1 > 1) {
+    //   cols = cols.replace("num_employees >= $1, num_employees <= $2", "num_employees >= $1 AND num_employees <= $2");
+    // }
 
     const querySql = `SELECT handle,
                              name,
@@ -199,7 +199,7 @@ class Company {
                       WHERE ${cols}
                       `;
     
-    
+    console.log(values)
     console.log(querySql);
     const result = await db.query(querySql, [...values]);
     
