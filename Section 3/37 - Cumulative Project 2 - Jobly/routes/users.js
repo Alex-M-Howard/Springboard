@@ -5,7 +5,7 @@
 const jsonschema = require("jsonschema");
 
 const express = require("express");
-const { ensureLoggedIn } = require("../middleware/auth");
+const {authenticateJWT,ensureLoggedIn,ensureAdmin,} = require("../middleware/auth");
 const { BadRequestError } = require("../expressError");
 const User = require("../models/user");
 const { createToken } = require("../helpers/tokens");
@@ -27,7 +27,7 @@ const router = express.Router();
  * Authorization required: login
  **/
 
-router.post("/", ensureLoggedIn, async function (req, res, next) {
+router.post("/", authenticateJWT, ensureLoggedIn, ensureAdmin, async function (req, res, next) {
   try {
     const validator = jsonschema.validate(req.body, userNewSchema);
     if (!validator.valid) {
@@ -51,14 +51,20 @@ router.post("/", ensureLoggedIn, async function (req, res, next) {
  * Authorization required: login
  **/
 
-router.get("/", ensureLoggedIn, async function (req, res, next) {
-  try {
-    const users = await User.findAll();
-    return res.json({ users });
-  } catch (err) {
-    return next(err);
+router.get(
+  "/",
+  authenticateJWT,
+  ensureLoggedIn,
+  ensureAdmin,
+  async function (req, res, next) {
+    try {
+      const users = await User.findAll();
+      return res.json({ users });
+    } catch (err) {
+      return next(err);
+    }
   }
-});
+);
 
 
 /** GET /[username] => { user }
@@ -68,14 +74,23 @@ router.get("/", ensureLoggedIn, async function (req, res, next) {
  * Authorization required: login
  **/
 
-router.get("/:username", ensureLoggedIn, async function (req, res, next) {
-  try {
-    const user = await User.get(req.params.username);
-    return res.json({ user });
-  } catch (err) {
-    return next(err);
+router.get(
+  "/:username",
+  authenticateJWT,
+  ensureLoggedIn,
+  async function (req, res, next) {
+    try {
+
+      const user = await User.get(req.params.username);
+      if (res.locals.user.username === user.username || res.locals.user.isAdmin) {
+        return res.json({ user });
+      }
+      throw new UnauthorizedError();
+    } catch (err) {
+      return next(err);
+    }
   }
-});
+);
 
 
 /** PATCH /[username] { user } => { user }
@@ -88,20 +103,30 @@ router.get("/:username", ensureLoggedIn, async function (req, res, next) {
  * Authorization required: login
  **/
 
-router.patch("/:username", ensureLoggedIn, async function (req, res, next) {
-  try {
-    const validator = jsonschema.validate(req.body, userUpdateSchema);
-    if (!validator.valid) {
-      const errs = validator.errors.map(e => e.stack);
-      throw new BadRequestError(errs);
-    }
+router.patch(
+  "/:username",
+  authenticateJWT,
+  ensureLoggedIn,
 
-    const user = await User.update(req.params.username, req.body);
-    return res.json({ user });
-  } catch (err) {
-    return next(err);
+  async function (req, res, next) {
+    try {
+      const validator = jsonschema.validate(req.body, userUpdateSchema);
+      if (!validator.valid) {
+        const errs = validator.errors.map((e) => e.stack);
+        throw new BadRequestError(errs);
+      }
+
+
+      const user = await User.update(req.params.username, req.body);
+      if (res.locals.user.username === user.username || res.locals.user.isAdmin) {
+        return res.json({ user });
+      }
+      throw new UnauthorizedError();
+    } catch (err) {
+      return next(err);
+    }
   }
-});
+);
 
 
 /** DELETE /[username]  =>  { deleted: username }
@@ -109,10 +134,14 @@ router.patch("/:username", ensureLoggedIn, async function (req, res, next) {
  * Authorization required: login
  **/
 
-router.delete("/:username", ensureLoggedIn, async function (req, res, next) {
+router.delete("/:username", authenticateJWT, ensureLoggedIn, async function (req, res, next) {
   try {
-    await User.remove(req.params.username);
-    return res.json({ deleted: req.params.username });
+    if (res.locals.user.username === req.params.username || res.locals.user.isAdmin) {
+
+      await User.remove(req.params.username);
+      return res.json({ deleted: req.params.username });
+    }
+    throw new UnauthorizedError();
   } catch (err) {
     return next(err);
   }
