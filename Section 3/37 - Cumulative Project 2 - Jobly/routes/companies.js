@@ -5,7 +5,7 @@
 const jsonschema = require("jsonschema");
 const express = require("express");
 
-const { BadRequestError } = require("../expressError");
+const { BadRequestError, ExpressError } = require("../expressError");
 const { ensureLoggedIn } = require("../middleware/auth");
 const Company = require("../models/company");
 
@@ -52,36 +52,21 @@ router.post("/", ensureLoggedIn, async function (req, res, next) {
 
 router.get("/", async function (req, res, next) {
   try {
-    let companies = await Company.findAll();
+    let results;
 
-    const minEmployees = req.query.minEmployees
-    const maxEmployees = req.query.maxEmployees
-    const nameLike = req.query.nameLike
-
-    if (minEmployees) {
-      companies = companies.filter(c => {
-        return c.numEmployees >= minEmployees;
-      })
+    if (!Object.keys(req.query).length) {
+      results = await Company.findAll();
+    } else {
+      results = await Company.getFilteredCompanies(req.query)
     }
 
-    if (maxEmployees) {
-      companies = companies.filter(c => {
-        return c.numEmployees <= maxEmployees;
-      })
-    }
+    return res.json({ results });
 
-    if (nameLike) {
-      companies = companies.filter(c => {
-        return c.name.toLowerCase().includes(nameLike.toLowerCase())
-      })
-    }
-
-
-    return res.json({ companies });
   } catch (err) {
     return next(err);
   }
 });
+
 
 /** GET /[handle]  =>  { company }
  *
