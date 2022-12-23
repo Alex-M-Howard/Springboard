@@ -1,7 +1,7 @@
 "use strict";
 
 const db = require("../db.js");
-const { BadRequestError, NotFoundError } = require("../expressError");
+const { BadRequestError, NotFoundError, ExpressError } = require("../expressError");
 const Company = require("./company.js");
 const {
   commonBeforeAll,
@@ -9,6 +9,7 @@ const {
   commonAfterEach,
   commonAfterAll,
 } = require("./_testCommon");
+
 
 beforeAll(commonBeforeAll);
 beforeEach(commonBeforeEach);
@@ -107,6 +108,74 @@ describe("get", function () {
       fail();
     } catch (err) {
       expect(err instanceof NotFoundError).toBeTruthy();
+    }
+  });
+});
+
+/************************************** get with filters*/
+
+describe("get with filters", function () {
+  test("works with all filters finding something", async function () {
+    let companies = await Company.getFilteredCompanies({
+      minEmployees: 1,
+      maxEmployees: 10,
+      nameLike: "c"
+    });
+    expect(companies.length).toEqual(3);
+  });
+  
+  test("works with all filters with nothing found", async function () {
+    let companies = await Company.getFilteredCompanies({
+      minEmployees: 10,
+      maxEmployees: 20,
+      nameLike: "c"
+    });
+    expect(companies.length).toEqual(0);
+  });
+
+  test("works with 2 filters finding something", async function () {
+    let companies = await Company.getFilteredCompanies({
+      minEmployees: 2,
+      maxEmployees: 3,
+    });
+    expect(companies.length).toEqual(2);
+  });
+
+  test("works with 2 filters with nothing found", async function () {
+    let companies = await Company.getFilteredCompanies({
+      minEmployees: 10,
+      nameLike: "DAVE"
+    });
+    expect(companies.length).toEqual(0);
+  });
+
+  test("works with 1 filter finding something", async function () {
+    let companies = await Company.getFilteredCompanies({
+      nameLike: "1"
+      });
+    expect(companies.length).toEqual(1);
+  });
+
+  test("works with 1 filter with nothing found", async function () {
+    let companies = await Company.getFilteredCompanies({
+      minEmployees: 10,
+    });
+    expect(companies.length).toEqual(0);
+  });
+
+  test("works with no data passed", async function () {
+    try {
+      let companies = await Company.getFilteredCompanies();    
+    } catch (err) {
+      expect(err instanceof ExpressError).toBeTruthy();
+    }
+  });
+
+  test("minEmployees > maxEmployees should error", async function () {
+    try {
+      await Company.getFilteredCompanies({minEmployees:10, maxEmployees:0});
+      } catch (err) {
+      expect(err instanceof ExpressError).toBeTruthy();
     }
   });
 });
