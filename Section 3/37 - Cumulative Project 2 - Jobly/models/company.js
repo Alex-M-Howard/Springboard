@@ -185,11 +185,6 @@ class Company {
     
     cols = cols.join(" AND ")
 
-    // // If min and max specified, replace the comma with AND
-    // if (cols.split("num_employees").length - 1 > 1) {
-    //   cols = cols.replace("num_employees >= $1, num_employees <= $2", "num_employees >= $1 AND num_employees <= $2");
-    // }
-
     const querySql = `SELECT handle,
                              name,
                              description,
