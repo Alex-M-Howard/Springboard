@@ -155,7 +155,7 @@ class Company {
    * Throws error if minEmployees > maxEmployees
    * 
    * This will be a similar method to the helper
-   * sqlForPartialUpdate
+   * sqlForPartialUpdate where we create parameterized query
    */
 
   static async getFilteredCompanies(data) {
@@ -167,16 +167,16 @@ class Company {
     const keys = Object.keys(data);
     const values = Object.values(data);
     
-    let cols = keys.map((column, idx) => {
-      if (column === "minEmployees") {
+    let cols = keys.map((col, idx) => {
+      if (col === "minEmployees") {
          return `num_employees >= $${idx + 1}`;
       }
       
-      if (column === "maxEmployees") {
+      if (col === "maxEmployees") {
         return `num_employees <= $${idx + 1}`;
       }
       
-      if (column === "nameLike"){
+      if (col === "nameLike"){
         values[idx] = `%${values[idx].toLowerCase()}%`;
         return `name ILIKE $${idx + 1}`;
       }
@@ -194,8 +194,6 @@ class Company {
                       WHERE ${cols}
                       `;
     
-    console.log(values)
-    console.log(querySql);
     const result = await db.query(querySql, [...values]);
     
     return result.rows;
