@@ -159,7 +159,12 @@ class Company {
    */
 
   static async getFilteredCompanies(data) {
-    
+    try {
+      Object.keys(data).length
+    } catch (error) {
+      return new ExpressError("No data provided", 400);
+    }
+
     if (data["minEmployees"] > data["maxEmployees"]) {
       return new ExpressError("minEmployees cannot be greater than maxEmployees", 400)
     }
