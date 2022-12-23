@@ -124,7 +124,7 @@ describe("GET /users", function () {
           firstName: "U1F",
           lastName: "U1L",
           email: "user1@user.com",
-          isAdmin: false,
+          isAdmin: true,
         },
         {
           username: "u2",
@@ -153,12 +153,13 @@ describe("GET /users", function () {
   test("fails: test next() handler", async function () {
     // there's no normal failure event which will cause this route to fail ---
     // thus making it hard to test that the error-handler works with it. This
-    // should cause an error, all right :)
+    // should cause an error, all right :) -> Not authorized error since u1
+    // will no longer be an authorized user afterwards
     await db.query("DROP TABLE users CASCADE");
     const resp = await request(app)
         .get("/users")
         .set("authorization", `Bearer ${u1Token}`);
-    expect(resp.statusCode).toEqual(500);
+    expect(resp.statusCode).toEqual(401);
   });
 });
 
@@ -175,6 +176,21 @@ describe("GET /users/:username", function () {
         firstName: "U1F",
         lastName: "U1L",
         email: "user1@user.com",
+        isAdmin: true,
+      },
+    });
+  });
+
+  test("works for users who aren't current user", async function () {
+    const resp = await request(app)
+        .get(`/users/u2`)
+        .set("authorization", `Bearer ${u1Token}`);
+    expect(resp.body).toEqual({
+      user: {
+        username: "u2",
+        firstName: "U2F",
+        lastName: "U2L",
+        email: "user2@user.com",
         isAdmin: false,
       },
     });
@@ -210,7 +226,7 @@ describe("PATCH /users/:username", () => {
         firstName: "New",
         lastName: "U1L",
         email: "user1@user.com",
-        isAdmin: false,
+        isAdmin: true,
       },
     });
   });
@@ -257,7 +273,7 @@ describe("PATCH /users/:username", () => {
         firstName: "U1F",
         lastName: "U1L",
         email: "user1@user.com",
-        isAdmin: false,
+        isAdmin: true,
       },
     });
     const isSuccessful = await User.authenticate("u1", "new-password");
