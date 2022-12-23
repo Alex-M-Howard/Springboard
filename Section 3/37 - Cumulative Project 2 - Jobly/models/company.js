@@ -1,7 +1,7 @@
 "use strict";
 
 const db = require("../db");
-const { BadRequestError, NotFoundError } = require("../expressError");
+const { BadRequestError, NotFoundError, ExpressError } = require("../expressError");
 const { sqlForPartialUpdate } = require("../helpers/sql");
 
 /** Related functions for companies. */
@@ -44,6 +44,7 @@ class Company {
     return company;
   }
 
+
   /** Find all companies.
    *
    * Returns [{ handle, name, description, numEmployees, logoUrl }, ...]
@@ -60,6 +61,7 @@ class Company {
            ORDER BY name`);
     return companiesRes.rows;
   }
+
 
   /** Given a company handle, return data about company.
    *
@@ -87,6 +89,7 @@ class Company {
     return company;
   }
 
+
   /** Update company data with `data`.
    *
    * This is a "partial update" --- it's fine if data doesn't contain all the
@@ -101,7 +104,6 @@ class Company {
 
   static async update(handle, data) {
 
-    console.log(data);
     const { setCols, values } = sqlForPartialUpdate(
         data,
         {
@@ -126,6 +128,7 @@ class Company {
     return company;
   }
 
+
   /** Delete given company from database; returns undefined.
    *
    * Throws NotFoundError if company not found.
@@ -142,6 +145,68 @@ class Company {
 
     if (!company) throw new NotFoundError(`No company: ${handle}`);
   }
+
+
+  /** Get companies that match query string variables
+   * minEmployees
+   * maxEmployees
+   * nameLike
+   * 
+   * Throws error if minEmployees > maxEmployees
+   * 
+   * This will be a similar method to the helper
+   * sqlForPartialUpdate
+   */
+
+  static async getFilteredCompanies(data) {
+    
+    if (data["minEmployees"] > data["maxEmployees"]) {
+      return new ExpressError("minEmployees cannot be greater than maxEmployees", 400)
+    }
+
+    const keys = Object.keys(data);
+    const values = Object.values(data);
+    
+    let cols = keys.map((column, idx) => {
+      if (column === "minEmployees") {
+         return `num_employees >= $${idx + 1}`;
+      }
+      
+      if (column === "maxEmployees") {
+        return `num_employees <= $${idx + 1}`;
+      }
+      
+      if (column === "nameLike"){
+        values[idx] = values[idx].toLowerCase();
+        return `nameLike LIKE "%$${idx + 1}%"`;
+      }
+    });
+
+    
+    cols = cols.join(", ")
+
+    // If min and max specified, replace the comma with AND
+    if (cols.split("num_employees").length - 1 > 1) {
+      cols = cols.replace("num_employees >= $1, num_employees <= $2", "num_employees >= $1 AND num_employees <= $2");
+    }
+
+    const querySql = `SELECT handle,
+                             name,
+                             description,
+                             num_employees AS "numEmployees",
+                             logo_url AS "logoUrl" 
+                      FROM companies
+                      WHERE ${cols}
+                      `;
+    
+    
+    console.log(querySql);
+    const result = await db.query(querySql, [...values]);
+    
+    return result.rows;
+
+  }
+
 }
 
 
