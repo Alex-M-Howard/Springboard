@@ -45,6 +45,8 @@ class Company {
   }
 
 
+
+
   /** Find all companies.
    *
    * Returns [{ handle, name, description, numEmployees, logoUrl }, ...]
@@ -62,6 +64,8 @@ class Company {
 
     return companiesRes.rows;
   }
+
+
 
 
   /** Given a company handle, return data about company.
@@ -89,6 +93,8 @@ class Company {
 
     return company;
   }
+
+
 
 
   /** Update company data with `data`.
@@ -130,6 +136,8 @@ class Company {
   }
 
 
+
+
   /** Delete given company from database; returns undefined.
    *
    * Throws NotFoundError if company not found.
@@ -148,6 +156,8 @@ class Company {
   }
 
 
+
+  
   /** Get companies that match query string variables
    * minEmployees
    * maxEmployees
