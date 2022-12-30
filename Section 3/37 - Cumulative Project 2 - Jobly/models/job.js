@@ -28,6 +28,17 @@ class Job {
     if (duplicateCheck.rows[0])
       throw new BadRequestError(`Duplicate job: ${company_handle} - ${title}`);
 
+    const checkCompanyExists = await db.query(
+      `SELECT handle
+       FROM companies
+       WHERE handle = $1`,
+      [company_handle]
+    );
+
+    if (!checkCompanyExists.rows[0]) {
+      throw new BadRequestError(`No company: ${company_handle}`);
+    }
+    
     const result = await db.query(
       `INSERT INTO jobs
            (title, salary, equity, company_handle)
@@ -83,6 +94,30 @@ class Job {
     return job;
   }
 
+  /** Given a copmany handle, return all jobs at company
+   *
+   * Returns { title, salary, equity}
+   *
+   ** Throws NotFoundError if not found.
+   **/
+
+  static async getCompanyJobs(company_handle) {
+    const jobsResponse = await db.query(
+      `SELECT title,
+              salary,
+              equity
+        FROM jobs
+        WHERE company_handle=$1`,
+      [company_handle]
+    );
+
+    const jobs = jobsResponse.rows;
+
+    if (!jobs) throw new NotFoundError(`No company: ${company_handle}`);
+
+    return jobs;
+  }
+
   /** Update job data with `data`.
    *
    * This is a "partial update" --- it's fine if data doesn't contain all the
@@ -111,7 +146,7 @@ class Job {
 
     const querySql = `UPDATE jobs
                       SET ${setCols} 
-                      WHERE title = ${oldTitleIdx} AND company_handle = ${companyHandleVarIdx}
+                      WHERE title ILIKE ${oldTitleIdx} AND company_handle ILIKE ${companyHandleVarIdx}
                       RETURNING title, 
                                 salary, 
                                 equity, 
@@ -131,10 +166,21 @@ class Job {
    **/
 
   static async remove(title, company_handle) {
+    const checkExist = await db.query(
+      `SELECT handle
+       FROM companies
+       WHERE handle ILIKE $1`,
+      [company_handle]
+    );
+
+    if (!checkExist.rows[0]) {
+      throw new NotFoundError(`No company: ${company_handle}`);
+    }
+
     const result = await db.query(
       `DELETE
            FROM jobs
-           WHERE title = $1 AND company_handle = $2
+           WHERE title ILIKE $1 AND company_handle ILIKE $2
            RETURNING NULL
           `,
       [title, company_handle]
