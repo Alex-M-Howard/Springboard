@@ -4,7 +4,7 @@ const db = require("../db.js");
 const {BadRequestError,NotFoundError,ExpressError } = require("../expressError");
 const { sqlForPartialUpdate } = require("../helpers/sql");
 
-/** Related functions for companies. */
+/** Related functions for jobs. */
 
 class Job {
   /** Create a job (from data), update db, return new job data.
@@ -38,7 +38,7 @@ class Job {
     if (!checkCompanyExists.rows[0]) {
       throw new BadRequestError(`No company: ${company_handle}`);
     }
-    
+
     const result = await db.query(
       `INSERT INTO jobs
            (title, salary, equity, company_handle)
@@ -50,6 +50,9 @@ class Job {
 
     return job;
   }
+
+
+
 
   /** Find all jobs.
    *
@@ -68,6 +71,9 @@ class Job {
 
     return jobsResponse.rows;
   }
+
+
+
 
   /** Given a job title and copmany handle, return data about job.
    *
@@ -94,6 +100,9 @@ class Job {
     return job;
   }
 
+
+
+
   /** Given a copmany handle, return all jobs at company
    *
    * Returns { title, salary, equity}
@@ -102,6 +111,17 @@ class Job {
    **/
 
   static async getCompanyJobs(company_handle) {
+    const companyExists = await db.query(
+      `SELECT handle
+        FROM companies
+        WHERE handle=$1`,
+      [company_handle]
+    );
+
+    if (!companyExists.rows[0]){
+      throw new NotFoundError(`No company: ${company_handle}`);
+    }
+
     const jobsResponse = await db.query(
       `SELECT title,
               salary,
@@ -113,10 +133,11 @@ class Job {
 
     const jobs = jobsResponse.rows;
 
-    if (!jobs) throw new NotFoundError(`No company: ${company_handle}`);
-
     return jobs;
   }
+
+
+
 
   /** Update job data with `data`.
    *
@@ -140,7 +161,7 @@ class Job {
       salary: "salary",
       equity: "equity",
     });
-    
+
     const oldTitleIdx = "$" + (values.length + 1);
     const companyHandleVarIdx = "$" + (values.length + 2);
 
@@ -151,14 +172,22 @@ class Job {
                                 salary, 
                                 equity, 
                                 company_handle`;
-       
-    const result = await db.query(querySql, [...values, oldTitle, company_handle]);
+
+    const result = await db.query(querySql, [
+      ...values,
+      oldTitle,
+      company_handle,
+    ]);
     const job = result.rows[0];
 
-    if (!job) throw new NotFoundError(`No job: ${company_handle} - ${oldTitle}`);
+    if (!job)
+      throw new NotFoundError(`No job: ${company_handle} - ${oldTitle}`);
 
     return job;
   }
+
+
+
 
   /** Delete given job from database; returns undefined.
    *
@@ -186,12 +215,68 @@ class Job {
       [title, company_handle]
     );
     const job = result.rows[0];
-    
-    if (!job) throw new NotFoundError(`No job: ${company_handle} - ${title}`);
-    
-  }
- 
 
+    if (!job) throw new NotFoundError(`No job: ${company_handle} - ${title}`);
+  }
+
+
+
+
+  /** Get jobs that match query string variables
+   * title
+   * minSalary
+   * hasEquity
+   *
+   *
+   * This will be a similar method to the helper
+   * sqlForPartialUpdate where we create parameterized query
+   */
+
+  static async getFilteredJobs(data) {
+    try {
+      Object.keys(data).length;
+    } catch (error) {
+      return new ExpressError("No data provided", 400);
+    }
+
+    const keys = Object.keys(data);
+    const values = Object.values(data);
+
+    let cols = keys.map((col, idx) => {
+      if (col === "title") {
+        return `title ILIKE $${idx + 1}`;
+      }
+
+      if (col === "minSalary") {
+        return `salary >= $${idx + 1}`;
+      }
+
+      if (col === "hasEquity") {
+        values.splice(idx, 1);
+        if (data.hasEquity === "true") {
+          return `equity > 0`;
+        }
+      }
+    });
+    
+    if (cols.indexOf(undefined) !== -1) {
+      cols.splice(cols.indexOf(undefined), 1);   // HasEquity is false, but undefined is still in the array
+    };
+
+    cols = cols.join(" AND ");
+
+    const querySql = `SELECT title,
+                             salary,
+                             equity,
+                             company_handle
+                      FROM jobs
+                      WHERE ${cols}
+                      `;
+console.log(querySql, values);
+    const result = await db.query(querySql, [...values]);
+    
+    return result.rows;
+  }
 }
 
 module.exports = Job;

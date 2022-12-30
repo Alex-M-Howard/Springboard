@@ -64,12 +64,12 @@ router.post(
 router.get("/", async function (req, res, next) {
   try {
     let results;
-
-    //if (!Object.keys(req.query).length) {
+    
+    if (!Object.keys(req.query).length) {
       results = await Job.findAll();
-    //} else {
-    //  results = await Job.getFilteredCompanies(req.query);
-    //}
+    } else {
+     results = await Job.getFilteredJobs(req.query);
+    }
 
     return res.json({ jobs: results });
   } catch (err) {
