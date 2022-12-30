@@ -55,6 +55,16 @@ describe("create", function () {
       expect(err instanceof BadRequestError).toBeTruthy();
     }
   });
+
+  test("bad request with unknown company", async function () {
+    try {
+      newJob.company_handle = "nope";
+      await Job.create(newJob);
+      fail();
+    } catch (err) {
+      expect(err instanceof BadRequestError).toBeTruthy();
+    }
+  });
 });
 
 /************************************** findAll */
