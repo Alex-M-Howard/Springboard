@@ -117,7 +117,6 @@ class Job {
                                 equity, 
                                 company_handle`;
        
-    console.log(querySql);
     const result = await db.query(querySql, [...values, oldTitle, company_handle]);
     const job = result.rows[0];
 
@@ -136,13 +135,16 @@ class Job {
       `DELETE
            FROM jobs
            WHERE title = $1 AND company_handle = $2
-           RETURNING undefined`,
+           RETURNING NULL
+          `,
       [title, company_handle]
     );
     const job = result.rows[0];
-
+    
     if (!job) throw new NotFoundError(`No job: ${company_handle} - ${title}`);
+    
   }
+ 
 
 }
 

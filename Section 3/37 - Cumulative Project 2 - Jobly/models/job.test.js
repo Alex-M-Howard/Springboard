@@ -52,7 +52,6 @@ describe("create", function () {
       await Job.create(newJob);
       fail();
     } catch (err) {
-      console.log(err);
       expect(err instanceof BadRequestError).toBeTruthy();
     }
   });
@@ -239,10 +238,9 @@ describe("update", function () {
 
   test("not found if no such job", async function () {
     try {
-      await Job.update(title="nope", company_handle='noad', updateData);
+      await Job.update(title="nope", company_handle='nope', updateData);
       fail();
     } catch (err) {
-      console.log(err);
       expect(err instanceof NotFoundError).toBeTruthy();
     }
   });
@@ -259,21 +257,23 @@ describe("update", function () {
 
 // /************************************** remove */
 
-// describe("remove", function () {
-//   test("works", async function () {
-//     await Job.remove("c1");
-//     const res = await db.query(
-//       "SELECT handle F`ROM jobs WHERE handle='c1'"
-//     );
-//     expect(res.rows.length).toEqual(0);
-//   });
+describe("remove", function () {
+  test("works", async function () {
 
-//   test("not found if no such job", async function () {
-//     try {
-//       await Job.remove("nope");
-//       fail();
-//     } catch (err) {
-//       expect(err instanceof NotFoundError).toBeTruthy();
-//     }
-//   });
-// });
+    await Job.remove(title="j1", company_handle="c1");
+    const res = await db.query(
+      "SELECT company_handle FROM jobs WHERE title='j1' AND company_handle='c1'"
+    );
+    
+    expect(res.rows.length).toEqual(0);
+  });
+
+  test("not found if no such job", async function () {
+    try {
+      await Job.remove("nope", "nope");
+      fail();
+    } catch (err) {
+      expect(err instanceof NotFoundError).toBeTruthy();
+    }
+  });
+});
