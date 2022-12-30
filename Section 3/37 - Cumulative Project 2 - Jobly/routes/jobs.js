@@ -11,16 +11,16 @@ const {
   ensureLoggedIn,
   ensureAdmin,
 } = require("../middleware/auth");
-const Company = require("../models/job.js");
+const Job = require("../models/job.js");
 
-const companyNewSchema = require("../schemas/companyNew.json");
-const companyUpdateSchema = require("../schemas/companyUpdate.json");
+const jobNewSchema = require("../schemas/jobNew.json");
+const jobUpdateSchema = require("../schemas/jobUpdate.json");
 
 const router = new express.Router();
 
-/** POST / { company } =>  { company }
+/** POST / { job } =>  { job }
  *
- * company should be { handle, name, description, numEmployees, logoUrl }
+ * job should be { handle, name, description, numEmployees, logoUrl }
  *
  * Returns { handle, name, description, numEmployees, logoUrl }
  *
@@ -34,14 +34,14 @@ router.post(
   ensureAdmin,
   async function (req, res, next) {
     try {
-      const validator = jsonschema.validate(req.body, companyNewSchema);
+      const validator = jsonschema.validate(req.body, jobNewSchema);
       if (!validator.valid) {
         const errs = validator.errors.map((e) => e.stack);
         throw new BadRequestError(errs);
       }
 
-      const company = await Company.create(req.body);
-      return res.status(201).json({ company });
+      const job = await Job.create(req.body);
+      return res.status(201).json({ job });
     } catch (err) {
       return next(err);
     }
@@ -64,9 +64,9 @@ router.get("/", async function (req, res, next) {
     let results;
 
     if (!Object.keys(req.query).length) {
-      results = await Company.findAll();
+      results = await Job.findAll();
     } else {
-      results = await Company.getFilteredCompanies(req.query);
+      results = await Job.getFilteredCompanies(req.query);
     }
 
     return res.json({ companies: results });
@@ -75,9 +75,9 @@ router.get("/", async function (req, res, next) {
   }
 });
 
-/** GET /[handle]  =>  { company }
+/** GET /[handle]  =>  { job }
  *
- *  Company is { handle, name, description, numEmployees, logoUrl, jobs }
+ *  Job is { handle, name, description, numEmployees, logoUrl, jobs }
  *   where jobs is [{ id, title, salary, equity }, ...]
  *
  * Authorization required: none
@@ -85,16 +85,16 @@ router.get("/", async function (req, res, next) {
 
 router.get("/:handle", async function (req, res, next) {
   try {
-    const company = await Company.get(req.params.handle);
-    return res.json({ company });
+    const job = await Job.get(req.params.handle);
+    return res.json({ job });
   } catch (err) {
     return next(err);
   }
 });
 
-/** PATCH /[handle] { fld1, fld2, ... } => { company }
+/** PATCH /[handle] { fld1, fld2, ... } => { job }
  *
- * Patches company data.
+ * Patches job data.
  *
  * fields can be: { name, description, numEmployees, logo_url }
  *
@@ -105,7 +105,7 @@ router.get("/:handle", async function (req, res, next) {
 
 router.patch("/:handle", ensureLoggedIn, async function (req, res, next) {
   try {
-    const validator = jsonschema.validate(req.body, companyUpdateSchema);
+    const validator = jsonschema.validate(req.body, jobUpdateSchema);
     if (!validator.valid) {
       const errs = validator.errors.map((e) => e.stack);
       throw new BadRequestError(errs);
@@ -113,8 +113,8 @@ router.patch("/:handle", ensureLoggedIn, async function (req, res, next) {
 
     console.log(req.body);
     console.log(req.params.handle);
-    const company = await Company.update(req.params.handle, req.body);
-    return res.json({ company });
+    const job = await Job.update(req.params.handle, req.body);
+    return res.json({ job });
   } catch (err) {
     return next(err);
   }
@@ -132,7 +132,7 @@ router.delete(
   ensureAdmin,
   async function (req, res, next) {
     try {
-      await Company.remove(req.params.handle);
+      await Job.remove(req.params.handle);
       return res.json({ deleted: req.params.handle });
     } catch (err) {
       return next(err);
