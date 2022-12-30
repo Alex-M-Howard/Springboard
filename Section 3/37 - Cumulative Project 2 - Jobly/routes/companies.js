@@ -104,8 +104,6 @@ router.patch("/:handle", ensureLoggedIn, async function (req, res, next) {
       throw new BadRequestError(errs);
     }
 
-    console.log(req.body);
-    console.log(req.params.handle);
     const company = await Company.update(req.params.handle, req.body);
     return res.json({ company });
   } catch (err) {
