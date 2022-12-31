@@ -36,7 +36,6 @@ describe("POST /jobs", function () {
       .post("/jobs")
       .send(newJob)
       .set("authorization", `Bearer ${u1Token}`);
-    console.log(resp.body);
     expect(resp.statusCode).toEqual(201);
     expect(resp.body).toEqual({
       job:
@@ -161,7 +160,6 @@ describe("GET /jobs/:company_handle", function () {
 
   test("not found for no such company", async function () {
     const resp = await request(app).get(`/jobs/nope`);
-    console.log(resp);
     expect(resp.statusCode).toEqual(404);
   });
 });

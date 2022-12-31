@@ -272,7 +272,6 @@ class Job {
                       FROM jobs
                       WHERE ${cols}
                       `;
-console.log(querySql, values);
     const result = await db.query(querySql, [...values]);
     
     return result.rows;
