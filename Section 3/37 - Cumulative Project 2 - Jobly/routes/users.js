@@ -182,6 +182,9 @@ router.delete("/:username", authenticateJWT, ensureLoggedIn, async function (req
 
 router.post("/:username/jobs/:id", authenticateJWT, ensureLoggedIn, async function (req, res, next) {
     try {
+      let user = await User.get(req.params.username);
+      if (!user) throw new BadRequestError(`No such user: ${req.params.username}`);
+
       if(res.locals.user.username !== req.params.username){
         if (!res.locals.user.isAdmin) {
           return next(new UnauthorizedError());

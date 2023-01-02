@@ -5,6 +5,7 @@ const request = require("supertest");
 const db = require("../db.js");
 const app = require("../app");
 const User = require("../models/user");
+const Job = require("../models/job");
 
 const {
   commonBeforeAll,
@@ -316,23 +317,31 @@ describe("DELETE /users/:username", function () {
 
 describe("POST /users/:username/jobs/:id", function () {
   test("works for users", async function () {
-    
+    const result = await db.query(`SELECT id FROM jobs LIMIT 1`);
+    const jobId = result.rows[0].id;
+
     const resp = await request(app)
-        .post(`/users/u1/jobs/${testJobIds[0]}`)
+        .post(`/users/u1/jobs/${jobId}`)
         .set("authorization", `Bearer ${u1Token}`);
-    expect(resp.body).toEqual({ applied: testJobIds[0] });
+    expect(resp.body).toEqual({applied: {jobId}}); 
   });
 
-//   test("unauth for anon", async function () {
-//     const resp = await request(app)
-//         .post(`/users/u1/jobs/${testJobIds[0]}`);
-//     expect(resp.statusCode).toEqual(401);
-//   });
+  test("unauth for anon", async function () {
+    const result = await db.query(`SELECT id FROM jobs LIMIT 1`);
+    const jobId = result.rows[0].id;
 
-//   test("not found if no such user", async function () {
-//     const resp = await request(app)
-//         .post(`/users/nope/jobs/${testJobIds[0]}`)
-//         .set ("authorization", `Bearer ${u1Token}`);
-//     expect(resp.statusCode).toEqual(404);
-//   });
+    const resp = await request(app)
+        .post(`/users/u1/jobs/${jobId}`);
+    expect(resp.statusCode).toEqual(401);
+  });
+
+  test("not found if no such user", async function () {
+    const result = await db.query(`SELECT id FROM jobs LIMIT 1`);
+    const jobId = result.rows[0].id;
+
+    const resp = await request(app)
+        .post(`/users/nope/jobs/${jobId}`)
+        .set ("authorization", `Bearer ${u1Token}`);
+    expect(resp.statusCode).toEqual(404);
+  });
 });
