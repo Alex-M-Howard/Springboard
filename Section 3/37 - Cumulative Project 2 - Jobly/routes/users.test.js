@@ -5,6 +5,7 @@ const request = require("supertest");
 const db = require("../db.js");
 const app = require("../app");
 const User = require("../models/user");
+const Job = require("../models/job");
 
 const {
   commonBeforeAll,
@@ -125,6 +126,7 @@ describe("GET /users", function () {
           lastName: "U1L",
           email: "user1@user.com",
           isAdmin: true,
+          applications: [],
         },
         {
           username: "u2",
@@ -132,6 +134,8 @@ describe("GET /users", function () {
           lastName: "U2L",
           email: "user2@user.com",
           isAdmin: false,
+          applications: [],
+
         },
         {
           username: "u3",
@@ -139,6 +143,8 @@ describe("GET /users", function () {
           lastName: "U3L",
           email: "user3@user.com",
           isAdmin: false,
+          applications: [],
+
         },
       ],
     });
@@ -177,6 +183,7 @@ describe("GET /users/:username", function () {
         lastName: "U1L",
         email: "user1@user.com",
         isAdmin: true,
+        applications: [],
       },
     });
   });
@@ -192,6 +199,7 @@ describe("GET /users/:username", function () {
         lastName: "U2L",
         email: "user2@user.com",
         isAdmin: false,
+        applications: [],
       },
     });
   });
@@ -301,6 +309,39 @@ describe("DELETE /users/:username", function () {
     const resp = await request(app)
         .delete(`/users/nope`)
         .set("authorization", `Bearer ${u1Token}`);
+    expect(resp.statusCode).toEqual(404);
+  });
+});
+
+/************************************** POST /users/:username/jobs/:id */
+
+describe("POST /users/:username/jobs/:id", function () {
+  test("works for users", async function () {
+    const result = await db.query(`SELECT id FROM jobs LIMIT 1`);
+    const jobId = result.rows[0].id;
+
+    const resp = await request(app)
+        .post(`/users/u1/jobs/${jobId}`)
+        .set("authorization", `Bearer ${u1Token}`);
+    expect(resp.body).toEqual({applied: {jobId}}); 
+  });
+
+  test("unauth for anon", async function () {
+    const result = await db.query(`SELECT id FROM jobs LIMIT 1`);
+    const jobId = result.rows[0].id;
+
+    const resp = await request(app)
+        .post(`/users/u1/jobs/${jobId}`);
+    expect(resp.statusCode).toEqual(401);
+  });
+
+  test("not found if no such user", async function () {
+    const result = await db.query(`SELECT id FROM jobs LIMIT 1`);
+    const jobId = result.rows[0].id;
+
+    const resp = await request(app)
+        .post(`/users/nope/jobs/${jobId}`)
+        .set ("authorization", `Bearer ${u1Token}`);
     expect(resp.statusCode).toEqual(404);
   });
 });

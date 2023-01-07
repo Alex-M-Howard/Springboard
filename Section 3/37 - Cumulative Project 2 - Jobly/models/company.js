@@ -45,6 +45,8 @@ class Company {
   }
 
 
+
+
   /** Find all companies.
    *
    * Returns [{ handle, name, description, numEmployees, logoUrl }, ...]
@@ -64,6 +66,8 @@ class Company {
   }
 
 
+
+
   /** Given a company handle, return data about company.
    *
    * Returns { handle, name, description, numEmployees, logoUrl, jobs }
@@ -74,21 +78,39 @@ class Company {
 
   static async get(handle) {
     const companyRes = await db.query(
-          `SELECT handle,
-                  name,
-                  description,
-                  num_employees AS "numEmployees",
-                  logo_url AS "logoUrl"
-           FROM companies
-           WHERE handle = $1`,
-        [handle]);
+      `SELECT handle,
+              name,
+              description,
+              num_employees AS "numEmployees",
+              logo_url AS "logoUrl"
+       FROM companies
+       WHERE handle = $1
+           `,
+      [handle]
+    );
+
+    const jobs = await db.query(
+      `SELECT id,
+              title,
+              salary,
+              equity,
+              company_handle AS "companyHandle"
+       FROM jobs
+        WHERE company_handle = $1
+        ORDER BY title`,
+      [handle]
+    );
 
     const company = companyRes.rows[0];
 
+
     if (!company) throw new NotFoundError(`No company: ${handle}`);
 
+    company.jobs = jobs.rows;
     return company;
   }
+
+
 
 
   /** Update company data with `data`.
@@ -130,6 +152,8 @@ class Company {
   }
 
 
+
+
   /** Delete given company from database; returns undefined.
    *
    * Throws NotFoundError if company not found.
@@ -148,6 +172,8 @@ class Company {
   }
 
 
+
+  
   /** Get companies that match query string variables
    * minEmployees
    * maxEmployees

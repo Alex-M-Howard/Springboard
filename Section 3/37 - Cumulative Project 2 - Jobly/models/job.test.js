@@ -55,6 +55,16 @@ describe("create", function () {
       expect(err instanceof BadRequestError).toBeTruthy();
     }
   });
+
+  test("bad request with unknown company", async function () {
+    try {
+      newJob.company_handle = "nope";
+      await Job.create(newJob);
+      fail();
+    } catch (err) {
+      expect(err instanceof BadRequestError).toBeTruthy();
+    }
+  });
 });
 
 /************************************** findAll */
@@ -108,73 +118,66 @@ describe("get", function () {
   });
 });
 
-// /************************************** get with filters*/
+/************************************** get with filters*/
 
-// describe("get with filters", function () {
-//   test("works with all filters finding something", async function () {
-//     let jobs = await Job.getFilteredJobs({
-//       minEmployees: 1,
-//       maxEmployees: 10,
-//       nameLike: "c",
-//     });
-//     expect(jobs.length).toEqual(3);
-//   });
+describe("get with filters", function () {
+  test("works with all filters finding something", async function () {
+    let jobs = await Job.getFilteredJobs({
+      title: 'j1',
+      minSalary: 1000,
+      hasEquity: false,
+    });
+    expect(jobs.length).toEqual(1);
+  });
 
-//   test("works with all filters with nothing found", async function () {
-//     let jobs = await Job.getFilteredJobs({
-//       minEmployees: 10,
-//       maxEmployees: 20,
-//       nameLike: "c",
-//     });
-//     expect(jobs.length).toEqual(0);
-//   });
+  test("works with all filters with nothing found", async function () {
+    let jobs = await Job.getFilteredJobs({
+      title: 10,
+      minSalary: 390000,
+      hasEquity: true,
+    });
+    expect(jobs.length).toEqual(0);
+  });
 
-//   test("works with 2 filters finding something", async function () {
-//     let jobs = await Job.getFilteredJobs({
-//       minEmployees: 2,
-//       maxEmployees: 3,
-//     });
-//     expect(jobs.length).toEqual(2);
-//   });
+  test("works with 2 filters finding something", async function () {
+    let jobs = await Job.getFilteredJobs({
+      minSalary: 1,
+      hasEquity: false
+    });
+    expect(jobs.length).toEqual(3);
+  });
 
-//   test("works with 2 filters with nothing found", async function () {
-//     let jobs = await Job.getFilteredJobs({
-//       minEmployees: 10,
-//       nameLike: "DAVE",
-//     });
-//     expect(jobs.length).toEqual(0);
-//   });
+  test("works with 2 filters with nothing found", async function () {
+    let jobs = await Job.getFilteredJobs({
+      minSalary: 1000000,
+      title: "j1",
+    });
+    expect(jobs.length).toEqual(0);
+  });
 
-//   test("works with 1 filter finding something", async function () {
-//     let jobs = await Job.getFilteredJobs({
-//       nameLike: "1",
-//     });
-//     expect(jobs.length).toEqual(1);
-//   });
+  test("works with 1 filter finding something", async function () {
+    let jobs = await Job.getFilteredJobs({
+      minSalary: 1
+    });
+    expect(jobs.length).toEqual(3);
+  });
 
-//   test("works with 1 filter with nothing found", async function () {
-//     let jobs = await Job.getFilteredJobs({
-//       minEmployees: 10,
-//     });
-//     expect(jobs.length).toEqual(0);
-//   });
+  test("works with 1 filter with nothing found", async function () {
+    let jobs = await Job.getFilteredJobs({
+      minSalary: 1000000
+    });
+    expect(jobs.length).toEqual(0);
+  });
 
-//   test("works with no data passed", async function () {
-//     try {
-//       let jobs = await Job.getFilteredJobs();
-//     } catch (err) {
-//       expect(err instanceof ExpressError).toBeTruthy();
-//     }
-//   });
+  test("works with no data passed", async function () {
+    try {
+      let jobs = await Job.getFilteredJobs();
+    } catch (err) {
+      expect(err instanceof ExpressError).toBeTruthy();
+    }
+  });
 
-//   test("minEmployees > maxEmployees should error", async function () {
-//     try {
-//       await Job.getFilteredJobs({ minEmployees: 10, maxEmployees: 0 });
-//     } catch (err) {
-//       expect(err instanceof ExpressError).toBeTruthy();
-//     }
-//   });
-// });
+});
 
 // /************************************** update */
 

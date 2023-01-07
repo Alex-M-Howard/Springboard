@@ -8,6 +8,7 @@ const express = require("express");
 const {authenticateJWT,ensureLoggedIn,ensureAdmin,} = require("../middleware/auth");
 const { BadRequestError } = require("../expressError");
 const User = require("../models/user");
+const Job = require("../models/job");
 const { createToken } = require("../helpers/tokens");
 const userNewSchema = require("../schemas/userNew.json");
 const userUpdateSchema = require("../schemas/userUpdate.json");
@@ -59,6 +60,20 @@ router.get(
   async function (req, res, next) {
     try {
       const users = await User.findAll();
+      const applications = await User.getAllApplications();
+      
+      users.map(user => {
+        const apps = []
+        applications.filter(app => {
+          if(app.username === user.username){
+            apps.push(app.jobId)
+          }
+        })
+        user.applications = apps
+    })
+        
+      
+
       return res.json({ users });
     } catch (err) {
       return next(err);
@@ -82,6 +97,17 @@ router.get(
     try {
 
       const user = await User.get(req.params.username);
+      const applications = await User.getAllApplications();
+      
+      const apps = []
+      applications.filter(app => {
+          if(app.username === user.username){
+            apps.push(app.jobId)
+          }
+        })
+        user.applications = apps
+    
+      
       if (res.locals.user.username === user.username || res.locals.user.isAdmin) {
         return res.json({ user });
       }
@@ -147,5 +173,32 @@ router.delete("/:username", authenticateJWT, ensureLoggedIn, async function (req
   }
 });
 
+
+
+/** POST /[username]/jobs/[id] => {applied: [id]} 
+* 
+* 
+**/
+
+router.post("/:username/jobs/:id", authenticateJWT, ensureLoggedIn, async function (req, res, next) {
+    try {
+      let user = await User.get(req.params.username);
+      if (!user) throw new BadRequestError(`No such user: ${req.params.username}`);
+
+      if(res.locals.user.username !== req.params.username){
+        if (!res.locals.user.isAdmin) {
+          return next(new UnauthorizedError());
+        }
+      }
+
+      const username = req.params.username;
+      const id = req.params.id;
+      const applied = await User.applyToJob(username, id);
+      return res.json({ applied });
+    } catch (err) {
+      return next(err);
+    }
+  }
+);
 
 module.exports = router;

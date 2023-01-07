@@ -7,6 +7,7 @@ const {
 } = require("../expressError");
 const db = require("../db.js");
 const User = require("./user.js");
+const Job = require("./job.js");
 const {
   commonBeforeAll,
   commonBeforeEach,
@@ -227,4 +228,17 @@ describe("remove", function () {
       expect(err instanceof NotFoundError).toBeTruthy();
     }
   });
+});
+
+/************************************** applyToJob */
+
+describe("applyToJob", function () {
+  test("works", async function () {
+    let job = await db.query('SELECT id FROM jobs LIMIT 1')
+    let jobId = job.rows[0].id
+
+    let app = await User.applyToJob("u1", jobId);
+    let allApps = await User.getAllApplications();
+    expect(allApps.length).toEqual(1);
+  });  
 });

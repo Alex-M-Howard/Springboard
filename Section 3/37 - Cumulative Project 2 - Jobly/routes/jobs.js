@@ -48,6 +48,8 @@ router.post(
   }
 );
 
+
+
 /** GET /  =>
  *   { companies: [ { handle, name, description, numEmployees, logoUrl }, ...] }
  *
@@ -62,35 +64,38 @@ router.post(
 router.get("/", async function (req, res, next) {
   try {
     let results;
-
+    
     if (!Object.keys(req.query).length) {
       results = await Job.findAll();
     } else {
-      results = await Job.getFilteredCompanies(req.query);
+     results = await Job.getFilteredJobs(req.query);
     }
 
-    return res.json({ companies: results });
+    return res.json({ jobs: results });
   } catch (err) {
     return next(err);
   }
 });
 
-/** GET /[handle]  =>  { job }
+
+
+/** GET /[company_handle]  =>  { job }
  *
- *  Job is { handle, name, description, numEmployees, logoUrl, jobs }
- *   where jobs is [{ id, title, salary, equity }, ...]
+ *  Get all jobs from a company
  *
  * Authorization required: none
  */
 
-router.get("/:handle", async function (req, res, next) {
+router.get("/:company_handle", async function (req, res, next) {
   try {
-    const job = await Job.get(req.params.handle);
-    return res.json({ job });
+    const jobs = await Job.getCompanyJobs(req.params.company_handle);
+    return res.json({ jobs });
   } catch (err) {
     return next(err);
   }
 });
+
+
 
 /** PATCH /[handle] { fld1, fld2, ... } => { job }
  *
@@ -103,22 +108,28 @@ router.get("/:handle", async function (req, res, next) {
  * Authorization required: login
  */
 
-router.patch("/:handle", ensureLoggedIn, async function (req, res, next) {
+router.patch("/:company_handle/:title", ensureLoggedIn, async function (req, res, next) {
   try {
-    const validator = jsonschema.validate(req.body, jobUpdateSchema);
+    
+    const validator = jsonschema.validate(req.params, jobUpdateSchema);
+    
     if (!validator.valid) {
       const errs = validator.errors.map((e) => e.stack);
       throw new BadRequestError(errs);
     }
+    
+    if (req.body.equity) {       // JSON validation not detecting equity being below 0 or above 1?
+      if (req.body.equity < 0 || req.body.equity > 1) throw new ExpressError("Equity must be between 0 and 1", 400);
+    }
 
-    console.log(req.body);
-    console.log(req.params.handle);
-    const job = await Job.update(req.params.handle, req.body);
+    const job = await Job.update(req.params.title, req.params.company_handle, req.body);
     return res.json({ job });
   } catch (err) {
     return next(err);
   }
 });
+
+
 
 /** DELETE /[handle]  =>  { deleted: handle }
  *
@@ -126,18 +137,20 @@ router.patch("/:handle", ensureLoggedIn, async function (req, res, next) {
  */
 
 router.delete(
-  "/:handle",
+  "/:company_handle/:title",
   authenticateJWT,
   ensureLoggedIn,
   ensureAdmin,
   async function (req, res, next) {
     try {
-      await Job.remove(req.params.handle);
-      return res.json({ deleted: req.params.handle });
+      await Job.remove(req.params.title, req.params.company_handle);
+      return res.json({ deleted: `${req.params.company_handle } - ${req.params.title}` });
     } catch (err) {
       return next(err);
     }
   }
 );
+
+
 
 module.exports = router;

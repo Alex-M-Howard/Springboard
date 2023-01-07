@@ -11,7 +11,7 @@
     "handle": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 10
+      "maxLength": 25
     },
     "description": {
       "type": "string"
