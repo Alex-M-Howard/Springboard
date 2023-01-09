@@ -1,0 +1,35 @@
+.Eightball{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    width:75vw;
+    height:75vh;
+    background-color: black;
+}
+
+.Eightball-msg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    width:20vw;
+    height:20vh;
+}
+
+.Eightball-green{
+    background-color: green;
+}
+
+.Eightball-goldenrod{
+    background-color: goldenrod;
+}
+
+.Eightball-red{
+    background-color: red;
+}
+
+.Eightball-blue{
+    background-color:blue;
+    color: white;
+}
