@@ -3,8 +3,8 @@
     justify-content: center;
     align-items: center;
     border-radius: 100%;
-    width:75vw;
-    height:75vh;
+    width:400px;
+    height:400px;
     background-color: black;
 }
 
@@ -13,23 +13,47 @@
     justify-content: center;
     align-items: center;
     border-radius: 100%;
-    width:20vw;
-    height:20vh;
+    width:200px;
+    height:200px;
 }
 
 .Eightball-green{
     background-color: green;
+     display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    width:200px;
+    height:200px;
 }
 
 .Eightball-goldenrod{
     background-color: goldenrod;
+     display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    width:200px;
+    height:200px;
 }
 
 .Eightball-red{
     background-color: red;
+     display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    width:200px;
+    height:200px;
 }
 
 .Eightball-blue{
     background-color:blue;
+     display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    width:200px;
+    height:200px;
     color: white;
 }
