@@ -15,9 +15,9 @@ import "./Board.css";
  * - board: array-of-arrays of true/false
  *
  *    For this board:
- *       .  .  .
- *       O  O  .     (where . is off, and O is on)
- *       .  .  .
+ *       0  0  0
+ *       1  1  0     (where 0 is off, and 1 is on)
+ *       0  0  0
  *
  *    This would be: [[f, f, f], [t, t, f], [f, f, f]]
  *
@@ -27,13 +27,21 @@ import "./Board.css";
  *
  **/
 
-function Board({ nrows, ncols, chanceLightStartsOn }) {
+function Board({ nrows=3, ncols=3, chanceLightStartsOn=.5 }) {
   const [board, setBoard] = useState(createBoard());
 
   /** create a board nrows high/ncols wide, each cell randomly lit or unlit */
   function createBoard() {
     let initialBoard = [];
-    // TODO: create array-of-arrays of true/false values
+      for(let i=0; i < nrows; i++){
+        let row = []
+        for(let j=0; j < ncols; j++){
+          let roll = Math.random();
+          roll < chanceLightStartsOn ? row.push(1) : row.push(0);
+        }
+        initialBoard.push(row);
+      }
+      console.log(initialBoard);
     return initialBoard;
   }
 
