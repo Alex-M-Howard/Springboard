@@ -41,17 +41,25 @@ function Board({ nrows=3, ncols=3, chanceLightStartsOn=.5 }) {
         }
         initialBoard.push(row);
       }
-      console.log(initialBoard);
     return initialBoard;
   }
 
-  function hasWon() {
-    // TODO: check the board in state to determine whether the player has won.
+  function hasWon(currBoard) {
+    console.log(currBoard);
+    let lit = 0;
+      board.forEach(row=>{
+        row.forEach(cell=>{
+          if(cell) lit++;
+        })
+      })
+    if(!lit) return true
   }
 
   function flipCellsAround(coord) {
     setBoard(oldBoard => {
-      const [y, x] = coord.split("-").map(Number);
+      const boardCopy = Array.from(oldBoard);
+      const x = coord.target.cellIndex;
+      const y = coord.target.parentElement.rowIndex;
 
       const flipCell = (y, x, boardCopy) => {
         // if this coord is actually on board, flip it
@@ -61,21 +69,55 @@ function Board({ nrows=3, ncols=3, chanceLightStartsOn=.5 }) {
         }
       };
 
-      // TODO: Make a (deep) copy of the oldBoard
 
-      // TODO: in the copy, flip this cell and the cells around it
+      flipCell(y, x, boardCopy);    //Flip original, then 1 up, down, 1 over each direction
+      flipCell(y-1, x, boardCopy)
+      flipCell(y+1, x, boardCopy)
+      flipCell(y, x-1, boardCopy)
+      flipCell(y, x+1, boardCopy)
 
-      // TODO: return the copy
+      return boardCopy;
     });
   }
 
   // if the game is won, just show a winning msg & render nothing else
 
-  // TODO
+  if (hasWon(board)) {
+    return(
+      <div className="Board-winner">
+        <h1 className="Board-winner-message">You win!</h1>
+      </div>
+    )
+  }
+  
 
   // make table board
-
-  // TODO
+  return (
+    <div className="Board">
+    <table className="Board-table">
+      <tbody className="Board-table-body">
+        {board.map((row, rowIdx) => {    
+          return (
+            <tr className="Board-table-body-tr" key={rowIdx}>
+              {
+                row.map((cell, colIdx) => {
+                  return (
+                    <Cell
+                      flipCellsAroundMe={flipCellsAround}
+                      isLit={cell}
+                      key={[colIdx]}
+                    />
+                  )
+                })
+              }
+            </tr>
+            )
+          })
+        }
+      </tbody>
+    </table>
+    </div>
+  );
 }
 
 export default Board;

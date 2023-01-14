@@ -1,3 +1,18 @@
 .Board {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
   margin: 0 auto;
+}
+
+.Board-table {
+ border: 3px solid black; 
+}
+
+.Board-winner{
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
 }
