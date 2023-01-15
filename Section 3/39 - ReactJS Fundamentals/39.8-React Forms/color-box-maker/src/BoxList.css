@@ -1,0 +1,12 @@
+.BoxList{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.BoxList-Boxes{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;    
+}
