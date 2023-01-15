@@ -1,4 +1,12 @@
 .Box{
+    display: flex;
+    margin: 5px;
+}
 
-    margin: 2px;
+.Box-Remove{
+    height: 25px;
+    width: 25px;
+    border-radius: 100%;
+    background-color: red;
+    color: white;
 }

@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
+import { v4 as uuidv4 } from "uuid";
 import './NewBoxForm.css'
 
-const NewBoxForm = ({updateBoxes}) =>{
+const NewBoxForm = ({addBox}) =>{
     const INITIAL_STATE = {
         color: '',
         width: '',
@@ -20,7 +21,7 @@ const NewBoxForm = ({updateBoxes}) =>{
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        updateBoxes({ ...formData });
+        addBox({ ...formData, id:uuidv4() });
         setFormData(INITIAL_STATE);
     }
 
