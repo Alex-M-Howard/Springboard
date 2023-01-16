@@ -10,8 +10,8 @@ const Todo = ({
   const remove = () => handleRemove(id);
 
   return (
-      <li className="Todo" key={key}>
-          {text}
+    <li className="Todo" data-testid="todo-element">
+      {text}
       <button className="Todo-Remove " onClick={remove}>
         X
       </button>
