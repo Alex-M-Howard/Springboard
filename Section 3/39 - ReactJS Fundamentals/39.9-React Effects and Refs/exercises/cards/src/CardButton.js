@@ -2,9 +2,17 @@ import React from "react";
 
 import "./CardButton.css";
 
-const CardButton = () => {
+const CardButton = ({ drawCard }) => {
+    
+    const handleAdd = () => {
+        drawCard()
+    }
+
     return (
-        <button className="CardButton"> GIMME A CARD!</button>
+        <button
+            className="CardButton"
+            onClick={handleAdd}
+        > GIMME A CARD!</button>
     )
 }
 
