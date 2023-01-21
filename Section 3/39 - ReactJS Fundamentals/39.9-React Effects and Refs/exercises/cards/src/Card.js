@@ -2,11 +2,15 @@ import React from "react";
 
 import "./Card.css";
 
-const Card = ({ card }) => {
+const Card = ({ image, alt }) => {
+
     return (
-        <div className="Card">
-            {card}
-        </div>
+        <img
+            className="Card"
+            src={image}
+            alt={alt}
+            style={{ transform: `rotate(${Math.random()}turn)` }}
+        />
   )
 };
 

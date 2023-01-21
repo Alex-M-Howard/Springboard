@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url('https://media.istockphoto.com/id/96655837/photo/a-simple-green-felt-background.jpg?s=612x612&w=0&k=20&c=r6fG3RK9fhdnGxq_whzjBANuyAEnDKcVmDK8VeYJ8gk=');
 }
 
 code {

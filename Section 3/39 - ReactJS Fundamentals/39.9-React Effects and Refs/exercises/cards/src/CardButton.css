@@ -1,0 +1,14 @@
+.CardButton{
+    background: rgb(255, 255, 255);
+    border: 1px solid #000;
+    border-radius: 3px;
+    padding: 0.5rem 0.75rem;
+    margin: 1rem 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.CardButton:hover{
+    background: rgb(122, 122, 122);
+    color: #fff;
+}
