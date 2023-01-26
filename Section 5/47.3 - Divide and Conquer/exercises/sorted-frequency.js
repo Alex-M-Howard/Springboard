@@ -1,5 +1,4 @@
 function sortedFrequency(arr, target) {
-    console.log('--------------------------------');
     let left = 0;
     let right = arr.length - 1;
 
