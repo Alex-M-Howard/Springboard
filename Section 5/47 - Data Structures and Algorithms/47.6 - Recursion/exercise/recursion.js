@@ -33,11 +33,13 @@ function everyOther(str) {
 /** isPalindrome: checks whether a string is a palindrome or not. */
 
 function isPalindrome(str) {
-  console.log(str);
-  if (!str) {
-    return "";
+  if (!str || str.length === 1) {
+    return true;
   } else {
-    return str.slice(0) === isPalindrome(str.slice(1).slice(str.length - 1));
+    return (
+      str[0] === str[str.length - 1] &&
+      isPalindrome(str.slice(1, str.length - 1))
+    );
   }
 }
 
