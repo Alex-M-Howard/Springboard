@@ -73,14 +73,44 @@ function revString(str) {
 /** gatherStrings: given an object, return an array of all of the string values. */
 
 function gatherStrings(obj) {
-
+    let arr = [];
+    for (let key in obj) {
+      if (typeof obj[key] === "string") {
+        arr.push(obj[key])
+      };
+      if (typeof obj[key] === "object") {
+        arr.push(...gatherStrings(obj[key]));        
+      }
+    }
+    return arr;
 }
 
 /** binarySearch: given a sorted array of numbers, and a value,
  * return the index of that value (or -1 if val is not present). */
 
 function binarySearch(arr, val) {
+  let idx;
+  
+  if (!arr.length) {
+    return -1;
+  }
 
+  if(arr[0] === val){
+    return 0;
+  }
+
+  let middle = Math.floor(arr.length / 2)
+  if(arr[middle] === val){
+    return middle;
+  } else if (arr[middle] < val){
+    idx = binarySearch(arr.slice(middle + 1), val);
+    idx === -1 ? -1 : idx += middle + 1;
+  } else {
+    idx = binarySearch(arr.slice(0, middle), val);
+    idx === -1 ? -1 : idx;
+  }
+  
+  return idx === -1 ? -1 : idx;
 }
 
 module.exports = {
