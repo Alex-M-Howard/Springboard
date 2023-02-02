@@ -6,6 +6,11 @@ class BinaryTreeNode {
     this.left = left;
     this.right = right;
   }
+
+  getMaxDepth() {
+    // check children
+    // return higher of children.getMaxDepth()
+  }
 }
 
 class BinaryTree {
@@ -29,18 +34,21 @@ class BinaryTree {
   /** maxDepth(): return the maximum depth of the tree -- that is,
    * the length of the longest path from the root to a leaf. */
 
-  maxDepth() {
-    let max = 0;
-    let depth = 0;
 
+  //                     6
+  //               5            5
+  //                        3       1
+  //                      2   1
+
+  maxDepth() {
     if (!this.root) {
       return 0;
     }
 
-    // Increase depth and decrease as you come back down. Maybe not a stack for this?
+    // How to count with many children?
     
 
-    return max;
+    return this.root.getMaxDepth()
   }
 
   /** maxSum(): return the maximum sum you can obtain by traveling along a path in the tree.
