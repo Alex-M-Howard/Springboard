@@ -17,14 +17,30 @@ class BinaryTree {
    * the length of the shortest path from the root to a leaf. */
 
   minDepth() {
-
+    if (!this.root) {
+      return 0;
+    } else if (this.root.left || this.root.right) {
+      return 2;
+    } else {
+      return 1;
+    }
   }
 
   /** maxDepth(): return the maximum depth of the tree -- that is,
    * the length of the longest path from the root to a leaf. */
 
   maxDepth() {
+    let max = 0;
+    let depth = 0;
 
+    if (!this.root) {
+      return 0;
+    }
+
+    // Increase depth and decrease as you come back down. Maybe not a stack for this?
+    
+
+    return max;
   }
 
   /** maxSum(): return the maximum sum you can obtain by traveling along a path in the tree.
