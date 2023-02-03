@@ -8,8 +8,13 @@ class BinaryTreeNode {
   }
 
   getMaxDepth() {
-    // check children
-    // return higher of children.getMaxDepth()
+    let left, right;
+
+    if (this.left)  left = this.left.getMaxDepth();
+    if (this.right) right = this.right.getMaxDepth();
+    if(!this.left && !this.right) return 1;
+
+    return left > right ? left + 1 : right + 1;
   }
 }
 
@@ -34,19 +39,10 @@ class BinaryTree {
   /** maxDepth(): return the maximum depth of the tree -- that is,
    * the length of the longest path from the root to a leaf. */
 
-
-  //                     6
-  //               5            5
-  //                        3       1
-  //                      2   1
-
   maxDepth() {
     if (!this.root) {
       return 0;
     }
-
-    // How to count with many children?
-    
 
     return this.root.getMaxDepth()
   }
