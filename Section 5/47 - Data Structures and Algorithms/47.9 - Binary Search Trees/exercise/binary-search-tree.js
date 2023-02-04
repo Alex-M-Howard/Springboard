@@ -4,6 +4,8 @@ class Node {
     this.left = left;
     this.right = right;
   }
+
+
 }
 
 class BinarySearchTree {
@@ -15,24 +17,24 @@ class BinarySearchTree {
    * Returns the tree. Uses iteration. */
 
   insert(val) {
-    let node = new Node(val);
+    let newNode = new Node(val);
 
     if (!this.root){
-      this.root = node;
+      this.root = newNode;
     } else {
       let current = this.root;
 
       while(current){
-        if (current === node) break;
+        if (current === newNode) break;
 
         if (val < current.val) {
-          current.left ? current = current.left : current.left = node;
+          current.left ? current = current.left : current.left = newNode;
           } else {
-          current.right ? current = current.right : current.right = node;
+          current.right ? current = current.right : current.right = newNode;
         }
       }
     }
-    
+
     return this;
   }
 
@@ -40,6 +42,28 @@ class BinarySearchTree {
    * Returns the tree. Uses recursion. */
 
   insertRecursively(val) {
+    let newNode = new Node(val);
+
+    if (!this.root) {
+      this.root = newNode;
+    } else {
+      
+      function getNode(root) {
+        if (root === null) return root;
+
+        if (val < root.val) {
+          return root.left ? getNode(root.left) : root;
+        } else {
+          return root.right ? getNode(root.right) : root;
+        }
+      }
+
+      let insertionNode = getNode(this.root);      
+      val < insertionNode.val ? insertionNode.left = newNode : insertionNode.right = newNode; 
+   
+    }
+
+    return this;
 
   }
 
