@@ -16,6 +16,20 @@ class BinaryTreeNode {
 
     return left > right ? left + 1 : right + 1;
   }
+
+   getMaxSum() {
+    let left=0, right=0;
+
+    if (this.left)  left = this.val + this.left.getMaxSum();
+    if (this.right) right = this.val + this.right.getMaxSum();
+    if(!this.left && !this.right) return this.val;
+
+    if (left > right || left === right) {
+      return left;
+    } else {
+      return right;
+    }
+  }
 }
 
 class BinaryTree {
@@ -51,7 +65,21 @@ class BinaryTree {
    * The path doesn't need to start at the root, but you can't visit a node more than once. */
 
   maxSum() {
+// let result = 0;
+//
+//     function maxSumHelper(node) {
+//       if (node === null) return 0;
+//       const leftSum = maxSumHelper(node.left);
+//       const rightSum = maxSumHelper(node.right);
+//       result = Math.max(result, node.val + leftSum + rightSum);
+//       return Math.max(0, leftSum + node.val, rightSum + node.val);
+//     }
+//
+//     maxSumHelper(this.root);
+//     return result;
+    if(!this.root) return 0;
 
+    return this.root.val + this.root.getMaxSum();
   }
 
   /** nextLarger(lowerBound): return the smallest value in the tree
@@ -61,35 +89,7 @@ class BinaryTree {
 
   }
 
-  /** Further study!
-   * areCousins(node1, node2): determine whether two nodes are cousins
-   * (i.e. are at the same level but have different parents. ) */
 
-  areCousins(node1, node2) {
-
-  }
-
-  /** Further study!
-   * serialize(tree): serialize the BinaryTree object tree into a string. */
-
-  static serialize() {
-
-  }
-
-  /** Further study!
-   * deserialize(stringTree): deserialize stringTree into a BinaryTree object. */
-
-  static deserialize() {
-
-  }
-
-  /** Further study!
-   * lowestCommonAncestor(node1, node2): find the lowest common ancestor
-   * of two nodes in a binary tree. */
-
-  lowestCommonAncestor(node1, node2) {
-    
-  }
 }
 
 module.exports = { BinaryTree, BinaryTreeNode };
