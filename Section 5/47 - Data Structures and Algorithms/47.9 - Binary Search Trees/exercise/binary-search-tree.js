@@ -49,7 +49,7 @@ class BinarySearchTree {
     } else {
       
       function getNode(root) {
-        if (root === null) return root;
+        if (!root) return root;
 
         if (val < root.val) {
           return root.left ? getNode(root.left) : root;
@@ -71,6 +71,17 @@ class BinarySearchTree {
    * return the node, if found; else undefined. Uses iteration. */
 
   find(val) {
+    if (!this.root) return undefined;
+
+    let currentNode = this.root;
+
+    while (currentNode) {
+      if (val === currentNode.val) return currentNode;
+      if (val < currentNode.val) currentNode = currentNode.left;
+      if (val > currentNode.val) currentNode = currentNode.right;
+    }
+
+    return undefined;
 
   }
 
@@ -78,6 +89,24 @@ class BinarySearchTree {
    * return the node, if found; else undefined. Uses recursion. */
 
   findRecursively(val) {
+    if (!this.root) return undefined;
+
+
+    let currentNode = this.root;
+
+    function findNode(node) {
+      if (!node) return node;
+
+      if (val < node.val) {
+        return node.left ? findNode(node.left) : node;
+      } else {
+        return node.right ? findNode(node.right) : node;
+      }
+    }
+    currentNode = findNode(this.root)
+
+    return currentNode.val === val ? currentNode : undefined;
+
 
   }
 
@@ -109,28 +138,28 @@ class BinarySearchTree {
 
   }
 
-  /** Further Study!
-   * remove(val): Removes a node in the BST with the value val.
-   * Returns the removed node. */
+  // /** Further Study!
+  //  * remove(val): Removes a node in the BST with the value val.
+  //  * Returns the removed node. */
 
-  remove(val) {
+  // remove(val) {
 
-  }
+  // }
 
-  /** Further Study!
-   * isBalanced(): Returns true if the BST is balanced, false otherwise. */
+  // /** Further Study!
+  //  * isBalanced(): Returns true if the BST is balanced, false otherwise. */
 
-  isBalanced() {
+  // isBalanced() {
 
-  }
+  // }
 
-  /** Further Study!
-   * findSecondHighest(): Find the second highest value in the BST, if it exists.
-   * Otherwise return undefined. */
+  // /** Further Study!
+  //  * findSecondHighest(): Find the second highest value in the BST, if it exists.
+  //  * Otherwise return undefined. */
 
-  findSecondHighest() {
+  // findSecondHighest() {
     
-  }
+  // }
 }
 
 module.exports = BinarySearchTree;

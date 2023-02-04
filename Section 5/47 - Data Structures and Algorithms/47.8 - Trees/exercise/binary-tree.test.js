@@ -98,4 +98,3 @@ describe("nextLarger", function() {
     expect(largeTree.nextLarger(6)).toBe(null);
   });
 });
-
