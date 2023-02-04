@@ -114,28 +114,71 @@ class BinarySearchTree {
    * Return an array of visited nodes. */
 
   dfsPreOrder() {
+      let order = [];
 
+    function traverse(node){
+      order.push(node.val);
+      if (node.left) traverse(node.left)
+      if (node.right) traverse(node.right);
+
+    }
+
+    traverse(this.root);
+    return order;
   }
 
   /** dfsInOrder(): Traverse the array using in-order DFS.
    * Return an array of visited nodes. */
 
   dfsInOrder() {
+    let order = [];
 
+    function traverse(node){
+      if (node.left) traverse(node.left)
+      order.push(node.val);
+      if (node.right) traverse(node.right);
+    }
+
+    traverse(this.root);
+    return order;
   }
 
   /** dfsPostOrder(): Traverse the array using post-order DFS.
    * Return an array of visited nodes. */
 
   dfsPostOrder() {
+        let order = [];
+
+    function traverse(node){
+    if (node.left) traverse(node.left)
+      if (node.right) traverse(node.right);
+      order.push(node.val);
+    }
+
+    traverse(this.root);
+    return order;
 
   }
 
   /** bfs(): Traverse the array using BFS.
    * Return an array of visited nodes. */
 
-  bfs() {
+    bfs() {
 
+    let node = this.root;
+    let queue = [node];
+    let order = [];
+
+    while(queue.length){
+     node = queue.shift();
+
+     order.push(node.val);
+
+     if(node.left) queue.push(node.left);
+     if(node.right) queue.push(node.right);
+    }
+
+    return order;
   }
 
   // /** Further Study!
