@@ -65,28 +65,45 @@ class BinaryTree {
    * The path doesn't need to start at the root, but you can't visit a node more than once. */
 
   maxSum() {
-// let result = 0;
-//
-//     function maxSumHelper(node) {
-//       if (node === null) return 0;
-//       const leftSum = maxSumHelper(node.left);
-//       const rightSum = maxSumHelper(node.right);
-//       result = Math.max(result, node.val + leftSum + rightSum);
-//       return Math.max(0, leftSum + node.val, rightSum + node.val);
-//     }
-//
-//     maxSumHelper(this.root);
-//     return result;
-    if(!this.root) return 0;
+let result = 0;
 
-    return this.root.val + this.root.getMaxSum();
+    function maxSumHelper(node) {
+      if (node === null) return 0;
+      const leftSum = maxSumHelper(node.left);
+      const rightSum = maxSumHelper(node.right);
+      result = Math.max(result, node.val + leftSum + rightSum);
+      return Math.max(0, leftSum + node.val, rightSum + node.val);
+    }
+
+    maxSumHelper(this.root);
+    return result;
+//     if(!this.root) return 0;
+//
+//     return this.root.val + this.root.getMaxSum();
   }
 
   /** nextLarger(lowerBound): return the smallest value in the tree
    * which is larger than lowerBound. Return null if no such value exists. */
 
   nextLarger(lowerBound) {
+  if (!this.root) return null;
 
+    let queue = [this.root];
+    let closest = null;
+
+    while (queue.length) {
+      let currentNode = queue.shift();
+      let currentVal = currentNode.val;
+
+      if ((currentVal > lowerBound) && (currentVal < closest || closest === null)) {
+        closest = currentVal;
+      }
+
+      if (currentNode.left) queue.push(currentNode.left);
+      if (currentNode.right) queue.push(currentNode.right);
+    }
+
+    return closest;
   }
 
 
