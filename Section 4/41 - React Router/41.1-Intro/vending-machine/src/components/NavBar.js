@@ -3,11 +3,6 @@ import Link from 'next/link';
 import Image from "next/image";
 
 function NavBar() {
-  const router = useRouter();
-
-  if (router.pathname === '/NavBar') {
-    return <div className="Error-notfound">Not Found</div>;
-  }
 
   const srcChips = 'https://m.media-amazon.com/images/I/A1EKoY3jL5L._SL1500_.jpg';
   const srcDrink = 'https://m.media-amazon.com/images/I/91iFMPtXsIL._SL1500_.jpg'

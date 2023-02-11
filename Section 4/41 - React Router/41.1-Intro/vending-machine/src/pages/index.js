@@ -1,12 +1,11 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import {Inter} from "@next/font/google";
-import Link from 'next/link'
-import '@/styles/Chips.module.css'
 
 // Import Components
-import VendingMachine from '@/pages/VendingMachine'
-import NavBar from "@/pages/NavBar";
+import VendingMachine from '@/components/VendingMachine'
+import NavBar from "@/components/NavBar";
+import Grid2 from "@mui/material/Unstable_Grid2";
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,10 +18,14 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Grid2 container justifyContent='center' alignItems='center' spacing={2} style={{height: '100vh', textAlign: 'center'}} >
       <main className='App'>
-        <VendingMachine />
-        <NavBar />
+
+          <VendingMachine  />
+          <NavBar />
+
       </main>
+      </Grid2>
     </>
   )
 }
