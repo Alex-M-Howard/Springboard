@@ -1,9 +1,13 @@
+import React from "react";
 import { useRouter } from "next/router";
 import DogProfile from "@/components/DogProfile";
 
+
 const Page = ({ dogs }) => {
   const router = useRouter();
-  const dog = dogs.find((d) => d.name.toLowerCase() === router.query.id.toLowerCase());
+  const dog = dogs.find(
+    (d) => d.name.toLowerCase() === router.query.id.toLowerCase()
+  );
 
   return <DogProfile dog={dog} />;
 };

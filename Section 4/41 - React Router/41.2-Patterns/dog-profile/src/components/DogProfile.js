@@ -1,6 +1,7 @@
+import React from "react";
 import Image from "next/image";
 import { Grid, List, ListItem, ListItemText } from "@mui/material";
-
+import Error from "next/error";
 
 const DogProfile = ({ dog }) => {
 
@@ -38,7 +39,7 @@ const DogProfile = ({ dog }) => {
       </Grid>
     );
   } catch (error) {
-    return (<>Dog Not found</>)
+    return (<Error title='Dog Not Found'></Error>)
   }
 
   
