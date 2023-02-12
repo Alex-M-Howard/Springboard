@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-
+import { Grid } from "@mui/material";
 
 function Dogs() {
 
@@ -20,21 +20,29 @@ function Dogs() {
     ];
 
   const images = dogs.map((dog) => { 
-       return <Link href={`/Dogs/${dog.name}`} key={dog.name}>
+    return (
+        <Link href={`/dogs/${dog.name.toLowerCase()}`} key={dog.name}>
           <Image
             src={`/images/${dog.name}.jpg`}
             alt={dog.name}
-            width={250}
-            height={250}
+            width={300}
+            height={300}
             priority
           />
-        </Link>;
+        </Link>
+    );
     })
 
     return (
-      <div style={{ height: '100vh' }}>
+      <Grid
+        style={{ height: '100vh' }}
+        container
+        justifyContent="space-around"
+        alignItems="center"
+        spacing={4}
+      >
         {images}    
-      </div>
+      </Grid>
     );
 }
 

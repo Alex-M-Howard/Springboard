@@ -3,7 +3,7 @@ import DogProfile from "@/components/DogProfile";
 
 const Page = ({ dogs }) => {
   const router = useRouter();
-  const dog = dogs.find((d) => d.name === router.query.id);
+  const dog = dogs.find((d) => d.name.toLowerCase() === router.query.id.toLowerCase());
 
   return <DogProfile dog={dog} />;
 };
