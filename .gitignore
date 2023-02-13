@@ -7,6 +7,7 @@ Section 2/Unit 24 - Intermediate Flask/24.5 - Hashing and Log In/exercise/models
 Section 2/Unit 24 - Intermediate Flask/24.5 - Hashing and Log In/exercise/app.pyc
 node_modules/
 .env
+.next/
 
 # dependencies
 /node_modules
