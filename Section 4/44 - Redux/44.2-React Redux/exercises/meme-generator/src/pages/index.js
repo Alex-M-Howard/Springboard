@@ -1,9 +1,9 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 
-import MemeList from "../../components/MemeList";
-import MemeForm from "../../components/MemeForm";
-import rootReducer from "../../config/rootReducer";
+import MemeList from "../../../meme-generator/components/MemeList";
+import MemeForm from "../../../meme-generator/components/MemeForm";
+import rootReducer from "../../../meme-generator/config/rootReducer";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 

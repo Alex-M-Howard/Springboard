@@ -7,8 +7,6 @@ function MemeList() {
 
   const memes = useSelector(store => store.memes);
 
-  console.log(memes)
-
   const memeList = () => {
     return memes.map(meme => {
       return <Meme 
