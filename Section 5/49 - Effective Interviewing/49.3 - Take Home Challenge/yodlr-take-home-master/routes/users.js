@@ -5,7 +5,7 @@ var logger = require('../lib/logger');
 var log = logger();
 
 var users = require('../init_data.json').data;
-var curId = _.size(users);
+var curId = _.size(users) + 1;
 
 /* GET users listing. */
 router.get('/', function(req, res) {
@@ -13,15 +13,18 @@ router.get('/', function(req, res) {
 });
 
 /* Create a new user */
-router.post('/', function(req, res) {
+router.post('/', function (req, res) {
   var user = req.body;
   user.id = curId++;
   if (!user.state) {
     user.state = 'pending';
   }
+
+  delete user.password;
+
   users[user.id] = user;
   log.info('Created user', user);
-  res.json(user);
+  res.status(201).json(user);
 });
 
 /* Get a specific user by id */
