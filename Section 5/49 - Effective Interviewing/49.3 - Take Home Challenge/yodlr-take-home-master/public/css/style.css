@@ -1,0 +1,16 @@
+body{
+  height: 100vh;
+}
+
+.btn-group{
+  width: 100%;
+}
+
+button{
+  width: 50%;
+}
+
+.btn, a {
+  text-decoration: none;
+  color: #fff;
+}
